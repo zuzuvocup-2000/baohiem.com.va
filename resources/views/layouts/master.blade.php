@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title', config('app.name', 'Trang chủ')) - {{ COMPANY_NAME }}</title>
 
     {{-- CSRF Token --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -16,8 +17,7 @@
 
     <!-- Core Css -->
     <link rel="stylesheet" href="/assets/css/styles.css">
-
-    <title>@yield('title', config('app.name', 'Trang chủ')) - {{ COMPANY_NAME }}</title>
+    @yield('style')
 </head>
 
 <body data-sidebartype="full">
@@ -27,13 +27,9 @@
     </div>
 
     <div id="main-wrapper">
-        <!-- Sidebar Start -->
         @include('partial.aside-vertical')
-        <!--  Sidebar End -->
         <div class="page-wrapper">
-            <!--  Header Start -->
             @include('partial.header')
-            <!--  Header End -->
 
             @include('partial.aside-horizontal')
 
@@ -41,18 +37,28 @@
                 <div class="container-fluid">
                     @yield('content')
                 </div>
-                <!----Footer--->
                 @include('partial.footer')
-                <!----Footer End--->
             </div>
             @include('partial.setting')
         </div>
     </div>
 
     <div class="dark-transparent sidebartoggler"></div>
-    <!-- Import Js Files -->
 
-    @include('partial.script')
+    <!-- Import Js Files -->
+    <script src="/assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="/assets/js/app.min.js"></script>
+    <script src="/assets/js/app.init.js"></script>
+    <script src="/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/libs/simplebar/dist/simplebar.min.js"></script>
+    <script src="/assets/libs/iconify-icon/dist/iconify-icon.min.js"></script>
+    <script src="/assets/libs/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <script src="/assets/js/sidebarmenu.js"></script>
+    <script src="/assets/js/theme.js"></script>
+    <script src="/assets/js/feather.min.js"></script>
+    <script src="/assets/js/breadcrumb/breadcrumbChart.js"></script>
+    <script src="/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+
 
     <!-- Import Js Files By Page -->
     @yield('script')

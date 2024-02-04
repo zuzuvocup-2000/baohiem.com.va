@@ -4,26 +4,26 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class UserBenhvien extends Model
 {
-    protected $table = 'TBL_USER';
+    protected $table = 'TBL_USER_BENHVIEN';
     public $timestamps = false;
 
     protected $fillable = [
-        'MANHANVIEN',
+        'MABENHVIEN',
+        'TENNHANVIEN',
         'TENDANGNHAP',
         'MATKHAU',
-        'QUYENYTRUYCAP',
         'ACTIVE',
-        'Tenquyen',
     ];
 
     protected $casts = [
         'ACTIVE' => 'boolean',
     ];
 
-    public function nhanvien()
+
+    public function benhvien()
     {
-        return $this->belongsTo(Nhanvien::class, 'MANHANVIEN', 'MANHANVIEN');
+        return $this->belongsTo(Benhvien::class, 'MABENHVIEN', 'MABENHVIEN');
     }
 }

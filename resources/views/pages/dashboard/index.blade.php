@@ -3,50 +3,8 @@
 @section('title', 'Trang chủ')
 
 @section('content')
-    <!-- -------------------------------------------------------------- -->
-    <!-- Breadcrumb -->
-    <!-- -------------------------------------------------------------- -->
-    <div class="font-weight-medium shadow-none position-relative overflow-hidden mb-4">
-        <div class="card-body px-0">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <h4 class="font-weight-medium ">Dashboard 7</h4>
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item">
-                                <a class="text-primary text-decoration-none" href="index.html">Home
-                                </a>
-                            </li>
-                            <li class="breadcrumb-item d-flex justify-content-center align-items-center ps-0">
-                                <iconify-icon icon="tabler:chevron-right"></iconify-icon>
-                            </li>
-                            <li class="breadcrumb-item" aria-current="page">Dashboard 7</li>
-                        </ol>
-                    </nav>
-                </div>
-                <div>
-                    <div class="d-flex no-block justify-content-end align-items-center">
-                        <div class="me-2">
-                            <div class="breadbar"></div>
-                        </div>
-                        <div class="">
-                            <small>LAST MONTH</small>
-                            <h4 class="text-primary mb-0 font-medium">$58,256</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- -------------------------------------------------------------- -->
-    <!-- Breadcrumb End -->
-    <!-- -------------------------------------------------------------- -->
-    <!-- -------------------------------------------------------------- -->
-    <!-- Overview, Visits, Sales, Order -->
-    <!-- -------------------------------------------------------------- -->
+    {{-- @include('partial.breadcrumb', ['breadcrumbTitle' => 'Trang chủ']) --}}
     <div class="row">
-        <!-- column -->
         <div class="col-sm-12 col-lg-6">
             <div class="card w-100 overflow-hidden">
                 <div class="card-body">
@@ -71,10 +29,8 @@
                 </div>
             </div>
         </div>
-        <!-- column -->
         <div class="col-sm-12 col-lg-6">
             <div class="row">
-                <!-- column -->
                 <div class="col-sm-12 col-md-6">
                     <div class="card w-100">
                         <div class="card-body">
@@ -87,7 +43,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- column -->
                 <div class="col-sm-12 col-md-6">
                     <div class="card">
                         <div class="card-body">
@@ -98,12 +53,10 @@
                         <div class="sales-ratio mt-2"></div>
                     </div>
                 </div>
-                <!-- column -->
                 <div class="col-sm-12">
                     <div class="card order-widget w-100">
                         <div class="card-body">
                             <div class="row">
-                                <!-- column -->
                                 <div class="col-sm-12 col-md-8">
                                     <h4 class="card-title">Order Status</h4>
                                     <h5 class="card-subtitle mb-0">Total Earnings of the Month</h5>
@@ -128,7 +81,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- column -->
                                 <div class="col-sm-12 col-md-4 d-flex justify-content-center">
                                     <div class="order-status mt-4"></div>
                                 </div>
@@ -139,11 +91,7 @@
             </div>
         </div>
     </div>
-    <!-- -------------------------------------------------------------- -->
-    <!-- Ravenue - page-view-bounce rate -->
-    <!-- -------------------------------------------------------------- -->
     <div class="row">
-        <!-- column -->
         <div class="col-sm-12 col-lg-4">
             <div class="card overflow-hidden w-100">
                 <div class="card-body bg-info">
@@ -160,7 +108,6 @@
                 </div>
             </div>
         </div>
-        <!-- column -->
         <div class="col-sm-12 col-lg-4">
             <div class="card overflow-hidden w-100">
                 <div class="bg-cyan">
@@ -205,7 +152,6 @@
                 </div>
             </div>
         </div>
-        <!-- column -->
         <div class="col-sm-12 col-lg-4">
             <div class="card w-100">
                 <div class="card-body">
@@ -228,17 +174,8 @@
             </div>
         </div>
     </div>
-    <!-- -------------------------------------------------------------- -->
-    <!-- Projects of the month -->
-    <!-- -------------------------------------------------------------- -->
-    <!-- -------------------------------------------------------------- -->
-    <!-- Table -->
-    <!-- -------------------------------------------------------------- -->
     <div class="row">
         <div class="col-lg-12">
-            <!-- ---------------------
-                                          start Projects of the Month
-                                      ---------------- -->
             <div class="card">
                 <div class="card-body">
                     <div class="d-md-flex align-items-center">
@@ -260,7 +197,6 @@
                     <div class="table-responsive">
                         <table class="table no-wrap v-middle">
                             <thead>
-                                <!-- start row -->
                                 <tr class="border-0">
                                     <th class="border-0">Team Lead</th>
                                     <th class="border-0">Project</th>
@@ -269,10 +205,8 @@
                                     <th class="border-0">Weeks</th>
                                     <th class="border-0">Budget</th>
                                 </tr>
-                                <!-- end row -->
                             </thead>
                             <tbody>
-                                <!-- start row -->
                                 <tr>
                                     <td>
                                         <div class="d-flex no-block align-items-center">
@@ -307,8 +241,6 @@
                                     <td>35</td>
                                     <td class="">$96K</td>
                                 </tr>
-                                <!-- end row -->
-                                <!-- start row -->
                                 <tr>
                                     <td>
                                         <div class="d-flex no-block align-items-center">
@@ -340,8 +272,6 @@
                                     <td>35</td>
                                     <td class="">$96K</td>
                                 </tr>
-                                <!-- end row -->
-                                <!-- start row -->
                                 <tr>
                                     <td>
                                         <div class="d-flex no-block align-items-center">
@@ -375,8 +305,6 @@
                                     <td>35</td>
                                     <td class="">$96K</td>
                                 </tr>
-                                <!-- end row -->
-                                <!-- start row -->
                                 <tr>
                                     <td>
                                         <div class="d-flex no-block align-items-center">
@@ -407,35 +335,20 @@
                                     <td>35</td>
                                     <td class="">$96K</td>
                                 </tr>
-                                <!-- end row -->
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-            <!-- ---------------------
-                                          end Projects of the Month
-                                      ---------------- -->
         </div>
     </div>
-    <!-- -------------------------------------------------------------- -->
-    <!-- Table -->
-    <!-- -------------------------------------------------------------- -->
-    <!-- -------------------------------------------------------------- -->
-    <!-- Recent comment and chats -->
-    <!-- -------------------------------------------------------------- -->
     <div class="row">
-        <!-- column -->
         <div class="col-lg-6">
-            <!-- ---------------------
-                                            start Recent Comments
-                                        ---------------- -->
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Recent Comments</h4>
                 </div>
                 <div class="comment-widgets scrollable" style="height: 530px;" data-simplebar="">
-                    <!-- Comment Row -->
                     <div class="d-flex flex-row comment-row mt-0">
                         <div class="px-2 py-0 ">
                             <img src="/assets/images/profile/user-5.jpg" alt="user" width="45"
@@ -467,7 +380,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Comment Row -->
                     <div class="d-flex flex-row comment-row">
                         <div class="px-2 py-0">
                             <img src="/assets/images/profile/user-6.jpg" alt="user" width="45"
@@ -499,7 +411,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Comment Row -->
                     <div class="d-flex flex-row comment-row">
                         <div class="px-2 py-0">
                             <img src="/assets/images/profile/user-1.jpg" alt="user" width="45"
@@ -531,7 +442,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Comment Row -->
                     <div class="d-flex flex-row comment-row">
                         <div class="px-2 py-0">
                             <img src="/assets/images/profile/user-2.jpg" alt="user" width="45"
@@ -563,7 +473,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Comment Row -->
                     <div class="d-flex flex-row comment-row">
                         <div class="px-2 py-0">
                             <img src="/assets/images/profile/user-4.jpg" alt="user" width="45"
@@ -595,25 +504,15 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Comment Row -->
                 </div>
             </div>
-            <!-- ---------------------
-                                            end Recent Comments
-                                        ---------------- -->
         </div>
-        <!-- column -->
         <div class="col-lg-6">
-            <!-- ---------------------
-                                          start Recent Chats
-                                      ---------------- -->
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Recent Chats</h4>
                     <div class="chat-box scrollable position-relative w-100" style="height: 450px;" data-simplebar="">
-                        <!--chat Row -->
                         <ul class="chat-list">
-                            <!--chat Row -->
                             <li class="chat-item">
                                 <div class="chat-img">
                                     <img src="/assets/images/profile/user-3.jpg" alt="user">
@@ -628,7 +527,6 @@
                                 </div>
                                 <div class="chat-time">10:56 am</div>
                             </li>
-                            <!--chat Row -->
                             <li class="chat-item">
                                 <div class="chat-img">
                                     <img src="/assets/images/profile/user-2.jpg" alt="user">
@@ -640,7 +538,6 @@
                                 </div>
                                 <div class="chat-time">10:57 am</div>
                             </li>
-                            <!--chat Row -->
                             <li class="odd chat-item">
                                 <div class="chat-content">
                                     <div class="box bg-info rounded">I would love to join the team.
@@ -648,7 +545,6 @@
                                     <br>
                                 </div>
                             </li>
-                            <!--chat Row -->
                             <li class="odd chat-item">
                                 <div class="chat-content">
                                     <div class="box bg-info rounded">Whats budget of the new project.
@@ -657,7 +553,6 @@
                                 </div>
                                 <div class="chat-time">10:59 am</div>
                             </li>
-                            <!--chat Row -->
                             <li class="chat-item">
                                 <div class="chat-img">
                                     <img src="/assets/images/profile/user-5.jpg" alt="user">
@@ -669,8 +564,6 @@
                                 </div>
                                 <div class="chat-time">11:00 am</div>
                             </li>
-                            <!--chat Row -->
-                            <!-- <div id="someDiv"></div> -->
                         </ul>
                     </div>
                 </div>
@@ -690,14 +583,8 @@
                     </div>
                 </div>
             </div>
-            <!-- ---------------------
-                          end Recent Chats
-                          ---------------- -->
         </div>
     </div>
-    <!-- -------------------------------------------------------------- -->
-    <!-- Recent comment and chats -->
-    <!-- -------------------------------------------------------------- -->
 @endsection
 
 
