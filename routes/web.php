@@ -17,13 +17,10 @@ use App\Http\Controllers\Auth\VerificationController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/dashboard', [DashboardController::class, 'index']);
 
 // Route for login page
+Route::get('/', [LoginController::class, 'showLoginForm']);
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 
