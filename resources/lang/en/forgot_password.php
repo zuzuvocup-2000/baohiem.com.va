@@ -6,4 +6,5 @@ return [
     'email' => 'Email',
     'forgot_password_button' => 'Forgot Password',
     'back_to_login_button' => 'Back to Login',
+    'have_account' => 'Do you already have an account?',
 ];

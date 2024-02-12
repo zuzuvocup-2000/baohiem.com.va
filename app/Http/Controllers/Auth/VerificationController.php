@@ -7,5 +7,8 @@ use Illuminate\Http\Request;
 
 class VerificationController extends Controller
 {
-    //
+    public function showVerifyForm()
+    {
+        return view('pages.auth.verify');
+    }
 }

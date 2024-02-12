@@ -6,4 +6,5 @@ return [
     'email' => 'Email',
     'forgot_password_button' => 'Quên Mật Khẩu',
     'back_to_login_button' => 'Quay lại Đăng nhập',
+    'have_account' => 'Bạn đã có tài khoản?',
 ];
