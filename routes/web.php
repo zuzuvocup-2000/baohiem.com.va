@@ -22,7 +22,8 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 // Route for login page
 Route::get('/', [LoginController::class, 'showLoginForm']);
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [LoginController::class, 'login']);
+Route::post('/login', [LoginController::class, 'login'])->name('login.post');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Route for forgot password page
 Route::get('/forgot', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');

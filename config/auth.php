@@ -64,7 +64,18 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-
+        'users_nhan_su' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\UserNhansu::class,
+        ],
+        'users_benh_vien' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\UserBenhvien::class,
+        ],
+        'users_khach_hang' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\UserKhachhang::class,
+        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
