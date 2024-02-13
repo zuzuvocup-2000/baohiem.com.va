@@ -9,7 +9,7 @@
     <link rel="shortcut icon" type="image/png" href="/assets/images/logos/favicon.png">
     <link rel="stylesheet" href="/assets/css/login.css">
     <link rel="stylesheet" href="/assets/css/styles.css">
-    <title>{{ __('login.login_title') }}</title>
+    <title>{{ __('verify.title') }}</title>
 </head>
 
 <body>
@@ -21,45 +21,34 @@
             <div id="particles-line"></div>
             <div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
                 <form class="login100-form validate-form flex-sb flex-w" action="" method="post">
-                    @csrf
-                    <span class="login100-form-title ">
-                        {{ __('login.system_name') }}
+                    <span class="login100-form-title mb-3">
+                    {{ __('verify.description') }}
                     </span>
+                    <p class="mb-0 ">{{ __('forgot_password.instructions') }}</p>
                     <div class="p-t-31 p-b-9">
                         <span class="txt1">
-                            {{ __('login.username') }}
+                        {{ __('verify.label') }}
                         </span>
                         <span class="form-bar text-danger "></span>
                     </div>
-                    <div class="wrap-input100 validate-input" data-validate="Username is required">
-                        <input type="text" name="username" class="input100  username-user" value="" placeholder="{{ __('login.username') }}" />
+                    <div class="wrap-input100 validate-input" data-validate = "Username is required">
+                        <input type="text" name="otp" class="input100" required="" value="" placeholder="Xác nhận OTP... " />
                         <span class="focus-input100"></span>
+                    </div>
+                    <div class="container-login100-form-btn m-t-17">
+                        <button class="login100-form-btn" type="submit">
+                        {{ __('verify.button') }}
+                        </button>
                     </div>
 
-                    <div class="p-t-13 p-b-9">
-                        <span class="txt1">
-                            {{ __('login.password') }}
+                    <div class="w-full text-center p-t-55">
+                        <span class="txt2">
+                        {{ __('verify.back_to_login_button') }}
                         </span>
-                        <span class="form-bar text-danger "></span>
-                    </div>
-                    <div class="wrap-input100 validate-input" data-validate="Password is required">
-                        <input type="password" name="password" autocomplete="off" class="input100 <?php echo isset($validate['password']) ? 'input-danger' : '' ?> password-user" placeholder="{{ __('login.password') }}" />
-                        <span class="focus-input100"></span>
-                    </div>
-                    <div class="container-login100-form-btn my-4">
-                        <div class="form-check mb-3">
-                            <input class="form-check-input primary" type="checkbox" value=""
-                                name="remember" id="flexCheckChecked" checked="">
-                            <label class="form-check-label text-dark" for="flexCheckChecked">
-                                {{ __('login.remember_password') }}
-                            </label>
-                        </div>
-                        <button class="login100-form-btn mb-sm-2" type="submit">
-                        {{ __('login.login_button') }}
-                        </button>
-                        <div class="btn-center">
-                            <a href="{{ route('password.request') }}" title="">{{ __('login.forgot_password') }}</a>
-                        </div>
+
+                        <a href="{{ route('login') }}" class="txt2 bo1">
+                        {{ __('verify.have_account') }}
+                        </a>
                     </div>
                 </form>
             </div>

@@ -29,5 +29,7 @@ Route::get('/forgot', [ForgotPasswordController::class, 'showLinkRequestForm'])-
 Route::post('/forgot', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 
 // Routes for email verification
+Route::get('/verify', [VerificationController::class, 'showVerifyForm'])->name('verify');
+Route::post('/verify', [VerificationController::class, 'verify']);
 Route::get('/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
 Route::get('/resend-verification', [VerificationController::class, 'resend'])->name('verification.resend');
