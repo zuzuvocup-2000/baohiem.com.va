@@ -40,6 +40,22 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'users' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+        'users_nhan_su' => [
+            'driver' => 'session',
+            'provider' => 'users_nhan_su',
+        ],
+        'users_benh_vien' => [
+            'driver' => 'session',
+            'provider' => 'users_benh_vien',
+        ],
+        'users_khach_hang' => [
+            'driver' => 'session',
+            'provider' => 'users_khach_hang',
+        ],
     ],
 
     /*
@@ -104,6 +120,19 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        'users_nhan_su' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\UserNhansu::class,
+        ],
+        'users_benh_vien' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\UserBenhvien::class,
+        ],
+        'users_khach_hang' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\UserKhachhang::class,
+        ],
+
     ],
 
     /*

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,35 +16,18 @@ class LoginController extends Controller
         return view('pages.auth.login');
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $messages = [
-            'username.required' => __('validation.username_required'),
-            'password.required' => __('validation.password_required'),
-            'username.string' => __('validation.username_string'),
-            'password.string' => __('validation.password_string'),
-        ];
+        $credentials = $request->only('username', 'password');
+        $guards = ['users', 'users_nhan_su', 'users_benh_vien', 'users_khach_hang'];
 
-        $credentials = $request->validate([
-            'username' => 'required|string',
-            'password' => 'required|string',
-        ], $messages);
-        if (Auth::guard('users')->attempt($credentials)) {
-            // Đăng nhập thành công
-            return redirect('/dashboard');
-        } elseif (Auth::guard('users_nhan_su')->attempt($credentials)) {
-            // Đăng nhập thành công
-            return redirect('/dashboard');
-        } elseif (Auth::guard('users_benh_vien')->attempt($credentials)) {
-            // Đăng nhập thành công
-            return redirect('/dashboard');
-        } elseif (Auth::guard('users_khach_hang')->attempt($credentials)) {
-            // Đăng nhập thành công
-            return redirect('/dashboard');
-        } else {
-            // Đăng nhập thất bại
-            return redirect('/login')->with('error', 'Tên đăng nhập hoặc mật khẩu không chính xác.');
+        foreach ($guards as $guard) {
+            if (Auth::guard($guard)->attempt($credentials)) {
+                return redirect('/dashboard');
+            }
         }
+
+        return redirect('/login')->with('error', 'Tên đăng nhập hoặc mật khẩu không chính xác.')->withInput();
     }
 
     protected function authenticated(Request $request, $user)

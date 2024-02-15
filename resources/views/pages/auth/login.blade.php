@@ -34,8 +34,8 @@
                     </div>
                     <div class="wrap-input100 validate-input" data-validate="Username is required">
                         <input type="text" name="username"
-                            class="input100  username-user {{ $errors->has('username') ? 'input-danger' : '' }}"
-                            value="{{ old('username') }}" placeholder="{{ __('login.username') }}" />
+                            class="input100  username-user {{ $errors->has('username') || session('error') ? 'input-danger' : '' }}"
+                            value="{{ old('username') }}" maxlength="255" placeholder="{{ __('login.username') }}" />
                         <span class="focus-input100"></span>
                     </div>
                     @error('username')
@@ -48,8 +48,8 @@
                         <span class="form-bar text-danger ">*</span>
                     </div>
                     <div class="wrap-input100 validate-input" data-validate="Password is required">
-                        <input type="password" name="password" autocomplete="off"
-                            class="input100 {{ $errors->has('password') ? 'input-danger' : '' }} password-user"
+                        <input type="password" maxlength="255" name="password" autocomplete="off"
+                            class="input100 {{ $errors->has('password') || session('error') ? 'input-danger' : '' }} password-user"
                             placeholder="{{ __('login.password') }}" />
                         <span class="focus-input100"></span>
                     </div>
@@ -59,7 +59,7 @@
                     <div class="container-login100-form-btn my-4 d-flex justify-content-between">
                         <div class="form-check">
                             <input class="form-check-input primary" type="checkbox" value="" name="remember"
-                                id="flexCheckChecked" checked="">
+                                id="flexCheckChecked">
                             <label class="form-check-label text-dark" for="flexCheckChecked">
                                 {{ __('login.remember_password') }}
                             </label>
@@ -79,8 +79,8 @@
         </div>
     </div>
     <div class="dark-transparent sidebartoggler"></div>
-    <!-- Import Js Files -->
 
+    <!-- Import Js Files -->
     <script src="/assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="/assets/js/app.min.js"></script>
     <script src="/assets/js/particles.min.js"></script>
@@ -93,6 +93,8 @@
     <script src="/assets/js/theme.js"></script>
     <script src="/assets/js/feather.min.js"></script>
 
+    <!-- Notification -->
+    @include('partial.notification')
 </body>
 
 </html>

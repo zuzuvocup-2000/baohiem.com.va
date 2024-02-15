@@ -59,6 +59,8 @@
     <script src="/assets/js/breadcrumb/breadcrumbChart.js"></script>
     <script src="/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
 
+    <!-- Notification -->
+    @include('partial.notification')
 
     <!-- Import Js Files By Page -->
     @yield('script')

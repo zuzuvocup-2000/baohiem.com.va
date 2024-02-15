@@ -2,16 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class UserNhansu extends Model
+class UserNhansu extends Authenticatable
 {
     protected $table = 'tbl_usernhansu';
     public $timestamps = false;
 
     protected $fillable = [
-        'tendangnhap',
-        'matkhau',
+        'username',
+        'password',
         'makhachhang',
         'active',
         'logdate',
