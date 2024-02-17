@@ -28,7 +28,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 // Route for forgot password page
 Route::get('/forgot', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 Route::post('/forgot', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-
+Route::post('/forgot', [ForgotPasswordController::class, 'forgot'])->name('forgot.post');
 // Routes for email verification
 Route::get('/verify', [VerificationController::class, 'showVerifyForm'])->name('verify');
 Route::post('/verify', [VerificationController::class, 'verify']);

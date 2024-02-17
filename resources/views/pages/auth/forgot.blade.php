@@ -27,21 +27,25 @@
         <div class="container-login100 container-login-admin">
             <div id="particles-line"></div>
             <div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
-                <form class="login100-form validate-form flex-sb flex-w" action="" method="post">
+                <form class="login100-form validate-form flex-sb flex-w" action="{{ route('forgot.post') }}" method="post">
+                     @csrf
                     <span class="login100-form-title mb-3">
                     {{ __('forgot_password.title') }}
                     </span>
                     <p class="mb-0 ">{{ __('forgot_password.instructions') }}</p>
                     <div class="p-t-31 p-b-9">
                         <span class="txt1">
-                        {{ __('login.username') }}
+                        {{ __('forgot_password.email') }}
                         </span>
                         <span class="form-bar text-danger "></span>
                     </div>
-                    <div class="wrap-input100 validate-input" data-validate = "Username is required">
-                        <input type="text" name="email" class="input100" required="" value="" placeholder="{{ __('login.username') }} " />
+                    <div class="wrap-input100 validate-input" data-validate = "Email is required">
+                        <input type="text" name="email" class="input100 email {{ $errors->has('email') || session('error') ? 'input-danger' : '' }}" value="{{ old('email') }}" maxlength="255" placeholder="{{ __('forgot_password.email') }} " />
                         <span class="focus-input100"></span>
                     </div>
+                    @error('email')
+                        <div class="text-danger w-100">{{ $message }}</div>
+                    @enderror
                     <div class="container-login100-form-btn m-t-17">
                         <button class="login100-form-btn" type="submit">
                         {{ __('forgot_password.forgot_password_button') }}

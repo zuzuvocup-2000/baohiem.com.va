@@ -12,5 +12,12 @@ return [
             'string' => 'The password must be a string.',
             'min' => 'The password must be at least :min characters.',
         ],
+        'email' => [
+            'required' => 'The email field is required.',
+            'string' => 'The email must be a string.',
+            'max' => 'The email may not be greater than :max characters.',
+            'regex' => 'Email format is invalid',
+            'not_regex' => 'Email format is invalid',
+        ],
     ],
 ];
