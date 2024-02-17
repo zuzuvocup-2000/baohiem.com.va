@@ -28,5 +28,12 @@ return [
             'password_max' => 'Mật khẩu không được vượt quá :max ký tự.',
             'password_min' => 'Mật khẩu phải chứa ít nhất :min ký tự.',
         ],
-    ]
+        'email' => [
+            'required' => 'Trường email là bắt buộc.',
+            'string' => 'Email phải là một chuỗi.',
+            'max' => 'Email phải có ít nhất :max kí tự.',
+            'regex' => 'Định dạng email không hợp lệ',
+            'not_regex' => 'Định dạng email không hợp lệ',
+        ],
+    ],
 ];
