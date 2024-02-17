@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\UserListController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\VerificationController;
@@ -35,4 +34,3 @@ Route::post('/verify', [VerificationController::class, 'verify']);
 Route::get('/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
 Route::get('/resend-verification', [VerificationController::class, 'resend'])->name('verification.resend');
 // Routes for free design before
-Route::get('/userlist', [UserListController::class, 'index']);
