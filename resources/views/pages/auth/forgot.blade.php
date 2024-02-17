@@ -27,7 +27,7 @@
         <div class="container-login100 container-login-admin">
             <div id="particles-line"></div>
             <div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
-                <form class="login100-form validate-form flex-sb flex-w" action="{{ route('forgot.post') }}" method="post">
+                <form class="login100-form validate-form flex-sb flex-w" action="{{ route('password.email') }}" method="post">
                      @csrf
                     <span class="login100-form-title mb-3">
                     {{ __('forgot_password.title') }}

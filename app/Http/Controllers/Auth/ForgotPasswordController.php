@@ -14,23 +14,7 @@ class ForgotPasswordController extends Controller
     {
         return view('pages.auth.forgot');
     }
-    public function forgot(ForgotPasswordRequest $request)
-    {
-        $credentials = $request->only('email');
-        $guards = ['users', 'users_nhan_su', 'users_benh_vien', 'users_khach_hang'];
-
-        foreach ($guards as $guard) {
-            if (Auth::guard($guard)->attempt($credentials)) {
-                return redirect('/verify');
-            }
-        }
-        $emailExists = User::where('email', $credentials['email'])->exists();
-        if (!$emailExists) {
-            return redirect()->back()->withInput()->withErrors(['email' => 'Email không tồn tại trong hệ thống']);
-        }
-        return redirect('/forgot')->with('error', 'Email không hợp lệ.')->withInput();
-    }
-    protected function sendResetLinkEmail(Request $request, $user)
+    protected function sendResetLinkEmail(ForgotPasswordRequest $request)
     {
         // Custom logic after successful login
     }
