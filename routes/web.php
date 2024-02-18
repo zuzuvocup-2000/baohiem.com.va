@@ -30,14 +30,13 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 // Route for forgot password page
 Route::get('/forgot', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 Route::post('/forgot', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-Route::post('/forgot', [ForgotPasswordController::class, 'forgot'])->name('forgot.post');
 // Routes for email verification
 Route::get('/verify', [VerificationController::class, 'showVerifyForm'])->name('verify');
 Route::post('/verify', [VerificationController::class, 'verify']);
 Route::get('/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
 Route::get('/resend-verification', [VerificationController::class, 'resend'])->name('verification.resend');
 
-// Route for user page
+// Routes for free design before
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
 Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
 Route::post('/user/create', [UserController::class, 'store'])->name('user.store');
