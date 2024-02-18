@@ -370,13 +370,17 @@
         @if (session('error'))
             toastr.error('{{ session('error') }}');
         @endif
+
+        @if (session('success'))
+            toastr.success('{{ session('success') }}');
+        @endif
     })(
-    "function" == typeof define && define.amd
-        ? define
-        : function (a, b) {
-            "undefined" != typeof module && module.exports
-                ? (module.exports = b(require("jquery")))
-                : (window.toastr = b(window.jQuery));
+        "function" == typeof define && define.amd ?
+        define :
+        function(a, b) {
+            "undefined" != typeof module && module.exports ?
+                (module.exports = b(require("jquery"))) :
+                (window.toastr = b(window.jQuery));
         }
     );
 </script>

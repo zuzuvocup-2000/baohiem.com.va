@@ -10,6 +10,7 @@ class NhanVien extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'employee_code',
         'MAPHONGBAN',
         'TENNHANVIEN',
         'DIACHI',

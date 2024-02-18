@@ -16,11 +16,13 @@ return new class extends Migration
         Schema::table('TBL_USER', function (Blueprint $table) {
             $table->renameColumn('TENDANGNHAP', 'username');
             $table->renameColumn('MATKHAU', 'password');
+            $table->renameColumn('ACTIVE', 'active');
         });
 
         Schema::table('TBL_USER_BENHVIEN', function (Blueprint $table) {
             $table->renameColumn('TENDANGNHAP', 'username');
             $table->renameColumn('MATKHAU', 'password');
+            $table->renameColumn('ACTIVE', 'active');
         });
 
         Schema::table('TBL_USERKHACHHANG', function (Blueprint $table) {
@@ -44,11 +46,13 @@ return new class extends Migration
         Schema::table('TBL_USER', function (Blueprint $table) {
             $table->renameColumn('username', 'TENDANGNHAP');
             $table->renameColumn('password', 'MATKHAU');
+            $table->renameColumn('active', 'ACTIVE');
         });
 
         Schema::table('TBL_USER_BENHVIEN', function (Blueprint $table) {
             $table->renameColumn('username', 'TENDANGNHAP');
             $table->renameColumn('password', 'MATKHAU');
+            $table->renameColumn('active', 'ACTIVE');
         });
 
         Schema::table('TBL_USERKHACHHANG', function (Blueprint $table) {
