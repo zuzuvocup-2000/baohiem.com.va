@@ -17,7 +17,6 @@
 
     <!-- Core Css -->
     <link rel="stylesheet" href="/assets/css/styles.css">
-    <script src="/assets/js/jquery.min.js"></script>
     @yield('style')
 </head>
 
