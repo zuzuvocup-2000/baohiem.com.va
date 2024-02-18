@@ -777,7 +777,7 @@
   --bs-success-bg-subtle: #caf3e7;
   --bs-info-bg-subtle: #e5f2ff;
   --bs-warning-bg-subtle: #fbecd3;
-  --bs-danger-bg-subtle: #ffe6eb;
+  --bs-danger-bg-subtle: #f7c7d0;
   --bs-light-bg-subtle: #F6F6F6;
   --bs-dark-bg-subtle: #6c757d;
   --bs-primary-border-subtle: #a9c0ff;
@@ -5878,8 +5878,8 @@ textarea.form-control-lg {
   --bs-pagination-focus-bg: var(--bs-secondary-bg);
   --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(41, 98, 255, 0.25);
   --bs-pagination-active-color: #fff;
-  --bs-pagination-active-bg: #2962ff;
-  --bs-pagination-active-border-color: #2962ff;
+  --bs-pagination-active-bg: #fa896b;
+  --bs-pagination-active-border-color: #fa896b;
   --bs-pagination-disabled-color: var(--bs-secondary-color);
   --bs-pagination-disabled-bg: var(--bs-secondary-bg);
   --bs-pagination-disabled-border-color: var(--bs-border-color);
@@ -27222,4 +27222,16 @@ svg {
   vertical-align: middle;
   line-height: 20px;
   padding-left: 3px;
+}
+/* customize css */
+.user-list input[type="password"]:disabled {
+  border: none !important;
+}
+.user-list ul.pagination{
+  margin-bottom: 0;
+  justify-content: right;
+}
+.user-list .btn-group{
+  display: block;
+  text-align: center;
 }
