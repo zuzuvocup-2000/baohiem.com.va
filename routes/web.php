@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\UserListController;
 use App\Http\Controllers\User\UserController;
 
 /*
@@ -29,7 +30,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 // Route for forgot password page
 Route::get('/forgot', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 Route::post('/forgot', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-
+Route::post('/forgot', [ForgotPasswordController::class, 'forgot'])->name('forgot.post');
 // Routes for email verification
 Route::get('/verify', [VerificationController::class, 'showVerifyForm'])->name('verify');
 Route::post('/verify', [VerificationController::class, 'verify']);
@@ -40,3 +41,4 @@ Route::get('/resend-verification', [VerificationController::class, 'resend'])->n
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
 Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
 Route::post('/user/create', [UserController::class, 'store'])->name('user.store');
+Route::get('/userlist', [UserListController::class, 'index']);
