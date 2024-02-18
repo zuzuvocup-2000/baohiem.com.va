@@ -14,11 +14,11 @@ class UserBenhvien extends Authenticatable
         'TENNHANVIEN',
         'username',
         'password',
-        'ACTIVE',
+        'active',
     ];
 
     protected $casts = [
-        'ACTIVE' => 'boolean',
+        'active' => 'boolean',
     ];
 
 
