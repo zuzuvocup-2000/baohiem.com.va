@@ -18,6 +18,11 @@ class UserController extends Controller
         $this->employeeService = $employeeService;
     }
 
+    public function index()
+    {
+        return view('pages.user.index');
+    }
+
     public function create()
     {
         $employeeList = $this->employeeService->getEmployeeListActive();

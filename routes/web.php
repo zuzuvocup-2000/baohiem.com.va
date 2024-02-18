@@ -5,7 +5,6 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\VerificationController;
-use App\Http\Controllers\UserListController;
 use App\Http\Controllers\User\UserController;
 
 /*
@@ -38,6 +37,6 @@ Route::get('/resend-verification', [VerificationController::class, 'resend'])->n
 
 // Routes for free design before
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
+Route::get('/user/index', [UserController::class, 'index']);
 Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
 Route::post('/user/create', [UserController::class, 'store'])->name('user.store');
-Route::get('/userlist', [UserListController::class, 'index']);
