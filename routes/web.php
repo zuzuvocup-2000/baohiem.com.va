@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\UserListController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\UserListController;
 
 /*
 |--------------------------------------------------------------------------

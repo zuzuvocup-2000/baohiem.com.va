@@ -31856,3 +31856,18 @@ svg {
 .select2 .select2-selection.select2-selection--single {
     border: var(--bs-border-width) solid #9097a7;
 }
+
+/* customize css */
+.user-list input[type="password"]:disabled {
+    border: none !important;
+}
+
+.user-list ul.pagination {
+    margin-bottom: 0;
+    justify-content: right;
+}
+
+.user-list .btn-group {
+    display: block;
+    text-align: center;
+}
