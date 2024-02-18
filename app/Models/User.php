@@ -14,12 +14,12 @@ class User extends Authenticatable
         'username',
         'password',
         'QUYENYTRUYCAP',
-        'ACTIVE',
+        'active',
         'Tenquyen',
     ];
 
     protected $casts = [
-        'ACTIVE' => 'boolean',
+        'active' => 'boolean',
     ];
 
     public function nhanvien()

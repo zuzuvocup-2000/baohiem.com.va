@@ -18,7 +18,7 @@ use App\Http\Controllers\User\UserController;
 |
 */
 
-Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
 
 // Route for login page
 Route::get('/', [LoginController::class, 'showLoginForm']);

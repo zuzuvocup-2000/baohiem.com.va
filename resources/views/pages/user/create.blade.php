@@ -102,8 +102,8 @@
                                         <div class="form-check-inline">
                                             <div class="custom-control custom-radio">
                                                 <input type="radio" class="custom-control-input" id="activeUser"
-                                                    name="ACTIVE" value="{{ ACTIVE_USER }}"
-                                                    {{ old('ACTIVE', ACTIVE_USER) == ACTIVE_USER ? 'checked' : '' }}>
+                                                    name="active" value="{{ ACTIVE_USER }}"
+                                                    {{ old('active', ACTIVE_USER) == ACTIVE_USER ? 'checked' : '' }}>
                                                 <label class="custom-control-label"
                                                     for="activeUser">{{ __('accounts.active') }}</label>
                                             </div>
@@ -111,8 +111,8 @@
                                         <div class="form-check-inline">
                                             <div class="custom-control custom-radio">
                                                 <input type="radio" class="custom-control-input" id="inactiveUser"
-                                                    name="ACTIVE" value="{{ INACTIVE_USER }}"
-                                                    {{ old('ACTIVE', ACTIVE_USER) == INACTIVE_USER ? 'checked' : '' }}>
+                                                    name="active" value="{{ INACTIVE_USER }}"
+                                                    {{ old('active', ACTIVE_USER) == INACTIVE_USER ? 'checked' : '' }}>
                                                 <label class="custom-control-label"
                                                     for="inactiveUser">{{ __('accounts.inactive') }}</label>
                                             </div>

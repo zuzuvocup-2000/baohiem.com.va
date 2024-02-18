@@ -12,7 +12,7 @@ class EmployeeService
 {
     public function getEmployeeListActive()
     {
-        $nhanVienList = NhanVien::where('ACTIVE', ACTIVE_USER)->get();
+        $nhanVienList = NhanVien::where('active', ACTIVE_USER)->get();
         $formattedNhanVienList = $nhanVienList->pluck('TENNHANVIEN', 'employee_code')->toArray();
         return $formattedNhanVienList;
     }

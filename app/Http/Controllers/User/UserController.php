@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UserCreateRequest;
 use App\Models\User;
 use App\Services\EmployeeService;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -26,17 +26,27 @@ class UserController extends Controller
 
     public function store(UserCreateRequest $request)
     {
-        // Validate input
-        $validatedData = $request->validate([
-            'username' => 'required|unique:accounts',
-            'email' => 'required|email|unique:accounts',
-            'password' => 'required',
-        ]);
+        try {
+            DB::beginTransaction();
 
-        // Create account
-        $account = User::create($validatedData);
+            $validatedData = $request->post();
 
-        // Redirect to account list or show success message
-        return redirect()->route('accounts.index')->with('success', 'Account created successfully.');
+            $user = new User([
+                'employee_code' => $validatedData['employee_code'],
+                'QUYENYTRUYCAP' => $validatedData['QUYENYTRUYCAP'],
+                'username'      => $validatedData['username'],
+                'password'      => bcrypt($validatedData['password']),
+                'active'        => $validatedData['active'],
+            ]);
+
+            $user->save();
+
+            DB::commit();
+
+            return redirect()->route('home')->with('success', __('accounts.add_new_success'));
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', __('accounts.add_new_error'));
+        }
     }
 }
