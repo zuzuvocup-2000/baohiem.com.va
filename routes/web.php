@@ -37,6 +37,8 @@ Route::get('/resend-verification', [VerificationController::class, 'resend'])->n
 
 // Routes for free design before
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
+Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+Route::put('/user/edit/{id}', [UserController::class, 'update'])->name('user.update');
 Route::get('/user/index', [UserController::class, 'index']);
 Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
 Route::post('/user/create', [UserController::class, 'store'])->name('user.store');

@@ -13,7 +13,7 @@ return [
             'min' => 'Mật khẩu phải có ít nhất :min kí tự.',
         ],
         'user' => [
-            'employee_code_required' => 'Vui lòng chọn nhân viên.',
+            'employee_id_required' => 'Vui lòng chọn nhân viên.',
             'username_required' => 'Vui lòng nhập tên tài khoản.',
             'username_max' => 'Tên tài khoản không được vượt quá :max ký tự.',
             'username_unique' => 'Tên tài khoản đã tồn tại.',

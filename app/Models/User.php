@@ -10,7 +10,7 @@ class User extends Authenticatable
     public $timestamps = false;
 
     protected $fillable = [
-        'employee_code',
+        'employee_id',
         'username',
         'password',
         'QUYENYTRUYCAP',
@@ -22,8 +22,8 @@ class User extends Authenticatable
         'active' => 'boolean',
     ];
 
-    public function nhanvien()
+    public function employee()
     {
-        return $this->belongsTo(Nhanvien::class, 'employee_code', 'employee_code');
+        return $this->belongsTo(Employee::class, 'employee_id');
     }
 }

@@ -25,7 +25,7 @@ class UserCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'employee_code' => 'required',
+            'employee_id' => 'required',
             'username' => [
                 'required',
                 'max:255',
@@ -41,7 +41,7 @@ class UserCreateRequest extends FormRequest
     public function messages()
     {
         return [
-            'employee_code.required' => __('validation.custom.user.employee_code_required'),
+            'employee_id.required' => __('validation.custom.user.employee_id_required'),
             'username.required' => __('validation.custom.user.username_required'),
             'username.max' => __('validation.custom.user.username_max'),
             'username.unique' => __('validation.custom.user.username_unique'),

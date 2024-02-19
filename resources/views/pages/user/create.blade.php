@@ -24,20 +24,20 @@
                                             {{ __('accounts.employee') }}
                                             <span class="text-danger"> *</span>
                                         </label>
-                                        <div class="{{ $errors->has('employee_code') ? 'is-invalid' : '' }}">
-                                            <select class="select2" name="employee_code">
+                                        <div class="{{ $errors->has('employee_id') ? 'is-invalid' : '' }}">
+                                            <select class="select2" name="employee_id">
                                                 <option selected="" value="">{{ __('accounts.employee_select') }}
                                                 </option>
                                                 @foreach ($employeeList as $employeeCode => $tennhanvien)
                                                     <option value="{{ $employeeCode }}"
-                                                        {{ old('employee_code') == $employeeCode ? 'selected' : '' }}>
+                                                        {{ old('employee_id') == $employeeCode ? 'selected' : '' }}>
                                                         {{ $tennhanvien }}
                                                     </option>
                                                 @endforeach
                                             </select>
-                                            @if ($errors->has('employee_code'))
+                                            @if ($errors->has('employee_id'))
                                                 <div class="invalid-feedback">
-                                                    {{ $errors->first('employee_code') }}
+                                                    {{ $errors->first('employee_id') }}
                                                 </div>
                                             @endif
                                         </div>
@@ -102,8 +102,8 @@
                                         <div class="form-check-inline">
                                             <div class="custom-control custom-radio">
                                                 <input type="radio" class="custom-control-input" id="activeUser"
-                                                    name="active" value="{{ ACTIVE_USER }}"
-                                                    {{ old('active', ACTIVE_USER) == ACTIVE_USER ? 'checked' : '' }}>
+                                                    name="active" value="{{ STATUS_ACTIVE }}"
+                                                    {{ old('active', STATUS_ACTIVE) == STATUS_ACTIVE ? 'checked' : '' }}>
                                                 <label class="custom-control-label"
                                                     for="activeUser">{{ __('accounts.active') }}</label>
                                             </div>
@@ -111,8 +111,8 @@
                                         <div class="form-check-inline">
                                             <div class="custom-control custom-radio">
                                                 <input type="radio" class="custom-control-input" id="inactiveUser"
-                                                    name="active" value="{{ INACTIVE_USER }}"
-                                                    {{ old('active', ACTIVE_USER) == INACTIVE_USER ? 'checked' : '' }}>
+                                                    name="active" value="{{ STATUS_INACTIVE }}"
+                                                    {{ old('active', STATUS_ACTIVE) == STATUS_INACTIVE ? 'checked' : '' }}>
                                                 <label class="custom-control-label"
                                                     for="inactiveUser">{{ __('accounts.inactive') }}</label>
                                             </div>

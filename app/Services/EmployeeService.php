@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\NhanVien;
+use App\Models\Employee;
 
 /**
  * Class EmployeeService
@@ -12,8 +12,8 @@ class EmployeeService
 {
     public function getEmployeeListActive()
     {
-        $nhanVienList = NhanVien::where('active', ACTIVE_USER)->get();
-        $formattedNhanVienList = $nhanVienList->pluck('TENNHANVIEN', 'employee_code')->toArray();
-        return $formattedNhanVienList;
+        $employeeList = Employee::where('active', STATUS_ACTIVE)->get();
+        $formattedEmployeeList = $employeeList->pluck('employee_name', 'id')->toArray();
+        return $formattedEmployeeList;
     }
 }

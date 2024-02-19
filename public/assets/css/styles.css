@@ -3458,7 +3458,7 @@ progress {
 .form-control {
     display: block;
     width: 100%;
-    padding: 8px 16px;
+    padding: 6px 14px;
     font-size: 0.875rem;
     font-weight: 400;
     line-height: 1.5;
@@ -3638,7 +3638,7 @@ textarea.form-control-lg {
     --bs-form-select-bg-img: url(../../assets/images/custom-select.png);
     display: block;
     width: 100%;
-    padding: 8px 38px 8px 16px;
+    padding: 6px 36px 6px 14px;
     font-size: 0.875rem;
     font-weight: 400;
     line-height: 1.5;
@@ -4391,8 +4391,8 @@ textarea.form-control-lg {
 }
 
 .btn {
-    --bs-btn-padding-x: 15px;
-    --bs-btn-padding-y: 7px;
+    --bs-btn-padding-x: 14px;
+    --bs-btn-padding-y: 6px;
     --bs-btn-font-family: ;
     --bs-btn-font-size: 0.875rem;
     --bs-btn-font-weight: 500;
@@ -24221,8 +24221,8 @@ body .select2-container--classic .select2-selection--single .select2-selection__
 body .select2-container--classic .select2-selection--single .select2-selection__rendered {
     border-color: var(--bs-border-color);
     color: var(--bs-body-color);
-    height: 40px;
-    line-height: 40px;
+    height: 35px;
+    line-height: 35px;
 }
 
 body .select2-container--default .select2-selection--multiple {

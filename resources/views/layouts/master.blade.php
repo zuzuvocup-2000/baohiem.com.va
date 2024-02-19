@@ -56,6 +56,7 @@
     <script src="/assets/js/sidebarmenu.js"></script>
     <script src="/assets/js/theme.js"></script>
     <script src="/assets/js/feather.min.js"></script>
+    <script src="/js/library.js"></script>
     {{-- <script src="/assets/js/breadcrumb/breadcrumbChart.js"></script> --}}
     {{-- <script src="/assets/libs/apexcharts/dist/apexcharts.min.js"></script> --}}
 

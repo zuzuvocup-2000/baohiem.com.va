@@ -5,22 +5,29 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UserCreateRequest;
 use App\Models\User;
-use App\Services\EmployeeService;
 use Illuminate\Support\Facades\DB;
+use App\Services\EmployeeService;
+use App\Services\UserService;
+use App\Services\DepartmentService;
 
 class UserController extends Controller
 {
-
+    protected $userService;
     protected $employeeService;
+    protected $departmentService;
 
-    public function __construct(EmployeeService $employeeService)
+    public function __construct(EmployeeService $employeeService, DepartmentService $departmentService, UserService $userService)
     {
         $this->employeeService = $employeeService;
+        $this->departmentService = $departmentService;
+        $this->userService = $userService;
     }
 
     public function index()
     {
-        return view('pages.user.index');
+        $activeDepartments = $this->departmentService->getActiveDepartments();
+        $userList = $this->userService->getUserList();
+        return view('pages.user.index', compact(['activeDepartments', 'userList']));
     }
 
     public function create()
@@ -37,7 +44,7 @@ class UserController extends Controller
             $validatedData = $request->post();
 
             $user = new User([
-                'employee_code' => $validatedData['employee_code'],
+                'employee_id' => $validatedData['employee_id'],
                 'QUYENYTRUYCAP' => $validatedData['QUYENYTRUYCAP'],
                 'username'      => $validatedData['username'],
                 'password'      => bcrypt($validatedData['password']),
