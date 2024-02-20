@@ -8,10 +8,10 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        return view('profiles.info');
+        return view('pages.profile.index');
     }
-    public function changepw()
+    public function changePassword()
     {
-        return view('profiles.changepw');
+        return view('pages.profile.change-password');
     }
 }

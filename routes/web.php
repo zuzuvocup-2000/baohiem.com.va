@@ -44,5 +44,5 @@ Route::get('/user/index', [UserController::class, 'index']);
 Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
 Route::post('/user/create', [UserController::class, 'store'])->name('user.store');
 // Routes Profiles
-Route::get('/profile', [ProfileController::class, 'index']);
-Route::get('/profile-changepw', [ProfileController::class, 'changepw']);
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile.user');
+Route::get('/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
