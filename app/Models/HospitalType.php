@@ -4,15 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PhanLoaiKhachHangTheoBenhVien extends Model
+class HospitalType extends Model
 {
-    protected $table = 'tbl_phanloaikhachhang_theobenhvien';
+    protected $table = 'tbl_hospital_type';
+    protected $primaryKey = 'id';
     public $timestamps = false;
 
     protected $fillable = [
-        'tenphanloai',
+        'hospital_type_name',
         'active',
-        'thutu',
     ];
 
     protected $casts = [

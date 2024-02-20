@@ -4,14 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class LoaiChi extends Model
+class PaymentType extends Model
 {
-    protected $table = 'TBL_LOAICHI';
+    protected $table = 'tbl_payment_type';
+    protected $primaryKey = 'id';
     public $timestamps = false;
 
     protected $fillable = [
-        'TENLOAICHI',
-        'ACTIVE',
+        'payment_type_name',
+        'active',
     ];
 
     public function chiTietChis()
