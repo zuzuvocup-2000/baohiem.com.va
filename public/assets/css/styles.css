@@ -31871,6 +31871,12 @@ svg {
     display: block;
     text-align: center;
 }
+.user-list nav{
+    text-align: center;
+}
+.user-list nav .flex{
+    display: none;
+}
 .user-list nav svg{
     width: 14px;
 }
