@@ -31871,3 +31871,20 @@ svg {
     display: block;
     text-align: center;
 }
+.user-list nav{
+    text-align: center;
+}
+.user-list nav .flex{
+    display: none;
+}
+.user-list nav svg{
+    width: 14px;
+}
+.user-list nav [aria-current="page"] span{
+    color: white;
+    background: var(--bs-primary) !important;
+}
+.user-list nav a:hover{
+    color: white;
+    background: var(--bs-primary) !important;
+}
