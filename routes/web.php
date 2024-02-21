@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\System\SystemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,3 +43,5 @@ Route::put('/user/edit/{id}', [UserController::class, 'update'])->name('user.upd
 Route::get('/user/index', [UserController::class, 'index']);
 Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
 Route::post('/user/create', [UserController::class, 'store'])->name('user.store');
+// Routes for system
+Route::get('/system', [SystemController::class, 'index'])->name('system.index');
