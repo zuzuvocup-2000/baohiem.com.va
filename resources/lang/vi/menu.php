@@ -8,6 +8,17 @@ return [
         'items' => []
     ],
     [
+        'name' => 'Thông tin tài khoản bảo hiểm',
+        'icon' => 'iconoir:home-hospital',
+        'url' => route('account.index'),
+        'items' => [
+            [
+                'name' => 'Thông tin tài khoản',
+                'url' => route('account.index'),
+            ]
+        ]
+    ],
+    [
         'name' => 'Quản trị',
         'icon' => 'material-symbols:shield-person-outline-rounded',
         'url' => route('user.index'),
@@ -18,7 +29,7 @@ return [
             ],
             [
                 'name' => 'Quản lý phân quyền',
-                'url' => '',
+                'url' => route('user.index'),
             ],
         ]
     ]

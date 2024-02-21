@@ -1,8 +1,5 @@
 <header class="topbar">
     <div class="with-vertical">
-        <!-- ---------------------------------- -->
-        <!-- Start Vertical Layout Header -->
-        <!-- ---------------------------------- -->
         <nav class="navbar navbar-expand-lg px-lg-0 px-0 py-0">
             <ul class="navbar-nav">
                 <li class="nav-item ">
@@ -27,7 +24,6 @@
                         <div class="mega-dropdown-menu row">
                             <div class="col-lg-3 col-xl-2 mb-4">
                                 <h4 class="mb-3 fs-5 ">Carousel</h4>
-                                <!-- CAROUSEL -->
                                 <div id="carouselExampleControls" class="carousel slide carousel-dark"
                                     data-bs-ride="carousel">
                                     <div class="carousel-inner">
@@ -55,11 +51,9 @@
                                         <span class="visually-hidden">Next</span>
                                     </a>
                                 </div>
-                                <!-- End CAROUSEL -->
                             </div>
                             <div class="col-lg-3 mb-4">
                                 <h4 class="mb-3 fs-5">Accordion</h4>
-                                <!-- Accordian -->
                                 <div class="accordion accordion-flush" id="accordionFlushExample">
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="flush-headingOne">
@@ -114,7 +108,6 @@
                             </div>
                             <div class="col-lg-3 mb-4">
                                 <h4 class="mb-3 fs-5">Contact Us</h4>
-                                <!-- Contact -->
                                 <form>
                                     <div class="mb-3 form-floating">
                                         <input type="text" class="form-control" id="exampleInputname1"
@@ -360,7 +353,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </li>
                 <li class="nav-item dropdown hover-dd d-none d-lg-block">
@@ -384,20 +376,13 @@
 
             <div class="d-block d-lg-none">
                 <div class="brand-logo d-flex align-items-center justify-content-between">
-                    <a href="index.html" class="text-nowrap logo-img">
-                        <b class="">
-                            <img src="/assets/images/logos/logo-light-icon.svg" alt="homepage" class="">
-                        </b>
-                        <!--End Logo icon -->
-                        <!-- Logo text -->
+                    <a href="/" class="text-nowrap logo-img">
                         <span class="">
-                            <img src="/assets/images/logos/logo-light-text.svg" class=" ps-2" alt="homepage">
+                            <img src="{{ asset('/img-system/system/logo.png') }}" class="logo-horizontal ps-2"
+                                alt="homepage">
                         </span>
                     </a>
                 </div>
-
-
-
             </div>
             <a class="navbar-toggler nav-icon-hover p-0 border-0 text-white" href="javascript:void(0)"
                 data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
@@ -982,50 +967,23 @@
 
                             </div>
                         </li>
-
-                        <!-- ------------------------------- -->
-                        <!-- end profile Dropdown -->
-                        <!-- ------------------------------- -->
                     </ul>
                 </div>
             </div>
         </nav>
-        <!-- ---------------------------------- -->
-        <!-- End Vertical Layout Header -->
-        <!-- ---------------------------------- -->
 
-        <!-- ------------------------------- -->
-        <!-- apps Dropdown in Small screen -->
-        <!-- ------------------------------- -->
-        <!--  Mobilenavbar -->
         <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="mobilenavbar"
             aria-labelledby="offcanvasWithBothOptionsLabel">
             <nav class="sidebar-nav scroll-sidebar">
                 <div class="offcanvas-header justify-content-between">
                     <div class="brand-logo d-flex align-items-center justify-content-between">
-                        <a href="index.html" class="text-nowrap logo-img">
-                            <b class="logo-icon">
-                                <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                                <!-- Dark Logo icon -->
-                                <img src="/assets/images/logos/logo-icon.svg" alt="homepage" class="dark-logo">
-                                <!-- Light Logo icon -->
-                                <img src="/assets/images/logos/logo-light-icon.svg" alt="homepage"
-                                    class="light-logo">
-                            </b>
-                            <!--End Logo icon -->
-                            <!-- Logo text -->
+                        <a href="/" class="text-nowrap logo-img">
                             <span class="logo-text">
-                                <!-- dark Logo text -->
-                                <img src="/assets/images/logos/logo-text.svg" alt="homepage" class="dark-logo ps-2">
-                                <!-- Light Logo text -->
-                                <img src="/assets/images/logos/logo-light-text.svg" class="light-logo ps-2"
+                                <img src="{{ asset('/img-system/system/logo.png') }}" class="logo-horizontal ps-2"
                                     alt="homepage">
                             </span>
                         </a>
                     </div>
-
-
-
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
                 </div>
@@ -1228,14 +1186,10 @@
                 </li>
                 <li class="nav-item d-none d-xl-block">
                     <div class="brand-logo d-flex align-items-center justify-content-between">
-                        <a href="index.html" class="text-nowrap logo-img">
-                            <b class="">
-                                <img src="/assets/images/logos/logo-light-icon.svg" alt="homepage" class="">
-                            </b>
-                            <!--End Logo icon -->
-                            <!-- Logo text -->
+                        <a href="/" class="text-nowrap logo-img">
                             <span class="">
-                                <img src="/assets/images/logos/logo-light-text.svg" class=" ps-2" alt="homepage">
+                                <img src="{{ asset('/img-system/system/logo.png') }}" class="logo-horizontal ps-2"
+                                    alt="homepage">
                             </span>
                         </a>
                     </div>
