@@ -4,14 +4,15 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class UserBenhvien extends Authenticatable
+class UserHospital extends Authenticatable
 {
-    protected $table = 'TBL_USER_BENHVIEN';
+    protected $table = 'tbl_user_hospital';
+    protected $primaryKey = 'id';
     public $timestamps = false;
 
     protected $fillable = [
-        'MABENHVIEN',
-        'TENNHANVIEN',
+        'hospital_id',
+        'employee_name',
         'username',
         'password',
         'active',
@@ -22,8 +23,8 @@ class UserBenhvien extends Authenticatable
     ];
 
 
-    public function benhvien()
+    public function hospital()
     {
-        return $this->belongsTo(Benhvien::class, 'MABENHVIEN', 'MABENHVIEN');
+        return $this->belongsTo(Hospital::class, 'hospital_id');
     }
 }

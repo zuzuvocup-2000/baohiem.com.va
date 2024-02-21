@@ -24,7 +24,7 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'username' => 'required|string|max:255|regex:/^[a-zA-Z0-9]+$/',
+            'username' => 'required|string|max:255',
             'password' => 'required|string|min:6',
         ];
     }
@@ -35,7 +35,6 @@ class LoginRequest extends FormRequest
             'username.required' => __('validation.custom.username.required'),
             'username.string' => __('validation.custom.username.string'),
             'username.max' => __('validation.custom.username.max'),
-            'username.regex' => __('validation.custom.username.regex'),
             'password.required' => __('validation.custom.password.required'),
             'password.string' => __('validation.custom.password.string'),
             'password.min' => __('validation.custom.password.min'),

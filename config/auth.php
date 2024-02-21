@@ -82,15 +82,15 @@ return [
         ],
         'users_nhan_su' => [
             'driver' => 'eloquent',
-            'model' => App\Models\UserNhansu::class,
+            'model' => App\Models\UserStaff::class,
         ],
         'users_benh_vien' => [
             'driver' => 'eloquent',
-            'model' => App\Models\UserBenhvien::class,
+            'model' => App\Models\UserHospital::class,
         ],
         'users_khach_hang' => [
             'driver' => 'eloquent',
-            'model' => App\Models\UserKhachhang::class,
+            'model' => App\Models\UserCustomer::class,
         ],
         // 'users' => [
         //     'driver' => 'database',
@@ -122,15 +122,15 @@ return [
         ],
         'users_nhan_su' => [
             'driver' => 'eloquent',
-            'model' => App\Models\UserNhansu::class,
+            'model' => App\Models\UserStaff::class,
         ],
         'users_benh_vien' => [
             'driver' => 'eloquent',
-            'model' => App\Models\UserBenhvien::class,
+            'model' => App\Models\UserHospital::class,
         ],
         'users_khach_hang' => [
             'driver' => 'eloquent',
-            'model' => App\Models\UserKhachhang::class,
+            'model' => App\Models\UserCustomer::class,
         ],
 
     ],

@@ -4,17 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PhanLoaiBenhVien extends Model
+class Province extends Model
 {
-    protected $table = 'TBL_PHANLOAIBENHVIEN';
+    protected $table = 'tbl_province';
+    protected $primaryKey = 'id';
     public $timestamps = false;
 
     protected $fillable = [
-        'TENPHANLOAIBENHVIEN',
-        'ACTIVE',
+        'province_name',
+        'active',
     ];
 
     protected $casts = [
-        'ACTIVE' => 'boolean',
+        'active' => 'boolean',
     ];
 }

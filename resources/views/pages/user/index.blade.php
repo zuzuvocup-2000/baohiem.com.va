@@ -50,7 +50,7 @@
                         </div>
                         <div>
                             <div class="table-responsive">
-                                <table class="table border text-nowrap customize-table mb-0 align-middle mb-3">
+                                <table id="simpletable" class="table border text-nowrap customize-table mb-0 align-middle mb-3">
                                     <thead class="text-dark fs-4">
                                         <tr>
                                             <th>
@@ -125,7 +125,7 @@
                                                                         src="{{ asset('img-system/system/edit_white.svg') }}">
                                                                 </span>
                                                             </a>
-                                                            <button class="btn btn-danger" data-id="{{ $user->id }}">
+                                                            <button class="btn btn-danger tabledit-delete-button" data-id="{{ $user->id }}">
                                                                 <span class="icon-item-icon">
                                                                     <img src="{{ asset('img-system/system/trash_white.svg') }}"
                                                                         alt="">
