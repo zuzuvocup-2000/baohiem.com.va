@@ -1,45 +1,23 @@
 <aside class="left-sidebar with-vertical">
     <div>
-        <!-- ---------------------------------- -->
-        <!-- Start Vertical Layout Sidebar -->
-        <!-- ---------------------------------- -->
         <div class="brand-logo d-flex align-items-center justify-content-between">
             <a href="index.html" class="text-nowrap logo-img">
-                <b class="logo-icon">
-                    <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                    <!-- Dark Logo icon -->
-                    <img src="/assets/images/logos/logo-icon.svg" alt="homepage" class="dark-logo">
-                    <!-- Light Logo icon -->
-                    <img src="/assets/images/logos/logo-light-icon.svg" alt="homepage" class="light-logo">
-                </b>
-                <!--End Logo icon -->
-                <!-- Logo text -->
                 <span class="logo-text">
-                    <!-- dark Logo text -->
-                    <img src="/assets/images/logos/logo-text.svg" alt="homepage" class="dark-logo ps-2">
-                    <!-- Light Logo text -->
-                    <img src="/assets/images/logos/logo-light-text.svg" class="light-logo ps-2" alt="homepage">
+                    <img src="{{ asset('/img-system/system/logo.png') }}" class="logo-horizontal ps-2" alt="homepage">
                 </span>
             </a>
         </div>
-
-
-
-
         <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
             <ul id="sidebarnav">
-
-                <!-- User Profile-->
                 <li class="pt-3">
-                    <!-- User Profile-->
                     <div class="user-profile d-flex no-block dropdown mt-3">
                         <div class="user-pic">
                             <img src="/assets/images/profile/user-6.jpg" alt="users" class="rounded-circle"
                                 width="40">
                         </div>
                         <div class="user-content hide-menu ms-2">
-                            <a href="#" class="" id="Userdd" role="button"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a href="#" class="" id="Userdd" role="button" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
                                 <h5 class="mb-0 user-name fw-medium d-flex ">
                                     Steave Jobs
                                     <iconify-icon icon="solar:alt-arrow-down-outline" class="ms-2">
@@ -228,8 +206,7 @@
                 </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link sidebar-link" href="app-calendar.html" aria-expanded="false">
-                        <iconify-icon icon="solar:calendar-minimalistic-outline"
-                            class="fs-5"></iconify-icon>
+                        <iconify-icon icon="solar:calendar-minimalistic-outline" class="fs-5"></iconify-icon>
                         <span class="hide-menu">Calendar</span>
                     </a>
                 </li>
@@ -361,8 +338,7 @@
                 </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link sidebar-link" href="page-pricing.html" aria-expanded="false">
-                        <iconify-icon icon="solar:calendar-minimalistic-outline"
-                            class="fs-5"></iconify-icon>
+                        <iconify-icon icon="solar:calendar-minimalistic-outline" class="fs-5"></iconify-icon>
                         <span class="hide-menu">Pricing</span>
                     </a>
                 </li>
@@ -373,15 +349,13 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link sidebar-link" href="page-account-settings.html"
-                        aria-expanded="false">
+                    <a class="sidebar-link sidebar-link" href="page-account-settings.html" aria-expanded="false">
                         <iconify-icon icon="solar:user-circle-line-duotone" class="fs-5"></iconify-icon>
                         <span class="hide-menu">Account Settings</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link sidebar-link" href="../landingpage/index.html"
-                        aria-expanded="false">
+                    <a class="sidebar-link sidebar-link" href="../landingpage/index.html" aria-expanded="false">
                         <iconify-icon icon="solar:laptop-minimalistic-outline" class="fs-5"></iconify-icon>
                         <span class="hide-menu">Landing Page</span>
                     </a>
@@ -858,8 +832,7 @@
                 <li class="sidebar-item">
                     <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
                         <span class="d-flex">
-                            <iconify-icon icon="solar:danger-circle-line-duotone"
-                                class="fs-6"></iconify-icon>
+                            <iconify-icon icon="solar:danger-circle-line-duotone" class="fs-6"></iconify-icon>
                         </span>
                         <span class="hide-menu">Form Validation</span>
                     </a>
@@ -885,8 +858,7 @@
                 <li class="sidebar-item">
                     <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
                         <span class="d-flex">
-                            <iconify-icon icon="solar:document-add-line-duotone"
-                                class="fs-6"></iconify-icon>
+                            <iconify-icon icon="solar:document-add-line-duotone" class="fs-6"></iconify-icon>
                         </span>
                         <span class="hide-menu">Form Picker</span>
                     </a>
@@ -936,8 +908,7 @@
                 <li class="sidebar-item">
                     <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
                         <span class="d-flex">
-                            <iconify-icon icon="solar:document-add-line-duotone"
-                                class="fs-6"></iconify-icon>
+                            <iconify-icon icon="solar:document-add-line-duotone" class="fs-6"></iconify-icon>
                         </span>
                         <span class="hide-menu">Form Editor</span>
                     </a>
@@ -1012,8 +983,7 @@
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="form-row-separator.html" aria-expanded="false">
                         <span class="d-flex">
-                            <iconify-icon icon="solar:hamburger-menu-line-duotone"
-                                class="fs-6"></iconify-icon>
+                            <iconify-icon icon="solar:hamburger-menu-line-duotone" class="fs-6"></iconify-icon>
                         </span>
                         <span class="hide-menu">Row Separator</span>
                     </a>
@@ -1230,8 +1200,7 @@
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="chart-sparkline.html" aria-expanded="false">
                         <span class="d-flex">
-                            <iconify-icon icon="solar:chart-square-line-duotone"
-                                class="fs-6"></iconify-icon>
+                            <iconify-icon icon="solar:chart-square-line-duotone" class="fs-6"></iconify-icon>
                         </span>
                         <span class="hide-menu">Sparkline Chart</span>
                     </a>
@@ -1241,8 +1210,7 @@
                 <!-- Sample pages -->
                 <!-- ---------------------------------- -->
                 <li class="nav-small-cap">
-                    <iconify-icon icon="solar:menu-dots-bold"
-                        class="nav-small-cap-icon fs-4"></iconify-icon>
+                    <iconify-icon icon="solar:menu-dots-bold" class="nav-small-cap-icon fs-4"></iconify-icon>
                     <span class="hide-menu">SAMPLE PAGES</span>
                 </li>
                 <!-- ---------------------------------- -->
@@ -1319,8 +1287,7 @@
                 <!-- Icons -->
                 <!-- ---------------------------------- -->
                 <li class="nav-small-cap">
-                    <iconify-icon icon="solar:menu-dots-bold"
-                        class="nav-small-cap-icon fs-4"></iconify-icon>
+                    <iconify-icon icon="solar:menu-dots-bold" class="nav-small-cap-icon fs-4"></iconify-icon>
                     <span class="hide-menu">Icons</span>
                 </li>
                 <!-- ---------------------------------- -->
@@ -1350,13 +1317,11 @@
                 <!-- Authentication -->
                 <!-- ---------------------------------- -->
                 <li class="nav-small-cap">
-                    <iconify-icon icon="solar:menu-dots-bold"
-                        class="nav-small-cap-icon fs-4"></iconify-icon>
+                    <iconify-icon icon="solar:menu-dots-bold" class="nav-small-cap-icon fs-4"></iconify-icon>
                     <span class="hide-menu">Auth</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link sidebar-link" href="authentication-error.html"
-                        aria-expanded="false">
+                    <a class="sidebar-link sidebar-link" href="authentication-error.html" aria-expanded="false">
                         <span class="d-flex">
                             <iconify-icon icon="solar:bug-broken" class="fs-6"></iconify-icon>
                         </span>
@@ -1445,8 +1410,7 @@
                 <li class="sidebar-item">
                     <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
                         <span class="d-flex">
-                            <iconify-icon icon="solar:magnifer-zoom-in-linear"
-                                class="fs-6"></iconify-icon>
+                            <iconify-icon icon="solar:magnifer-zoom-in-linear" class="fs-6"></iconify-icon>
                         </span>
                         <span class="hide-menu">Two Steps</span>
                     </a>
@@ -1484,8 +1448,7 @@
                 <!-- OTHER -->
                 <!-- ---------------------------------- -->
                 <li class="nav-small-cap">
-                    <iconify-icon icon="solar:menu-dots-bold"
-                        class="nav-small-cap-icon fs-4"></iconify-icon>
+                    <iconify-icon icon="solar:menu-dots-bold" class="nav-small-cap-icon fs-4"></iconify-icon>
                     <span class="hide-menu">OTHER</span>
                 </li>
                 <li class="sidebar-item">
@@ -1516,8 +1479,7 @@
                             <ul aria-expanded="false" class="collapse two-level">
                                 <li class="sidebar-item">
                                     <a href="javascript:void(0)" class="sidebar-link sublink">
-                                        <div
-                                            class="round-16 d-flex align-items-center justify-content-center">
+                                        <div class="round-16 d-flex align-items-center justify-content-center">
                                             <i class="sidebar-icon"></i>
                                         </div>
                                         <span class="hide-menu">Level 2</span>
@@ -1526,8 +1488,7 @@
                                 <li class="sidebar-item">
                                     <a class="sidebar-link has-arrow sublink" href="javascript:void(0)"
                                         aria-expanded="false">
-                                        <div
-                                            class="round-16 d-flex align-items-center justify-content-center">
+                                        <div class="round-16 d-flex align-items-center justify-content-center">
                                             <i class="sidebar-icon"></i>
                                         </div>
                                         <span class="hide-menu">Level 2.1</span>
@@ -1593,12 +1554,10 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link justify-content-between" href="#outlined"
-                        aria-expanded="false">
+                    <a class="sidebar-link justify-content-between" href="#outlined" aria-expanded="false">
                         <div class="d-flex align-items-center gap-2">
                             <span class="d-flex">
-                                <iconify-icon icon="solar:smile-circle-outline"
-                                    class="fs-6"></iconify-icon>
+                                <iconify-icon icon="solar:smile-circle-outline" class="fs-6"></iconify-icon>
                             </span>
                             <span class="hide-menu">Outlined</span>
                         </div>
