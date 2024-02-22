@@ -32,5 +32,11 @@ return [
                 'url' => route('user.index'),
             ],
         ]
-    ]
+    ],
+    [
+        'name' => 'Cấu hình hệ thống',
+        'icon' => 'solar:settings-outline',
+        'url' => route('system.index'),
+        'items' => []
+    ],
 ];

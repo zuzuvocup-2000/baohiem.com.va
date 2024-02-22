@@ -1,3 +1,6 @@
+<?php
+$currentUser = getInfoUserAdmin();
+?>
 <header class="topbar">
     <div class="with-vertical">
         <nav class="navbar navbar-expand-lg px-lg-0 px-0 py-0">
@@ -907,13 +910,14 @@
                                 aria-labelledby="drop2">
                                 <div class="profile-dropdown position-relative" data-simplebar="">
                                     <div class="py-3 px-7 pb-0">
-                                        <h5 class="mb-0 fs-5 ">User Profile</h5>
+                                        <h5 class="mb-0 fs-5 ">Thông tin cá nhân</h5>
                                     </div>
                                     <div class="d-flex align-items-center py-9 mx-7 border-bottom">
                                         <img src="/assets/images/profile/user-6.jpg" class="rounded-circle"
                                             width="80" height="80" alt="">
                                         <div class="ms-3">
-                                            <h5 class="mb-1 fs-4 text-secondary">Steve Jobs</h5>
+                                            <h5 class="mb-1 fs-4 text-secondary">
+                                                {{ $currentUser->employee->employee_name }}</h5>
                                             <span class="mb-1 d-block text-secondary">Designer</span>
                                             <p class="mb-0 d-flex align-items-center gap-2">
                                                 <i class="ti ti-mail fs-4"></i> info@xtreme.com
@@ -1926,16 +1930,18 @@
                                 aria-labelledby="drop2">
                                 <div class="profile-dropdown position-relative" data-simplebar="">
                                     <div class="py-3 px-7 pb-0">
-                                        <h5 class="mb-0 fs-5 ">User Profile</h5>
+                                        <h5 class="mb-0 fs-5 ">Thông tin cá nhân</h5>
                                     </div>
                                     <div class="d-flex align-items-center py-9 mx-7 border-bottom">
                                         <img src="/assets/images/profile/user-6.jpg" class="rounded-circle"
                                             width="80" height="80" alt="">
                                         <div class="ms-3">
-                                            <h5 class="mb-1 fs-4 text-secondary">Steve Jobs</h5>
-                                            <span class="mb-1 d-block text-secondary">Designer</span>
+                                            <h5 class="mb-1 fs-4 text-secondary">
+                                                {{ $currentUser->employee->employee_name }}</h5>
+                                            <span
+                                                class="mb-1 d-block text-secondary">{{ $currentUser->Tenquyen }}</span>
                                             <p class="mb-0 d-flex align-items-center gap-2">
-                                                <i class="ti ti-mail fs-4"></i> info@xtreme.com
+                                                <i class="ti ti-mail fs-4"></i> {{ $currentUser->employee->email }}
                                             </p>
                                         </div>
                                     </div>

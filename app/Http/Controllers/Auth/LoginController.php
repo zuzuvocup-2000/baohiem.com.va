@@ -19,11 +19,15 @@ class LoginController extends Controller
     public function login(LoginRequest $request)
     {
         $credentials = $request->only('username', 'password');
-        $guards = ['users', 'users_nhan_su', 'users_benh_vien', 'users_khach_hang'];
+        $guards = ['user_admins', 'user_employees', 'user_hospitals', 'user_customers'];
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->attempt($credentials)) {
-                return redirect('/dashboard');
+                if (Auth::guard('user_admins')->check()) {
+                    return redirect('/dashboard');
+                } else {
+                    return redirect('/');
+                }
             }
         }
 
