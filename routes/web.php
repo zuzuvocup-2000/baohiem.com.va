@@ -21,7 +21,9 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
+Route::middleware(['is_user_admin'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
+});
 
 // Route for login page
 Route::get('/', [LoginController::class, 'showLoginForm']);
@@ -60,4 +62,3 @@ Route::get('/account/create', [AccountController::class, 'create'])->name('accou
 Route::post('/account/create', [AccountController::class, 'store'])->name('user.store');
 Route::get('/account/edit/{id}', [AccountController::class, 'edit'])->name('account.edit');
 Route::put('/account/edit/{id}', [AccountController::class, 'update'])->name('account.update');
-

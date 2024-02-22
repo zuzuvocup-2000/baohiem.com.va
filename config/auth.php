@@ -40,21 +40,21 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'users' => [
+        'user_admins' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'user_admins',
         ],
-        'users_nhan_su' => [
+        'user_employees' => [
             'driver' => 'session',
-            'provider' => 'users_nhan_su',
+            'provider' => 'user_employees',
         ],
-        'users_benh_vien' => [
+        'user_hospitals' => [
             'driver' => 'session',
-            'provider' => 'users_benh_vien',
+            'provider' => 'user_hospitals',
         ],
-        'users_khach_hang' => [
+        'user_customers' => [
             'driver' => 'session',
-            'provider' => 'users_khach_hang',
+            'provider' => 'user_customers',
         ],
     ],
 
@@ -80,15 +80,19 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-        'users_nhan_su' => [
+        'user_admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
+        'user_employees' => [
             'driver' => 'eloquent',
             'model' => App\Models\UserStaff::class,
         ],
-        'users_benh_vien' => [
+        'user_hospitals' => [
             'driver' => 'eloquent',
             'model' => App\Models\UserHospital::class,
         ],
-        'users_khach_hang' => [
+        'user_customers' => [
             'driver' => 'eloquent',
             'model' => App\Models\UserCustomer::class,
         ],
@@ -120,15 +124,19 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
-        'users_nhan_su' => [
+        'user_admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
+        'user_employees' => [
             'driver' => 'eloquent',
             'model' => App\Models\UserStaff::class,
         ],
-        'users_benh_vien' => [
+        'user_hospitals' => [
             'driver' => 'eloquent',
             'model' => App\Models\UserHospital::class,
         ],
-        'users_khach_hang' => [
+        'user_customers' => [
             'driver' => 'eloquent',
             'model' => App\Models\UserCustomer::class,
         ],
