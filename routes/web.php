@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\System\SystemController;
 use App\Http\Controllers\ProfileController;
 
 /*
@@ -31,6 +32,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 // Route for forgot password page
 Route::get('/forgot', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 Route::post('/forgot', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+
 // Routes for email verification
 Route::get('/verify', [VerificationController::class, 'showVerifyForm'])->name('verify');
 Route::post('/verify', [VerificationController::class, 'verify']);
@@ -45,6 +47,9 @@ Route::put('/user/edit/{id}', [UserController::class, 'update'])->name('user.upd
 Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
 Route::post('/user/create', [UserController::class, 'store'])->name('user.store');
 
+// Routes for system
+Route::get('/system', [SystemController::class, 'index'])->name('system.index');
+
 // Routes Profiles
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile.user');
 Route::get('/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
@@ -55,3 +60,4 @@ Route::get('/account/create', [AccountController::class, 'create'])->name('accou
 Route::post('/account/create', [AccountController::class, 'store'])->name('user.store');
 Route::get('/account/edit/{id}', [AccountController::class, 'edit'])->name('account.edit');
 Route::put('/account/edit/{id}', [AccountController::class, 'update'])->name('account.update');
+
