@@ -14,9 +14,4 @@ class PaymentType extends Model
         'payment_type_name',
         'active',
     ];
-
-    public function chiTietChis()
-    {
-        return $this->hasMany(ChiTietChi::class, 'MALOAICHI', 'MALOAICHI');
-    }
 }
