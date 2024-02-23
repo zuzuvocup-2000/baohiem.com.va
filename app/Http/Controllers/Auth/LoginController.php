@@ -20,9 +20,10 @@ class LoginController extends Controller
     {
         $credentials = $request->only('username', 'password');
         $guards = ['user_admins', 'user_employees', 'user_hospitals', 'user_customers'];
+        $remember = $request->filled('remember');
 
         foreach ($guards as $guard) {
-            if (Auth::guard($guard)->attempt($credentials)) {
+            if (Auth::guard($guard)->attempt($credentials, $remember)) {
                 if (Auth::guard('user_admins')->check()) {
                     return redirect('/dashboard');
                 } else {
