@@ -916,8 +916,11 @@ $currentUser = getInfoUserAdmin();
                                         <img src="/assets/images/profile/user-6.jpg" class="rounded-circle"
                                             width="80" height="80" alt="">
                                         <div class="ms-3">
+                                            @if(isset($currentUser))
                                             <h5 class="mb-1 fs-4 text-secondary">
-                                                {{ $currentUser->employee->employee_name }}</h5>
+                                                {{ $currentUser->employee->employee_name }}
+                                            </h5>
+                                            @endif
                                             <span class="mb-1 d-block text-secondary">Designer</span>
                                             <p class="mb-0 d-flex align-items-center gap-2">
                                                 <i class="ti ti-mail fs-4"></i> info@xtreme.com
@@ -938,34 +941,9 @@ $currentUser = getInfoUserAdmin();
                                                     Settings</span>
                                             </div>
                                         </a>
-                                        <a href="app-email.html" class="py-8 px-7 d-flex align-items-center">
-                                            <span
-                                                class="d-flex align-items-center justify-content-center bg-warning-subtle rounded-circle round p-6 fs-6 text-primary">
-                                                <iconify-icon icon="solar:inbox-line-line-duotone"
-                                                    class="text-warning"></iconify-icon>
-                                            </span>
-                                            <div class="w-75 d-inline-block v-middle ps-3">
-                                                <h6 class="mb-1 fs-3  lh-base">My Inbox</h6>
-                                                <span class="fs-3 d-block text-secondary ">Messages &
-                                                    Emails</span>
-                                            </div>
-                                        </a>
-                                        <a href="app-notes.html" class="py-8 px-7 d-flex align-items-center">
-                                            <span
-                                                class="d-flex align-items-center justify-content-center bg-success-subtle rounded-circle round p-6 fs-6 text-primary">
-                                                <iconify-icon icon="solar:checklist-minimalistic-line-duotone"
-                                                    class="text-success "></iconify-icon>
-                                            </span>
-                                            <div class="w-75 d-inline-block v-middle ps-3">
-                                                <h6 class="mb-1 fs-3  lh-base">My Task</h6>
-                                                <span class="fs-3 d-block text-secondary">To-do and Daily
-                                                    Tasks</span>
-                                            </div>
-                                        </a>
                                     </div>
                                     <div class="d-grid py-4 px-7 pt-8">
-                                        <a href="authentication-login.html" class="btn btn-primary">Log
-                                            Out</a>
+                                        <a href="{{ route('logout') }}" class="btn btn-primary">Đăng xuất</a>
                                     </div>
                                 </div>
 
@@ -1935,6 +1913,7 @@ $currentUser = getInfoUserAdmin();
                                     <div class="d-flex align-items-center py-9 mx-7 border-bottom">
                                         <img src="/assets/images/profile/user-6.jpg" class="rounded-circle"
                                             width="80" height="80" alt="">
+                                        @if(isset($currentUser))
                                         <div class="ms-3">
                                             <h5 class="mb-1 fs-4 text-secondary">
                                                 {{ $currentUser->employee->employee_name }}</h5>
@@ -1944,6 +1923,7 @@ $currentUser = getInfoUserAdmin();
                                                 <i class="ti ti-mail fs-4"></i> {{ $currentUser->employee->email }}
                                             </p>
                                         </div>
+                                        @endif
                                     </div>
                                     <div class="message-body">
                                         <a href="page-user-profile.html"
@@ -1959,34 +1939,9 @@ $currentUser = getInfoUserAdmin();
                                                     Settings</span>
                                             </div>
                                         </a>
-                                        <a href="app-email.html" class="py-8 px-7 d-flex align-items-center">
-                                            <span
-                                                class="d-flex align-items-center justify-content-center bg-warning-subtle rounded-circle round p-6 fs-6 text-primary">
-                                                <iconify-icon icon="solar:inbox-line-line-duotone"
-                                                    class="text-warning"></iconify-icon>
-                                            </span>
-                                            <div class="w-75 d-inline-block v-middle ps-3">
-                                                <h6 class="mb-1 fs-3  lh-base">My Inbox</h6>
-                                                <span class="fs-3 d-block text-secondary ">Messages &
-                                                    Emails</span>
-                                            </div>
-                                        </a>
-                                        <a href="app-notes.html" class="py-8 px-7 d-flex align-items-center">
-                                            <span
-                                                class="d-flex align-items-center justify-content-center bg-success-subtle rounded-circle round p-6 fs-6 text-primary">
-                                                <iconify-icon icon="solar:checklist-minimalistic-line-duotone"
-                                                    class="text-success "></iconify-icon>
-                                            </span>
-                                            <div class="w-75 d-inline-block v-middle ps-3">
-                                                <h6 class="mb-1 fs-3  lh-base">My Task</h6>
-                                                <span class="fs-3 d-block text-secondary">To-do and Daily
-                                                    Tasks</span>
-                                            </div>
-                                        </a>
                                     </div>
                                     <div class="d-grid py-4 px-7 pt-8">
-                                        <a href="authentication-login.html" class="btn btn-primary">Log
-                                            Out</a>
+                                        <a href="{{ route('logout') }}" class="btn btn-primary">Đăng xuất</a>
                                     </div>
                                 </div>
                             </div>
