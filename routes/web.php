@@ -40,6 +40,7 @@ Route::middleware(['is_user_admin'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.user');
     Route::get('/change-password', [ProfileController::class, 'changePasswordIndex'])->name('profile.changePassword');
     Route::post('/change-password', [ProfileController::class, 'changePassword'])->name('change.password');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Routes Account
     Route::get('/account', [AccountController::class, 'index'])->name('account.index');
     Route::get('/account/create', [AccountController::class, 'create'])->name('account.create');

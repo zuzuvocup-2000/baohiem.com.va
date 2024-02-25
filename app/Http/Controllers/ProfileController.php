@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Profile\ProfileRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Employee;
 
 class ProfileController extends Controller
 {
@@ -22,12 +23,16 @@ class ProfileController extends Controller
         $user = getInfoUserAdmin();
     
         if (Hash::check($request->current_password, $user->password)) {
-            // Kiểm tra mật khẩu cũ đúng
             $user->update(['password' => Hash::make($request->new_password)]);
             return redirect()->route('home')->with('success', 'Mật khẩu của bạn đã được thay đổi thành công!');
         } else {
-            // Mật khẩu cũ không đúng
             return back()->withErrors(['current_password' => 'Mật khẩu cũ không đúng.']);
         }
+    }
+    public function update(Request $request)
+    {
+        $user = getInfoUserAdmin();
+        $user->employee->update($request->only(['employee_name', 'email', 'phone_number', 'address']));
+        return redirect()->route('profile.user')->with('success', 'Cập nhật thông tin cá nhân thành công!');
     }
 }
