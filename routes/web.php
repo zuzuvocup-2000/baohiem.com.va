@@ -29,9 +29,10 @@ Route::middleware(['is_user_admin'])->group(function () {
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
     Route::get('/user/index', [UserController::class, 'index']);
     Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
-    Route::put('/user/edit/{id}', [UserController::class, 'update'])->name('user.update');
+    Route::post('/user/edit/{id}', [UserController::class, 'update'])->name('user.update');
     Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
     Route::post('/user/create', [UserController::class, 'store'])->name('user.store');
+    Route::delete('/user/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
 
     // Routes for system
     Route::get('/system', [SystemController::class, 'index'])->name('system.index');
@@ -45,7 +46,7 @@ Route::middleware(['is_user_admin'])->group(function () {
     Route::get('/account/create', [AccountController::class, 'create'])->name('account.create');
     Route::post('/account/create', [AccountController::class, 'store'])->name('user.store');
     Route::get('/account/edit/{id}', [AccountController::class, 'edit'])->name('account.edit');
-    Route::put('/account/edit/{id}', [AccountController::class, 'update'])->name('account.update');
+    Route::post('/account/edit/{id}', [AccountController::class, 'update'])->name('account.update');
 });
 
 // Route for login page

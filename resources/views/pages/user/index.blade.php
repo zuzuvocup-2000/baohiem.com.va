@@ -20,15 +20,16 @@
                                     <select name="department" id="department" class="form-select">
                                         <option value="">Tất cả</option>
                                         @foreach ($activeDepartments as $department)
-                                            <option value="{{ $department->id }}">
+                                            <option value="{{ $department->id }}"
+                                                {{ request('department') == $department->id ? 'selected' : '' }}>
                                                 {{ $department->department_name }}
                                             </option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="form-field me-3">
-                                    <input type="search" name="keyword" class="form-control" value=""
-                                        placeholder="Tìm kiếm...">
+                                    <input type="search" name="keyword" class="form-control"
+                                        value="{{ request('keyword') }}" placeholder="Tìm kiếm...">
                                 </div>
                                 <button class="btn-success btn">Tìm kiếm</button>
                             </form>
@@ -50,7 +51,8 @@
                         </div>
                         <div>
                             <div class="system-table table-responsive">
-                                <table id="simpletable" class="table border text-nowrap customize-table mb-0 align-middle mb-3">
+                                <table id="simpletable"
+                                    class="table border text-nowrap customize-table mb-0 align-middle mb-3">
                                     <thead class="text-dark fs-4">
                                         <tr>
                                             <th>
@@ -125,7 +127,8 @@
                                                                         src="{{ asset('img-system/system/edit_white.svg') }}">
                                                                 </span>
                                                             </a>
-                                                            <button class="btn btn-danger tabledit-delete-button" data-id="{{ $user->id }}">
+                                                            <button class="btn btn-danger tabledit-delete-button"
+                                                                data-id="{{ $user->id }}">
                                                                 <span class="icon-item-icon">
                                                                     <img src="{{ asset('img-system/system/trash_white.svg') }}"
                                                                         alt="">
@@ -149,4 +152,5 @@
 @endsection
 
 @section('script')
+    <script src="/js/pages/user.js"></script>
 @endsection
