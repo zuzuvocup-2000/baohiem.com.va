@@ -28,5 +28,18 @@ return [
             'regex' => 'Định dạng email không hợp lệ',
             'not_regex' => 'Định dạng email không hợp lệ',
         ],
+        'current_password' => [
+            'required' => 'Bạn phải nhập mật khẩu cũ.',
+        ],
+        'new_password' => [
+            'required' => 'Bạn phải nhập mật khẩu mới.',
+            'min' => 'Mật khẩu phải có ít nhất :min kí tự.',
+        ],
+        'confirm_password' => [
+            'required' => 'Bạn phải nhập lại mật khẩu mới vừa nhập.',
+            'min' => 'Mật khẩu phải có ít nhất :min kí tự.',
+            'same' => 'Mật khẩu không trùng khớp'
+        ],
+        
     ]
 ];
