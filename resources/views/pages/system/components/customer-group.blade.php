@@ -1,31 +1,3 @@
-<div class="row mb-3">
-    <div class="col-xs-12 col-md-6">
-        <div class="form-group">
-            <label class="mr-sm-2" for="companySelect">Tên công ty</label>
-            <select class="form-select mr-sm-2" id="companySelect" name="companySelect">
-                @foreach ($companyList as $company)
-                    <option value="{{ $company->id }}"
-                        {{ old('companySelect', $companyList[0]->id) == $company->id ? 'selected' : '' }}>
-                        {{ $company->company_name }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-    </div>
-    <div class="col-xs-12 col-md-6">
-        <div class="form-group">
-            <label class="mr-sm-2" for="periodSelect">Niên hạn</label>
-            <select class="form-select mr-sm-2" id="periodSelect" name="periodSelect">
-                @foreach ($periodList as $period)
-                    <option value="{{ $period->id }}"
-                        {{ old('periodSelect', $periodList[0]->id) == $period->id ? 'selected' : '' }}>
-                        {{ $period->period_name }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-    </div>
-</div>
 <div class="table-responsive">
     <table id="simpletable" class="table system-table border text-nowrap customize-table mb-0 align-middle mb-3">
         <thead class="text-dark fs-4">
@@ -37,13 +9,8 @@
                     <h6 class="fs-4 fw-semibold mb-0 text-center">STT</h6>
                 </th>
                 <th>
-                    <h6 class="fs-4 fw-semibold mb-0">Tên gói bảo hiểm</h6>
-                </th>
-                <th>
-                    <h6 class="fs-4 fw-semibold mb-0">Giá trị gói</h6>
-                </th>
-                <th>
-                    <h6 class="fs-4 fw-semibold mb-0">Ghi chú</h6>
+                    <h6 class="fs-4 fw-semibold mb-0">Tên nhóm khách hàng
+                    </h6>
                 </th>
                 <th>
                     <h6 class="fs-4 fw-semibold mb-0">Thao tác</h6>
@@ -51,32 +18,23 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($packageDetailList as $key => $packageDetail)
-                <tr role="row" data-id="{{ $packageDetail->id }}">
+            @foreach ($customerGroupList as $key => $customerGroup)
+                <tr role="row" data-id="{{ $customerGroup->id }}">
                     <td>
                         <input type="checkbox" class="toggleCheckbox custom-control-input"
-                            id="packageDetail-{{ $packageDetail->id }}" name="id[]"
-                            value="{{ $packageDetail->id }}" />
+                            id="customerGroup-{{ $customerGroup->id }}" name="id[]"
+                            value="{{ $customerGroup->id }}" />
                     </td>
                     <td>
                         <p class="mb-0 fw-normal fs-4 text-center">{{ ++$key }}</p>
                     </td>
                     <td>
-                        <input class="inputField form-control" type="text" name="package_name"
-                            value="{{ $packageDetail->accountPackage->package_name }}"
-                            data-original-value="{{ $packageDetail->accountPackage->package_name }}" disabled="" />
+                        <input class="inputField form-control" type="text" name="group_name"
+                            value="{{ $customerGroup->group_name }}"
+                            data-original-value="{{ $customerGroup->group_name }}" style="width: 100%;"
+                            disabled="" />
                     </td>
-                    <td>
-                        <input class="inputField form-control" type="text" name="package_price"
-                            value="{{ $packageDetail->accountPackage->package_price }}"
-                            data-original-value="{{ $packageDetail->accountPackage->package_price }}" disabled="" />
-                    </td>
-                    <td>
-                        <input class="inputField form-control" type="text" name="note"
-                            value="{{ $packageDetail->accountPackage->note }}"
-                            data-original-value="{{ $packageDetail->accountPackage->note }}" disabled="" />
-                    </td>
-                    <td>
+                    <td style="width: 150px;">
                         <h6 class="fs-4 fw-semibold mb-0">
                             <div class="btn-group d-flex">
                                 <button class="btn btn-success me-1 editButton">
@@ -142,16 +100,8 @@
                     </div>
                 </td>
                 <td>
-                    <input class="inputField form-control" type="text" name="package_name" value=""
-                        data-original-value="" />
-                </td>
-                <td>
-                    <input class="inputField form-control" type="text" name="package_price" value=""
-                        data-original-value="" />
-                </td>
-                <td>
-                    <input class="inputField form-control" type="text" name="note" value=""
-                        data-original-value="" />
+                    <input class="inputField form-control" type="text" name="company" value=""
+                        data-original-value="" style="width: 100%;" />
                 </td>
                 <td></td>
             </tr>

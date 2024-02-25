@@ -12,6 +12,6 @@ class CustomerTypeService
 {
     public function getCustomerTypeActive()
     {
-        return CustomerType::where(['active' => 1])->orderBy('order', 'desc')->get();
+        return CustomerType::where(['active' => STATUS_ACTIVE])->orderBy('order', 'asc')->get();
     }
 }

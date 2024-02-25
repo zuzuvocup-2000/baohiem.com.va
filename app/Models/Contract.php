@@ -29,4 +29,9 @@ class Contract extends Model
         'folder',
         'gas_contract',
     ];
+
+    public function periodDetail()
+    {
+        return $this->hasOne(PeriodDetail::class, 'period_id');
+    }
 }

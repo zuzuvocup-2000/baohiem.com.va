@@ -12,6 +12,6 @@ class PeriodService
 {
     public function getPeriodActive()
     {
-        return Period::where(['active' => 1])->orderBy('order', 'desc')->get();
+        return Period::where(['active' => STATUS_ACTIVE])->orderBy('order', 'asc')->get();
     }
 }

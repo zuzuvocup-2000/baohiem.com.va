@@ -23,7 +23,7 @@ return new class extends Migration
             $table->renameColumn('TONGSOKHACHHANG', 'total_customers');
             $table->renameColumn('PHULUC', 'supplement');
             $table->renameColumn('SOHDPHULUCTHAMKHAO', 'reference_contract_supplement_number');
-            $table->renameColumn('ACTIVE', 'active_status');
+            $table->renameColumn('ACTIVE', 'active');
             $table->renameColumn('TENHOPDONG', 'contract_name');
             $table->renameColumn('mauser', 'user_id');
             $table->renameColumn('giahan', 'extension');
@@ -54,7 +54,7 @@ return new class extends Migration
             $table->renameColumn('total_customers', 'TONGSOKHACHHANG');
             $table->renameColumn('supplement', 'PHULUC');
             $table->renameColumn('reference_contract_supplement_number', 'SOHDPHULUCTHAMKHAO');
-            $table->renameColumn('active_status', 'ACTIVE');
+            $table->renameColumn('active', 'ACTIVE');
             $table->renameColumn('contract_name', 'TENHOPDONG');
             $table->renameColumn('user_id', 'mauser');
             $table->renameColumn('extension', 'giahan');

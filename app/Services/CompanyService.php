@@ -12,6 +12,6 @@ class CompanyService
 {
     public function getCompanyActive()
     {
-        return Company::where(['active' => 1])->orderBy('order', 'desc')->get();
+        return Company::where(['active' => STATUS_ACTIVE])->orderBy('order', 'asc')->get();
     }
 }

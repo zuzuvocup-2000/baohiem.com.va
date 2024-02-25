@@ -12,6 +12,6 @@ class UserService
 {
     public function getUserList()
     {
-        return User::with(['employee'])->orderBy('username', 'asc')->paginate(1);
+        return User::with(['employee'])->orderBy('username', 'asc')->paginate(PER_PAGE_SMALL);
     }
 }
