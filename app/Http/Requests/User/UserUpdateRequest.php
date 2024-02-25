@@ -5,7 +5,7 @@ namespace App\Http\Requests\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UserCreateRequest extends FormRequest
+class UserUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,17 +24,17 @@ class UserCreateRequest extends FormRequest
      */
     public function rules()
     {
+        $userId = $this->route('id');
         return [
             'employee_id' => 'required',
             'username' => [
                 'required',
                 'max:255',
-                Rule::unique('tbl_user', 'username'),
-                Rule::unique('tbl_user_hospital', 'username'),
-                Rule::unique('tbl_user_customer', 'username'),
-                Rule::unique('tbl_user_staff', 'username'),
+                Rule::unique('tbl_user', 'username')->ignore($userId),
+                Rule::unique('tbl_user_hospital', 'username')->ignore($userId),
+                Rule::unique('tbl_user_customer', 'username')->ignore($userId),
+                Rule::unique('tbl_user_staff', 'username')->ignore($userId),
             ],
-            'password' => 'required|max:255|min:6',
         ];
     }
 
@@ -45,9 +45,6 @@ class UserCreateRequest extends FormRequest
             'username.required' => __('validation.custom.user.username_required'),
             'username.max' => __('validation.custom.user.username_max'),
             'username.unique' => __('validation.custom.user.username_unique'),
-            'password.required' => __('validation.custom.user.password_required'),
-            'password.max' => __('validation.custom.user.password_max'),
-            'password.min' => __('validation.custom.user.password_min'),
         ];
     }
 }

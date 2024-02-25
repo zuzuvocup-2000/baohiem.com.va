@@ -2,6 +2,7 @@
 
 return [
     'add_account' => 'Thêm mới tài khoản',
+    'edit_account' => 'Cập nhật tài khoản',
     'employee' => 'Nhân viên',
     'employee_select' => '-- Chọn nhân viên --',
     'account' => 'Tài khoản',
@@ -14,6 +15,7 @@ return [
     'inactive' => 'Không hoạt động',
     'change_info' => 'Để thay đổi thông tin tài khoản hệ thống, hãy chỉnh sửa và lưu từ đây.',
     'add_new' => 'Thêm mới',
+    'update' => 'Cập nhật',
     'add_new_success' => 'Thêm mới tài khoản thành công.',
     'add_new_error' => 'Thêm mới tài khoản thất bại.',
 ];
