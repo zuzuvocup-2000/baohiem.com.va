@@ -13,16 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::rename('tbl_nienhan', 'tbl_period');
         Schema::table('tbl_period', function (Blueprint $table) {
+            $table->renameColumn('manienhan', 'id');
             $table->renameColumn('tennienhan', 'period_name');
             $table->renameColumn('logdate', 'log_date');
             $table->renameColumn('tunam', 'from_year');
             $table->renameColumn('dennam', 'to_year');
-            $table->renameColumn('manienhan', 'id');
             $table->renameColumn('Thutu', 'order');
         });
-
-        Schema::rename('tbl_nienhan', 'tbl_period');
     }
 
     /**
@@ -32,12 +31,12 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('tbl_nienhan', function (Blueprint $table) {
+        Schema::table('tbl_period', function (Blueprint $table) {
+            $table->renameColumn('id', 'manienhan');
             $table->renameColumn('period_name', 'tennienhan');
             $table->renameColumn('log_date', 'logdate');
             $table->renameColumn('from_year', 'tunam');
             $table->renameColumn('to_year', 'dennam');
-            $table->renameColumn('id', 'manienhan');
             $table->renameColumn('order', 'Thutu');
         });
 
