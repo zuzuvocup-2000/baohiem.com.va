@@ -554,10 +554,8 @@
 @endsection
 @section('script')
     <script src="/assets/js/datetimepicker/moment.min.js"></script>
-    <script src="/assets/js/datetimepicker/picker.js"></script>
-    <script src="/assets/js/datetimepicker/picker.date.js"></script>
-    <script src="/assets/js/datetimepicker/picker.time.js"></script>
     <script src="/assets/js/datetimepicker/daterangepicker.js"></script>
-    <script src="/assets/js/datetimepicker/datetimepicker.init.js"></script>
-    <script src="/assets/js/datetimepicker/daterangepicker.init.js"></script>
+    <script src="/assets/js/datetimepicker/daterangepicker-init.js"></script>
+    <script src="/assets/js/datetimepicker/bootstrap-datepicker.min.js"></script>
+    <script src="/assets/js/datetimepicker/datepicker-init.js"></script>
 @endsection

@@ -16,6 +16,7 @@
     <link rel="shortcut icon" type="image/png" href="{{ asset('/assets/images/logos/favicon.png') }}">
 
     <!-- Core Css -->
+    <link rel="stylesheet" href="/assets/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="/assets/css/styles.css">
     @yield('style')
 </head>

@@ -38,13 +38,13 @@
                 </td>
                 <td>
                     <div class="input-group">
-                        <input type="text" class="inputField form-control pickadate-select-year"
+                        <input type="text" class="inputField form-control mydatepicker"
                             value="{{ $period->from_year }}" name="from_year" disabled="" />
                     </div>
                 </td>
                 <td>
                     <div class="input-group">
-                        <input type="text" class="inputField form-control pickadate-select-year"
+                        <input type="text" class="inputField form-control mydatepicker"
                             value="{{ $period->to_year }}" name="to_year" disabled="" />
                     </div>
                 </td>
@@ -119,12 +119,12 @@
             </td>
             <td>
                 <div class="input-group">
-                    <input type="text" class="inputField form-control pickadate-select-year" name="from_year" />
+                    <input type="text" class="inputField form-control mydatepicker" name="from_year" />
                 </div>
             </td>
             <td>
                 <div class="input-group">
-                    <input type="text" class="inputField form-control pickadate-select-year" name="to_year" />
+                    <input type="text" class="inputField form-control mydatepicker" name="to_year" />
                 </div>
             </td>
             <td></td>
