@@ -19,7 +19,7 @@ class Contract extends Model
         'total_customers',
         'supplement',
         'reference_contract_supplement_number',
-        'active_status',
+        'active',
         'contract_name',
         'user_id',
         'extension',

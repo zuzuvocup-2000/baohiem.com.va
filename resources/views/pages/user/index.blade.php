@@ -49,7 +49,7 @@
                             </a>
                         </div>
                         <div>
-                            <div class="table-responsive">
+                            <div class="system-table table-responsive">
                                 <table id="simpletable" class="table border text-nowrap customize-table mb-0 align-middle mb-3">
                                     <thead class="text-dark fs-4">
                                         <tr>
