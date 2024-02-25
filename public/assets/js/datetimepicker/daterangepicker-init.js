@@ -10,7 +10,7 @@ $(".datetime").daterangepicker({
     timePicker: true,
     timePickerIncrement: 30,
     locale: {
-        format: "DD/MM/YYYY h:mm A",
+        format: "MM/DD/YYYY h:mm A",
     },
 });
 
@@ -23,7 +23,7 @@ $(".timeseconds").daterangepicker({
     timePicker24Hour: true,
     timePickerSeconds: true,
     locale: {
-        format: "DD/MM/YYYY h:mm:ss",
+        format: "MM-DD-YYYY h:mm:ss",
     },
 });
 
