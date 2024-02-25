@@ -250,10 +250,9 @@ $currentUser = getInfoUserAdmin();
                                                                 height="24">
                                                         </div>
                                                         <div class="d-inline-block">
-                                                            <h6 class="mb-1 fw-semibold fs-3">User Profile
+                                                            <h6 class="mb-1 fw-semibold fs-3">Thông tin cá nhân
                                                             </h6>
-                                                            <span class="fs-3 d-block text-secondary">learn
-                                                                more information</span>
+                                                            <span class="fs-3 d-block text-secondary">Xem thêm thông tin cá nhân</span>
                                                         </div>
                                                     </a>
                                                     <a href="app-calendar.html"
@@ -928,7 +927,7 @@ $currentUser = getInfoUserAdmin();
                                         </div>
                                     </div>
                                     <div class="message-body">
-                                        <a href="page-user-profile.html"
+                                        <a href="{{ route('profile.user') }}"
                                             class="py-8 px-7 mt-8 d-flex align-items-center">
                                             <span
                                                 class="d-flex align-items-center justify-content-center bg-primary-subtle rounded-circle round p-6 fs-6 text-primary">
@@ -936,9 +935,8 @@ $currentUser = getInfoUserAdmin();
                                                     class="text-primary"></iconify-icon>
                                             </span>
                                             <div class="w-75 d-inline-block v-middle ps-3">
-                                                <h6 class="mb-1 fs-3  lh-base">My Profile</h6>
-                                                <span class="fs-3 d-block text-secondary">Account
-                                                    Settings</span>
+                                                <h6 class="mb-1 fs-3  lh-base">Thông tin cá nhân</h6>
+                                                <span class="fs-3 d-block text-secondary">Cài đặt tài khoản</span>
                                             </div>
                                         </a>
                                     </div>
@@ -1926,17 +1924,27 @@ $currentUser = getInfoUserAdmin();
                                         @endif
                                     </div>
                                     <div class="message-body">
-                                        <a href="page-user-profile.html"
+                                        <a href="{{ route('profile.user') }}"
                                             class="py-8 px-7 mt-8 d-flex align-items-center">
                                             <span
-                                                class="d-flex align-items-center justify-content-center bg-primary-subtle rounded-circle round p-6 fs-6 text-primary">
+                                                class="d-flex align-items-center justify-content-center bg-warning-subtle rounded-circle round p-6 fs-6 text-primary">
                                                 <iconify-icon icon="solar:user-circle-line-duotone"
                                                     class="text-primary"></iconify-icon>
                                             </span>
                                             <div class="w-75 d-inline-block v-middle ps-3">
-                                                <h6 class="mb-1 fs-3  lh-base">My Profile</h6>
-                                                <span class="fs-3 d-block text-secondary">Account
-                                                    Settings</span>
+                                                <h6 class="mb-1 fs-3  lh-base">Thông tin cá nhân</h6>
+                                                <span class="fs-3 d-block text-secondary">Cài đặt tài khoản</span>
+                                            </div>
+                                        </a>
+                                        <a href="{{ route('profile.changePassword') }}"
+                                            class="py-8 px-7 mt-8 d-flex align-items-center">
+                                            <span
+                                                class="d-flex align-items-center justify-content-center bg-success-subtle rounded-circle round p-6 fs-6 text-primary">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-password-fingerprint" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M17 8c.788 1 1 2 1 3v1"></path><path d="M9 11c0 -1.578 1.343 -3 3 -3s3 1.422 3 3v2"></path><path d="M12 11v2"></path><path d="M6 12v-1.397c-.006 -1.999 1.136 -3.849 2.993 -4.85a6.385 6.385 0 0 1 6.007 -.005"></path><path d="M12 17v4"></path><path d="M10 20l4 -2"></path><path d="M10 18l4 2"></path><path d="M5 17v4"></path><path d="M3 20l4 -2"></path><path d="M3 18l4 2"></path><path d="M19 17v4"></path><path d="M17 20l4 -2"></path><path d="M17 18l4 2"></path></svg>
+                                            </span>
+                                            <div class="w-75 d-inline-block v-middle ps-3">
+                                                <h6 class="mb-1 fs-3  lh-base">Đổi mật khẩu</h6>
+                                                <span class="fs-3 d-block text-secondary">Bảo mật</span>
                                             </div>
                                         </a>
                                     </div>

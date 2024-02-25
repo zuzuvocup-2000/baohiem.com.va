@@ -25,7 +25,7 @@ class LoginController extends Controller
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->attempt($credentials, $remember)) {
                 if (Auth::guard('user_admins')->check()) {
-                    return redirect('/dashboard');
+                    return redirect('/dashboard')->with('success', 'Đăng nhập thành công!');
                 } else {
                     return redirect('/');
                 }
