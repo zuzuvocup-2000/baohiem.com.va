@@ -32763,3 +32763,19 @@ svg {
 .logo-horizontal {
     height: 50px;
 }
+.info-contract {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+.info-contract .info-contract-item {
+    display: flex;
+}
+.info-contract .content {
+    font-weight: bold;
+}
+.info-contract .content span {
+    font-weight: normal;
+}
+.bg-infor{
+    color: var(--bs-primary);
+}
