@@ -67,5 +67,8 @@ class Kernel extends HttpKernel
         'is_user_customer' => \App\Http\Middleware\IsUserCustomer::class,
         'is_user_hospital' => \App\Http\Middleware\IsUserHospital::class,
         'is_user_employee' => \App\Http\Middleware\IsUserEmployee::class,
+        'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
+        'permission' => \App\Http\Middleware\PermissionMiddleware::class,
+        'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
     ];
 }

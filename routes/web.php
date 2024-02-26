@@ -9,6 +9,8 @@ use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\System\SystemController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PermissionsController;
+use App\Http\Controllers\RolesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,33 +23,43 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
-Route::middleware(['is_user_admin'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
+Route::group(['middleware' => ['is_user_admin', 'is_user_customer', 'is_user_employee', 'is_user_hospital']], function () {
+    // Routes Logout
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
+    // Routes Profile
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.user');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::get('/change-password', [ProfileController::class, 'changePasswordIndex'])->name('profile.changePassword');
+    Route::post('/change-password', [ProfileController::class, 'changePassword'])->name('change.password');
+});
+
+Route::middleware(['is_user_admin', 'permission'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
+
     // Routes for free design before
-    Route::get('/user', [UserController::class, 'index'])->name('user.index');
-    Route::get('/user/index', [UserController::class, 'index']);
-    Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
-    Route::post('/user/edit/{id}', [UserController::class, 'update'])->name('user.update');
-    Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
-    Route::post('/user/create', [UserController::class, 'store'])->name('user.store');
-    Route::delete('/user/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
+    Route::group(['prefix' => 'users'], function () {
+        Route::get('/', [UserController::class, 'index'])->name('user.index');
+        Route::get('/index', [UserController::class, 'index']);
+        Route::get('/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+        Route::post('/edit/{id}', [UserController::class, 'update'])->name('user.update');
+        Route::get('/create', [UserController::class, 'create'])->name('user.create');
+        Route::post('/create', [UserController::class, 'store'])->name('user.store');
+        Route::delete('/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
+    });
 
     // Routes for system
     Route::get('/system', [SystemController::class, 'index'])->name('system.index');
 
-    // Routes Profiles
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.user');
-    Route::get('/change-password', [ProfileController::class, 'changePasswordIndex'])->name('profile.changePassword');
-    Route::post('/change-password', [ProfileController::class, 'changePassword'])->name('change.password');
-    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Routes Account
     Route::get('/account', [AccountController::class, 'index'])->name('account.index');
     Route::get('/account/create', [AccountController::class, 'create'])->name('account.create');
     Route::post('/account/create', [AccountController::class, 'store'])->name('user.store');
     Route::get('/account/edit/{id}', [AccountController::class, 'edit'])->name('account.edit');
     Route::post('/account/edit/{id}', [AccountController::class, 'update'])->name('account.update');
+
+    Route::resource('roles', RolesController::class);
+    Route::resource('permissions', PermissionsController::class);
 });
 
 // Route for login page
