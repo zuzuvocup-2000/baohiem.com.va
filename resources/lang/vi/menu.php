@@ -29,7 +29,7 @@ return [
             ],
             [
                 'name' => 'Quản lý phân quyền',
-                'url' => route('user.index'),
+                'url' => '/permissions'
             ],
         ]
     ],
