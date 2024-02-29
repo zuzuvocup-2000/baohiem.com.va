@@ -53,6 +53,7 @@ Route::middleware(['is_user_admin', 'permission'])->group(function () {
     Route::get('/system', [SystemController::class, 'index'])->name('system.index');
     // Routes for contact
     Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+    Route::post('/contact', [ContactController::class, 'sendEmail'])->name('contact.form');
     // Routes Account
     Route::get('/account', [AccountController::class, 'index'])->name('account.index');
     Route::get('/account/create', [AccountController::class, 'create'])->name('account.create');

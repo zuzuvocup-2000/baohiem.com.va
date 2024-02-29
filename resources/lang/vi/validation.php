@@ -40,6 +40,29 @@ return [
             'min' => 'Mật khẩu phải có ít nhất :min kí tự.',
             'same' => 'Mật khẩu không trùng khớp'
         ],
-        
+        'email_title' => [
+            'required' => 'Trường email là bắt buộc.',
+            'string' => 'Email phải là một chuỗi.',
+            'max' => 'Email phải có ít nhất :max kí tự.',
+            'not_regex' => 'Định dạng email không hợp lệ',
+        ],
+        'email_receive' => [
+            'required' => 'Trường email là bắt buộc.',
+            'string' => 'Email phải là một chuỗi.',
+            'max' => 'Email phải có ít nhất :max kí tự.',
+            'not_regex' => 'Định dạng email không hợp lệ',
+        ],
+        'title' => [
+            'required' => 'Trường tiêu đề là bắt buộc.',
+        ],
+        // 'file' => [
+        //     'file' => 'Trường file bắt buộc phải là một tệp.',
+        //     'mimes' => 'Tệp được tải lên phải thuộc một trong các loại được chỉ định (PDF, DOC, DOCX, XLSX, PDF)',
+        //     'max' => 'Tệp tải lên không được vượt quá 1024KB',
+        // ],
+        'ckeditor_contact' => [
+            'required' => 'Trường nội dung là bắt buộc.',
+            'min' => 'Nội dung phải tối thiểu 10 ký tự.',
+        ],
     ]
 ];

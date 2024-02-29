@@ -24,15 +24,18 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'styles' },
 		{ name: 'colors' },
 		{ name: 'about' }
+		
 	];
 
 	// Remove some buttons provided by the standard plugins, which are
 	// not needed in the Standard(s) toolbar.
 	config.removeButtons = 'Underline,Subscript,Superscript';
-
+	config.forcePasteAsPlainText = false;
+	config.extraPlugins = 'pastefromword';
+	config.pasteFromWordPromptCleanup = true;
 	// Set the most common block elements.
 	config.format_tags = 'p;h1;h2;h3;pre';
-
+	config.justifyClasses = ['text-left', 'text-center', 'text-right', 'text-justify'];
 	// Simplify the dialog windows.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
 };
