@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\System\SystemController;
+use App\Http\Controllers\Contact\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\RolesController;
@@ -50,7 +51,8 @@ Route::middleware(['is_user_admin', 'permission'])->group(function () {
 
     // Routes for system
     Route::get('/system', [SystemController::class, 'index'])->name('system.index');
-
+    // Routes for contact
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
     // Routes Account
     Route::get('/account', [AccountController::class, 'index'])->name('account.index');
     Route::get('/account/create', [AccountController::class, 'create'])->name('account.create');
