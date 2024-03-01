@@ -4,9 +4,9 @@
 
 @section('content')
     <div class="bg-light p-4 rounded">
-        <h1>Add new role</h1>
+        <h1>Tạo vai trò mới</h1>
         <div class="lead">
-            Add new role and assign permissions.
+            Thêm một vai trò mới cho người dùng hoặc nhóm người dùng.
         </div>
 
         <div class="container mt-4">
@@ -25,18 +25,18 @@
             <form method="POST" action="{{ route('roles.store') }}">
                 @csrf
                 <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
+                    <label for="name" class="form-label">Tên vai trò</label>
                     <input value="{{ old('name') }}" type="text" class="form-control" name="name" placeholder="Name"
                         required>
                 </div>
 
-                <label for="permissions" class="form-label">Assign Permissions</label>
+                <label for="permissions" class="form-label">Gán quyền</label>
 
                 <table class="table table-striped">
                     <thead>
                         <th scope="col" width="1%"><input type="checkbox" name="all_permission"></th>
-                        <th scope="col" width="20%">Name</th>
-                        <th scope="col" width="1%">Guard</th>
+                        <th scope="col" width="20%">Tên quyền</th>
+                        <th scope="col" width="1%">Vị trí</th>
                     </thead>
 
                     @foreach ($permissions as $permission)
@@ -50,9 +50,16 @@
                         </tr>
                     @endforeach
                 </table>
-
-                <button type="submit" class="btn btn-primary">Save user</button>
-                <a href="{{ route('user.index') }}" class="btn btn-default">Back</a>
+                <div style="text-align: right;">
+                    <button type="submit" class="btn btn-success">
+                        <span class="icon-item-icon me-1"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M5 12l5 5l10 -10"></path></svg></span>
+                        Lưu
+                    </button>
+                    <a class="btn btn-primary btn-sm" href="{{ route('roles.index') }}" class="btn btn-default">
+                        <span class="icon-item-icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-back-up" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 14l-4 -4l4 -4"></path><path d="M5 10h11a4 4 0 1 1 0 8h-1"></path></svg></span>    
+                        Trở về
+                    </a>
+                </div>
             </form>
         </div>
 
