@@ -32786,3 +32786,39 @@ svg {
     background-position: right calc(0.375em + 4px) center;
     background-size: calc(0.75em + 8px) calc(0.75em + 8px);
 }
+.edit-info-page .note-has-grid .single-note-item .side-stick {
+    position: absolute;
+    width: 3px;
+    height: 35px;
+    left: 0;
+    background-color: var(--bs-gray-700);
+    top: 15px;
+}
+.edit-info-page  .input-group:not(.has-validation)> :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating),.edit-info-page .input-group:not(.has-validation)>.dropdown-toggle:nth-last-child(n+3), .edit-info-page .input-group:not(.has-validation)>.form-floating:not(:last-child)>.form-control,.edit-info-page .input-group:not(.has-validation)>.form-floating:not(:last-child)>.form-select {
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+.edit-info-page .form-group.form-checkbox{
+    height: 100%;
+    display: flex;
+    -ms-flex-align: end;
+    -webkit-align-items: end;
+}
+.edit-info-page .form-group.form-checkbox .form-check{
+    margin-bottom: 8px;
+}
+.edit-info-page .bhpvi{
+    position: relative;
+}
+.edit-info-page .bhpvi input{
+    padding-right: 50px; 
+}
+.edit-info-page .vnd{
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+}
+.edit-info-page  .daterange{
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+}
