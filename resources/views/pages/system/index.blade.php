@@ -157,7 +157,6 @@
             </div>
         </div>
     </div>
-
 @endsection
 @section('script')
     <script src="/assets/js/datetimepicker/moment.min.js"></script>

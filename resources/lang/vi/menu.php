@@ -72,10 +72,14 @@ return [
             ],
             [
                 'name' => 'Supervisor',
-                'url' => route('supervisor.account'),
+                'url' => route('supervisor.insuranceExpenses'),
                 'items' => [
                     [
-                        'name' => 'Thông tin tài khoản',
+                        'name' => 'Chi bảo hiểm đã xóa',
+                        'url' => route('supervisor.insuranceExpenses'),
+                    ],
+                    [
+                        'name' => 'Tài khoản khách hàng đã xóa',
                         'url' => route('supervisor.account'),
                     ],
                     [
