@@ -39,7 +39,7 @@ Route::middleware(['is_user_admin', 'permission'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
 
     // Routes for free design before
-    Route::group(['prefix' => 'users'], function () {
+    Route::group(['prefix' => 'user'], function () {
         Route::get('/', [UserController::class, 'index'])->name('user.index');
         Route::get('/index', [UserController::class, 'index']);
         Route::get('/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
@@ -61,8 +61,8 @@ Route::middleware(['is_user_admin', 'permission'])->group(function () {
     Route::get('/account/edit/{id}', [AccountController::class, 'edit'])->name('account.edit');
     Route::post('/account/edit/{id}', [AccountController::class, 'update'])->name('account.update');
 
-    Route::resource('roles', RolesController::class);
-    Route::resource('permissions', PermissionsController::class);
+    Route::resource('role', RolesController::class);
+    Route::resource('permission', PermissionsController::class);
 });
 
 // Route for login page

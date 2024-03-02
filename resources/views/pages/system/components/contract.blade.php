@@ -2,7 +2,7 @@
     <div class="col-xs-12 col-md-6">
         <div class="form-group">
             <label class="mr-sm-2" for="companySelect">Tên công ty</label>
-            <select class="form-select mr-sm-2" id="companySelect" name="companySelect">
+            <select class="form-select contract-company-search mr-sm-2" id="companySelect" name="companySelect">
                 @foreach ($companyList as $company)
                     <option value="{{ $company->id }}"
                         {{ old('companySelect', $companyList[0]->id) == $company->id ? 'selected' : '' }}>
@@ -15,7 +15,7 @@
     <div class="col-xs-12 col-md-6">
         <div class="form-group">
             <label class="mr-sm-2" for="periodSelect">Niên hạn</label>
-            <select class="form-select mr-sm-2" id="periodSelect" name="periodSelect">
+            <select class="form-select contract-period-search mr-sm-2" id="periodSelect" name="periodSelect">
                 @foreach ($periodList as $period)
                     <option value="{{ $period->id }}"
                         {{ old('periodSelect', $periodList[0]->id) == $period->id ? 'selected' : '' }}>

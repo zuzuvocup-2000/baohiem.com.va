@@ -45,4 +45,12 @@ class SystemController extends Controller
         $customerGroupList = $this->customerGroupService->getCustomerGroupActive();
         return view('pages.system.index', compact(['companyList', 'periodList', 'customerTypeList', 'packageDetailList', 'contractList', 'customerGroupList']));
     }
+
+    public function searchPackageDetail()
+    {
+    }
+
+    public function searchContract()
+    {
+    }
 }
