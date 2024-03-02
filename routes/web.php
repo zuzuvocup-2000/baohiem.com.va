@@ -66,6 +66,7 @@ Route::middleware(['is_user_admin', 'permission'])->group(function () {
     Route::resource('permission', PermissionsController::class);
 
     // Routes for Supervisor
+    Route::get('/supervisor/insurance-expenses', [SupervisorController::class, 'insuranceExpenses'])->name('supervisor.insuranceExpenses');
     Route::get('/supervisor/account', [SupervisorController::class, 'account'])->name('supervisor.account');
     Route::get('/supervisor/account-online', [SupervisorController::class, 'accountOnline'])->name('supervisor.accountOnline');
 
