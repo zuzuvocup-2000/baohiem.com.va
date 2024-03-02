@@ -12,6 +12,7 @@ use App\Http\Controllers\Contact\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\RolesController;
+use App\Http\Controllers\SupervisorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,6 +64,13 @@ Route::middleware(['is_user_admin', 'permission'])->group(function () {
 
     Route::resource('role', RolesController::class);
     Route::resource('permission', PermissionsController::class);
+
+    // Routes for Supervisor
+    Route::get('/supervisor/account', [SupervisorController::class, 'account'])->name('supervisor.account');
+    Route::get('/supervisor/account-online', [SupervisorController::class, 'accountOnline'])->name('supervisor.accountOnline');
+
+    // Routes for Supervisor
+    Route::get('/supervisor', [SupervisorController::class, 'index'])->name('supervisor.index');
 });
 
 // Route for login page

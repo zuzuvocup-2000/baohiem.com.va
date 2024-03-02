@@ -21,12 +21,29 @@ $menu = __('menu');
                                 <ul aria-expanded="false" class="collapse first-level">
                                     @foreach ($value['items'] as $keyItem => $valueItem)
                                         <li class="sidebar-item">
-                                            <a href="{{ $valueItem['url'] }}" class="sidebar-link sublink">
+                                            <a href="{{ $valueItem['url'] }}"
+                                                class="sidebar-link {{ isset($valueItem['items']) && is_array($valueItem['items']) && count($valueItem['items']) ? 'has-arrow' : 'sublink' }}">
                                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                                     <i class="sidebar-icon"></i>
                                                 </div>
                                                 <span class="hide-menu">{{ $valueItem['name'] }}</span>
                                             </a>
+                                            @if (isset($valueItem['items']) && is_array($valueItem['items']) && count($valueItem['items']))
+                                                <ul aria-expanded="false" class="collapse second-level">
+                                                    @foreach ($valueItem['items'] as $keyItemChild => $valueItemChild)
+                                                        <li class="sidebar-item">
+                                                            <a href="{{ $valueItemChild['url'] }}"
+                                                                class="sidebar-link sublink">
+                                                                <div
+                                                                    class="round-16 d-flex align-items-center justify-content-center">
+                                                                    <i class="sidebar-icon"></i>
+                                                                </div><span
+                                                                    class="hide-menu">{{ $valueItemChild['name'] }}</span>
+                                                            </a>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
                                         </li>
                                     @endforeach
                                 </ul>
