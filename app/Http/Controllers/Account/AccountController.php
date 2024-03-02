@@ -11,4 +11,8 @@ class AccountController extends Controller
     {
         return view('pages.account.index');
     }
+    public function edit()
+    {
+        return view('pages.account.edit');
+    }
 }
