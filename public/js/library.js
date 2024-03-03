@@ -1,9 +1,9 @@
 $(document).ready(function () {
     $(".toggleAll").on("change", function () {
-        $(".toggleCheckbox").prop("checked", $(this).prop("checked"));
+        $(this).parents('table').find(".toggleCheckbox").prop("checked", $(this).prop("checked"));
     });
     $(".toggleCheckbox").on("change", function () {
-        $(".toggleAll").prop("checked", $(".toggleCheckbox:checked").length === $(".toggleCheckbox")
+        $(this).parents('table').find(".toggleAll").prop("checked", $(this).parents('table').find(".toggleCheckbox:checked").length === $(this).parents('table').find(".toggleCheckbox")
             .length);
     });
 });

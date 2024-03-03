@@ -41,20 +41,20 @@ return [
         'items' => [
             [
                 'name' => 'Danh sách khám sức khỏe',
+                'url' => route('physical.index'),
+            ],
+            [
+                'name' => 'Sức khỏe chung',
                 'url' => '',
             ],
             [
-                'name' => 'Danh sách khám sức khỏe',
+                'name' => 'Khám sức khỏe',
                 'url' => '',
             ],
             [
-                'name' => 'Danh sách khám sức khỏe',
+                'name' => 'Báo cáo khám sức khỏe',
                 'url' => '',
-            ],
-            [
-                'name' => 'Danh sách khám sức khỏe',
-                'url' => '',
-            ],
+            ]
         ]
     ],
     [
@@ -68,11 +68,19 @@ return [
             ],
             [
                 'name' => 'Quản lý quyền',
-                'url' => '/permission'
+                'url' => route('permission.index')
             ],
             [
                 'name' => 'Quản lý vai trò',
-                'url' => '/role'
+                'url' => route('role.index')
+            ],
+            [
+                'name' => 'Nhật ký thao tác chứng từ',
+                'url' => ''
+            ],
+            [
+                'name' => 'Download biểu mẫu',
+                'url' => ''
             ],
             [
                 'name' => 'Supervisor',
@@ -98,7 +106,24 @@ return [
         'name' => 'Cấu hình hệ thống',
         'icon' => 'solar:settings-outline',
         'url' => route('system.index'),
-        'items' => []
+        'items' => [
+            [
+                'name' => 'Quản lý thông tin bảo hiểm',
+                'url' => route('system.index'),
+            ],
+            [
+                'name' => 'Quản lý danh mục khám',
+                'url' => '',
+            ],
+            [
+                'name' => 'Quản lý thông tin sức khỏe',
+                'url' => ''
+            ],
+            [
+                'name' => 'Quản lý thông tin bệnh viện',
+                'url' => ''
+            ],
+        ]
     ],
     [
         'name' => 'Liên hệ',

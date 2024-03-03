@@ -35,4 +35,12 @@ class SupervisorController extends Controller
         $contractList = $this->contractService->getContractByCompanyAndPeriod($companyList->first()->id, $periodList->first()->id);
         return view('pages.supervisor.account', compact(['companyList', 'periodList', 'contractList']));
     }
+
+    public function accountOnline()
+    {
+        $companyList = $this->companyService->getCompanyActive();
+        $periodList = $this->periodService->getPeriodActive();
+        $contractList = $this->contractService->getContractByCompanyAndPeriod($companyList->first()->id, $periodList->first()->id);
+        return view('pages.supervisor.account-online', compact(['companyList', 'periodList', 'contractList']));
+    }
 }
