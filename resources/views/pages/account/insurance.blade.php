@@ -242,7 +242,7 @@
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-2 col-xl-4">
                         <div class="btn-input" style="text-align: right;">
-                            <button type="button" class="btn btn-success">Nhập khách hàng</button>
+                            <button type="button" class="btn btn-warning">Nhập khách hàng</button>
                         </div>
                     </div>
                 </div>
@@ -255,8 +255,8 @@
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-5 col-xl-4">
                         <div class="btn-group">
-                            <button class="me-2 btn btn-secondary" type="button">Dowload file mẫu DS KH chính</button>
-                            <button class="btn btn-info" type="button">Xử lý file Excel</button>
+                            <button class="me-2 btn btn-dark" type="button">Dowload file mẫu DS KH chính</button>
+                            <button class="btn btn-warning" type="button">Xử lý file Excel</button>
                         </div>
                     </div>
                 </div>
@@ -269,8 +269,8 @@
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-5 col-xl-4">
                         <div class="btn-group">
-                            <button class="me-2 btn btn-secondary" type="button">Dowload file đổi số thẻ KH</button>
-                            <button class="btn btn-info" type="button">Đổi số thẻ danh sách KH</button>
+                            <button class="me-2 btn btn-dark" type="button">Dowload file đổi số thẻ KH</button>
+                            <button class="btn btn-warning" type="button">Đổi số thẻ danh sách KH</button>
                         </div>
                     </div>
                 </div>
