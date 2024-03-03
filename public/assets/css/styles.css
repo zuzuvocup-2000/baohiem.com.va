@@ -19656,7 +19656,7 @@ html[data-layout=horizontal] .left-part.fixed-left-part, html[data-layout=horizo
     }
 
     html[data-layout=horizontal] .sidebar-nav #sidebarnav>.sidebar-item ul.second-level {
-        left: 240px;
+        left: 210px;
         top: 0;
     }
 
@@ -32772,6 +32772,8 @@ svg {
 }
 .info-contract .content {
     font-weight: bold;
+    padding: 0;
+    line-height: 21px;
 }
 .info-contract .content span {
     font-weight: normal;
@@ -32821,4 +32823,28 @@ svg {
 .edit-info-page  .daterange{
     border-top-right-radius: 0px !important;
     border-bottom-right-radius: 0px !important;
+}
+.bg-info-insurance {
+    background-color: rgb(250 137 107 / 30%) !important;
+}
+.form-search-absolute{
+    position: relative;
+}
+.form-search-absolute .btn-search{
+    position: absolute;
+    right: 3px;
+    top: 3px;
+    padding: 3px 10px;
+}
+.form-search-absolute .form-search{
+    padding-right: 90px;
+}
+.insurance-account .btn-group{
+    width: 100%;
+}
+.insurance-account .btn-group button:nth-child(1){
+    width: 50%;
+}
+.insurance-account .btn-group button:nth-child(2){
+    width: 50%;
 }
