@@ -32822,3 +32822,19 @@ svg {
     border-top-right-radius: 0px !important;
     border-bottom-right-radius: 0px !important;
 }
+.physical-page .form-group.form-checkbox {
+    height: 100%;
+    display: flex;
+    -ms-flex-align: end;
+    -webkit-align-items: end;
+}
+.physical-page .form-group.form-checkbox .form-check {
+    margin-bottom: 8px;
+}
+.physical-page .form-group.form-button {
+    height: 100%;
+    display: flex;
+    -ms-flex-align: end;
+    -webkit-align-items: flex-end;
+    justify-content: flex-end;
+}

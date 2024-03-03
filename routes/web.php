@@ -13,6 +13,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\SupervisorController;
+use App\Http\Controllers\Physical\PhysicalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +73,10 @@ Route::middleware(['is_user_admin', 'permission'])->group(function () {
 
     // Routes for Supervisor
     Route::get('/supervisor', [SupervisorController::class, 'index'])->name('supervisor.index');
+
+    // Routes Physical
+    Route::get('/physical', [PhysicalController::class, 'index'])->name('physical.index');
+
 });
 
 // Route for login page
