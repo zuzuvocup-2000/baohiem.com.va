@@ -19,7 +19,7 @@ $(".datetime").daterangepicker({
 /*******************************************/
 $(".timeseconds").daterangepicker({
     timePicker: true,
-    timePickerIncrement: 30,
+    timePickerIncrement: 365,
     timePicker24Hour: true,
     timePickerSeconds: true,
     locale: {
