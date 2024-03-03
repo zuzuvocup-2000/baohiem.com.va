@@ -68,7 +68,11 @@ return [
             ],
             [
                 'name' => 'Quản lý phân quyền',
-                'url' => '/permissions'
+                'url' => '/permission'
+            ],
+            [
+                'name' => 'Quản lý vai trò',
+                'url' => '/role'
             ],
             [
                 'name' => 'Supervisor',

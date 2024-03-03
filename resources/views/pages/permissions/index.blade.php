@@ -7,9 +7,11 @@
         <h2>Điều Chỉnh Quyền Hạn</h2>
         <div class="lead d-flex no-block justify-content-between align-items-center mb-3">
             <p>Quản lý Quyền Truy Cập các nhóm thành viên, thành viên.</p>
-            <a href="{{ route('permissions.create') }}" class="btn btn-success d-flex align-items-center btn-sm float-right">
+            <a href="{{ route('permission.create') }}" class="btn btn-success d-flex align-items-center btn-sm float-right">
                 <span class="icon-item-icon me-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil-plus" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil-plus" width="20"
+                        height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                         <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4">
                         </path>
@@ -35,19 +37,18 @@
                         <tr>
                             <td>{{ $permission->name }}</td>
                             <td>{{ $permission->guard_name }}</td>
-                            <td><a href="{{ route('permissions.edit', $permission->id) }}" class="btn btn-info btn-sm">
-                                <span class="icon-item-icon">
-                                    <img
-                                        src="{{ asset('img-system/system/edit_white.svg') }}">
-                                </span>
+                            <td><a href="{{ route('permission.edit', $permission->id) }}" class="btn btn-info btn-sm">
+                                    <span class="icon-item-icon">
+                                        <img src="{{ asset('img-system/system/edit_white.svg') }}">
+                                    </span>
                                 </a>
-                                <form method="POST" action="{{ route('permissions.destroy', $permission->id) }}" style="display:inline;">
+                                <form method="POST" action="{{ route('permission.destroy', $permission->id) }}"
+                                    style="display:inline;">
                                     @method('DELETE')
                                     @csrf
                                     <button type="submit" class="btn btn-danger btn-sm">
                                         <span class="icon-item-icon">
-                                            <img src="{{ asset('img-system/system/trash_white.svg') }}"
-                                                alt="">
+                                            <img src="{{ asset('img-system/system/trash_white.svg') }}" alt="">
                                         </span>
                                     </button>
                                 </form>
