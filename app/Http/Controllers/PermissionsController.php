@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Permission;
 
 class PermissionsController extends Controller
@@ -15,7 +14,7 @@ class PermissionsController extends Controller
      */
     public function index()
     {
-        $permissions = Permission::all();
+        $permissions = Permission::paginate(PER_PAGE_SMALL);
 
         return view('pages.permissions.index', [
             'permissions' => $permissions
@@ -44,10 +43,10 @@ class PermissionsController extends Controller
             'name' => 'required|unique:users,name'
         ]);
 
-        Permission::create($request->only('name'));
+        Permission::create($request->only(['name', 'description']));
 
-        return redirect()->route('permissions.index')
-            ->withSuccess(__('Permission created successfully.'));
+        return redirect()->route('permission.index')
+            ->withSuccess(__('Tạo quyền thành công.'));
     }
 
     /**
@@ -74,23 +73,22 @@ class PermissionsController extends Controller
             'name' => 'required|unique:permissions,name,' . $permission->id
         ]);
 
-        $permission->update($request->only('name'));
+        $permission->update($request->only(['name', 'description']));
 
-        return redirect()->route('permissions.index')
-            ->withSuccess(__('Permission updated successfully.'));
+        return redirect()->route('permission.index')
+            ->withSuccess(__('Cập nhật quyền thành công.'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
     public function destroy(Permission $permission)
     {
         $permission->delete();
 
-        return redirect()->route('permissions.index')
-            ->withSuccess(__('Permission deleted successfully.'));
+        return redirect()->route('permission.index')
+            ->withSuccess(__('Xóa quyền thành công.'));
     }
 }

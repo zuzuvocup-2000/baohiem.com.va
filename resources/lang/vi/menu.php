@@ -67,7 +67,7 @@ return [
                 'url' => route('user.index'),
             ],
             [
-                'name' => 'Quản lý phân quyền',
+                'name' => 'Quản lý quyền',
                 'url' => '/permission'
             ],
             [

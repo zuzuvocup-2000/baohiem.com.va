@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use DB;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Permission;
 
 class RolesController extends Controller
@@ -27,9 +25,9 @@ class RolesController extends Controller
      */
     public function index(Request $request)
     {
-        $roles = Role::orderBy('id', 'DESC')->paginate(5);
+        $roles = Role::orderBy('id', 'DESC')->paginate(PER_PAGE_SMALL);
         return view('pages.roles.index', compact('roles'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+            ->with('i', ($request->input('page', 1) - 1) * PER_PAGE_SMALL);
     }
 
     /**
@@ -59,7 +57,7 @@ class RolesController extends Controller
         $role = Role::create(['name' => $request->get('name')]);
         $role->syncPermissions($request->get('permission'));
 
-        return redirect()->route('roles.index')->with('success', 'Role created successfully');
+        return redirect()->route('role.index')->with('success', 'Tạo vai trò thành công.');
     }
 
     /**
@@ -70,7 +68,6 @@ class RolesController extends Controller
      */
     public function show(Role $role)
     {
-        $role = $role;
         $rolePermissions = $role->permissions;
 
         return view('pages.roles.show', compact('role', 'rolePermissions'));
@@ -84,7 +81,6 @@ class RolesController extends Controller
      */
     public function edit(Role $role)
     {
-        $role = $role;
         $rolePermissions = $role->permissions->pluck('name')->toArray();
         $permissions = Permission::get();
 
@@ -109,7 +105,7 @@ class RolesController extends Controller
 
         $role->syncPermissions($request->get('permission'));
 
-        return redirect()->route('roles.index')->with('success', 'Role updated successfully');
+        return redirect()->route('role.index')->with('success', 'Cập nhật vai trò thành công.');
     }
 
     /**
@@ -122,6 +118,6 @@ class RolesController extends Controller
     {
         $role->delete();
 
-        return redirect()->route('roles.index')->with('success', 'Role deleted successfully');
+        return redirect()->route('role.index')->with('success', 'Xóa vai trò thành công.');
     }
 }
