@@ -47,6 +47,8 @@
         </div>
     </div>
 
+    @yield('modal')
+
     <div class="dark-transparent sidebartoggler"></div>
 
     <!-- Import Js Files -->

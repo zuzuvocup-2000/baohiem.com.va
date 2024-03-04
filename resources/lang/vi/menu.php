@@ -63,6 +63,10 @@ return [
         'url' => route('user.index'),
         'items' => [
             [
+                'name' => 'Quản lý phòng ban',
+                'url' => route('department.index'),
+            ],
+            [
                 'name' => 'Quản lý tài khoản',
                 'url' => route('user.index'),
             ],
@@ -71,7 +75,7 @@ return [
                 'url' => route('permission.index')
             ],
             [
-                'name' => 'Quản lý vai trò',
+                'name' => 'Quản lý vị trí chức vụ',
                 'url' => route('role.index')
             ],
             [
@@ -110,14 +114,6 @@ return [
             [
                 'name' => 'Quản lý thông tin bảo hiểm',
                 'url' => route('system.index'),
-            ],
-            [
-                'name' => 'Quản lý danh mục khám',
-                'url' => '',
-            ],
-            [
-                'name' => 'Quản lý thông tin sức khỏe',
-                'url' => ''
             ],
             [
                 'name' => 'Quản lý thông tin bệnh viện',

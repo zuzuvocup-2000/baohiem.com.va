@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\System\SystemController;
 use App\Http\Controllers\Contact\ContactController;
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\RolesController;
@@ -78,6 +79,12 @@ Route::middleware(['is_user_admin', 'permission'])->group(function () {
     // Routes Physical
     Route::get('/physical', [PhysicalController::class, 'index'])->name('physical.index');
     Route::get('/physical-detail', [PhysicalController::class, 'detail'])->name('physical.detail');
+
+    // Routes Department
+    Route::get('/department', [DepartmentController::class, 'index'])->name('department.index');
+    Route::post('/department/store', 'DepartmentController@store')->name('department.store');
+    Route::put('/department/update/{id}', 'DepartmentController@update')->name('department.update');
+    Route::delete('/department/delete/{id}', 'DepartmentController@destroy')->name('department.delete');
 });
 
 // Route for login page
