@@ -30,4 +30,8 @@ class PhysicalController extends Controller
         $contractList = $this->contractService->getContractByCompanyAndPeriod($companyList->first()->id, $periodList->first()->id);
         return view('pages.physical.index', compact(['companyList', 'periodList', 'contractList']));
     }
+    public function detail()
+    {
+        return view('pages.physical.detail');
+    }
 }
