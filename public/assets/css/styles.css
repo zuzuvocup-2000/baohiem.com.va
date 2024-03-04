@@ -1720,6 +1720,11 @@ progress {
     width: 16.66666667%;
 }
 
+.col-2plus {
+    flex: 0 0 auto;
+    width: 20%;
+}
+
 .col-3 {
     flex: 0 0 auto;
     width: 25%;
@@ -1968,7 +1973,10 @@ progress {
         flex: 0 0 auto;
         width: 16.66666667%;
     }
-
+    .col-sm-2plus {
+        flex: 0 0 auto;
+        width: 20%;
+    }
     .col-sm-3 {
         flex: 0 0 auto;
         width: 25%;
@@ -2222,7 +2230,10 @@ progress {
         flex: 0 0 auto;
         width: 16.66666667%;
     }
-
+    .col-md-2plus {
+        flex: 0 0 auto;
+        width: 20%;
+    }
     .col-md-3 {
         flex: 0 0 auto;
         width: 25%;
@@ -2730,7 +2741,10 @@ progress {
         flex: 0 0 auto;
         width: 16.66666667%;
     }
-
+    .col-xl-2plus {
+        flex: 0 0 auto;
+        width: 20%;
+    }
     .col-xl-3 {
         flex: 0 0 auto;
         width: 25%;
@@ -32873,4 +32887,16 @@ svg {
 }
 .insurance-account .btn-group button:nth-child(2){
     width: 50%;
+}
+.physical-detail-page .form-search-absolute input{
+    padding-right: 30px;
+}
+.physical-detail-page span.unit{
+    position: absolute;
+    right: 10px;
+    top: 8px;
+}
+.physical-detail-page .description {
+    font-size: 16px;
+    line-height: 19px;
 }

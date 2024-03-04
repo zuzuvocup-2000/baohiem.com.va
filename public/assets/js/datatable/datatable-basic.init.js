@@ -17,8 +17,9 @@ $(function () {
 /****************************************
  *       Basic Table                   *
  ****************************************/
-$("#zero_config").DataTable();
-
+$("#diagnosticTable").DataTable();
+$("#diagnosticImage").DataTable();
+$("#file").DataTable();
 /****************************************
  *       Default Order Table           *
  ****************************************/

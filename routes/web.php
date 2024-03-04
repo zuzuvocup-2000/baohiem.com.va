@@ -77,7 +77,7 @@ Route::middleware(['is_user_admin', 'permission'])->group(function () {
 
     // Routes Physical
     Route::get('/physical', [PhysicalController::class, 'index'])->name('physical.index');
-
+    Route::get('/physical-detail', [PhysicalController::class, 'detail'])->name('physical.detail');
 });
 
 // Route for login page
