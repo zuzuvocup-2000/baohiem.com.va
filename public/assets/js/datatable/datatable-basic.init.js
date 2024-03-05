@@ -20,6 +20,8 @@ $(function () {
 $("#diagnosticTable").DataTable();
 $("#diagnosticImage").DataTable();
 $("#file").DataTable();
+$("#hospitalInfo").DataTable();
+$("#hospitalUser").DataTable();
 /****************************************
  *       Default Order Table           *
  ****************************************/

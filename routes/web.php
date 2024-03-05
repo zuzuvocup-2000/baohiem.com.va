@@ -15,6 +15,7 @@ use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\SupervisorController;
 use App\Http\Controllers\Physical\PhysicalController;
+use App\Http\Controllers\Hospital\HospitalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,6 +86,9 @@ Route::middleware(['is_user_admin', 'permission'])->group(function () {
     Route::post('/department/store', 'DepartmentController@store')->name('department.store');
     Route::put('/department/update/{id}', 'DepartmentController@update')->name('department.update');
     Route::delete('/department/delete/{id}', 'DepartmentController@destroy')->name('department.delete');
+
+    // Routes Hospital
+    Route::get('/hospital', [HospitalController::class, 'index'])->name('hospital.index');
 });
 
 // Route for login page

@@ -14,11 +14,8 @@
 
     <!-- Favicon icon-->
     <link rel="shortcut icon" type="image/png" href="{{ asset('/assets/images/logos/favicon.png') }}">
-    <!-- Ckeditor Css -->
-    <link rel="stylesheet" href="assets/libs/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
-    <link rel="stylesheet" href="assets/libs/ckeditor/samples/css/samples.css">
+ 
     <!-- Core Css -->
-    <link rel="stylesheet" href="/assets/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="/assets/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="/assets/css/styles.css">
     @yield('style')
