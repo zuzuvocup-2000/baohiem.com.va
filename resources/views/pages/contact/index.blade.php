@@ -1,9 +1,14 @@
 @extends('layouts.master')
 
 @section('title', 'Liên hệ')
-
+@section('style')
+<!-- Ckeditor Css -->
+<link rel="stylesheet" href="assets/libs/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
+<link rel="stylesheet" href="assets/libs/ckeditor/samples/css/samples.css">
+@endsection
 @section('content')
     @include('partial.breadcrumb', ['breadcrumbTitle' => 'Liên hệ'])
+   
     <div class="contact font-weight-medium shadow-none position-relative overflow-hidden mb-4">
         <div class="row">
             <div class="col-12">

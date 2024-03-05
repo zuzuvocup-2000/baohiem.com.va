@@ -1,7 +1,9 @@
 @extends('layouts.master')
 
 @section('title', 'Khám sức khỏe định kỳ')
-
+@section('style')
+<link rel="stylesheet" href="/assets/css/dataTables.bootstrap5.min.css">
+@endsection
 @section('content')
     @include('partial.breadcrumb', ['breadcrumbTitle' => 'Khám sức khỏe định kỳ'])
     <div class="physical-detail-page font-weight-medium shadow-none position-relative overflow-hidden mb-4">
