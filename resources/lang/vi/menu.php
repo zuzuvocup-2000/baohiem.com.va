@@ -18,7 +18,7 @@ return [
             ],
             [
                 'name' => 'Cập nhật tài khoản',
-                'url' => '',
+                'url' => route('account.insurance'),
             ],
             [
                 'name' => 'Chi bảo hiểm',
@@ -30,7 +30,7 @@ return [
             ],
             [
                 'name' => 'Báo cáo thống kê',
-                'url' => '',
+                'url' => route('revenue.index'),
             ]
         ]
     ],
@@ -42,10 +42,6 @@ return [
             [
                 'name' => 'Danh sách khám sức khỏe',
                 'url' => route('physical.index'),
-            ],
-            [
-                'name' => 'Sức khỏe chung',
-                'url' => '',
             ],
             [
                 'name' => 'Khám sức khỏe',
@@ -117,7 +113,7 @@ return [
             ],
             [
                 'name' => 'Quản lý thông tin bệnh viện',
-                'url' => ''
+                'url' => route('hospital.index')
             ],
         ]
     ],
