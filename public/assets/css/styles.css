@@ -32900,3 +32900,24 @@ svg {
     font-size: 16px;
     line-height: 19px;
 }
+.price-table .main-th{
+    color: var(--bs-primary) !important;
+}
+.price-table .main-color{
+    color: var(--bs-primary) !important;
+}
+.price-table tr td:nth-child(2){
+    text-align: right;
+}
+.price-table .extra-th{
+    padding-left: 50px;
+}
+.user-table .main-th{
+    color: var(--bs-primary) !important;
+}
+.user-table .main-color{
+    color: var(--bs-primary) !important;
+}
+.user-table .extra-th{
+    padding-left: 50px;
+}

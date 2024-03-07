@@ -16,6 +16,7 @@ use App\Http\Controllers\RolesController;
 use App\Http\Controllers\SupervisorController;
 use App\Http\Controllers\Physical\PhysicalController;
 use App\Http\Controllers\Hospital\HospitalController;
+use App\Http\Controllers\Revenue\RevenueController;
 
 /*
 |--------------------------------------------------------------------------
@@ -89,6 +90,9 @@ Route::middleware(['is_user_admin', 'permission'])->group(function () {
 
     // Routes Hospital
     Route::get('/hospital', [HospitalController::class, 'index'])->name('hospital.index');
+
+    // Routes Revenue
+    Route::get('/revenue', [RevenueController::class, 'index'])->name('revenue.index');
 });
 
 // Route for login page
