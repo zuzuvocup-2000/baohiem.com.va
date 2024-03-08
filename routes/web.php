@@ -16,7 +16,6 @@ use App\Http\Controllers\RolesController;
 use App\Http\Controllers\SupervisorController;
 use App\Http\Controllers\Physical\PhysicalController;
 use App\Http\Controllers\Hospital\HospitalController;
-use App\Http\Controllers\Revenue\RevenueController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +61,7 @@ Route::middleware(['is_user_admin', 'permission'])->group(function () {
     // Routes Account
     Route::get('/account', [AccountController::class, 'index'])->name('account.index');
     Route::get('/account/insurance', [AccountController::class, 'insurance'])->name('account.insurance');
+    Route::get('/account/insurance-expenses', [AccountController::class, 'expenses'])->name('account.expenses');
     Route::get('/account/create', [AccountController::class, 'create'])->name('account.create');
     Route::post('/account/create', [AccountController::class, 'store'])->name('user.store');
     Route::get('/account/edit/{id}', [AccountController::class, 'edit'])->name('account.edit');
@@ -90,9 +90,6 @@ Route::middleware(['is_user_admin', 'permission'])->group(function () {
 
     // Routes Hospital
     Route::get('/hospital', [HospitalController::class, 'index'])->name('hospital.index');
-
-    // Routes Revenue
-    Route::get('/revenue', [RevenueController::class, 'index'])->name('revenue.index');
 });
 
 // Route for login page
