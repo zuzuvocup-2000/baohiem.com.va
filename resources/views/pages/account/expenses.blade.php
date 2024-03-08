@@ -127,22 +127,22 @@
                         </div>
                         <div class="col-xs-12 col-sm-12 col-xl-3">
                             <div class="info-contract-item">
-                                <div class="title me-2">Tên HĐ:</div>
-                                <div class="content">DH CUU LONG 2023</div>
+                                <div class="title me-2">Tên niên hạn:</div>
+                                <div class="content">CL 2023</div>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-xl-3">
                             <div class="info-contract-item">
-                                <div class="title me-2">Số HĐ:</div>
-                                <div class="content">01/2022HĐ CL</div>
+                                <div class="title me-2">Tên HĐ:</div>
+                                <div class="content">DH CUU LONG 2023</div>
                             </div>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-xs-12 col-sm-12 col-xl-3">
                             <div class="info-contract-item">
-                                <div class="title me-2">Ngày ký HĐ:</div>
-                                <div class="content">01/01/2023</div>
+                                <div class="title me-2">Số HĐ:</div>
+                                <div class="content">01/2022HĐ CL</div>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-xl-3">
@@ -152,20 +152,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-xl-3">
-                            <div class="info-contract-item">
-                                <div class="title me-2">Thời hạn từ:</div>
-                                <div class="content">01/01/2023 <span>đến:</span> 31/12/2023</div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-xl-3">
-                            <div class="info-contract-item">
-                                <div class="title me-2">Tên niên hạn:</div>
-                                <div class="content">CL 2023</div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </form>
         </div>
@@ -340,6 +327,32 @@
                     </div>
                 </div>
                 <div class="tab-pane fade" id="expenses2" role="tabpanel" aria-labelledby="expenses-tab" tabindex="0">
+                    <div class="row mb-3">
+                        <div class="col-xs-12 col-md-6">
+                            <div class="form-group ">
+                                <label class="col-form-label">Thời gian:</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control daterange">
+                                    <span class="input-group-text">
+                                        <i class="ti ti-calendar fs-5"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="form-group ">
+                                <label class="col-form-label">Đã duyệt:</label>
+                                <select class="form-select period-search mr-sm-2" id="periodSelect" name="periodSelect" style="width: calc(100% - 100px);">
+                                    <option value="10079" selected="">
+                                        Đã duyệt
+                                    </option>
+                                    <option value="10077">
+                                        Chưa duyệt
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                     <div class="table-responsive">
                         <table id="simpletable" class="table system-table border text-nowrap customize-table mb-0 align-middle mb-3">
                             <thead class="text-dark fs-4">
@@ -351,16 +364,25 @@
                                         <h6 class="fs-4 fw-semibold mb-0 text-center">STT</h6>
                                     </th>
                                     <th>
-                                        <h6 class="fs-4 fw-semibold mb-0">Tên nhân viên</h6>
+                                        <h6 class="fs-4 fw-semibold mb-0">Số thẻ Bảo hiểm</h6>
                                     </th>
                                     <th>
-                                        <h6 class="fs-4 fw-semibold mb-0">Tên đăng nhập</h6>
+                                        <h6 class="fs-4 fw-semibold mb-0">Tên khách hàng</h6>
                                     </th>
                                     <th>
-                                        <h6 class="fs-4 fw-semibold mb-0">Mật khẩu</h6>
+                                        <h6 class="fs-4 fw-semibold mb-0">Số tiền chi trả</h6>
                                     </th>
-                                    <th style="width: 200px;">
-                                        <h6 class="fs-4 fw-semibold text-center mb-0">Thao tác</h6>
+                                    <th>
+                                        <h6 class="fs-4 fw-semibold mb-0">Nội dung chi</h6>
+                                    </th>
+                                    <th>
+                                        <h6 class="fs-4 fw-semibold mb-0">Duyệt</h6>
+                                    </th>
+                                    <th>
+                                        <h6 class="fs-4 fw-semibold mb-0">Ghi chú</h6>
+                                    </th>
+                                    <th>
+                                        <h6 class="fs-4 fw-semibold mb-0">Ngày chi</h6>
                                     </th>
                                 </tr>
                             </thead>
@@ -371,138 +393,79 @@
                                         <p class="mb-0 fw-normal fs-4 text-center">1</p>
                                     </td>
                                     <td>
-                                        <input class="inputField form-control" type="text" name="name" value="Nguyễn Văn A" data-original-value="Nguyễn Văn A" disabled="">
+                                        001200033444
                                     </td>
                                     <td>
-                                        <input class="inputField form-control" type="text" name="email" value="boyphoco@gmail.com" data-original-value="boyphoco@gmail.com" disabled="">
+                                        Nguyễn Văn A
                                     </td>
                                     <td>
-                                        <input class="inputField form-control" type="text" name="password" value="123456" data-original-value="123456" disabled="">
+                                        1 000 000
                                     </td>
                                     <td>
-                                        <h6 class="fs-4 fw-semibold mb-0">
-                                            <div class="btn-group d-flex">
-                                                <button class="btn btn-success me-1 editButton">
-                                                    <span class="icon-item-icon">
-                                                        <img src="{{ asset('/img-system/system/edit_white.svg') }}" />
-                                                    </span>
-                                                </button>
-                                                <button class="btn btn-danger tabledit-delete-button" data-id="24">
-                                                    <span class="icon-item-icon">
-                                                        <img src="{{ asset('/img-system/system/trash_white.svg') }}" alt="" />
-                                                    </span>
-                                                </button>
-                                                <button class="btn btn-info me-1 saveButton" style="display: none;">
-                                                    <span class="icon-item-icon">
-                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                            class="icon icon-tabler icon-tabler-discount-check-filled" width="24"
-                                                            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                                            fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                            <path
-                                                                d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944zm3.697 7.282a1 1 0 0 0 -1.414 0l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.32 1.497l2 2l.094 .083a1 1 0 0 0 1.32 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
-                                                                stroke-width="0" fill="currentColor"></path>
-                                                        </svg>
-                                                    </span>
-                                                </button>
-                                                <button class="btn btn-warning cancelButton" style="display: none;">
-                                                    <span class="icon-item-icon">
-                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                            class="icon icon-tabler icon-tabler-circle-x-filled" width="24"
-                                                            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                                            fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                            <path
-                                                                d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-6.489 5.8a1 1 0 0 0 -1.218 1.567l1.292 1.293l-1.292 1.293l-.083 .094a1 1 0 0 0 1.497 1.32l1.293 -1.292l1.293 1.292l.094 .083a1 1 0 0 0 1.32 -1.497l-1.292 -1.293l1.292 -1.293l.083 -.094a1 1 0 0 0 -1.497 -1.32l-1.293 1.292l-1.293 -1.292l-.094 -.083z"
-                                                                stroke-width="0" fill="currentColor"></path>
-                                                        </svg>
-                                                    </span>
-                                                </button>
-                                            </div>
-                                        </h6>
+                                        chi trả phí bh
+                                    </td>
+                                    <td>
+                                        không
+                                    </td>
+                                    <td>
+                                        không
+                                    </td>
+                                    <td>
+                                        20/3/2024
                                     </td>
                                 </tr>
                                 <tr role="row" data-id="20067">
                                     <th class="text-center"><input class="toggleCheckbox" type="checkbox"></th>
                                     <td>
-                                        <p class="mb-0 fw-normal fs-4 text-center">2</p>
+                                        <p class="mb-0 fw-normal fs-4 text-center">1</p>
                                     </td>
                                     <td>
-                                        <input class="inputField form-control" type="text" name="name" value="Nguyễn Thị B" data-original-value="Nguyễn Thị B" disabled="">
+                                        001200033444
                                     </td>
                                     <td>
-                                        <input class="inputField form-control" type="text" name="email" value="girhathanh@gmail.com" data-original-value="girhathanh@gmail.com" disabled="">
+                                        Nguyễn Văn A
                                     </td>
                                     <td>
-                                        <input class="inputField form-control" type="text" name="password" value="123456" data-original-value="123456" disabled="">
+                                        1 000 000
                                     </td>
                                     <td>
-                                        <h6 class="fs-4 fw-semibold mb-0">
-                                            <div class="btn-group d-flex">
-                                                <button class="btn btn-success me-1 editButton">
-                                                    <span class="icon-item-icon">
-                                                        <img src="{{ asset('/img-system/system/edit_white.svg') }}" />
-                                                    </span>
-                                                </button>
-                                                <button class="btn btn-danger tabledit-delete-button" data-id="24">
-                                                    <span class="icon-item-icon">
-                                                        <img src="{{ asset('/img-system/system/trash_white.svg') }}" alt="" />
-                                                    </span>
-                                                </button>
-                                                <button class="btn btn-info me-1 saveButton" style="display: none;">
-                                                    <span class="icon-item-icon">
-                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                            class="icon icon-tabler icon-tabler-discount-check-filled" width="24"
-                                                            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                                            fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                            <path
-                                                                d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944zm3.697 7.282a1 1 0 0 0 -1.414 0l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.32 1.497l2 2l.094 .083a1 1 0 0 0 1.32 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
-                                                                stroke-width="0" fill="currentColor"></path>
-                                                        </svg>
-                                                    </span>
-                                                </button>
-                                                <button class="btn btn-warning cancelButton" style="display: none;">
-                                                    <span class="icon-item-icon">
-                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                            class="icon icon-tabler icon-tabler-circle-x-filled" width="24"
-                                                            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                                            fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                            <path
-                                                                d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-6.489 5.8a1 1 0 0 0 -1.218 1.567l1.292 1.293l-1.292 1.293l-.083 .094a1 1 0 0 0 1.497 1.32l1.293 -1.292l1.293 1.292l.094 .083a1 1 0 0 0 1.32 -1.497l-1.292 -1.293l1.292 -1.293l.083 -.094a1 1 0 0 0 -1.497 -1.32l-1.293 1.292l-1.293 -1.292l-.094 -.083z"
-                                                                stroke-width="0" fill="currentColor"></path>
-                                                        </svg>
-                                                    </span>
-                                                </button>
-                                            </div>
-                                        </h6>
+                                        chi trả phí bh
+                                    </td>
+                                    <td>
+                                        không
+                                    </td>
+                                    <td>
+                                        không
+                                    </td>
+                                    <td>
+                                        20/3/2024
                                     </td>
                                 </tr>
-                                <tr role="row">
+                                <tr role="row" data-id="20067">
+                                    <th class="text-center"><input class="toggleCheckbox" type="checkbox"></th>
                                     <td>
-                                        <p class="mb-0 fw-normal fs-4 text-center"></p>
+                                        <p class="mb-0 fw-normal fs-4 text-center">1</p>
                                     </td>
                                     <td>
-                                        <div class="btn-group d-flex">
-                                            <button class="btn btn-info me-1 saveButton">
-                                                <span class="icon-item-icon">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-discount-check-filled" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                        <path d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944zm3.697 7.282a1 1 0 0 0 -1.414 0l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.32 1.497l2 2l.094 .083a1 1 0 0 0 1.32 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z" stroke-width="0" fill="currentColor"></path>
-                                                    </svg>
-                                                </span>
-                                            </button>
-                                        </div>
+                                        001200033444
                                     </td>
                                     <td>
-                                        <input class="inputField form-control" type="text" name="name" value="" data-original-value="">
+                                        Nguyễn Văn A
                                     </td>
                                     <td>
-                                        <input class="inputField form-control" type="text" name="email" value="" data-original-value="">
+                                        1 000 000
                                     </td>
                                     <td>
-                                        <input class="inputField form-control" type="text" name="password" value="" data-original-value="">
+                                        chi trả phí bh
+                                    </td>
+                                    <td>
+                                        không
+                                    </td>
+                                    <td>
+                                        không
+                                    </td>
+                                    <td>
+                                        20/3/2024
                                     </td>
                                 </tr>
                             </tbody>
@@ -510,6 +473,48 @@
                     </div>
                 </div>
                 <div class="tab-pane fade" id="expenses3" role="tabpanel" aria-labelledby="expenses-tab" tabindex="0">
+                    <div class="row mb-3">
+                        <div class="col-xs-12 col-md-6 col-xl-3">
+                            <div class="form-group ">
+                                <label class="col-form-label">Thời gian:</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control daterange">
+                                    <span class="input-group-text">
+                                        <i class="ti ti-calendar fs-5"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 col-xl-3">
+                            <div class="form-group ">
+                                <label class="col-form-label">Tên bệnh viện:</label>
+                                <select class="form-select period-search mr-sm-2" id="periodSelect" name="periodSelect" style="width: calc(100% - 100px);">
+                                    <option value="10079" selected="">
+                                        Bệnh viện VN Cu Ba
+                                    </option>
+                                    <option value="10077">
+                                        Bệnh viện Việt Đức
+                                    </option>
+                                    <option value="10077">
+                                        Bệnh viện Xanh Pôn
+                                    </option>
+                                    <option value="10077">
+                                        Bệnh viện Đức Giang
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 col-xl-3 btn-flexend">
+                            <div class="btn-group">
+                                <button class="btn btn-primary" type="button">Duyệt chi</button>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 col-xl-3 btn-flexend">
+                            <div class="btn-group">
+                                <button class="btn btn-primary" type="button">Xuất ra Excel</button>
+                            </div>
+                        </div>
+                    </div>
                     <div class="table-responsive">
                         <table id="simpletable" class="table system-table border text-nowrap customize-table mb-0 align-middle mb-3">
                             <thead class="text-dark fs-4">
@@ -521,16 +526,25 @@
                                         <h6 class="fs-4 fw-semibold mb-0 text-center">STT</h6>
                                     </th>
                                     <th>
-                                        <h6 class="fs-4 fw-semibold mb-0">Tên nhân viên</h6>
+                                        <h6 class="fs-4 fw-semibold mb-0">Số thẻ Bảo hiểm</h6>
                                     </th>
                                     <th>
-                                        <h6 class="fs-4 fw-semibold mb-0">Tên đăng nhập</h6>
+                                        <h6 class="fs-4 fw-semibold mb-0">Tên khách hàng</h6>
                                     </th>
                                     <th>
-                                        <h6 class="fs-4 fw-semibold mb-0">Mật khẩu</h6>
+                                        <h6 class="fs-4 fw-semibold mb-0">Số tiền chi trả</h6>
                                     </th>
-                                    <th style="width: 200px;">
-                                        <h6 class="fs-4 fw-semibold text-center mb-0">Thao tác</h6>
+                                    <th>
+                                        <h6 class="fs-4 fw-semibold mb-0">Nội dung chi</h6>
+                                    </th>
+                                    <th>
+                                        <h6 class="fs-4 fw-semibold mb-0">Duyệt</h6>
+                                    </th>
+                                    <th>
+                                        <h6 class="fs-4 fw-semibold mb-0">Ghi chú</h6>
+                                    </th>
+                                    <th>
+                                        <h6 class="fs-4 fw-semibold mb-0">Ngày chi</h6>
                                     </th>
                                 </tr>
                             </thead>
@@ -541,138 +555,79 @@
                                         <p class="mb-0 fw-normal fs-4 text-center">1</p>
                                     </td>
                                     <td>
-                                        <input class="inputField form-control" type="text" name="name" value="Nguyễn Văn A" data-original-value="Nguyễn Văn A" disabled="">
+                                        001200033444
                                     </td>
                                     <td>
-                                        <input class="inputField form-control" type="text" name="email" value="boyphoco@gmail.com" data-original-value="boyphoco@gmail.com" disabled="">
+                                        Nguyễn Văn A
                                     </td>
                                     <td>
-                                        <input class="inputField form-control" type="text" name="password" value="123456" data-original-value="123456" disabled="">
+                                        1 000 000
                                     </td>
                                     <td>
-                                        <h6 class="fs-4 fw-semibold mb-0">
-                                            <div class="btn-group d-flex">
-                                                <button class="btn btn-success me-1 editButton">
-                                                    <span class="icon-item-icon">
-                                                        <img src="{{ asset('/img-system/system/edit_white.svg') }}" />
-                                                    </span>
-                                                </button>
-                                                <button class="btn btn-danger tabledit-delete-button" data-id="24">
-                                                    <span class="icon-item-icon">
-                                                        <img src="{{ asset('/img-system/system/trash_white.svg') }}" alt="" />
-                                                    </span>
-                                                </button>
-                                                <button class="btn btn-info me-1 saveButton" style="display: none;">
-                                                    <span class="icon-item-icon">
-                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                            class="icon icon-tabler icon-tabler-discount-check-filled" width="24"
-                                                            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                                            fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                            <path
-                                                                d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944zm3.697 7.282a1 1 0 0 0 -1.414 0l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.32 1.497l2 2l.094 .083a1 1 0 0 0 1.32 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
-                                                                stroke-width="0" fill="currentColor"></path>
-                                                        </svg>
-                                                    </span>
-                                                </button>
-                                                <button class="btn btn-warning cancelButton" style="display: none;">
-                                                    <span class="icon-item-icon">
-                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                            class="icon icon-tabler icon-tabler-circle-x-filled" width="24"
-                                                            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                                            fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                            <path
-                                                                d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-6.489 5.8a1 1 0 0 0 -1.218 1.567l1.292 1.293l-1.292 1.293l-.083 .094a1 1 0 0 0 1.497 1.32l1.293 -1.292l1.293 1.292l.094 .083a1 1 0 0 0 1.32 -1.497l-1.292 -1.293l1.292 -1.293l.083 -.094a1 1 0 0 0 -1.497 -1.32l-1.293 1.292l-1.293 -1.292l-.094 -.083z"
-                                                                stroke-width="0" fill="currentColor"></path>
-                                                        </svg>
-                                                    </span>
-                                                </button>
-                                            </div>
-                                        </h6>
+                                        chi trả phí bh
+                                    </td>
+                                    <td>
+                                        không
+                                    </td>
+                                    <td>
+                                        không
+                                    </td>
+                                    <td>
+                                        20/3/2024
                                     </td>
                                 </tr>
                                 <tr role="row" data-id="20067">
                                     <th class="text-center"><input class="toggleCheckbox" type="checkbox"></th>
                                     <td>
-                                        <p class="mb-0 fw-normal fs-4 text-center">2</p>
+                                        <p class="mb-0 fw-normal fs-4 text-center">1</p>
                                     </td>
                                     <td>
-                                        <input class="inputField form-control" type="text" name="name" value="Nguyễn Thị B" data-original-value="Nguyễn Thị B" disabled="">
+                                        001200033444
                                     </td>
                                     <td>
-                                        <input class="inputField form-control" type="text" name="email" value="girhathanh@gmail.com" data-original-value="girhathanh@gmail.com" disabled="">
+                                        Nguyễn Văn A
                                     </td>
                                     <td>
-                                        <input class="inputField form-control" type="text" name="password" value="123456" data-original-value="123456" disabled="">
+                                        1 000 000
                                     </td>
                                     <td>
-                                        <h6 class="fs-4 fw-semibold mb-0">
-                                            <div class="btn-group d-flex">
-                                                <button class="btn btn-success me-1 editButton">
-                                                    <span class="icon-item-icon">
-                                                        <img src="{{ asset('/img-system/system/edit_white.svg') }}" />
-                                                    </span>
-                                                </button>
-                                                <button class="btn btn-danger tabledit-delete-button" data-id="24">
-                                                    <span class="icon-item-icon">
-                                                        <img src="{{ asset('/img-system/system/trash_white.svg') }}" alt="" />
-                                                    </span>
-                                                </button>
-                                                <button class="btn btn-info me-1 saveButton" style="display: none;">
-                                                    <span class="icon-item-icon">
-                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                            class="icon icon-tabler icon-tabler-discount-check-filled" width="24"
-                                                            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                                            fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                            <path
-                                                                d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944zm3.697 7.282a1 1 0 0 0 -1.414 0l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.32 1.497l2 2l.094 .083a1 1 0 0 0 1.32 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
-                                                                stroke-width="0" fill="currentColor"></path>
-                                                        </svg>
-                                                    </span>
-                                                </button>
-                                                <button class="btn btn-warning cancelButton" style="display: none;">
-                                                    <span class="icon-item-icon">
-                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                            class="icon icon-tabler icon-tabler-circle-x-filled" width="24"
-                                                            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                                            fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                            <path
-                                                                d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-6.489 5.8a1 1 0 0 0 -1.218 1.567l1.292 1.293l-1.292 1.293l-.083 .094a1 1 0 0 0 1.497 1.32l1.293 -1.292l1.293 1.292l.094 .083a1 1 0 0 0 1.32 -1.497l-1.292 -1.293l1.292 -1.293l.083 -.094a1 1 0 0 0 -1.497 -1.32l-1.293 1.292l-1.293 -1.292l-.094 -.083z"
-                                                                stroke-width="0" fill="currentColor"></path>
-                                                        </svg>
-                                                    </span>
-                                                </button>
-                                            </div>
-                                        </h6>
+                                        chi trả phí bh
+                                    </td>
+                                    <td>
+                                        không
+                                    </td>
+                                    <td>
+                                        không
+                                    </td>
+                                    <td>
+                                        20/3/2024
                                     </td>
                                 </tr>
-                                <tr role="row">
+                                <tr role="row" data-id="20067">
+                                    <th class="text-center"><input class="toggleCheckbox" type="checkbox"></th>
                                     <td>
-                                        <p class="mb-0 fw-normal fs-4 text-center"></p>
+                                        <p class="mb-0 fw-normal fs-4 text-center">1</p>
                                     </td>
                                     <td>
-                                        <div class="btn-group d-flex">
-                                            <button class="btn btn-info me-1 saveButton">
-                                                <span class="icon-item-icon">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-discount-check-filled" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                        <path d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944zm3.697 7.282a1 1 0 0 0 -1.414 0l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.32 1.497l2 2l.094 .083a1 1 0 0 0 1.32 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z" stroke-width="0" fill="currentColor"></path>
-                                                    </svg>
-                                                </span>
-                                            </button>
-                                        </div>
+                                        001200033444
                                     </td>
                                     <td>
-                                        <input class="inputField form-control" type="text" name="name" value="" data-original-value="">
+                                        Nguyễn Văn A
                                     </td>
                                     <td>
-                                        <input class="inputField form-control" type="text" name="email" value="" data-original-value="">
+                                        1 000 000
                                     </td>
                                     <td>
-                                        <input class="inputField form-control" type="text" name="password" value="" data-original-value="">
+                                        chi trả phí bh
+                                    </td>
+                                    <td>
+                                        không
+                                    </td>
+                                    <td>
+                                        không
+                                    </td>
+                                    <td>
+                                        20/3/2024
                                     </td>
                                 </tr>
                             </tbody>
@@ -680,6 +635,96 @@
                     </div>
                 </div>
                 <div class="tab-pane fade" id="expenses4" role="tabpanel" aria-labelledby="expenses-tab" tabindex="0">
+                    <div class="row mb-3">
+                        <div class="col-xs-12 col-md-6 col-xl-3">
+                            <div class="form-group ">
+                                <label class="col-form-label">Thời gian:</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control daterange">
+                                    <span class="input-group-text">
+                                        <i class="ti ti-calendar fs-5"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 col-xl-3">
+                            <div class="form-group">
+                                <label class="col-form-label">Niên hạn:</label>
+                                <select class="form-select period-search mr-sm-2" id="periodSelect" name="periodSelect">
+                                    <option value="10079" selected="">
+                                        CL2023
+                                    </option>
+                                    <option value="10077">
+                                        CL2022
+                                    </option>
+                                    <option value="10078">
+                                        Gas2022
+                                    </option>
+                                    <option value="10075">
+                                        CL2021
+                                    </option>
+                                    <option value="10076">
+                                        Gas2021
+                                    </option>
+                                    <option value="10074">
+                                        Gas2020
+                                    </option>
+                                    <option value="10073">
+                                        2020-2020
+                                    </option>
+                                    <option value="10072">
+                                        2019-2020
+                                    </option>
+                                    <option value="10071">
+                                        2018-2019
+                                    </option>
+                                    <option value="10070">
+                                        2017-2018
+                                    </option>
+                                    <option value="10069">
+                                        2016-2017
+                                    </option>
+                                    <option value="10068">
+                                        2015-2016
+                                    </option>
+                                    <option value="10067">
+                                        2014-2015
+                                    </option>
+                                    <option value="10066">
+                                        2013-2014
+                                    </option>
+                                    <option value="10065">
+                                        2012-2013
+                                    </option>
+                                    <option value="10064">
+                                        2011-2012
+                                    </option>
+                                    <option value="64">
+                                        2010-2011
+                                    </option>
+                                    <option value="63">
+                                        2007-2008
+                                    </option>
+                                    <option value="62">
+                                        2006-2007
+                                    </option>
+                                    <option value="61">
+                                        2005-2006
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 col-xl-3 btn-flexend">
+                            <div class="btn-group">
+                                <button class="btn btn-primary" type="button">Xuất ra Excel</button>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 col-xl-3 btn-flexend">
+                            <div class="btn-group">
+                                <button class="btn btn-primary" type="button">Xóa thông tin</button>
+                            </div>
+                        </div>
+                    </div>
                     <div class="table-responsive">
                         <table id="simpletable" class="table system-table border text-nowrap customize-table mb-0 align-middle mb-3">
                             <thead class="text-dark fs-4">
@@ -691,16 +736,25 @@
                                         <h6 class="fs-4 fw-semibold mb-0 text-center">STT</h6>
                                     </th>
                                     <th>
-                                        <h6 class="fs-4 fw-semibold mb-0">Tên nhân viên</h6>
+                                        <h6 class="fs-4 fw-semibold mb-0">Số thẻ Bảo hiểm</h6>
                                     </th>
                                     <th>
-                                        <h6 class="fs-4 fw-semibold mb-0">Tên đăng nhập</h6>
+                                        <h6 class="fs-4 fw-semibold mb-0">Tên khách hàng</h6>
                                     </th>
                                     <th>
-                                        <h6 class="fs-4 fw-semibold mb-0">Mật khẩu</h6>
+                                        <h6 class="fs-4 fw-semibold mb-0">Số tiền chi trả</h6>
                                     </th>
-                                    <th style="width: 200px;">
-                                        <h6 class="fs-4 fw-semibold text-center mb-0">Thao tác</h6>
+                                    <th>
+                                        <h6 class="fs-4 fw-semibold mb-0">Nội dung chi</h6>
+                                    </th>
+                                    <th>
+                                        <h6 class="fs-4 fw-semibold mb-0">Duyệt</h6>
+                                    </th>
+                                    <th>
+                                        <h6 class="fs-4 fw-semibold mb-0">Ghi chú</h6>
+                                    </th>
+                                    <th>
+                                        <h6 class="fs-4 fw-semibold mb-0">Ngày chi</h6>
                                     </th>
                                 </tr>
                             </thead>
@@ -711,138 +765,79 @@
                                         <p class="mb-0 fw-normal fs-4 text-center">1</p>
                                     </td>
                                     <td>
-                                        <input class="inputField form-control" type="text" name="name" value="Nguyễn Văn A" data-original-value="Nguyễn Văn A" disabled="">
+                                        001200033444
                                     </td>
                                     <td>
-                                        <input class="inputField form-control" type="text" name="email" value="boyphoco@gmail.com" data-original-value="boyphoco@gmail.com" disabled="">
+                                        Nguyễn Văn A
                                     </td>
                                     <td>
-                                        <input class="inputField form-control" type="text" name="password" value="123456" data-original-value="123456" disabled="">
+                                        1 000 000
                                     </td>
                                     <td>
-                                        <h6 class="fs-4 fw-semibold mb-0">
-                                            <div class="btn-group d-flex">
-                                                <button class="btn btn-success me-1 editButton">
-                                                    <span class="icon-item-icon">
-                                                        <img src="{{ asset('/img-system/system/edit_white.svg') }}" />
-                                                    </span>
-                                                </button>
-                                                <button class="btn btn-danger tabledit-delete-button" data-id="24">
-                                                    <span class="icon-item-icon">
-                                                        <img src="{{ asset('/img-system/system/trash_white.svg') }}" alt="" />
-                                                    </span>
-                                                </button>
-                                                <button class="btn btn-info me-1 saveButton" style="display: none;">
-                                                    <span class="icon-item-icon">
-                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                            class="icon icon-tabler icon-tabler-discount-check-filled" width="24"
-                                                            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                                            fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                            <path
-                                                                d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944zm3.697 7.282a1 1 0 0 0 -1.414 0l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.32 1.497l2 2l.094 .083a1 1 0 0 0 1.32 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
-                                                                stroke-width="0" fill="currentColor"></path>
-                                                        </svg>
-                                                    </span>
-                                                </button>
-                                                <button class="btn btn-warning cancelButton" style="display: none;">
-                                                    <span class="icon-item-icon">
-                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                            class="icon icon-tabler icon-tabler-circle-x-filled" width="24"
-                                                            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                                            fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                            <path
-                                                                d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-6.489 5.8a1 1 0 0 0 -1.218 1.567l1.292 1.293l-1.292 1.293l-.083 .094a1 1 0 0 0 1.497 1.32l1.293 -1.292l1.293 1.292l.094 .083a1 1 0 0 0 1.32 -1.497l-1.292 -1.293l1.292 -1.293l.083 -.094a1 1 0 0 0 -1.497 -1.32l-1.293 1.292l-1.293 -1.292l-.094 -.083z"
-                                                                stroke-width="0" fill="currentColor"></path>
-                                                        </svg>
-                                                    </span>
-                                                </button>
-                                            </div>
-                                        </h6>
+                                        chi trả phí bh
+                                    </td>
+                                    <td>
+                                        không
+                                    </td>
+                                    <td>
+                                        không
+                                    </td>
+                                    <td>
+                                        20/3/2024
                                     </td>
                                 </tr>
                                 <tr role="row" data-id="20067">
                                     <th class="text-center"><input class="toggleCheckbox" type="checkbox"></th>
                                     <td>
-                                        <p class="mb-0 fw-normal fs-4 text-center">2</p>
+                                        <p class="mb-0 fw-normal fs-4 text-center">1</p>
                                     </td>
                                     <td>
-                                        <input class="inputField form-control" type="text" name="name" value="Nguyễn Thị B" data-original-value="Nguyễn Thị B" disabled="">
+                                        001200033444
                                     </td>
                                     <td>
-                                        <input class="inputField form-control" type="text" name="email" value="girhathanh@gmail.com" data-original-value="girhathanh@gmail.com" disabled="">
+                                        Nguyễn Văn A
                                     </td>
                                     <td>
-                                        <input class="inputField form-control" type="text" name="password" value="123456" data-original-value="123456" disabled="">
+                                        1 000 000
                                     </td>
                                     <td>
-                                        <h6 class="fs-4 fw-semibold mb-0">
-                                            <div class="btn-group d-flex">
-                                                <button class="btn btn-success me-1 editButton">
-                                                    <span class="icon-item-icon">
-                                                        <img src="{{ asset('/img-system/system/edit_white.svg') }}" />
-                                                    </span>
-                                                </button>
-                                                <button class="btn btn-danger tabledit-delete-button" data-id="24">
-                                                    <span class="icon-item-icon">
-                                                        <img src="{{ asset('/img-system/system/trash_white.svg') }}" alt="" />
-                                                    </span>
-                                                </button>
-                                                <button class="btn btn-info me-1 saveButton" style="display: none;">
-                                                    <span class="icon-item-icon">
-                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                            class="icon icon-tabler icon-tabler-discount-check-filled" width="24"
-                                                            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                                            fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                            <path
-                                                                d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944zm3.697 7.282a1 1 0 0 0 -1.414 0l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.32 1.497l2 2l.094 .083a1 1 0 0 0 1.32 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
-                                                                stroke-width="0" fill="currentColor"></path>
-                                                        </svg>
-                                                    </span>
-                                                </button>
-                                                <button class="btn btn-warning cancelButton" style="display: none;">
-                                                    <span class="icon-item-icon">
-                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                            class="icon icon-tabler icon-tabler-circle-x-filled" width="24"
-                                                            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                                            fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                            <path
-                                                                d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-6.489 5.8a1 1 0 0 0 -1.218 1.567l1.292 1.293l-1.292 1.293l-.083 .094a1 1 0 0 0 1.497 1.32l1.293 -1.292l1.293 1.292l.094 .083a1 1 0 0 0 1.32 -1.497l-1.292 -1.293l1.292 -1.293l.083 -.094a1 1 0 0 0 -1.497 -1.32l-1.293 1.292l-1.293 -1.292l-.094 -.083z"
-                                                                stroke-width="0" fill="currentColor"></path>
-                                                        </svg>
-                                                    </span>
-                                                </button>
-                                            </div>
-                                        </h6>
+                                        chi trả phí bh
+                                    </td>
+                                    <td>
+                                        không
+                                    </td>
+                                    <td>
+                                        không
+                                    </td>
+                                    <td>
+                                        20/3/2024
                                     </td>
                                 </tr>
-                                <tr role="row">
+                                <tr role="row" data-id="20067">
+                                    <th class="text-center"><input class="toggleCheckbox" type="checkbox"></th>
                                     <td>
-                                        <p class="mb-0 fw-normal fs-4 text-center"></p>
+                                        <p class="mb-0 fw-normal fs-4 text-center">1</p>
                                     </td>
                                     <td>
-                                        <div class="btn-group d-flex">
-                                            <button class="btn btn-info me-1 saveButton">
-                                                <span class="icon-item-icon">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-discount-check-filled" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                        <path d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944zm3.697 7.282a1 1 0 0 0 -1.414 0l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.32 1.497l2 2l.094 .083a1 1 0 0 0 1.32 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z" stroke-width="0" fill="currentColor"></path>
-                                                    </svg>
-                                                </span>
-                                            </button>
-                                        </div>
+                                        001200033444
                                     </td>
                                     <td>
-                                        <input class="inputField form-control" type="text" name="name" value="" data-original-value="">
+                                        Nguyễn Văn A
                                     </td>
                                     <td>
-                                        <input class="inputField form-control" type="text" name="email" value="" data-original-value="">
+                                        1 000 000
                                     </td>
                                     <td>
-                                        <input class="inputField form-control" type="text" name="password" value="" data-original-value="">
+                                        chi trả phí bh
+                                    </td>
+                                    <td>
+                                        không
+                                    </td>
+                                    <td>
+                                        không
+                                    </td>
+                                    <td>
+                                        20/3/2024
                                     </td>
                                 </tr>
                             </tbody>
@@ -855,4 +850,9 @@
 @endsection
 @section('script')
     <script src="/js/pages/account.js"></script>
+    <script src="/assets/js/datetimepicker/moment.min.js"></script>
+    <script src="/assets/js/datetimepicker/daterangepicker.js"></script>
+    <script src="/assets/js/datetimepicker/daterangepicker-init.js"></script>
+    <script src="/assets/js/datetimepicker/bootstrap-datepicker.min.js"></script>
+    <script src="/assets/js/datetimepicker/datepicker-init.js"></script>
 @endsection
