@@ -17,6 +17,7 @@ use App\Http\Controllers\SupervisorController;
 use App\Http\Controllers\Revenue\RevenueController;
 use App\Http\Controllers\Physical\PhysicalController;
 use App\Http\Controllers\Hospital\HospitalController;
+use App\Http\Controllers\Diary\DiaryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -94,6 +95,10 @@ use App\Http\Controllers\Hospital\HospitalController;
 
     // Routes Revenue
     Route::get('/revenue', [RevenueController::class, 'index'])->name('revenue.index');
+
+    // Routes Diary
+    Route::get('/diary', [DiaryController::class, 'index'])->name('diary.index');
+
 // });
 
 // Route for login page
