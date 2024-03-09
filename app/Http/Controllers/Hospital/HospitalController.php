@@ -9,6 +9,6 @@ class HospitalController extends Controller
 {
     public function index()
     {
-        return view('pages.hospital.index');
+        return view('admin.pages.hospital.index');
     }
 }

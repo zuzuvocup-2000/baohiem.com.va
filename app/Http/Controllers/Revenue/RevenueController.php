@@ -9,6 +9,6 @@ class RevenueController extends Controller
 {
     public function index()
     {
-        return view('pages.revenue.index');
+        return view('admin.pages.revenue.index');
     }
 }

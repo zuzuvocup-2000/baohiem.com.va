@@ -18,10 +18,10 @@ class PermissionMiddleware
      */
     public function handle($request, Closure $next, $permission = null, $guard = null)
     {
-        if (!Auth::guard('user_admins')->check()) {
+        if (!Auth::guard('web')->check()) {
             return redirect('/')->with('error', "Bạn không có quyền truy cập vào chức năng này.");
         }
-        $authGuard = app('auth')->guard('user_admins');
+        $authGuard = app('auth')->guard('web');
         if (!is_null($permission)) {
             $permissions = is_array($permission)
                 ? $permission

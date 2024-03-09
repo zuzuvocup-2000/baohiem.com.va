@@ -12,8 +12,8 @@ class PhysicalController extends Controller
 {
     protected $companyService;
     protected $periodService;
-    protected $contractService; 
-    
+    protected $contractService;
+
     public function __construct(
         CompanyService $companyService,
         PeriodService $periodService,
@@ -28,10 +28,10 @@ class PhysicalController extends Controller
         $companyList = $this->companyService->getCompanyActive();
         $periodList = $this->periodService->getPeriodActive();
         $contractList = $this->contractService->getContractByCompanyAndPeriod($companyList->first()->id, $periodList->first()->id);
-        return view('pages.physical.index', compact(['companyList', 'periodList', 'contractList']));
+        return view('admin.pages.physical.index', compact(['companyList', 'periodList', 'contractList']));
     }
     public function detail()
     {
-        return view('pages.physical.detail');
+        return view('admin.pages.physical.detail');
     }
 }

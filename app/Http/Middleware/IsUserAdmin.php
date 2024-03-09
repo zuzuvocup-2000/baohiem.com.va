@@ -17,7 +17,7 @@ class IsUserAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::guard('user_admins')->check()) {
+        if (Auth::guard('web')->check()) {
             return $next($request);
         }
         return redirect('/')->with('error', "Bạn không có quyền truy cập vào chức năng này.");

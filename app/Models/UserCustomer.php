@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class UserCustomer extends Authenticatable
 {
     protected $table = 'tbl_user_customer';
+    protected $guard = 'customer';
     protected $primaryKey = 'id';
     public $timestamps = false;
 

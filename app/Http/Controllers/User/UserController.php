@@ -29,13 +29,13 @@ class UserController extends Controller
     {
         $activeDepartments = $this->departmentService->getActiveDepartments();
         $userList = $this->userService->getUserList($request);
-        return view('pages.user.index', compact(['activeDepartments', 'userList']));
+        return view('admin.pages.user.index', compact(['activeDepartments', 'userList']));
     }
 
     public function create()
     {
         $employeeList = $this->employeeService->getEmployeeListActive();
-        return view('pages.user.create', compact('employeeList'));
+        return view('admin.pages.user.create', compact('employeeList'));
     }
 
     public function store(UserCreateRequest $request)
@@ -71,7 +71,7 @@ class UserController extends Controller
             return redirect()->back()->with('error', 'Tài khoản không tồn tại.');
         }
         $employeeList = $this->employeeService->getEmployeeListActive();
-        return view('pages.user.edit', compact('employeeList', 'user'));
+        return view('admin.pages.user.edit', compact('employeeList', 'user'));
     }
 
     public function update($id, UserUpdateRequest $request)

@@ -12,16 +12,16 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        return view('pages.profile.index');
+        return view('admin.pages.profile.index');
     }
     public function changePasswordIndex()
     {
-        return view('pages.profile.change-password');
+        return view('admin.pages.profile.change-password');
     }
     public function changePassword(ProfileRequest $request)
     {
         $user = getInfoUserAdmin();
-    
+
         if (Hash::check($request->current_password, $user->password)) {
             $user->update(['password' => Hash::make($request->new_password)]);
             return redirect()->route('home')->with('success', 'Mật khẩu của bạn đã được thay đổi thành công!');

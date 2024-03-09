@@ -9,14 +9,14 @@ class AccountController extends Controller
 {
     public function index()
     {
-        return view('pages.account.index');
+        return view('admin.pages.account.index');
     }
     public function edit()
     {
-        return view('pages.account.edit');
+        return view('admin.pages.account.edit');
     }
     public function insurance()
     {
-        return view('pages.account.insurance');
+        return view('admin.pages.account.insurance');
     }
 }

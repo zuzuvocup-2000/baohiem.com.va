@@ -13,18 +13,18 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
-        return view('pages.auth.login');
+        return view('admin.pages.auth.login');
     }
 
     public function login(LoginRequest $request)
     {
         $credentials = $request->only('username', 'password');
-        $guards = ['user_admins', 'user_employees', 'user_hospitals', 'user_customers'];
+        $guards = ['web', 'staff', 'hospital', 'customer'];
         $remember = $request->filled('remember');
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->attempt($credentials, $remember)) {
-                if (Auth::guard('user_admins')->check()) {
+                if (Auth::guard('web')->check()) {
                     return redirect('/dashboard')->with('success', 'Đăng nhập thành công!');
                 } else {
                     return redirect('/');

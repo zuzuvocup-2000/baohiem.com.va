@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
@@ -40,21 +39,17 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'user_admins' => [
+        'hospital' => [
             'driver' => 'session',
-            'provider' => 'user_admins',
+            'provider' => 'hospitals',
         ],
-        'user_employees' => [
+        'customer' => [
             'driver' => 'session',
-            'provider' => 'user_employees',
+            'provider' => 'customers',
         ],
-        'user_hospitals' => [
+        'staff' => [
             'driver' => 'session',
-            'provider' => 'user_hospitals',
-        ],
-        'user_customers' => [
-            'driver' => 'session',
-            'provider' => 'user_customers',
+            'provider' => 'staffs',
         ],
     ],
 
@@ -80,26 +75,18 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-        'user_admins' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\User::class,
-        ],
-        'user_employees' => [
+        'staffs' => [
             'driver' => 'eloquent',
             'model' => App\Models\UserStaff::class,
         ],
-        'user_hospitals' => [
+        'hospitals' => [
             'driver' => 'eloquent',
             'model' => App\Models\UserHospital::class,
         ],
-        'user_customers' => [
+        'customers' => [
             'driver' => 'eloquent',
             'model' => App\Models\UserCustomer::class,
         ],
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
     ],
 
     /*
@@ -124,7 +111,7 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
-        'user_admins' => [
+        'web' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
@@ -140,7 +127,6 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\UserCustomer::class,
         ],
-
     ],
 
     /*
@@ -155,5 +141,4 @@ return [
     */
 
     'password_timeout' => 10800,
-
 ];

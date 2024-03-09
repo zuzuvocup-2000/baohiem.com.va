@@ -12,17 +12,17 @@ class ContactController extends Controller
 {
     public function index()
     {
-        return view('pages.contact.index');
+        return view('admin.pages.contact.index');
     }
     public function sendEmail(ContactRequest $request)
     {
         $data = $request->validated();
-    
+
         Mail::send('pages.contact.mailview', $data, function ($message) use ($data) {
             $message->to($data['email_receive'])
                     ->subject($data['title']);
         });
-    
+
         return redirect()->back()->with('success', 'Gửi email thành công');
     }
 }

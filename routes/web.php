@@ -29,7 +29,7 @@ use App\Http\Controllers\Revenue\RevenueController;
 |
 */
 
-Route::group(['middleware' => ['is_user_admin', 'is_user_customer', 'is_user_employee', 'is_user_hospital']], function () {
+// Route::group(['middleware' => ['is_user_admin', 'is_user_customer', 'is_user_employee', 'is_user_hospital']], function () {
     // Routes Logout
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
@@ -38,9 +38,9 @@ Route::group(['middleware' => ['is_user_admin', 'is_user_customer', 'is_user_emp
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/change-password', [ProfileController::class, 'changePasswordIndex'])->name('profile.changePassword');
     Route::post('/change-password', [ProfileController::class, 'changePassword'])->name('change.password');
-});
+// });
 
-Route::middleware(['is_user_admin', 'permission'])->group(function () {
+// Route::middleware(['is_user_admin', 'permission'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
 
     // Routes for free design before
@@ -93,7 +93,7 @@ Route::middleware(['is_user_admin', 'permission'])->group(function () {
 
     // Routes Revenue
     Route::get('/revenue', [RevenueController::class, 'index'])->name('revenue.index');
-});
+// });
 
 // Route for login page
 Route::get('/', [LoginController::class, 'showLoginForm']);
