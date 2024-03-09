@@ -31,16 +31,16 @@ class SupervisorController extends Controller
     public function account()
     {
         $companyList = $this->companyService->getCompanyActive();
-        $periodList = $this->periodService->getPeriodActive();
-        $contractList = $this->contractService->getContractByCompanyAndPeriod($companyList->first()->id, $periodList->first()->id);
+        $periodList = $this->periodService->getPeriodActiveByCompany($companyList->first()->id);
+        $contractList = $this->contractService->getContractByPeriod($periodList->first()->id);
         return view('admin.supervisor.account', compact(['companyList', 'periodList', 'contractList']));
     }
 
     public function accountOnline()
     {
         $companyList = $this->companyService->getCompanyActive();
-        $periodList = $this->periodService->getPeriodActive();
-        $contractList = $this->contractService->getContractByCompanyAndPeriod($companyList->first()->id, $periodList->first()->id);
+        $periodList = $this->periodService->getPeriodActiveByCompany($companyList->first()->id);
+        $contractList = $this->contractService->getContractByPeriod($periodList->first()->id);
         return view('admin.supervisor.account-online', compact(['companyList', 'periodList', 'contractList']));
     }
 }

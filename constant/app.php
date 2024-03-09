@@ -9,5 +9,20 @@ define('PER_PAGE_MEDIUM', 50);
 define('PER_PAGE_BIG', 100);
 
 // Trạng thái tài khoản
-define('STATUS_ACTIVE', 1);
 define('STATUS_INACTIVE', 0);
+define('STATUS_ACTIVE', 1);
+
+// Trạng thái Email
+define('EMAIL_ALL', -1);
+define('EMAIL_NO', 0);
+define('EMAIL_YES', 1);
+
+// Trạng thái
+define('ACTIVE_ALL', -1);
+define('ACTIVE_NO', 0);
+define('ACTIVE_YES', 1);
+
+// Là chủ tài khoản
+define('ACCOUNT_ALL', -1);
+define('ACCOUNT_NO', 0);
+define('ACCOUNT_YES', 1);
