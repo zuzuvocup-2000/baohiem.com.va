@@ -9,7 +9,7 @@ class DepartmentController extends Controller
 {
     public function index()
     {
-        return view('admin.pages.department.index');
+        return view('admin.department.index');
     }
 
     public function store(Request $request)

@@ -9,18 +9,18 @@ class AccountController extends Controller
 {
     public function index()
     {
-        return view('admin.pages.account.index');
+        return view('admin.account.index');
     }
     public function edit()
     {
-        return view('admin.pages.account.edit');
+        return view('admin.account.edit');
     }
     public function insurance()
     {
-        return view('admin.pages.account.insurance');
+        return view('admin.account.insurance');
     }
     public function expenses()
     {
-        return view('pages.account.expenses');
+        return view('admin.account.expenses');
     }
 }

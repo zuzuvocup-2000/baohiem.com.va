@@ -9,6 +9,6 @@ class VerificationController extends Controller
 {
     public function showVerifyForm()
     {
-        return view('admin.pages.auth.verify');
+        return view('auth.verify');
     }
 }

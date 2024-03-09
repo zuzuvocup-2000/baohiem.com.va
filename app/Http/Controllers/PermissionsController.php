@@ -16,7 +16,7 @@ class PermissionsController extends Controller
     {
         $permissions = Permission::paginate(PER_PAGE_SMALL);
 
-        return view('admin.pages.permissions.index', [
+        return view('admin.permissions.index', [
             'permissions' => $permissions
         ]);
     }
@@ -28,7 +28,7 @@ class PermissionsController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.permissions.create');
+        return view('admin.permissions.create');
     }
 
     /**
@@ -57,7 +57,7 @@ class PermissionsController extends Controller
      */
     public function edit(Permission $permission)
     {
-        return view('admin.pages.permissions.edit', compact('permission'));
+        return view('admin.permissions.edit', compact('permission'));
     }
 
     /**

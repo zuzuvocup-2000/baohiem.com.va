@@ -12,11 +12,11 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        return view('admin.pages.profile.index');
+        return view('admin.profile.index');
     }
     public function changePasswordIndex()
     {
-        return view('admin.pages.profile.change-password');
+        return view('admin.profile.change-password');
     }
     public function changePassword(ProfileRequest $request)
     {

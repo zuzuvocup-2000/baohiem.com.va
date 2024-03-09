@@ -12,13 +12,13 @@ class ContactController extends Controller
 {
     public function index()
     {
-        return view('admin.pages.contact.index');
+        return view('admin.contact.index');
     }
     public function sendEmail(ContactRequest $request)
     {
         $data = $request->validated();
 
-        Mail::send('pages.contact.mailview', $data, function ($message) use ($data) {
+        Mail::send('admin.contact.mailview', $data, function ($message) use ($data) {
             $message->to($data['email_receive'])
                     ->subject($data['title']);
         });

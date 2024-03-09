@@ -43,7 +43,7 @@ class SystemController extends Controller
         $packageDetailList = $this->packageDetailService->getPackageByCompanyAndPeriod($companyList->first()->id, $periodList->first()->id);
         $contractList = $this->contractService->getContractByCompanyAndPeriod($companyList->first()->id, $periodList->first()->id);
         $customerGroupList = $this->customerGroupService->getCustomerGroupActive();
-        return view('admin.pages.system.index', compact(['companyList', 'periodList', 'customerTypeList', 'packageDetailList', 'contractList', 'customerGroupList']));
+        return view('admin.system.index', compact(['companyList', 'periodList', 'customerTypeList', 'packageDetailList', 'contractList', 'customerGroupList']));
     }
 
     public function searchPackageDetail()

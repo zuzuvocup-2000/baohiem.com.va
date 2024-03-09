@@ -25,7 +25,7 @@ class SupervisorController extends Controller
 
     public function insuranceExpenses()
     {
-        return view('admin.pages.supervisor.insuranceExpenses');
+        return view('admin.supervisor.insuranceExpenses');
     }
 
     public function account()
@@ -33,7 +33,7 @@ class SupervisorController extends Controller
         $companyList = $this->companyService->getCompanyActive();
         $periodList = $this->periodService->getPeriodActive();
         $contractList = $this->contractService->getContractByCompanyAndPeriod($companyList->first()->id, $periodList->first()->id);
-        return view('admin.pages.supervisor.account', compact(['companyList', 'periodList', 'contractList']));
+        return view('admin.supervisor.account', compact(['companyList', 'periodList', 'contractList']));
     }
 
     public function accountOnline()
@@ -41,6 +41,6 @@ class SupervisorController extends Controller
         $companyList = $this->companyService->getCompanyActive();
         $periodList = $this->periodService->getPeriodActive();
         $contractList = $this->contractService->getContractByCompanyAndPeriod($companyList->first()->id, $periodList->first()->id);
-        return view('admin.pages.supervisor.account-online', compact(['companyList', 'periodList', 'contractList']));
+        return view('admin.supervisor.account-online', compact(['companyList', 'periodList', 'contractList']));
     }
 }
