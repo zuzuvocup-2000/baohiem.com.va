@@ -19,4 +19,8 @@ class AccountController extends Controller
     {
         return view('admin.pages.account.insurance');
     }
+    public function expenses()
+    {
+        return view('pages.account.expenses');
+    }
 }

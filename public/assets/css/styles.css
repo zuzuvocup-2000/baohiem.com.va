@@ -32921,3 +32921,7 @@ svg {
 .user-table .extra-th{
     padding-left: 50px;
 }
+.btn-flexend {
+    display: flex;
+    flex-direction: column-reverse;
+}
