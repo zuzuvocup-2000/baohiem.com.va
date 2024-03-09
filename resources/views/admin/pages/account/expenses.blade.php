@@ -1,9 +1,9 @@
-@extends('layouts.master')
+@extends('admin.layouts.master')
 
 @section('title', 'Chi bảo hiểm')
 
 @section('content')
-    @include('partial.breadcrumb', ['breadcrumbTitle' => 'Chi bảo hiểm'])
+    @include('admin.partial.breadcrumb', ['breadcrumbTitle' => 'Chi bảo hiểm'])
     <div class="widget-content searchable-container list insurance-account">
         <div class="card card-body">
             <h5>Chi bảo hiêm</h5>
@@ -152,7 +152,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
             </form>
         </div>
