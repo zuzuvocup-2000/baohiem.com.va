@@ -101,6 +101,7 @@ Route::delete('/department/delete/{id}', 'DepartmentController@destroy')->name('
 
 // Routes Hospital
 Route::get('/hospital', [HospitalController::class, 'index'])->name('hospital.index');
+Route::get('/health-report', [HospitalController::class, 'healthReport'])->name('healthReport.index');
 
 // Routes Revenue
 Route::get('/revenue', [RevenueController::class, 'index'])->name('revenue.index');
