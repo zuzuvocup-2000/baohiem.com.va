@@ -38,10 +38,10 @@ class SystemController extends Controller
     public function index()
     {
         $companyList = $this->companyService->getCompanyActive();
-        $periodList = $this->periodService->getPeriodActive();
+        $periodList = $this->periodService->getPeriodActiveByCompany($companyList->first()->id);
         $customerTypeList = $this->customerTypeService->getCustomerTypeActive();
         $packageDetailList = $this->packageDetailService->getPackageByCompanyAndPeriod($companyList->first()->id, $periodList->first()->id);
-        $contractList = $this->contractService->getContractByCompanyAndPeriod($companyList->first()->id, $periodList->first()->id);
+        $contractList = $this->contractService->getContractByPeriod($periodList->first()->id);
         $customerGroupList = $this->customerGroupService->getCustomerGroupActive();
         return view('admin.system.index', compact(['companyList', 'periodList', 'customerTypeList', 'packageDetailList', 'contractList', 'customerGroupList']));
     }
