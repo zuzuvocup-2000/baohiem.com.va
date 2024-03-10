@@ -47,4 +47,4 @@ $('#periodSelect').on('change', function () {
     });
 });
 
-$('#companySelect').trigger('change');
+// $('#companySelect').trigger('change');

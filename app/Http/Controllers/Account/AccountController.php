@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\CustomerGroupService;
 use App\Services\CompanyService;
 use App\Services\ContractService;
+use App\Services\CustomerService;
 use App\Services\PeriodService;
 use Illuminate\Http\Request;
 
@@ -15,21 +16,39 @@ class AccountController extends Controller
     protected $companyService;
     protected $periodService;
     protected $contractService;
+    protected $customerService;
 
-    public function __construct(CompanyService $companyService, PeriodService $periodService, ContractService $contractService, CustomerGroupService $customerGroupService)
+    public function __construct(CompanyService $companyService, PeriodService $periodService, ContractService $contractService, CustomerGroupService $customerGroupService, CustomerService $customerService)
     {
         $this->customerGroupService = $customerGroupService;
         $this->companyService = $companyService;
         $this->periodService = $periodService;
         $this->contractService = $contractService;
+        $this->customerService = $customerService;
     }
-    public function index()
+    public function index(Request $request)
     {
+        $params = $request->query();
         $customerGroupList = $this->customerGroupService->getCustomerGroupActive();
         $companyList = $this->companyService->getCompanyActive();
-        $periodList = $this->periodService->getPeriodActiveByCompany($companyList->first()->id);
-        $contractList = $this->contractService->getContractByPeriod($periodList->first()->id);
-        return view('admin.account.index', compact(['customerGroupList', 'companyList', 'periodList', 'contractList']));
+
+        // Lấy danh sách niên hạn
+        if (!isset($params['company'])) {
+            $params['company'] = $companyList->first()->id;
+        }
+        $periodList = $this->periodService->getPeriodActiveByCompany($params['company']);
+
+        // Lấy danh sách hợp đồng
+        if (!isset($params['period'])) {
+            $params['period'] = $periodList->first()->id;
+        }
+        $contractList = $this->contractService->getContractByPeriod($params['period']);
+        if (!isset($params['contract'])) {
+            $params['contract'] = $contractList->first()->id;
+        }
+
+        $accountList = $this->customerService->getListAccount($params);
+        return view('admin.account.index', compact(['customerGroupList', 'companyList', 'periodList', 'contractList', 'accountList']));
     }
     public function edit()
     {
