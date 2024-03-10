@@ -20,6 +20,7 @@ use App\Http\Controllers\SupervisorController;
 use App\Http\Controllers\Revenue\RevenueController;
 use App\Http\Controllers\Physical\PhysicalController;
 use App\Http\Controllers\Hospital\HospitalController;
+use App\Http\Controllers\Diary\DiaryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,7 @@ Route::post('/change-password', [ProfileController::class, 'changePassword'])->n
 // });
 
 // Route::middleware(['is_user_admin', 'permission'])->group(function () {
+
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
 
 // Routes for free design before
@@ -104,6 +106,9 @@ Route::get('/hospital', [HospitalController::class, 'index'])->name('hospital.in
 
 // Routes Revenue
 Route::get('/revenue', [RevenueController::class, 'index'])->name('revenue.index');
+
+// Routes Diary
+Route::get('/diary', [DiaryController::class, 'index'])->name('diary.index');
 // });
 
 // Route for login page
