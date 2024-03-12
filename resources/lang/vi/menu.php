@@ -49,7 +49,7 @@ return [
             ],
             [
                 'name' => 'Báo cáo khám sức khỏe',
-                'url' => '',
+                'url' => route('healthReport.index'),
             ]
         ]
     ],
@@ -77,10 +77,6 @@ return [
             [
                 'name' => 'Nhật ký thao tác chứng từ',
                 'url' => route('diary.index')
-            ],
-            [
-                'name' => 'Download biểu mẫu',
-                'url' => ''
             ],
             [
                 'name' => 'Supervisor',
