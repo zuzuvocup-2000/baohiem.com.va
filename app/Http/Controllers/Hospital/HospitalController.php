@@ -11,4 +11,8 @@ class HospitalController extends Controller
     {
         return view('admin.hospital.index');
     }
+    public function healthReport()
+    {
+        return view('admin.hospital.health_report');
+    }
 }
