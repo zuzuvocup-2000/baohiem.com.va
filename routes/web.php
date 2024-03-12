@@ -52,6 +52,9 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
 Route::group(['prefix' => 'ajax'], function () {
     Route::get('/contract/list', [ContractController::class, 'index'])->name('contract.index');
     Route::get('/company/list', [CompanyController::class, 'index'])->name('company.index');
+    Route::post('/company/create', [CompanyController::class, 'create'])->name('company.create');
+    Route::post('/company/delete', [CompanyController::class, 'delete'])->name('company.delete');
+    Route::put('/company/update', [CompanyController::class, 'update'])->name('company.update');
     Route::get('/period/list', [PeriodController::class, 'index'])->name('period.index');
 });
 

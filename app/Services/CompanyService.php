@@ -10,8 +10,25 @@ use App\Models\Company;
  */
 class CompanyService
 {
-    public function getCompanyActive()
+    public function getCompanyActiveByProvince($provinceId = 0)
     {
-        return Company::where(['active' => STATUS_ACTIVE])->orderBy('order', 'asc')->get();
+        return Company::where('active', STATUS_ACTIVE)
+            ->where('province_id', $provinceId)
+            ->orderBy('id', 'asc')
+            ->get();
+    }
+
+    public function getCompanyActiveDefault()
+    {
+        return Company::where('active', STATUS_ACTIVE)
+            ->orderBy('id', 'asc')
+            ->get();
+    }
+
+    public function getCompanyActiveSortByOrder()
+    {
+        return Company::where('active', STATUS_ACTIVE)
+            ->orderBy('order', 'asc')
+            ->get();
     }
 }

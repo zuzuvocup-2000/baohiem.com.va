@@ -164,4 +164,5 @@
     <script src="/assets/js/datetimepicker/daterangepicker-init.js"></script>
     <script src="/assets/js/datetimepicker/bootstrap-datepicker.min.js"></script>
     <script src="/assets/js/datetimepicker/datepicker-init.js"></script>
+    <script src="/js/pages/system.js"></script>
 @endsection

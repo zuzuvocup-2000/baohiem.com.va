@@ -44,3 +44,15 @@ $(document).ready(function () {
         row.find(".saveButton").hide();
     })
 });
+
+function disabledButtonLoading(_this){
+    _this.attr('disabled', 'disabled')
+    _this.find('.default').addClass('d-none')
+    _this.find('.loading-dot').removeClass('d-none')
+}
+
+function enabledButtonLoading(_this){
+    _this.removeAttr('disabled')
+    _this.find('.default').removeClass('d-none')
+    _this.find('.loading-dot').addClass('d-none')
+}

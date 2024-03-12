@@ -22,7 +22,7 @@ return [
             ],
             [
                 'name' => 'Chi bảo hiểm',
-                'url' => '',
+                'url' => route('account.expenses'),
             ],
             [
                 'name' => 'Gia hạn tài khoản',
@@ -30,7 +30,7 @@ return [
             ],
             [
                 'name' => 'Báo cáo thống kê',
-                'url' => '',
+                'url' => route('revenue.index'),
             ]
         ]
     ],
@@ -76,7 +76,7 @@ return [
             ],
             [
                 'name' => 'Nhật ký thao tác chứng từ',
-                'url' => ''
+                'url' => route('diary.index')
             ],
             [
                 'name' => 'Download biểu mẫu',

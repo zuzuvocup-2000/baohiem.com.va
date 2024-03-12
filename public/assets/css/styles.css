@@ -32754,7 +32754,6 @@ svg {
     background: var(--bs-primary) !important;
 }
 .system-table input{
-    width: auto;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;

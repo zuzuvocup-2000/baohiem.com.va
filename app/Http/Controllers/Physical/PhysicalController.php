@@ -25,7 +25,7 @@ class PhysicalController extends Controller
     }
     public function index()
     {
-        $companyList = $this->companyService->getCompanyActive();
+        $companyList = $this->companyService->getCompanyActiveSortByOrder();
         $periodList = $this->periodService->getPeriodActiveByCompany($companyList->first()->id);
         $contractList = $this->contractService->getContractByPeriod($periodList->first()->id);
         return view('admin.physical.index', compact(['companyList', 'periodList', 'contractList']));

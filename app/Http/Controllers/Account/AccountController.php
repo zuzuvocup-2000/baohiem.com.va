@@ -30,7 +30,7 @@ class AccountController extends Controller
     {
         $params = $request->query();
         $customerGroupList = $this->customerGroupService->getCustomerGroupActive();
-        $companyList = $this->companyService->getCompanyActive();
+        $companyList = $this->companyService->getCompanyActiveSortByOrder();
 
         // Lấy danh sách niên hạn
         if (!isset($params['company'])) {

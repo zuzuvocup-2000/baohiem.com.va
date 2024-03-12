@@ -30,7 +30,7 @@ class SupervisorController extends Controller
 
     public function account()
     {
-        $companyList = $this->companyService->getCompanyActive();
+        $companyList = $this->companyService->getCompanyActiveSortByOrder();
         $periodList = $this->periodService->getPeriodActiveByCompany($companyList->first()->id);
         $contractList = $this->contractService->getContractByPeriod($periodList->first()->id);
         return view('admin.supervisor.account', compact(['companyList', 'periodList', 'contractList']));
@@ -38,7 +38,7 @@ class SupervisorController extends Controller
 
     public function accountOnline()
     {
-        $companyList = $this->companyService->getCompanyActive();
+        $companyList = $this->companyService->getCompanyActiveSortByOrder();
         $periodList = $this->periodService->getPeriodActiveByCompany($companyList->first()->id);
         $contractList = $this->contractService->getContractByPeriod($periodList->first()->id);
         return view('admin.supervisor.account-online', compact(['companyList', 'periodList', 'contractList']));
