@@ -26,7 +26,7 @@ return [
             ],
             [
                 'name' => 'Gia hạn tài khoản',
-                'url' => '',
+                'url' => route('renewal.index'),
             ],
             [
                 'name' => 'Báo cáo thống kê',

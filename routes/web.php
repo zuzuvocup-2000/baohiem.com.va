@@ -51,11 +51,18 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
 // Routes for free design before
 Route::group(['prefix' => 'ajax'], function () {
     Route::get('/contract/list', [ContractController::class, 'index'])->name('contract.index');
+
+    // Công ty
     Route::get('/company/list', [CompanyController::class, 'index'])->name('company.index');
     Route::post('/company/create', [CompanyController::class, 'create'])->name('company.create');
     Route::post('/company/delete', [CompanyController::class, 'delete'])->name('company.delete');
     Route::put('/company/update', [CompanyController::class, 'update'])->name('company.update');
+
+    // Niên hạn
     Route::get('/period/list', [PeriodController::class, 'index'])->name('period.index');
+    Route::post('/period/create', [PeriodController::class, 'create'])->name('period.create');
+    Route::post('/period/delete', [PeriodController::class, 'delete'])->name('period.delete');
+    Route::put('/period/update', [PeriodController::class, 'update'])->name('period.update');
 });
 
 // Routes for free design before
