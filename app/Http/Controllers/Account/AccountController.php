@@ -62,4 +62,8 @@ class AccountController extends Controller
     {
         return view('admin.account.expenses');
     }
+    public function renewal()
+    {
+        return view('admin.account.renewal');
+    }
 }

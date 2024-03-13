@@ -32757,6 +32757,7 @@ svg {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    height: 35px;
 }
 .system-table input:disabled{
     border: none;
@@ -32923,4 +32924,9 @@ svg {
 .btn-flexend {
     display: flex;
     flex-direction: column-reverse;
+}
+.renewal-container{
+    padding: 10px;
+    border: 1px solid ;
+    box-shadow: var(--bs-card-box-shadow);
 }
