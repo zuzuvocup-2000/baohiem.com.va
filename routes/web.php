@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Account\AccountController;
 use App\Http\Controllers\Ajax\CompanyController;
 use App\Http\Controllers\Ajax\ContractController;
+use App\Http\Controllers\Ajax\AccountPackageController;
 use App\Http\Controllers\Ajax\PeriodController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
@@ -63,6 +64,11 @@ Route::group(['prefix' => 'ajax'], function () {
     Route::post('/period/create', [PeriodController::class, 'create'])->name('period.create');
     Route::post('/period/delete', [PeriodController::class, 'delete'])->name('period.delete');
     Route::put('/period/update', [PeriodController::class, 'update'])->name('period.update');
+
+    // Gói bảo hiểm
+    Route::post('/account-package/create', [AccountPackageController::class, 'create'])->name('account-package.create');
+    Route::post('/account-package/delete', [AccountPackageController::class, 'delete'])->name('account-package.delete');
+    Route::put('/account-package/update', [AccountPackageController::class, 'update'])->name('account-package.update');
 });
 
 // Routes for free design before

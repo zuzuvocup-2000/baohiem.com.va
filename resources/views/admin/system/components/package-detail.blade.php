@@ -2,10 +2,10 @@
     <div class="col-xs-12 col-md-6">
         <div class="form-group">
             <label class="mr-sm-2" for="companySelect">Tên công ty</label>
-            <select class="form-select mr-sm-2" id="companySelect" name="companySelect">
-                @foreach ($companyList as $company)
+            <select class="form-select mr-sm-2" id="companySelectAccountPackage" name="companySelect">
+                @foreach ($companyAll as $company)
                     <option value="{{ $company->id }}"
-                        {{ old('companySelect', $companyList[0]->id) == $company->id ? 'selected' : '' }}>
+                        {{ isset($_GET['account_package_company_id']) && $_GET['account_package_company_id'] == $company->id ? 'selected' : '' }}>
                         {{ $company->company_name }}
                     </option>
                 @endforeach
@@ -15,10 +15,10 @@
     <div class="col-xs-12 col-md-6">
         <div class="form-group">
             <label class="mr-sm-2" for="periodSelect">Niên hạn</label>
-            <select class="form-select mr-sm-2" id="periodSelect" name="periodSelect">
+            <select class="form-select mr-sm-2" id="periodSelectAccountPackage" name="periodSelect">
                 @foreach ($periodList as $period)
                     <option value="{{ $period->id }}"
-                        {{ old('periodSelect', $periodList[0]->id) == $period->id ? 'selected' : '' }}>
+                        {{ isset($_GET['account_package_period_id']) && $_GET['account_package_period_id'] == $period->id ? 'selected' : '' }}>
                         {{ $period->period_name }}
                     </option>
                 @endforeach
@@ -51,30 +51,30 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($packageDetailList as $key => $packageDetail)
-                <tr role="row" data-id="{{ $packageDetail->id }}">
+            @foreach ($accountPackageList as $key => $accountPackage)
+                <tr role="row" data-id="{{ $accountPackage->id }}">
                     <td>
                         <input type="checkbox" class="toggleCheckbox custom-control-input"
-                            id="packageDetail-{{ $packageDetail->id }}" name="id[]"
-                            value="{{ $packageDetail->id }}" />
+                            id="accountPackage-{{ $accountPackage->id }}" name="id[]"
+                            value="{{ $accountPackage->id }}" />
                     </td>
                     <td>
                         <p class="mb-0 fw-normal fs-4 text-center">{{ ++$key }}</p>
                     </td>
                     <td>
-                        <input class="inputField form-control" type="text" name="package_name"
-                            value="{{ $packageDetail->accountPackage->package_name }}"
-                            data-original-value="{{ $packageDetail->accountPackage->package_name }}" disabled="" />
+                        <input class="inputField form-control update-account-package-package_name" type="text" name="package_name"
+                            value="{{ $accountPackage->package_name }}"
+                            data-original-value="{{ $accountPackage->package_name }}" disabled="" />
                     </td>
                     <td>
-                        <input class="inputField form-control" type="text" name="package_price"
-                            value="{{ $packageDetail->accountPackage->package_price }}"
-                            data-original-value="{{ $packageDetail->accountPackage->package_price }}" disabled="" />
+                        <input class="inputField form-control int update-account-package-package_price" type="text" name="package_price"
+                            value="{{ $accountPackage->package_price }}"
+                            data-original-value="{{ $accountPackage->package_price }}" disabled="" />
                     </td>
                     <td>
-                        <input class="inputField form-control" type="text" name="note"
-                            value="{{ $packageDetail->accountPackage->note }}"
-                            data-original-value="{{ $packageDetail->accountPackage->note }}" disabled="" />
+                        <input class="inputField form-control update-account-package-note" type="text" name="note"
+                            value="{{ $accountPackage->note }}"
+                            data-original-value="{{ $accountPackage->note }}" disabled="" />
                     </td>
                     <td>
                         <h6 class="fs-4 fw-semibold mb-0">
@@ -84,12 +84,12 @@
                                         <img src="{{ asset('/img-system/system/edit_white.svg') }}" />
                                     </span>
                                 </button>
-                                <button class="btn btn-danger tabledit-delete-button" data-id="24">
+                                <button class="btn btn-danger tabledit-delete-button delete-button-account-package">
                                     <span class="icon-item-icon">
                                         <img src="{{ asset('/img-system/system/trash_white.svg') }}" alt="" />
                                     </span>
                                 </button>
-                                <button class="btn btn-info me-1 saveButton" style="display: none;">
+                                <button class="btn btn-info me-1 saveButton btn-update-account-package" style="display: none;">
                                     <span class="icon-item-icon">
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                             class="icon icon-tabler icon-tabler-discount-check-filled" width="24"
@@ -125,32 +125,18 @@
                     <p class="mb-0 fw-normal fs-4 text-center"></p>
                 </td>
                 <td>
-                    <div class="btn-group d-flex">
-                        <button class="btn btn-info me-1 saveButton">
-                            <span class="icon-item-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    class="icon icon-tabler icon-tabler-discount-check-filled" width="24"
-                                    height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                    <path
-                                        d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944zm3.697 7.282a1 1 0 0 0 -1.414 0l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.32 1.497l2 2l.094 .083a1 1 0 0 0 1.32 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
-                                        stroke-width="0" fill="currentColor"></path>
-                                </svg>
-                            </span>
-                        </button>
-                    </div>
+                    @include('common/button-loading', ['class' => 'btn-create-account-package'])
                 </td>
                 <td>
-                    <input class="inputField form-control" type="text" name="package_name" value=""
+                    <input class="inputField form-control create-account-package-package_name" type="text" name="package_name" value=""
                         data-original-value="" />
                 </td>
                 <td>
-                    <input class="inputField form-control" type="text" name="package_price" value=""
+                    <input class="inputField form-control create-account-package-package_price int" type="text" name="package_price" value=""
                         data-original-value="" />
                 </td>
                 <td>
-                    <input class="inputField form-control" type="text" name="note" value=""
+                    <input class="inputField form-control create-account-package-note" type="text" name="note" value=""
                         data-original-value="" />
                 </td>
                 <td></td>

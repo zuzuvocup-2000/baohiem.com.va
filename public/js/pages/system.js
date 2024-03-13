@@ -74,7 +74,7 @@ $(document).on('click', '.btn-create-company', function () {
 
 $('#provinceSelect').on('change', function () {
     var selectedProvinceId = $(this).val();
-    window.location.href = window.location.pathname + '?&province_id=' + selectedProvinceId;
+    window.location.href = window.location.pathname + '?province_id=' + selectedProvinceId;
 });
 
 $('.delete-button-company').on('click', function () {
@@ -225,3 +225,119 @@ $('.delete-button-period').on('click', function () {
 });
 
 /* ====================================================================== Period ================================================================================= */
+
+/* ====================================================================== Account Package ================================================================================= */
+
+$(document).on('change' , '#companySelectAccountPackage, #periodSelectAccountPackage', function(){
+    console.log(1);
+    var company = $('#companySelectAccountPackage').val();
+    var period = $('#periodSelectAccountPackage').val();
+    window.location.href = window.location.pathname + '?account_package_company_id=' + company + '&account_package_period_id=' + period;
+});
+
+$(document).on('click', '.btn-update-account-package', function () {
+    let _this = $(this);
+    let row = _this.parents('tr');
+
+    var formData = {
+        package_name: row.find('.update-account-package-package_name').val(),
+        package_price: row.find('.update-account-package-package_price').val(),
+        note: row.find('.update-account-package-note').val(),
+        companyId: $('#companySelectAccountPackage').val(),
+        periodId: $('#periodSelectAccountPackage').val(),
+        accountPackageId: row.attr('data-id'),
+    };
+
+    $.ajax({
+        type: 'PUT',
+        url: '/ajax/account-package/update',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: formData,
+        success: function (response) {
+            if (response.status === 'success') {
+                toastr.success(response.message);
+            } else {
+                toastr.error(response.message);
+            }
+        },
+        error: function (error) {
+            toastr.error(error.responseJSON.message);
+        }
+    });
+    return false;
+})
+
+$(document).on('click', '.btn-create-account-package', function () {
+    let _this = $(this);
+    var formData = {
+        package_name: $('.create-account-package-package_name').val(),
+        package_price: $('.create-account-package-package_price').val(),
+        note: $('.create-account-package-note').val(),
+        companyId: $('#companySelectAccountPackage').val(),
+        periodId: $('#periodSelectAccountPackage').val(),
+    };
+
+    disabledButtonLoading(_this)
+    $.ajax({
+        type: 'POST',
+        url: '/ajax/account-package/create',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: formData,
+        success: function (response) {
+            if (response.status === 'success') {
+                toastr.success(response.message);
+                window.location.reload()
+            } else {
+                toastr.error(response.message);
+            }
+            enabledButtonLoading(_this)
+        },
+        error: function (error) {
+            toastr.error(error.responseJSON.message);
+            enabledButtonLoading(_this)
+        }
+    });
+    return false;
+})
+
+$('.delete-button-account-package').on('click', function () {
+    var _this = $(this);
+
+    Swal.fire({
+        title: 'Bạn có chắc khi thực hiện hành động này?',
+        text: 'Xoá gói bảo hiểm được chọn!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Vâng, xoá nó!',
+        cancelButtonText: 'Huỷ bỏ'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var accountPackageId = _this.parents('tr').attr('data-id');
+            $.ajax({
+                type: 'POST',
+                url: '/ajax/account-package/delete',
+                data: { accountPackageId: accountPackageId },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    if (response.status === 'success') {
+                        Swal.fire('Xoá thành công!', response.message, 'success');
+                        _this.parents('tr').remove()
+                    } else {
+                        Swal.fire('Lỗi!', response.message, 'error');
+                    }
+                },
+                error: function (error) {
+                    Swal.fire('Error!', 'Failed to delete the period.', 'error');
+                }
+            });
+        }
+    });
+});
