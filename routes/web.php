@@ -78,6 +78,7 @@ Route::post('/contact', [ContactController::class, 'sendEmail'])->name('contact.
 Route::get('/account', [AccountController::class, 'index'])->name('account.index');
 Route::get('/account/insurance', [AccountController::class, 'insurance'])->name('account.insurance');
 Route::get('/account/insurance-expenses', [AccountController::class, 'expenses'])->name('account.expenses');
+Route::get('/account/renewal', [AccountController::class, 'renewal'])->name('renewal.index');
 Route::get('/account/create', [AccountController::class, 'create'])->name('account.create');
 Route::post('/account/create', [AccountController::class, 'store'])->name('user.store');
 Route::get('/account/edit/{id}', [AccountController::class, 'edit'])->name('account.edit');
