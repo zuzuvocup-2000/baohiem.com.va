@@ -34,4 +34,8 @@ class PhysicalController extends Controller
     {
         return view('admin.physical.detail');
     }
+    public function periodic()
+    {
+        return view('admin.physical.periodic');
+    }
 }

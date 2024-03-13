@@ -236,7 +236,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-5 col-xl-4">
                         <div class="form-group d-flex align-items-center form-search-absolute">
                             <label class="d-inline-block" style="width: 100px;" for="periodSelect">Niên hạn</label>
-                            <input type="search" name="keyword" class="form-control form-search" value="" placeholder="Tìm kiếm...">
+                            <input type="search" name="keyword" class="form-control form-search" value="" placeholder="Tìm kiếm..." style="width: calc(100% - 100px);">
                             <button class="btn-primary btn btn-search">Tìm kiếm</button>
                         </div>
                     </div>

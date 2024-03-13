@@ -98,6 +98,7 @@ Route::get('/supervisor', [SupervisorController::class, 'index'])->name('supervi
 // Routes Physical
 Route::get('/physical', [PhysicalController::class, 'index'])->name('physical.index');
 Route::get('/physical-detail', [PhysicalController::class, 'detail'])->name('physical.detail');
+Route::get('/physical-periodic', [PhysicalController::class, 'periodic'])->name('physical.periodic');
 
 // Routes Department
 Route::get('/department', [DepartmentController::class, 'index'])->name('department.index');

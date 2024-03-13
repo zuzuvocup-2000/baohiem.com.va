@@ -144,7 +144,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card card-body">
+                        <div class="card card-body note-has-grid">
                             <div class="single-note-item mb-3">
                                 <span class="side-stick"></span>
                                 <h3>Hồ sơ bệnh án</h3>
@@ -710,7 +710,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card card-body">
+                        <div class="card card-body note-has-grid">
                             <div class="single-note-item mb-3">
                                 <span class="side-stick"></span>
                                 <h3>Xét nghiệm & Chuẩn đoán</h3>
@@ -892,7 +892,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card card-body">
+                        <div class="card card-body note-has-grid">
                             <div class="single-note-item mb-3">
                                 <span class="side-stick"></span>
                                 <h3>Phân loại sức khỏe</h3>
