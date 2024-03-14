@@ -45,7 +45,7 @@ return [
             ],
             [
                 'name' => 'Khám sức khỏe',
-                'url' => '',
+                'url' => route('physical.periodic'),
             ],
             [
                 'name' => 'Báo cáo khám sức khỏe',

@@ -56,22 +56,15 @@ class SystemController extends Controller
         // Danh sách gói tài khoản từ công ty và niên hạn
         $accountPackageList = $this->accountPackageService->getPackageByCompanyAndPeriod(($request->get('account_package_company_id') ? $request->get('account_package_company_id') : $companyAll->first()->id), ($request->get('account_package_period_id') ? $request->get('account_package_period_id') : $periodList->first()->id));
 
-        $periodListByCompany = $this->periodService->getPeriodActiveByCompany();
-
         // Danh sách phân nhóm khách hàng theo bệnh viện
         $customerTypeList = $this->customerTypeService->getCustomerTypeActive();
-        $contractList = $this->contractService->getContractByPeriod($periodList->first()->id);
+
+        // Danh sách hợp đồng
+        $periodListByCompany = $this->periodService->getPeriodActiveByCompany();
+        $contractList = $this->contractService->getContractByCompanyAndPeriod(($request->get('contract_company_id') ? $request->get('contract_company_id') : $companyAll->first()->id), ($request->get('contract_period_id') ? $request->get('contract_period_id') : $periodListByCompany->first()->id));
 
         // Danh sách phân loại khách hàng
         $customerGroupList = $this->customerGroupService->getCustomerGroupActive();
         return view('admin.system.index', compact(['companyList', 'companyAll', 'provinceList', 'periodList', 'periodListByCompany', 'customerTypeList', 'accountPackageList', 'contractList', 'customerGroupList']));
-    }
-
-    public function searchPackageDetail()
-    {
-    }
-
-    public function searchContract()
-    {
     }
 }

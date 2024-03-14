@@ -13,6 +13,8 @@ use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\System\SystemController;
 use App\Http\Controllers\Contact\ContactController;
+use App\Http\Controllers\Ajax\CustomerGroupController;
+use App\Http\Controllers\Ajax\CustomerTypeController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PermissionsController;
@@ -51,7 +53,11 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
 
 // Routes for free design before
 Route::group(['prefix' => 'ajax'], function () {
+    // Hợp đồng
     Route::get('/contract/list', [ContractController::class, 'index'])->name('contract.index');
+    Route::post('/contract/create', [ContractController::class, 'create'])->name('contract.create');
+    Route::post('/contract/delete', [ContractController::class, 'delete'])->name('contract.delete');
+    Route::put('/contract/update', [ContractController::class, 'update'])->name('contract.update');
 
     // Công ty
     Route::get('/company/list', [CompanyController::class, 'index'])->name('company.index');
@@ -69,6 +75,16 @@ Route::group(['prefix' => 'ajax'], function () {
     Route::post('/account-package/create', [AccountPackageController::class, 'create'])->name('account-package.create');
     Route::post('/account-package/delete', [AccountPackageController::class, 'delete'])->name('account-package.delete');
     Route::put('/account-package/update', [AccountPackageController::class, 'update'])->name('account-package.update');
+
+    // Phân nhóm khách hàng theo bệnh viện
+    Route::post('/customer-group/create', [CustomerGroupController::class, 'create'])->name('customer-group.create');
+    Route::post('/customer-group/delete', [CustomerGroupController::class, 'delete'])->name('customer-group.delete');
+    Route::put('/customer-group/update', [CustomerGroupController::class, 'update'])->name('customer-group.update');
+
+    // Phân loại khách hàng
+    Route::post('/customer-type/create', [CustomerTypeController::class, 'create'])->name('customer-type.create');
+    Route::post('/customer-type/delete', [CustomerTypeController::class, 'delete'])->name('customer-type.delete');
+    Route::put('/customer-type/update', [CustomerTypeController::class, 'update'])->name('customer-type.update');
 });
 
 // Routes for free design before

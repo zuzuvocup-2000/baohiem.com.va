@@ -1,11 +1,11 @@
 <div class="row mb-3">
     <div class="col-xs-12 col-md-6">
         <div class="form-group">
-            <label class="mr-sm-2" for="companySelect">Tên công ty</label>
-            <select class="form-select contract-company-search mr-sm-2" id="companySelect" name="companySelect">
-                @foreach ($companyList as $company)
+            <label class="mr-sm-2" for="companySelectContract">Tên công ty</label>
+            <select class="form-select contract-company-search mr-sm-2" id="companySelectContract" name="contract_company_id">
+                @foreach ($companyAll as $company)
                     <option value="{{ $company->id }}"
-                        {{ old('companySelect', $companyList[0]->id) == $company->id ? 'selected' : '' }}>
+                        {{ isset($_GET['contract_company_id']) && $_GET['contract_company_id'] == $company->id ? 'selected' : '' }}>
                         {{ $company->company_name }}
                     </option>
                 @endforeach
@@ -14,11 +14,12 @@
     </div>
     <div class="col-xs-12 col-md-6">
         <div class="form-group">
-            <label class="mr-sm-2" for="periodSelect">Niên hạn</label>
-            <select class="form-select contract-period-search mr-sm-2" id="periodSelect" name="periodSelect">
+            <label class="mr-sm-2" for="periodSelectContract">Niên hạn</label>
+            <?php dd($periodList) ?>
+            <select class="form-select contract-period-search mr-sm-2" id="periodSelectContract" name="contract_period_id">
                 @foreach ($periodList as $period)
-                    <option value="{{ $period->id }}"
-                        {{ old('periodSelect', $periodList[0]->id) == $period->id ? 'selected' : '' }}>
+                    <option value="{{ $period->perid_detail->id }}"
+                        {{ isset($_GET['contract_period_id']) && $_GET['contract_period_id'] == $period->perid_detail->id ? 'selected' : '' }}>
                         {{ $period->period_name }}
                     </option>
                 @endforeach
@@ -31,7 +32,7 @@
         <thead class="text-dark fs-4">
             <tr role="row">
                 <th>
-                    <input type="checkbox" class="toggleAll custom-control-input" id="customCheck1" />
+                    <input type="checkbox" class="toggleAll custom-control-input" />
                 </th>
                 <th>
                     <h6 class="fs-4 fw-semibold mb-0 text-center">STT</h6>
@@ -90,27 +91,26 @@
                     <td>
                         <div class="input-group">
                             <input type="text" class="inputField form-control singledate"
-                                value="{{ $contract->signature_date }}" disabled="" name="signature_date" />
+                                value="{{ date('d/m/Y', strtotime($contract->signature_date)) }}" disabled="" name="signature_date" />
                         </div>
                     </td>
                     <td>
                         <div class="input-group">
                             <input type="text" class="inputField form-control singledate"
-                                value="{{ $contract->effective_time }}" disabled="" name="effective_time" />
+                                value="{{ date('d/m/Y', strtotime($contract->effective_time)) }}" disabled="" name="effective_time" />
                         </div>
                     </td>
                     <td>
                         <div class="input-group">
                             <input type="text" class="inputField form-control singledate"
-                                value="{{ $contract->end_time }}" name="end_time" disabled="" />
+                                value="{{ date('d/m/Y', strtotime($contract->end_time)) }}" name="end_time" disabled="" />
                         </div>
                     </td>
                     <td class="text-center">
-                        <input type="checkbox" class="inputField custom-control-input" id="customCheck1"
-                            disabled="" />
+                        <input type="checkbox" class="inputField custom-control-input" disabled="" name="extension"/>
                     </td>
                     <td>
-                        <input class="inputField form-control" type="text" name="total_contract_value"
+                        <input class="inputField form-control int" type="text" name="total_contract_value"
                             value="{{ $contract->total_contract_value }}"
                             data-original-value="{{ $contract->total_contract_value }}" disabled="" />
                     </td>
@@ -164,48 +164,28 @@
                     <p class="mb-0 fw-normal fs-4 text-center"></p>
                 </td>
                 <td>
-                    <div class="btn-group d-flex">
-                        <button class="btn btn-info me-1 saveButton">
-                            <span class="icon-item-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    class="icon icon-tabler icon-tabler-discount-check-filled" width="24"
-                                    height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                    <path
-                                        d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944zm3.697 7.282a1 1 0 0 0 -1.414 0l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.32 1.497l2 2l.094 .083a1 1 0 0 0 1.32 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
-                                        stroke-width="0" fill="currentColor"></path>
-                                </svg>
-                            </span>
-                        </button>
-                    </div>
+                    @include('common/button-loading', ['class' => 'btn-create-contract'])
                 </td>
                 <td>
-                    <input class="inputField form-control" type="text" name="company" value=""
-                        data-original-value="" />
+                    <input class="inputField form-control create-contract-contract_name" type="text" name="contract_name" value=""/>
                 </td>
                 <td>
-                    <input class="inputField form-control" type="text" name="company" value=""
-                        data-original-value="" />
+                    <input class="inputField form-control create-contract-contract_supplement_number" type="text" name="contract_supplement_number" value=""/>
                 </td>
                 <td>
-                    <input class="inputField form-control singledate" type="text" name="address" value=""
-                        data-original-value="" />
+                    <input class="inputField form-control create-contract-signature_date singledate" type="text" name="signature_date" value=""/>
                 </td>
                 <td>
-                    <input class="inputField form-control singledate" type="text" name="phone" value=""
-                        data-original-value="" />
+                    <input class="inputField form-control create-contract-effective_time singledate" type="text" name="effective_time" value=""/>
                 </td>
                 <td>
-                    <input class="inputField form-control singledate" type="text" name="ceo" value=""
-                        data-original-value="" />
+                    <input class="inputField form-control create-contract-end_time singledate" type="text" name="end_time" value=""/>
                 </td>
                 <td class="text-center">
-                    <input type="checkbox" class="inputField custom-control-input" id="customCheck1" />
+                    <input type="checkbox" class="inputField custom-control-input create-contract-extension" name="extension"/>
                 </td>
                 <td class="text-center">
-                    <input class="inputField form-control" type="text" name="contactuser" value=""
-                        data-original-value="" />
+                    <input class="inputField form-control create-contract-total_contract_value int" type="text" name="total_contract_value" value=""/>
                 </td>
                 <td></td>
             </tr>

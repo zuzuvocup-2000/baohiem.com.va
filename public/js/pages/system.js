@@ -341,3 +341,355 @@ $('.delete-button-account-package').on('click', function () {
         }
     });
 });
+
+/* ====================================================================== Account Package ================================================================================= */
+
+/* ====================================================================== Customer Group ================================================================================= */
+
+$(document).on('click', '.btn-update-customer-group', function () {
+    let _this = $(this);
+    let row = _this.parents('tr');
+
+    var formData = {
+        group_name: row.find('.update-customer-group-group_name').val(),
+        customerGroupId: row.attr('data-id'),
+    };
+
+    $.ajax({
+        type: 'PUT',
+        url: '/ajax/customer-group/update',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: formData,
+        success: function (response) {
+            if (response.status === 'success') {
+                toastr.success(response.message);
+            } else {
+                toastr.error(response.message);
+            }
+        },
+        error: function (error) {
+            toastr.error(error.responseJSON.message);
+        }
+    });
+    return false;
+})
+
+$(document).on('click', '.btn-create-customer-group', function () {
+    let _this = $(this);
+    var formData = {
+        group_name: $('.create-customer-group-group_name').val(),
+    };
+
+    disabledButtonLoading(_this)
+    $.ajax({
+        type: 'POST',
+        url: '/ajax/customer-group/create',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: formData,
+        success: function (response) {
+            if (response.status === 'success') {
+                toastr.success(response.message);
+                window.location.reload()
+            } else {
+                toastr.error(response.message);
+            }
+            enabledButtonLoading(_this)
+        },
+        error: function (error) {
+            toastr.error(error.responseJSON.message);
+            enabledButtonLoading(_this)
+        }
+    });
+    return false;
+})
+
+$('.delete-button-customer-group').on('click', function () {
+    var _this = $(this);
+
+    Swal.fire({
+        title: 'Bạn có chắc khi thực hiện hành động này?',
+        text: 'Xoá phân nhóm khách hàng theo bệnh viện được chọn!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Vâng, xoá nó!',
+        cancelButtonText: 'Huỷ bỏ'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var customerGroupId = _this.parents('tr').attr('data-id');
+            $.ajax({
+                type: 'POST',
+                url: '/ajax/customer-group/delete',
+                data: { customerGroupId: customerGroupId },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    if (response.status === 'success') {
+                        Swal.fire('Xoá thành công!', response.message, 'success');
+                        _this.parents('tr').remove()
+                    } else {
+                        Swal.fire('Lỗi!', response.message, 'error');
+                    }
+                },
+                error: function (error) {
+                    Swal.fire('Error!', 'Failed to delete the period.', 'error');
+                }
+            });
+        }
+    });
+});
+
+/* ====================================================================== Customer Group ================================================================================= */
+
+/* ====================================================================== Customer Type ================================================================================= */
+
+$(document).on('click', '.btn-update-customer-type', function () {
+    let _this = $(this);
+    let row = _this.parents('tr');
+
+    var formData = {
+        type_name: row.find('.update-customer-type-type_name').val(),
+        order: row.find('.update-customer-type-order').val(),
+        customerTypeId: row.attr('data-id'),
+    };
+
+    $.ajax({
+        type: 'PUT',
+        url: '/ajax/customer-type/update',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: formData,
+        success: function (response) {
+            if (response.status === 'success') {
+                toastr.success(response.message);
+            } else {
+                toastr.error(response.message);
+            }
+        },
+        error: function (error) {
+            toastr.error(error.responseJSON.message);
+        }
+    });
+    return false;
+})
+
+$(document).on('click', '.btn-create-customer-type', function () {
+    let _this = $(this);
+    var formData = {
+        type_name: $('.create-customer-type-type_name').val(),
+        order: $('.create-customer-type-order').val(),
+    };
+
+    disabledButtonLoading(_this)
+    $.ajax({
+        type: 'POST',
+        url: '/ajax/customer-type/create',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: formData,
+        success: function (response) {
+            if (response.status === 'success') {
+                toastr.success(response.message);
+                window.location.reload()
+            } else {
+                toastr.error(response.message);
+            }
+            enabledButtonLoading(_this)
+        },
+        error: function (error) {
+            toastr.error(error.responseJSON.message);
+            enabledButtonLoading(_this)
+        }
+    });
+    return false;
+})
+
+$('.delete-button-customer-type').on('click', function () {
+    var _this = $(this);
+
+    Swal.fire({
+        title: 'Bạn có chắc khi thực hiện hành động này?',
+        text: 'Xoá phân loại khách hàng được chọn!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Vâng, xoá nó!',
+        cancelButtonText: 'Huỷ bỏ'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var customerTypeId = _this.parents('tr').attr('data-id');
+            $.ajax({
+                type: 'POST',
+                url: '/ajax/customer-type/delete',
+                data: { customerTypeId: customerTypeId },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    if (response.status === 'success') {
+                        Swal.fire('Xoá thành công!', response.message, 'success');
+                        _this.parents('tr').remove()
+                    } else {
+                        Swal.fire('Lỗi!', response.message, 'error');
+                    }
+                },
+                error: function (error) {
+                    Swal.fire('Error!', 'Failed to delete the period.', 'error');
+                }
+            });
+        }
+    });
+});
+
+/* ====================================================================== Customer Type ================================================================================= */
+
+/* ====================================================================== Contract ================================================================================= */
+
+$('#companySelectContract').on('change', function () {
+    var companyId = $(this).val();
+
+    $.ajax({
+        type: 'GET',
+        url: '/ajax/period/list',
+        data: {
+            'company_id': companyId
+        },
+        success: function (data) {
+            $('#periodSelectContract').empty();
+
+            $.each(data, function (key, value) {
+                $('#periodSelectContract').append('<option value="' + value.id + '">' + value.period_name + '</option>');
+            });
+
+            $('#periodSelectContract').trigger('change');
+        }
+    });
+});
+
+$(document).on('change' , '#periodSelectContract', function(){
+    var company = $('#companySelectContract').val();
+    var period = $('#periodSelectContract').val();
+    window.location.href = window.location.pathname + '?contract_company_id=' + company + '&contract_period_id=' + period;
+});
+
+$(document).on('click', '.btn-update-contract', function () {
+    let _this = $(this);
+    let row = _this.parents('tr');
+
+    var formData = {
+        package_name: row.find('.update-contract-package_name').val(),
+        package_price: row.find('.update-contract-package_price').val(),
+        note: row.find('.update-contract-note').val(),
+        companyId: $('#companySelectAccountPackage').val(),
+        periodId: $('#periodSelectAccountPackage').val(),
+        accountPackageId: row.attr('data-id'),
+    };
+
+    $.ajax({
+        type: 'PUT',
+        url: '/ajax/contract/update',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: formData,
+        success: function (response) {
+            if (response.status === 'success') {
+                toastr.success(response.message);
+            } else {
+                toastr.error(response.message);
+            }
+        },
+        error: function (error) {
+            toastr.error(error.responseJSON.message);
+        }
+    });
+    return false;
+})
+
+$(document).on('click', '.btn-create-contract', function () {
+    let _this = $(this);
+    var formData = {
+        contract_name: $('.create-contract-contract_name').val(),
+        contract_supplement_number: $('.create-contract-contract_supplement_number').val(),
+        signature_date: $('.create-contract-signature_date').val(),
+        effective_time: $('.create-contract-effective_time').val(),
+        end_time: $('.create-contract-end_time').val(),
+        extension: $(".create-contract-extension").is(":checked") ? 1 : 0,
+        total_contract_value: $('.create-contract-total_contract_value').val(),
+        companyId: $('#companySelectContract').val(),
+        periodId: $('#periodSelectContract').val(),
+    };
+
+    disabledButtonLoading(_this)
+    $.ajax({
+        type: 'POST',
+        url: '/ajax/contract/create',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: formData,
+        success: function (response) {
+            if (response.status === 'success') {
+                toastr.success(response.message);
+                window.location.reload()
+            } else {
+                toastr.error(response.message);
+            }
+            enabledButtonLoading(_this)
+        },
+        error: function (error) {
+            toastr.error(error.responseJSON.message);
+            enabledButtonLoading(_this)
+        }
+    });
+    return false;
+})
+
+$('.delete-button-contract').on('click', function () {
+    var _this = $(this);
+
+    Swal.fire({
+        title: 'Bạn có chắc khi thực hiện hành động này?',
+        text: 'Xoá gói bảo hiểm được chọn!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Vâng, xoá nó!',
+        cancelButtonText: 'Huỷ bỏ'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var accountPackageId = _this.parents('tr').attr('data-id');
+            $.ajax({
+                type: 'POST',
+                url: '/ajax/contract/delete',
+                data: { accountPackageId: accountPackageId },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    if (response.status === 'success') {
+                        Swal.fire('Xoá thành công!', response.message, 'success');
+                        _this.parents('tr').remove()
+                    } else {
+                        Swal.fire('Lỗi!', response.message, 'error');
+                    }
+                },
+                error: function (error) {
+                    Swal.fire('Error!', 'Failed to delete the period.', 'error');
+                }
+            });
+        }
+    });
+});
+
+/* ====================================================================== Contract ================================================================================= */

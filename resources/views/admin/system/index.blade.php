@@ -13,7 +13,7 @@
                             id="pills-tab" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <button
-                                    class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6 active"
+                                    class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6 {{ count($_GET) == 0 || isset($_GET['province_id']) || (isset($_GET['account_package_company_id']) && isset($_GET['account_package_period_id'])) ? 'active' : '' }}"
                                     id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile"
                                     type="button" role="tab" aria-controls="pills-profile" aria-selected="true">
                                     <span class="icon-item-icon me-2">
@@ -42,7 +42,7 @@
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button
-                                    class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6"
+                                    class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6 {{ (isset($_GET['contract_company_id']) && isset($_GET['contract_period_id'])) ? 'active' : '' }}"
                                     id="pills-followers-tab" data-bs-toggle="pill" data-bs-target="#pills-followers"
                                     type="button" role="tab" aria-controls="pills-followers" aria-selected="false"
                                     tabindex="-1">
@@ -65,7 +65,7 @@
                             </li>
                         </ul>
                         <div class="tab-content" id="pills-tabContent">
-                            <div class="tab-pane fade active show" id="pills-profile" role="tabpanel"
+                            <div class="tab-pane fade {{ count($_GET) == 0 || isset($_GET['province_id']) || (isset($_GET['account_package_company_id']) && isset($_GET['account_package_period_id'])) ? 'active show' : '' }}" id="pills-profile" role="tabpanel"
                                 aria-labelledby="pills-profile-tab" tabindex="0">
                                 <div class="mb-3">
                                     <h5 class="mb-0">Cập nhật thông tin hệ thống</h5>
@@ -75,7 +75,7 @@
                                         <!-- Nav tabs -->
                                         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
                                             aria-orientation="vertical">
-                                            <a class="nav-link {{ count($_GET) == 0 || isset($_GET['province_id']) ? 'active' : '' }}" id="v-pills-client-tab" data-bs-toggle="pill"
+                                            <a class="nav-link {{ count($_GET) == 0 || isset($_GET['province_id']) || (isset($_GET['contract_company_id']) && isset($_GET['contract_period_id'])) ? 'active' : '' }}" id="v-pills-client-tab" data-bs-toggle="pill"
                                                 href="#v-pills-client" role="tab" aria-controls="v-pills-client"
                                                 aria-selected="true"> Công ty Khách hàng </a>
                                             <a class="nav-link" id="v-pills-duration-tab" data-bs-toggle="pill"
@@ -92,7 +92,7 @@
                                     </div>
                                     <div class="col-md-10">
                                         <div class="tab-content" id="v-pills-tabContent">
-                                            <div class="tab-pane fade {{ count($_GET) == 0 || isset($_GET['province_id']) ? 'active show' : '' }}" id="v-pills-client" role="tabpanel"
+                                            <div class="tab-pane fade {{ count($_GET) == 0 || isset($_GET['province_id']) || (isset($_GET['contract_company_id']) && isset($_GET['contract_period_id'])) ? 'active show' : '' }}" id="v-pills-client" role="tabpanel"
                                                 aria-labelledby="v-pills-client-tab">
                                                 <div class="table-responsive">
                                                     @include('admin.system.components.company')
@@ -111,14 +111,14 @@
                                             <div class="tab-pane fade" id="v-pills-hospital" role="tabpanel"
                                                 aria-labelledby="v-pills-insurance-tab">
                                                 <div class="table-responsive">
-                                                    @include('admin.system.components.customer-type')
+                                                    @include('admin.system.components.customer-group')
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="pills-followers" role="tabpanel"
+                            <div class="tab-pane fade {{ (isset($_GET['contract_company_id']) && isset($_GET['contract_period_id'])) ? 'active show' : '' }}" id="pills-followers" role="tabpanel"
                                 aria-labelledby="pills-followers-tab" tabindex="0">
                                 <div class="mb-3">
                                     <h5 class="mb-0">Cập nhật thông tin hợp đồng</h5>
@@ -145,7 +145,7 @@
                                             </div>
                                             <div class="tab-pane fade" id="v-pills-clientuser" role="tabpanel"
                                                 aria-labelledby="v-pills-clientuser-tab">
-                                                @include('admin.system.components.customer-group')
+                                                @include('admin.system.components.customer-type')
                                             </div>
                                         </div>
                                     </div>
