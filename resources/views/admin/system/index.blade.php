@@ -75,13 +75,13 @@
                                         <!-- Nav tabs -->
                                         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
                                             aria-orientation="vertical">
-                                            <a class="nav-link active" id="v-pills-client-tab" data-bs-toggle="pill"
+                                            <a class="nav-link {{ count($_GET) == 0 || isset($_GET['province_id']) ? 'active' : '' }}" id="v-pills-client-tab" data-bs-toggle="pill"
                                                 href="#v-pills-client" role="tab" aria-controls="v-pills-client"
                                                 aria-selected="true"> Công ty Khách hàng </a>
                                             <a class="nav-link" id="v-pills-duration-tab" data-bs-toggle="pill"
                                                 href="#v-pills-duration" role="tab" aria-controls="v-pills-duration"
                                                 aria-selected="false" tabindex="-1"> Niên hạn </a>
-                                            <a class="nav-link" id="v-pills-insurance-tab" data-bs-toggle="pill"
+                                            <a class="nav-link {{ isset($_GET['account_package_company_id']) && isset($_GET['account_package_period_id']) ? 'active' : '' }}" id="v-pills-insurance-tab" data-bs-toggle="pill"
                                                 href="#v-pills-insurance" role="tab" aria-controls="v-pills-insurance"
                                                 aria-selected="false" tabindex="-1"> Gói bảo hiểm </a>
                                             <a class="nav-link" id="v-pills-hospital-tab" data-bs-toggle="pill"
@@ -92,7 +92,7 @@
                                     </div>
                                     <div class="col-md-10">
                                         <div class="tab-content" id="v-pills-tabContent">
-                                            <div class="tab-pane fade active show" id="v-pills-client" role="tabpanel"
+                                            <div class="tab-pane fade {{ count($_GET) == 0 || isset($_GET['province_id']) ? 'active show' : '' }}" id="v-pills-client" role="tabpanel"
                                                 aria-labelledby="v-pills-client-tab">
                                                 <div class="table-responsive">
                                                     @include('admin.system.components.company')
@@ -104,7 +104,7 @@
                                                     @include('admin.system.components.period')
                                                 </div>
                                             </div>
-                                            <div class="tab-pane fade" id="v-pills-insurance" role="tabpanel"
+                                            <div class="tab-pane fade {{ isset($_GET['account_package_company_id']) && isset($_GET['account_package_period_id']) ? 'active show' : '' }}" id="v-pills-insurance" role="tabpanel"
                                                 aria-labelledby="v-pills-insurance-tab">
                                                 @include('admin.system.components.package-detail')
                                             </div>

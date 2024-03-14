@@ -18,6 +18,13 @@ class CompanyService
             ->get();
     }
 
+    public function getAllCompany()
+    {
+        return Company::where('active', STATUS_ACTIVE)
+            ->orderBy('id', 'asc')
+            ->get();
+    }
+
     public function getCompanyActiveDefault()
     {
         return Company::where('active', STATUS_ACTIVE)

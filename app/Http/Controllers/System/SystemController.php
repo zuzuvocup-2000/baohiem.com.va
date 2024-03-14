@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
+use App\Services\AccountPackageService;
 use App\Services\CompanyService;
 use App\Services\ContractService;
 use App\Services\CustomerGroupService;
 use App\Services\CustomerTypeService;
-use App\Services\PackageDetailService;
 use App\Services\PeriodService;
 use App\Services\ProvinceService;
 use Illuminate\Http\Request;
@@ -17,7 +17,7 @@ class SystemController extends Controller
     protected $companyService;
     protected $periodService;
     protected $customerTypeService;
-    protected $packageDetailService;
+    protected $accountPackageService;
     protected $contractService;
     protected $provinceService;
     protected $customerGroupService;
@@ -26,7 +26,7 @@ class SystemController extends Controller
         CompanyService $companyService,
         PeriodService $periodService,
         CustomerTypeService $customerTypeService,
-        PackageDetailService $packageDetailService,
+        AccountPackageService $accountPackageService,
         ContractService $contractService,
         ProvinceService $provinceService,
         CustomerGroupService $customerGroupService
@@ -34,7 +34,7 @@ class SystemController extends Controller
         $this->companyService = $companyService;
         $this->periodService = $periodService;
         $this->customerTypeService = $customerTypeService;
-        $this->packageDetailService = $packageDetailService;
+        $this->accountPackageService = $accountPackageService;
         $this->provinceService = $provinceService;
         $this->contractService = $contractService;
         $this->customerGroupService = $customerGroupService;
@@ -43,15 +43,28 @@ class SystemController extends Controller
     public function index(Request $request)
     {
         $provinceList = $this->provinceService->getProvinceList();
+
+        // Danh sách công ty bằng thành phố
         $companyList = $this->companyService->getCompanyActiveByProvince($request->get('province_id') ? $request->get('province_id') : $provinceList->first()->id);
+
+        // Tất cả công ty
+        $companyAll = $this->companyService->getAllCompany();
+
+        // Danh sách niên hạn
         $periodList = $this->periodService->getPeriodList();
+
+        // Danh sách gói tài khoản từ công ty và niên hạn
+        $accountPackageList = $this->accountPackageService->getPackageByCompanyAndPeriod(($request->get('account_package_company_id') ? $request->get('account_package_company_id') : $companyAll->first()->id), ($request->get('account_package_period_id') ? $request->get('account_package_period_id') : $periodList->first()->id));
+
         $periodListByCompany = $this->periodService->getPeriodActiveByCompany();
+
+        // Danh sách phân nhóm khách hàng theo bệnh viện
         $customerTypeList = $this->customerTypeService->getCustomerTypeActive();
-        // $packageDetailList = $this->packageDetailService->getPackageByCompanyAndPeriod($companyList->first()->id, $periodList->first()->id);
-        $packageDetailList = [];
         $contractList = $this->contractService->getContractByPeriod($periodList->first()->id);
+
+        // Danh sách phân loại khách hàng
         $customerGroupList = $this->customerGroupService->getCustomerGroupActive();
-        return view('admin.system.index', compact(['companyList', 'provinceList', 'periodList', 'periodListByCompany', 'customerTypeList', 'packageDetailList', 'contractList', 'customerGroupList']));
+        return view('admin.system.index', compact(['companyList', 'companyAll', 'provinceList', 'periodList', 'periodListByCompany', 'customerTypeList', 'accountPackageList', 'contractList', 'customerGroupList']));
     }
 
     public function searchPackageDetail()
