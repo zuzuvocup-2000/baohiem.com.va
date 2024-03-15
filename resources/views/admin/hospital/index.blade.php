@@ -26,6 +26,22 @@
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade active show" id="hospital-info" role="tabpanel" aria-labelledby="hospital-info-tab" tabindex="0">
+                            <div class="row mb-4">
+                                <div class="col-xs-12 col-md-6">
+                                    <div class="form-group">
+                                        <label class="d-inline-block" for="startDate">Loại bệnh viện</label>
+                                        <select class="form-select contract-hospital-search mr-sm-2" id="hospitalTypeSelect" name="hospital_type_id">
+                                            <option value="-1" {{ empty($_GET['hospital_type_id']) || $_GET['hospital_type_id'] == -1 ? 'selected' : '' }}>Tất cả bệnh viện</option>
+                                            @foreach ($hospitalTypeList as $hospitalType)
+                                                <option value="{{ $hospitalType->id }}"
+                                                    {{ isset($_GET['hospital_type_id']) && $_GET['hospital_type_id'] == $hospitalType->id ? 'selected' : '' }}>
+                                                    {{ $hospitalType->hospital_type_name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="table-responsive">
                                 <table id="simpletable" class="table system-table border text-nowrap customize-table mb-0 align-middle mb-3">
                                     <thead class="text-dark fs-4">
@@ -45,13 +61,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr role="row" data-id="20067">
-                                            <th class="text-center"><input class="toggleCheckbox" type="checkbox"></th>
+                                        @foreach ($hospitalList as $key => $hospital)
+                                        <tr role="row" data-id="{{ $hospital->id }}">
+                                            <th class="text-center"><input type="checkbox" class="toggleCheckbox custom-control-input" id="hosptital-{{$hospital->id }}" name="id[]" value="{{ $hospital->id }}" /></th>
                                             <td>
-                                                <p class="mb-0 fw-normal fs-4 text-center">1</p>
+                                                <p class="mb-0 fw-normal fs-4 text-center">{{ ++$key }}</p>
                                             </td>
                                             <td>
-                                                <input class="inputField form-control" type="text" name="hospital_name" value="Bệnh viện An Sinh" data-original-value="Bệnh viện An Sinh" disabled="" style="width: 300px;">
+                                                <input class="inputField form-control update-hospital-name" type="text" name="hospital_name" value="{{ $hospital->hospital_name }}" data-original-value="{{ $hospital->hospital_name }}" disabled="" style="width: 300px;">
+                                                
                                             </td>
                                                <td>
                                                 <h6 class="fs-4 fw-semibold mb-0">
@@ -61,12 +79,12 @@
                                                                 <img src="{{ asset('/img-system/system/edit_white.svg') }}" />
                                                             </span>
                                                         </button>
-                                                        <button class="btn btn-danger tabledit-delete-button" data-id="24">
+                                                        <button class="btn btn-danger tabledit-delete-button delete-button-hospital" data-id="24">
                                                             <span class="icon-item-icon">
                                                                 <img src="{{ asset('/img-system/system/trash_white.svg') }}" alt="" />
                                                             </span>
                                                         </button>
-                                                        <button class="btn btn-info me-1 saveButton" style="display: none;">
+                                                        <button class="btn btn-info me-1 saveButton btn-update-hospital" style="display: none;">
                                                             <span class="icon-item-icon">
                                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                                     class="icon icon-tabler icon-tabler-discount-check-filled" width="24"
@@ -96,75 +114,24 @@
                                                 </h6>
                                             </td>
                                         </tr>
-                                        <tr role="row" data-id="20067">
-                                            <th class="text-center"><input class="toggleCheckbox" type="checkbox"></th>
-                                            <td>
-                                                <p class="mb-0 fw-normal fs-4 text-center">2</p>
-                                            </td>
-                                            <td>
-                                                <input class="inputField form-control" type="text" name="name" value="Bệnh viện Việt Nam Cu Ba" data-original-value="Bệnh viện Việt Nam Cu Ba" disabled="" style="width: 300px;">
-                                            </td>
-                                               <td>
-                                                <h6 class="fs-4 fw-semibold mb-0">
-                                                    <div class="btn-group d-flex">
-                                                        <button class="btn btn-success me-1 editButton">
-                                                            <span class="icon-item-icon">
-                                                                <img src="{{ asset('/img-system/system/edit_white.svg') }}" />
-                                                            </span>
-                                                        </button>
-                                                        <button class="btn btn-danger tabledit-delete-button" data-id="24">
-                                                            <span class="icon-item-icon">
-                                                                <img src="{{ asset('/img-system/system/trash_white.svg') }}" alt="" />
-                                                            </span>
-                                                        </button>
-                                                        <button class="btn btn-info me-1 saveButton" style="display: none;">
-                                                            <span class="icon-item-icon">
-                                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                                    class="icon icon-tabler icon-tabler-discount-check-filled" width="24"
-                                                                    height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                                    <path
-                                                                        d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944zm3.697 7.282a1 1 0 0 0 -1.414 0l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.32 1.497l2 2l.094 .083a1 1 0 0 0 1.32 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
-                                                                        stroke-width="0" fill="currentColor"></path>
-                                                                </svg>
-                                                            </span>
-                                                        </button>
-                                                        <button class="btn btn-warning cancelButton" style="display: none;">
-                                                            <span class="icon-item-icon">
-                                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                                    class="icon icon-tabler icon-tabler-circle-x-filled" width="24"
-                                                                    height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                                    <path
-                                                                        d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-6.489 5.8a1 1 0 0 0 -1.218 1.567l1.292 1.293l-1.292 1.293l-.083 .094a1 1 0 0 0 1.497 1.32l1.293 -1.292l1.293 1.292l.094 .083a1 1 0 0 0 1.32 -1.497l-1.292 -1.293l1.292 -1.293l.083 -.094a1 1 0 0 0 -1.497 -1.32l-1.293 1.292l-1.293 -1.292l-.094 -.083z"
-                                                                        stroke-width="0" fill="currentColor"></path>
-                                                                </svg>
-                                                            </span>
-                                                        </button>
-                                                    </div>
-                                                </h6>
-                                            </td>
-                                        </tr>
+                                        @endforeach
                                         <tr role="row">
                                             <td>
                                                 <p class="mb-0 fw-normal fs-4 text-center"></p>
                                             </td>
                                             <td>
-                                                <div class="btn-group d-flex">
-                                                    <button class="btn btn-info me-1 saveButton">
-                                                        <span class="icon-item-icon">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-discount-check-filled" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                                <path d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944zm3.697 7.282a1 1 0 0 0 -1.414 0l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.32 1.497l2 2l.094 .083a1 1 0 0 0 1.32 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z" stroke-width="0" fill="currentColor"></path>
-                                                            </svg>
-                                                        </span>
-                                                    </button>
-                                                </div>
+                                                @include('common/button-loading', ['class' => 'btn-create-hospital'])
                                             </td>
-                                            <td>
-                                                <input class="inputField form-control" type="text" name="hospital_name" value="" data-original-value="" style="width: 300px;">
+                                            <td class="hospital-type d-flex align-center">
+                                                <input class="inputField form-control create-hospital me-3" type="text" name="hospital_name" value="" data-original-value="" style="width: 300px;">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1" checked>
+                                                    <label class="form-check-label" for="inlineRadio1">Bệnh viện công</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="2">
+                                                    <label class="form-check-label" for="inlineRadio2">Bệnh viện tư</label>
+                                                </div>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -351,4 +318,5 @@
 @section('script')
 <script src="assets/js/datatable/jquery.dataTables.min.js"></script>
 <script src="assets/js/datatable/datatable-basic.init.js"></script>
+<script src="/js/pages/hospital.js"></script>
 @endsection
