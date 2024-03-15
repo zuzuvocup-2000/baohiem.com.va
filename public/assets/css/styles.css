@@ -5416,6 +5416,17 @@ textarea.form-control-lg {
 .btn-group-vertical>.btn {
     position: relative;
     flex: 1 1 auto;
+    width: 35px !important;
+    max-width: 35px;
+    min-width: 35px;
+    height: 35px !important;
+    display: inline-flex;
+    min-height: 35px;
+    align-items: center;
+    padding: 0;
+    border-radius: 100% !important;
+    max-height: 35px;
+    justify-content: center;
 }
 
 .btn-group>.btn-check:checked+.btn,
@@ -32930,7 +32941,7 @@ span.unit{
     border: 1px solid ;
     box-shadow: var(--bs-card-box-shadow);
 }
- 
+
 .periodic .doctor-name{
     position: relative;
 }
@@ -32954,4 +32965,19 @@ span.unit{
 }
 .hospital-type .form-check-label{
     margin-top: 8px;
+}
+.w-100-px{
+    width: 100px;
+    min-width: 100px;
+}
+
+.w-150-px{
+    width: 150px;
+    min-width: 150px;
+}
+
+.btn-create-contract{
+    min-width: 35px;
+    max-width: 35px;
+    margin: auto !important;
 }
