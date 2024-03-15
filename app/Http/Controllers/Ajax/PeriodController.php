@@ -46,7 +46,7 @@ class PeriodController extends Controller
         $period = Period::find($periodId);
 
         if ($period) {
-            $period->update(['active' => 0]);
+            $period->update(['active' => STATUS_INACTIVE]);
 
             return response()->json(['status' => STATUS_SUCCESS, 'message' => 'Xóa niên hạn thành công.']);
         }

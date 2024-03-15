@@ -62,7 +62,7 @@ class AccountPackageController extends Controller
             $company = AccountPackage::find($accountPackageId);
 
             if ($company) {
-                $company->update(['active' => 0]);
+                $company->update(['active' => STATUS_INACTIVE]);
 
                 DB::commit();
 

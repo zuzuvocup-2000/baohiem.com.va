@@ -60,11 +60,10 @@ class SystemController extends Controller
         $customerTypeList = $this->customerTypeService->getCustomerTypeActive();
 
         // Danh sách hợp đồng
-        $periodListByCompany = $this->periodService->getPeriodActiveByCompany();
-        $contractList = $this->contractService->getContractByCompanyAndPeriod(($request->get('contract_company_id') ? $request->get('contract_company_id') : $companyAll->first()->id), ($request->get('contract_period_id') ? $request->get('contract_period_id') : $periodListByCompany->first()->id_new));
+        $contractList = $this->contractService->getAllContract();
 
         // Danh sách phân loại khách hàng
         $customerGroupList = $this->customerGroupService->getCustomerGroupActive();
-        return view('admin.system.index', compact(['companyList', 'companyAll', 'provinceList', 'periodList', 'periodListByCompany', 'customerTypeList', 'accountPackageList', 'contractList', 'customerGroupList']));
+        return view('admin.system.index', compact(['companyList', 'companyAll', 'provinceList', 'periodList', 'customerTypeList', 'accountPackageList', 'contractList', 'customerGroupList']));
     }
 }
