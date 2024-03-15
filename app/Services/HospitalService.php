@@ -16,6 +16,6 @@ class HospitalService
     }
     public function getAllHospitals()
     {
-        return Hospital::all();
+        return Hospital::where(['active' => STATUS_ACTIVE])->get();
     }
 }

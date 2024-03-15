@@ -1,8 +1,8 @@
 $(document).on('click', '.btn-create-hospital', function () {
     let _this = $(this);
     var formData = {
-        hospital_name: $('.create-hospital').val(),
-        hospital_type_id: $('.hospital-type input[type=radio]:checked').val(),
+        hospital_name: $('input[name="hospital_name"]').val(),
+        hospital_type_id: $('select[name="hospital_type_id"]').val(),
     };
 
     disabledButtonLoading(_this)
@@ -34,7 +34,7 @@ $('.delete-button-hospital').on('click', function () {
 
     Swal.fire({
         title: 'Bạn có chắc khi thực hiện hành động này?',
-        text: 'Xoá phân nhóm khách hàng theo bệnh viện được chọn!',
+        text: 'Xoá bệnh viện được chọn!',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#d33',

@@ -26,22 +26,6 @@
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade active show" id="hospital-info" role="tabpanel" aria-labelledby="hospital-info-tab" tabindex="0">
-                            <div class="row mb-4">
-                                <div class="col-xs-12 col-md-6">
-                                    <div class="form-group">
-                                        <label class="d-inline-block" for="startDate">Loại bệnh viện</label>
-                                        <select class="form-select contract-hospital-search mr-sm-2" id="hospitalTypeSelect" name="hospital_type_id">
-                                            <option value="-1" {{ empty($_GET['hospital_type_id']) || $_GET['hospital_type_id'] == -1 ? 'selected' : '' }}>Tất cả bệnh viện</option>
-                                            @foreach ($hospitalTypeList as $hospitalType)
-                                                <option value="{{ $hospitalType->id }}"
-                                                    {{ isset($_GET['hospital_type_id']) && $_GET['hospital_type_id'] == $hospitalType->id ? 'selected' : '' }}>
-                                                    {{ $hospitalType->hospital_type_name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="table-responsive">
                                 <table id="simpletable" class="table system-table border text-nowrap customize-table mb-0 align-middle mb-3">
                                     <thead class="text-dark fs-4">
@@ -54,6 +38,9 @@
                                             </th>
                                             <th>
                                                 <h6 class="fs-4 fw-semibold mb-0">Tên bệnh viện</h6>
+                                            </th>
+                                            <th>
+                                                <h6 class="fs-4 fw-semibold mb-0">Loại bệnh viện</h6>
                                             </th>
                                             <th style="width: 200px;">
                                                 <h6 class="fs-4 fw-semibold text-center mb-0">Thao tác</h6>
@@ -71,6 +58,17 @@
                                                 <input class="inputField form-control update-hospital-name" type="text" name="hospital_name" value="{{ $hospital->hospital_name }}" data-original-value="{{ $hospital->hospital_name }}" disabled="" style="width: 300px;">
                                                 
                                             </td>
+                                            <td>
+                                                <select class="form-select inputField mr-sm-2 " name="hospital_type_id" disabled>
+                                                    @foreach ($hospitalTypeList as $hospitalType)
+                                                        <option value="{{ $hospitalType->id }}"
+                                                            {{ $hospital->hospital_type_id == $hospitalType->id ? 'selected' : '' }}>
+                                                            {{ $hospitalType->hospital_type_name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+
                                                <td>
                                                 <h6 class="fs-4 fw-semibold mb-0">
                                                     <div class="btn-group d-flex">
@@ -124,14 +122,15 @@
                                             </td>
                                             <td class="hospital-type d-flex align-center">
                                                 <input class="inputField form-control create-hospital me-3" type="text" name="hospital_name" value="" data-original-value="" style="width: 300px;">
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1" checked>
-                                                    <label class="form-check-label" for="inlineRadio1">Bệnh viện công</label>
-                                                </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="2">
-                                                    <label class="form-check-label" for="inlineRadio2">Bệnh viện tư</label>
-                                                </div>
+                                            </td>
+                                            <td>
+                                                <select class="form-select create-hospital-type inputField mr-sm-2" name="hospital_type_id" >
+                                                    @foreach ($hospitalTypeList as $hospitalType)
+                                                        <option value="{{ $hospitalType->id }}">
+                                                            {{ $hospitalType->hospital_type_name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
                                             </td>
                                         </tr>
                                     </tbody>

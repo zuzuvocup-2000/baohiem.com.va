@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class HospitalNameController extends Controller
+class HospitalController extends Controller
 {
     public function create(Request $request)
     {
@@ -16,10 +16,10 @@ class HospitalNameController extends Controller
             $data = $request->all();
             $hospital = Hospital::create([
                 'hospital_name' => (string)$data['hospital_name'],
-                'hospital_type_id' => (string)$data['hospital_type_id'],
+                'hospital_type_id' => (int)$data['hospital_type_id'],
                 'active' => STATUS_ACTIVE
             ]);
-
+ 
             if (!$hospital) {
                 throw new \Exception('Error creating Hospital');
             }
@@ -41,7 +41,7 @@ class HospitalNameController extends Controller
             $hospital = Hospital::find($hospitalId);
 
             if ($hospital) {
-                $hospital->update(['active' => 0]);
+                $hospital->update(['active' => STATUS_INACTIVE]);
 
                 DB::commit();
 

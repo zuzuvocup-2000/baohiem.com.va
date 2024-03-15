@@ -23,7 +23,7 @@ use App\Http\Controllers\SupervisorController;
 use App\Http\Controllers\Revenue\RevenueController;
 use App\Http\Controllers\Physical\PhysicalController;
 use App\Http\Controllers\Hospital\HospitalController;
-use App\Http\Controllers\Ajax\HospitalNameController;
+use App\Http\Controllers\Ajax\HospitalController as HospitalAjax;
 use App\Http\Controllers\Diary\DiaryController;
 
 /*
@@ -88,9 +88,9 @@ Route::group(['prefix' => 'ajax'], function () {
     Route::put('/customer-type/update', [CustomerTypeController::class, 'update'])->name('customer-type.update');
 
     //Bệnh viện
-    Route::post('/hospital/create', [HospitalNameController::class, 'create'])->name('hospital-name.create');
-    Route::post('/hospital/delete', [HospitalNameController::class, 'delete'])->name('hospital-name.delete');
-    Route::put('/hospital/update', [HospitalNameController::class, 'update'])->name('hospital-name.update');
+    Route::post('/hospital/create', [HospitalAjax::class, 'create'])->name('hospital-name.create');
+    Route::post('/hospital/delete', [HospitalAjax::class, 'delete'])->name('hospital-name.delete');
+    Route::put('/hospital/update', [HospitalAjax::class, 'update'])->name('hospital-name.update');
 });
 
 // Routes for free design before
