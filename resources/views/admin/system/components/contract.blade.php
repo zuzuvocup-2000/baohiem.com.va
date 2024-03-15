@@ -15,11 +15,10 @@
     <div class="col-xs-12 col-md-6">
         <div class="form-group">
             <label class="mr-sm-2" for="periodSelectContract">Niên hạn</label>
-            <?php dd($periodList) ?>
             <select class="form-select contract-period-search mr-sm-2" id="periodSelectContract" name="contract_period_id">
                 @foreach ($periodList as $period)
-                    <option value="{{ $period->perid_detail->id }}"
-                        {{ isset($_GET['contract_period_id']) && $_GET['contract_period_id'] == $period->perid_detail->id ? 'selected' : '' }}>
+                    <option value="{{ $period->id_new }}"
+                        {{ isset($_GET['contract_period_id']) && $_GET['contract_period_id'] == $period->id_new ? 'selected' : '' }}>
                         {{ $period->period_name }}
                     </option>
                 @endforeach
