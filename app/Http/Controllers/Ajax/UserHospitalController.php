@@ -81,7 +81,7 @@ class UserHospitalController extends Controller
             throw new \Exception('Không tìm thông tin tài khoản bệnh viện.');
         } catch (\Exception $e) {
             DB::rollback();
-            return response()->json(['status' => STATUS_ERROR, 'message' => 'Cập nhật thông tin bệnh viện thất bại.']);
+            return response()->json(['status' => STATUS_ERROR, 'message' => 'Cập nhật thông tin tài khoản bệnh viện thất bại.']);
         }
     }
 }
