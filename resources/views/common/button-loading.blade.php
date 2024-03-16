@@ -1,5 +1,5 @@
 <div class="btn-group d-flex">
-    <button class="btn btn-info me-1 {{ isset($class) ? $class : '' }} js-btn-loading">
+    <button class="btn btn-info me-1 {{ isset($class) ? $class : '' }} js-btn-loading" style="min-width: 35px;max-width: 35px;margin: auto !important;">
         <div class="default ">
             <span class="icon-item-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-discount-check-filled"

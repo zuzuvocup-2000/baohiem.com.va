@@ -41,7 +41,7 @@ class CustomerTypeController extends Controller
             $customerType = CustomerType::find($customerTypeId);
 
             if ($customerType) {
-                $customerType->update(['active' => 0]);
+                $customerType->update(['active' => STATUS_INACTIVE]);
 
                 DB::commit();
 
