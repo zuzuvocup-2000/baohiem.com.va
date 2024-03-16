@@ -60,7 +60,7 @@
         if (this.element.hasClass('pull-right'))
             this.opens = 'left';
 
-        this.drops = 'down';
+        this.drops = 'up';
         if (this.element.hasClass('dropup'))
             this.drops = 'up';
 
