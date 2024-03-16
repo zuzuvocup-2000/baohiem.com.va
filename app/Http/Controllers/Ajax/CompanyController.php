@@ -34,7 +34,7 @@ class CompanyController extends Controller
         $company = Company::find($companyId);
 
         if ($company) {
-            $company->update(['active' => 0]);
+            $company->update(['active' => STATUS_INACTIVE]);
 
             return response()->json(['status' => STATUS_SUCCESS, 'message' => 'Xóa công ty thành công.']);
         }

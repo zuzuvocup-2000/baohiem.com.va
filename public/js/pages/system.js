@@ -554,44 +554,21 @@ $('.delete-button-customer-type').on('click', function () {
 
 /* ====================================================================== Contract ================================================================================= */
 
-$('#companySelectContract').on('change', function () {
-    var companyId = $(this).val();
-
-    $.ajax({
-        type: 'GET',
-        url: '/ajax/period/list',
-        data: {
-            'company_id': companyId
-        },
-        success: function (data) {
-            $('#periodSelectContract').empty();
-
-            $.each(data, function (key, value) {
-                $('#periodSelectContract').append('<option value="' + value.id + '">' + value.period_name + '</option>');
-            });
-
-            $('#periodSelectContract').trigger('change');
-        }
-    });
-});
-
-$(document).on('change' , '#periodSelectContract', function(){
-    var company = $('#companySelectContract').val();
-    var period = $('#periodSelectContract').val();
-    window.location.href = window.location.pathname + '?contract_company_id=' + company + '&contract_period_id=' + period;
-});
-
 $(document).on('click', '.btn-update-contract', function () {
     let _this = $(this);
     let row = _this.parents('tr');
 
     var formData = {
-        package_name: row.find('.update-contract-package_name').val(),
-        package_price: row.find('.update-contract-package_price').val(),
-        note: row.find('.update-contract-note').val(),
-        companyId: $('#companySelectAccountPackage').val(),
-        periodId: $('#periodSelectAccountPackage').val(),
-        accountPackageId: row.attr('data-id'),
+        contract_name: row.find('.update-contract-contract_name').val(),
+        contract_supplement_number: row.find('.update-contract-contract_supplement_number').val(),
+        signature_date: row.find('.update-contract-signature_date').val(),
+        effective_time: row.find('.update-contract-effective_time').val(),
+        end_time: row.find('.update-contract-end_time').val(),
+        extension: row.find(".update-contract-extension").is(":checked") ? 1 : 0,
+        total_contract_value: row.find('.update-contract-total_contract_value').val(),
+        company_id: row.find('.update-contract-company_id').val(),
+        period_id: row.find('.update-contract-period_id').val(),
+        contractId: row.attr('data-id'),
     };
 
     $.ajax({
@@ -619,14 +596,14 @@ $(document).on('click', '.btn-create-contract', function () {
     let _this = $(this);
     var formData = {
         contract_name: $('.create-contract-contract_name').val(),
+        company_id: $('.create-contract-company_id').val(),
+        period_id: $('.create-contract-period_id').val(),
         contract_supplement_number: $('.create-contract-contract_supplement_number').val(),
         signature_date: $('.create-contract-signature_date').val(),
         effective_time: $('.create-contract-effective_time').val(),
         end_time: $('.create-contract-end_time').val(),
         extension: $(".create-contract-extension").is(":checked") ? 1 : 0,
         total_contract_value: $('.create-contract-total_contract_value').val(),
-        companyId: $('#companySelectContract').val(),
-        periodId: $('#periodSelectContract').val(),
     };
 
     disabledButtonLoading(_this)
@@ -659,7 +636,7 @@ $('.delete-button-contract').on('click', function () {
 
     Swal.fire({
         title: 'Bạn có chắc khi thực hiện hành động này?',
-        text: 'Xoá gói bảo hiểm được chọn!',
+        text: 'Xoá hợp đồng được chọn!',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#d33',
@@ -668,11 +645,11 @@ $('.delete-button-contract').on('click', function () {
         cancelButtonText: 'Huỷ bỏ'
     }).then((result) => {
         if (result.isConfirmed) {
-            var accountPackageId = _this.parents('tr').attr('data-id');
+            var contractId = _this.parents('tr').attr('data-id');
             $.ajax({
                 type: 'POST',
                 url: '/ajax/contract/delete',
-                data: { accountPackageId: accountPackageId },
+                data: { contractId: contractId },
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },

@@ -40,7 +40,7 @@ class CustomerGroupController extends Controller
             $customerGroup = CustomerGroup::find($customerGroupId);
 
             if ($customerGroup) {
-                $customerGroup->update(['active' => 0]);
+                $customerGroup->update(['active' => STATUS_INACTIVE]);
 
                 DB::commit();
 

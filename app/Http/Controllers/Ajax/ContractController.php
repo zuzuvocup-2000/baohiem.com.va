@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Ajax;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contract;
+use App\Models\PeriodDetail;
 use App\Services\ContractService;
+use App\Services\PeriodDetailService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,13 +16,16 @@ use Illuminate\Support\Facades\Response;
 class ContractController extends Controller
 {
     protected $contractService;
+    protected $periodDetailService;
 
-    public function __construct(ContractService $contractService)
+    public function __construct(ContractService $contractService, PeriodDetailService $periodDetailService)
     {
         $this->contractService = $contractService;
+        $this->periodDetailService = $periodDetailService;
     }
 
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         $contracts = $this->contractService->getContractByPeriod($request->get('period_id'));
         return Response::json($contracts);
     }
@@ -29,23 +34,25 @@ class ContractController extends Controller
     {
         try {
             DB::beginTransaction();
+
             $data = $request->all();
+
+            $periodDetail = $this->periodDetailService->checkAndInsertPeriodDetail($data['company_id'], $data['period_id']);
+
             $authUser = Auth::user();
 
             $contract = Contract::create([
-                'contract_name' => (string)$data['contract_name'],
-                'contract_supplement_number' => (string)$data['contract_supplement_number'],
+                'contract_name' => (string) $data['contract_name'],
+                'contract_supplement_number' => (string) $data['contract_supplement_number'],
                 'signature_date' => Carbon::createFromFormat('d/m/Y', $data['signature_date'])->format('Y-m-d H:i:s'),
                 'effective_time' => Carbon::createFromFormat('d/m/Y', $data['effective_time'])->format('Y-m-d H:i:s'),
                 'end_time' => Carbon::createFromFormat('d/m/Y', $data['end_time'])->format('Y-m-d H:i:s'),
-                'extension' => (bool)$data['extension'],
-                'total_contract_value' => (int)$data['total_contract_value'],
-                'company_id' => (int)$data['companyId'],
-                'period_id' => (int)$data['periodId'],
+                'extension' => (bool) $data['extension'],
+                'total_contract_value' => (int) str_replace('.', '', $data['total_contract_value']),
+                'period_id' => (int) $periodDetail->id,
                 'user_id' => $authUser->id,
-                'active' => STATUS_ACTIVE
+                'active' => STATUS_ACTIVE,
             ]);
-
 
             if (!$contract) {
                 throw new \Exception('Error creating Contract');
@@ -65,11 +72,11 @@ class ContractController extends Controller
         try {
             DB::beginTransaction();
 
-            $contractId = $request->input('ContractId');
+            $contractId = $request->input('contractId');
             $contract = Contract::find($contractId);
 
             if ($contract) {
-                $contract->update(['active' => 0]);
+                $contract->update(['active' => STATUS_INACTIVE]);
 
                 DB::commit();
 
@@ -89,11 +96,21 @@ class ContractController extends Controller
             DB::beginTransaction();
 
             $data = $request->all();
-            $contract = Contract::find($data['ContractId']);
+
+            $periodDetail = $this->periodDetailService->checkAndInsertPeriodDetail($data['company_id'], $data['period_id']);
+
+            $contract = Contract::find($data['contractId']);
 
             if ($contract) {
                 $contract->update([
-                    'group_name' => (string)$data['group_name'],
+                    'contract_name' => (string) $data['contract_name'],
+                    'contract_supplement_number' => (string) $data['contract_supplement_number'],
+                    'signature_date' => Carbon::createFromFormat('d/m/Y', $data['signature_date'])->format('Y-m-d H:i:s'),
+                    'effective_time' => Carbon::createFromFormat('d/m/Y', $data['effective_time'])->format('Y-m-d H:i:s'),
+                    'end_time' => Carbon::createFromFormat('d/m/Y', $data['end_time'])->format('Y-m-d H:i:s'),
+                    'extension' => (bool) $data['extension'],
+                    'total_contract_value' => (int) str_replace('.', '', $data['total_contract_value']),
+                    'period_id' => (int) $periodDetail->id,
                 ]);
 
                 DB::commit();
