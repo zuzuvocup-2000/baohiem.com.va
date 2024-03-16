@@ -66,6 +66,7 @@ class HospitalController extends Controller
             if ($hospital) {
                 $hospital->update([
                     'hospital_name' => (string)$data['hospital_name'],
+                    'hospital_type_id' => (int)$data['hospital_type_id'],
                 ]);
 
                 DB::commit();
