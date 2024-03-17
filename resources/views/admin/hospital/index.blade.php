@@ -197,7 +197,7 @@
                                                 <input class="inputField form-control" type="text" name="update_username" value="{{ $userhospital->username }}" data-original-value="{{ $userhospital->username }}" disabled="">
                                             </td>
                                             <td>
-                                                <input class="inputField form-control" type="password" name="update_password" value="{{ $userhospital->password }}" data-original-value="{{ $userhospital->password }}" disabled="">
+                                                <input class="inputField form-control" type="password" name="update_password" value="******" data-original-value="******" disabled="">
                                             </td>
                                             <td>
                                                 <select class="form-select inputField mr-sm-2 " name="update_user_hospital_id" disabled>
