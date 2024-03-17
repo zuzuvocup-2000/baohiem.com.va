@@ -136,7 +136,7 @@ $('.delete-button-user-hospital').on('click', function () {
 
     Swal.fire({
         title: 'Bạn có chắc khi thực hiện hành động này?',
-        text: 'Xoá bệnh viện được chọn!',
+        text: 'Xoá tài khoản bệnh viện được chọn!',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#d33',
