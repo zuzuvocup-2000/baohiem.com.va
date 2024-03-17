@@ -32981,3 +32981,20 @@ span.unit{
     max-width: 35px;
     margin: auto !important;
 }
+.sticky-column {
+  overflow: auto;
+}
+
+.sticky-column thead th:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 2; 
+  background-color: white; 
+}
+
+.sticky-column tbody td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background-color: white; 
+}

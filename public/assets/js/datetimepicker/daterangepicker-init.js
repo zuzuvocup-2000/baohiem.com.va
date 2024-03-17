@@ -33,6 +33,7 @@ $(".timeseconds").daterangepicker({
 $(".singledate").daterangepicker({
     singleDatePicker: true,
     showDropdowns: true,
+    drops: 'up',
 });
 
 /*******************************************/

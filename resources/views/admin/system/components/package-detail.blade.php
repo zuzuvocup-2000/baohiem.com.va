@@ -27,14 +27,11 @@
     </div>
 </div>
 <div class="table-responsive">
-    <table id="simpletable" class="table system-table border text-nowrap customize-table mb-0 align-middle mb-3">
+    <table id="simpletable" class="sticky-column table system-table border text-nowrap customize-table mb-0 align-middle mb-3">
         <thead class="text-dark fs-4">
             <tr role="row">
                 <th>
-                    <input type="checkbox" class="toggleAll custom-control-input" id="customCheck1" />
-                </th>
-                <th>
-                    <h6 class="fs-4 fw-semibold mb-0 text-center">STT</h6>
+                    <h6 class="fs-4 fw-semibold mb-0 text-center">Thao tác</h6>
                 </th>
                 <th>
                     <h6 class="fs-4 fw-semibold mb-0">Tên gói bảo hiểm</h6>
@@ -45,40 +42,14 @@
                 <th>
                     <h6 class="fs-4 fw-semibold mb-0">Ghi chú</h6>
                 </th>
-                <th>
-                    <h6 class="fs-4 fw-semibold mb-0">Thao tác</h6>
-                </th>
             </tr>
         </thead>
         <tbody>
             @foreach ($accountPackageList as $key => $accountPackage)
                 <tr role="row" data-id="{{ $accountPackage->id }}">
                     <td>
-                        <input type="checkbox" class="toggleCheckbox custom-control-input"
-                            id="accountPackage-{{ $accountPackage->id }}" name="id[]"
-                            value="{{ $accountPackage->id }}" />
-                    </td>
-                    <td>
-                        <p class="mb-0 fw-normal fs-4 text-center">{{ ++$key }}</p>
-                    </td>
-                    <td>
-                        <input class="inputField form-control update-account-package-package_name" type="text" name="package_name"
-                            value="{{ $accountPackage->package_name }}"
-                            data-original-value="{{ $accountPackage->package_name }}" disabled="" />
-                    </td>
-                    <td>
-                        <input class="inputField form-control int update-account-package-package_price" type="text" name="package_price"
-                            value="{{ $accountPackage->package_price }}"
-                            data-original-value="{{ $accountPackage->package_price }}" disabled="" />
-                    </td>
-                    <td>
-                        <input class="inputField form-control update-account-package-note" type="text" name="note"
-                            value="{{ $accountPackage->note }}"
-                            data-original-value="{{ $accountPackage->note }}" disabled="" />
-                    </td>
-                    <td>
                         <h6 class="fs-4 fw-semibold mb-0">
-                            <div class="btn-group d-flex">
+                            <div class="btn-group d-flex justify-content-center">
                                 <button class="btn btn-success me-1 editButton">
                                     <span class="icon-item-icon">
                                         <img src="{{ asset('/img-system/system/edit_white.svg') }}" />
@@ -118,12 +89,25 @@
                             </div>
                         </h6>
                     </td>
+                    <td>
+                        <input class="inputField form-control update-account-package-package_name" type="text" name="package_name"
+                            value="{{ $accountPackage->package_name }}"
+                            data-original-value="{{ $accountPackage->package_name }}" disabled="" />
+                    </td>
+                    <td>
+                        <input class="inputField form-control int update-account-package-package_price" type="text" name="package_price"
+                            value="{{ $accountPackage->package_price }}"
+                            data-original-value="{{ $accountPackage->package_price }}" disabled="" />
+                    </td>
+                    <td>
+                        <input class="inputField form-control update-account-package-note" type="text" name="note"
+                            value="{{ $accountPackage->note }}"
+                            data-original-value="{{ $accountPackage->note }}" disabled="" />
+                    </td>
                 </tr>
             @endforeach
             <tr role="row">
-                <td>
-                    <p class="mb-0 fw-normal fs-4 text-center"></p>
-                </td>
+           
                 <td>
                     @include('common/button-loading', ['class' => 'btn-create-account-package'])
                 </td>
@@ -139,7 +123,6 @@
                     <input class="inputField form-control create-account-package-note" type="text" name="note" value=""
                         data-original-value="" />
                 </td>
-                <td></td>
             </tr>
         </tbody>
     </table>

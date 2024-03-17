@@ -1,9 +1,9 @@
 <div class="table-responsive">
-    <table id="simpletable" class="table system-table border text-nowrap customize-table mb-0 align-middle mb-3">
+    <table id="simpletable" class="sticky-column table system-table border text-nowrap customize-table mb-0 align-middle mb-3">
         <thead class="text-dark fs-4">
             <tr role="row">
                 <th>
-                    <h6 class="fs-4 fw-semibold mb-0">Thao tác</h6>
+                    <h6 class="fs-4 fw-semibold mb-0 text-center">Thao tác</h6>
                 </th>
                 <th class="w-150-px">
                     <h6 class="fs-4 fw-semibold mb-0">Tên hợp đồng</h6>
@@ -46,7 +46,7 @@
                 <tr role="row" data-id="{{ $contract['id'] }}">
                     <td>
                         <h6 class="fs-4 fw-semibold mb-0">
-                            <div class="btn-group d-flex">
+                            <div class="btn-group d-flex justify-content-center">
                                 <button class="btn btn-success me-1 editButton">
                                     <span class="icon-item-icon">
                                         <img src="{{ asset('/img-system/system/edit_white.svg') }}" />

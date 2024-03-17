@@ -13,14 +13,11 @@
         </div>
     </div>
 </div>
-<table id="simpletable" class="table system-table border text-nowrap customize-table mb-0 align-middle mb-3">
+<table id="simpletable" class="table sticky-column system-table border text-nowrap customize-table mb-0 align-middle mb-3">
     <thead class="text-dark fs-4">
         <tr role="row">
             <th>
-                <input type="checkbox" class="toggleAll custom-control-input" id="customCheck1" />
-            </th>
-            <th>
-                <h6 class="fs-4 fw-semibold mb-0 text-center">STT</h6>
+                <h6 class="fs-4 fw-semibold mb-0 text-center">Thao tác</h6>
             </th>
             <th>
                 <h6 class="fs-4 fw-semibold mb-0">Tên công ty</h6>
@@ -40,52 +37,14 @@
             <th>
                 <h6 class="fs-4 fw-semibold mb-0">Người liên hệ</h6>
             </th>
-            <th>
-                <h6 class="fs-4 fw-semibold mb-0">Thao tác</h6>
-            </th>
         </tr>
     </thead>
     <tbody>
         @foreach ($companyList as $key => $company)
             <tr role="row" data-id="{{ $company->id }}">
                 <td>
-                    <input type="checkbox" class="toggleCheckbox custom-control-input" id="company-{{ $company->id }}"
-                        name="id[]" value="{{ $company->id }}" />
-                </td>
-                <td>
-                    <p class="mb-0 fw-normal fs-4 text-center">{{ ++$key }}</p>
-                </td>
-                <td>
-                    <input class="inputField form-control" type="text" name="company_name"
-                        value="{{ $company->company_name }}" data-original-value="{{ $company->company_name }}"
-                        disabled="" />
-                </td>
-                <td>
-                    <input class="inputField form-control" type="text" name="address" value="{{ $company->address }}"
-                        data-original-value="{{ $company->address }}" disabled="" />
-                </td>
-                <td>
-                    <input class="inputField form-control" type="text" name="phone_number"
-                        value="{{ $company->phone_number }}" data-original-value="{{ $company->phone_number }}"
-                        disabled="" />
-                </td>
-                <td>
-                    <input class="inputField form-control" type="text" name="email" value="{{ $company->email }}"
-                        data-original-value="{{ $company->email }}" disabled="" />
-                </td>
-                <td>
-                    <input class="inputField form-control" type="text" name="ceo_name"
-                        value="{{ $company->ceo_name }}" data-original-value="{{ $company->ceo_name }}"
-                        disabled="" />
-                </td>
-                <td class="text-center">
-                    <input class="inputField form-control" type="text" name="responsibility_officer_name"
-                        value="{{ $company->responsibility_officer_name }}"
-                        data-original-value="{{ $company->responsibility_officer_name }}" disabled="" />
-                </td>
-                <td>
                     <h6 class="fs-4 fw-semibold mb-0">
-                        <div class="btn-group d-flex">
+                        <div class="btn-group d-flex justify-content-center">
                             <button class="btn btn-success me-1 editButton">
                                 <span class="icon-item-icon">
                                     <img src="{{ asset('/img-system/system/edit_white.svg') }}" />
@@ -125,12 +84,37 @@
                         </div>
                     </h6>
                 </td>
+                <td>
+                    <input class="inputField form-control" type="text" name="company_name"
+                        value="{{ $company->company_name }}" data-original-value="{{ $company->company_name }}"
+                        disabled="" />
+                </td>
+                <td>
+                    <input class="inputField form-control" type="text" name="address" value="{{ $company->address }}"
+                        data-original-value="{{ $company->address }}" disabled="" />
+                </td>
+                <td>
+                    <input class="inputField form-control" type="text" name="phone_number"
+                        value="{{ $company->phone_number }}" data-original-value="{{ $company->phone_number }}"
+                        disabled="" />
+                </td>
+                <td>
+                    <input class="inputField form-control" type="text" name="email" value="{{ $company->email }}"
+                        data-original-value="{{ $company->email }}" disabled="" />
+                </td>
+                <td>
+                    <input class="inputField form-control" type="text" name="ceo_name"
+                        value="{{ $company->ceo_name }}" data-original-value="{{ $company->ceo_name }}"
+                        disabled="" />
+                </td>
+                <td class="text-center">
+                    <input class="inputField form-control" type="text" name="responsibility_officer_name"
+                        value="{{ $company->responsibility_officer_name }}"
+                        data-original-value="{{ $company->responsibility_officer_name }}" disabled="" />
+                </td>
             </tr>
         @endforeach
         <tr role="row">
-            <td>
-                <p class="mb-0 fw-normal fs-4 text-center"></p>
-            </td>
             <td>
                 @include('common/button-loading', ['class' => 'btn-create-company'])
             </td>
@@ -158,7 +142,6 @@
                 <input class="inputField form-control create-company-responsibility_officer_name" type="text"
                     name="responsibility_officer_name" value="" />
             </td>
-            <td></td>
         </tr>
     </tbody>
 </table>
