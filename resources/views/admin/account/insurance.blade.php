@@ -254,7 +254,7 @@
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-5 col-xl-4">
-                        <div class="btn-group">
+                        <div>
                             <button class="me-2 btn btn-dark" type="button">Dowload file mẫu DS KH chính</button>
                             <button class="btn btn-warning" type="button">Xử lý file Excel</button>
                         </div>
@@ -268,7 +268,7 @@
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-5 col-xl-4">
-                        <div class="btn-group">
+                        <div>
                             <button class="me-2 btn btn-dark" type="button">Dowload file đổi số thẻ KH</button>
                             <button class="btn btn-warning" type="button">Đổi số thẻ danh sách KH</button>
                         </div>

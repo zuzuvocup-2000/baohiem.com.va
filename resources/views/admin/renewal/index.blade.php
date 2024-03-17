@@ -9,101 +9,42 @@
             <div class="card card-body">
                 <div class="row mb-3">
                     <div class="col-xs-12 col-md-4">
-                        <div class="form-group">
-                            <label class="d-inline-block" style="width: 100px;" for="companySelect">Tên công ty</label>
-                            <select class="form-select company-search mr-sm-2" id="companySelect" name="companySelect">
-                                <option value="20067" selected="">
-                                    CỬU LONG JOC 2
-                                </option>
-                                <option value="20058">
-                                    PVFCCO
-                                </option>
-                                <option value="20059">
-                                    TRƯỜNG SƠN JOC
-                                </option>
-                                <option value="49">
-                                    CỬU LONG JOC (O)
-                                </option>
-                                <option value="20066">
-                                    TALISMAN
-                                </option>
-                                <option value="20068">
-                                    GAS SOUTH (KMN)
-                                </option>
+                        <div class="form-field">
+                            <label for="" class="mb-1">Tên công ty</label>
+                            <select class="form-select mr-sm-2" id="companySelect" name="company">
+                                @foreach ($companyList as $company)
+                                    <option value="{{ $company->id }}"
+                                        {{ isset($_GET['company']) && $_GET['company']  == $company->id ? 'selected' : '' }}>
+                                        {{ $company->company_name }}
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="col-xs-12 col-md-4">
-                        <div class="form-group">
-                            <label class="d-inline-block" style="width: 100px;" for="periodSelect">Niên hạn</label>
-                            <select class="form-select period-search mr-sm-2" id="periodSelect" name="periodSelect">
-                                <option value="10079" selected="">
-                                    CL2023
-                                </option>
-                                <option value="10077">
-                                    CL2022
-                                </option>
-                                <option value="10078">
-                                    Gas2022
-                                </option>
-                                <option value="10075">
-                                    CL2021
-                                </option>
-                                <option value="10076">
-                                    Gas2021
-                                </option>
-                                <option value="10074">
-                                    Gas2020
-                                </option>
-                                <option value="10073">
-                                    2020-2020
-                                </option>
-                                <option value="10072">
-                                    2019-2020
-                                </option>
-                                <option value="10071">
-                                    2018-2019
-                                </option>
-                                <option value="10070">
-                                    2017-2018
-                                </option>
-                                <option value="10069">
-                                    2016-2017
-                                </option>
-                                <option value="10068">
-                                    2015-2016
-                                </option>
-                                <option value="10067">
-                                    2014-2015
-                                </option>
-                                <option value="10066">
-                                    2013-2014
-                                </option>
-                                <option value="10065">
-                                    2012-2013
-                                </option>
-                                <option value="10064">
-                                    2011-2012
-                                </option>
-                                <option value="64">
-                                    2010-2011
-                                </option>
-                                <option value="63">
-                                    2007-2008
-                                </option>
-                                <option value="62">
-                                    2006-2007
-                                </option>
-                                <option value="61">
-                                    2005-2006
-                                </option>
+                        <div class="form-field">
+                            <label for="" class="mb-1">Niên hạn</label>
+                            <select class="form-select mr-sm-2" id="periodSelect" name="period">
+                                @foreach ($periodList as $period)
+                                    <option value="{{ $period->id }}"
+                                        {{ isset($_GET['period']) && $_GET['period']  == $period->id ? 'selected' : '' }}>
+                                        {{ $period->period_name }}
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="col-xs-12 col-md-4">
-                        <div class="form-group">
-                            <label class="d-inline-block" style="width: 100px;" for="companySelect">Hợp đồng</label>
-                            <select class="form-select contract-search mr-sm-2" id="contractSelect" name="contractSelect"> </select>
+                        <div class="form-field">
+                            <label for="" class="mb-1">Tên hợp đồng</label>
+                            <select class="form-select mr-sm-2" id="contractSelect" name="contract">
+                                @foreach ($contractList as $contract)
+                                    <option value="{{ $contract->id }}"
+                                        {{ isset($_GET['contract']) && $_GET['contract'] == $contract->id ? 'selected' : '' }}>
+                                        {{ $contract->contract_name }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -124,7 +65,7 @@
                                             <tr>
                                                 <th>Tên hợp đồng:</th>
                                                 <td>
-                                                <input class="inputField form-control" type="text" name="hd" value="CỬU LONG JOC (O)" data-original-value="CỬU LONG JOC (O)" disabled="">
+                                                <input class="inputField form-control" type="text" name="contract_name" value="{{ $contractDetail->contract_name }}" data-original-value="{{ $contractDetail->contract_name }}" disabled="">
                                                 </td>
                                                 <td></td>
                                             </tr>
@@ -133,7 +74,7 @@
                                                     Số hợp đồng:
                                                 </th>
                                                 <td>
-                                                <input class="inputField form-control" type="text" name="hd" value="CỬU LONG JOC (O)" data-original-value="CỬU LONG JOC (O)" disabled="">
+                                                <input class="inputField form-control" type="text" name="contract_supplement_number" value="{{ $contractDetail->contract_supplement_number }}" data-original-value="{{ $contractDetail->contract_supplement_number }}" disabled="">
                                                 </td>
                                                 <td></td>
                                             </tr>
@@ -141,13 +82,13 @@
                                                 <th>
                                                     Ngày ký hợp đồng:
                                                 </th>
-                                                <td><input class="inputField form-control singledate" type="text" name="phone" value="" data-original-value="" disabled></td>
+                                                <td><input class="inputField form-control singledate" type="text" name="signature_date" value="{{ $contractDetail->signature_date }}" data-original-value="" disabled></td>
                                                 <td></td>
                                             </tr>
                                             <tr>
                                                 <th>Tên niên hạn:</th>
                                                 <td>
-                                                <input class="inputField form-control" type="text" name="company" value="CL2023" data-original-value="CL2023" disabled="">
+                                                <input class="inputField form-control" type="text" name="period_name" value="{{ $contractDetail->period_name }}" data-original-value="{{ $contractDetail->period_name }}" disabled="">
                                                 </td>
                                                 <td></td>
                                             </tr>
@@ -156,7 +97,7 @@
                                                     Thời hạn từ:
                                                 </th>
                                                 <td>
-                                                    <input type="text" class="form-control daterange" id="dateInput" disabled value="13/03/2022 - 08/08/2024">
+                                                    <input type="text" class="form-control daterange" id="dateInput" name="time" disabled value="{{ $contractDetail->effective_time }} - {{ $contractDetail->end_time }}">
                                                 </td>
                                                 <td></td>
                                             </tr>
@@ -164,21 +105,21 @@
                                                 <th>
                                                     Số Khách hàng chính:
                                                 </th>
-                                                <td><input class="inputField form-control" type="text" name="clientmain" value="5" data-original-value="5" disabled=""></td>
+                                                <td><input class="inputField form-control" type="text" name="clientmain" value="{{ $customerPrimary }}" data-original-value="{{ $customerPrimary }}" disabled=""></td>
                                                 <td></td>
                                             </tr>
                                             <tr>
                                                 <th>
                                                 Số Khách hàng phụ:
                                                 </th>
-                                                <td><input class="inputField form-control" type="text" name="clien" value="7" data-original-value="7" disabled=""></td>
+                                                <td><input class="inputField form-control" type="text" name="clien" value="{{ $customerSecondary }}" data-original-value="{{ $customerSecondary }}" disabled=""></td>
                                                 <td></td>
                                             </tr>
                                             <tr>
                                                 <th>
-                                                    Giá trị hợp đồng: 
+                                                    Giá trị hợp đồng:
                                                 </th>
-                                                <td><input class="inputField form-control" type="text" name="vnd" value="0" data-original-value="5" disabled=""></td>
+                                                <td><input class="inputField form-control" type="text" name="total_contract_value" value="{{ $contractDetail->total_contract_value }}" data-original-value="{{ $contractDetail->total_contract_value }}" disabled=""></td>
                                                 <td>VNĐ</td>
                                             </tr>
                                         </tbody>
@@ -188,7 +129,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 col-xl-6">
                             <div class="renewal-block-right">
-                                <h5>Tên công ty: Cửu Long JOC 2</h5>
+                                <h5>Tên công ty: {{ $companyName }}</h5>
                                 <div class="bg-infor bg-info-insurance py-2 px-3 mb-3 text-center">
                                     Hợp đồng mới
                                 </div>
@@ -250,7 +191,7 @@
                                             </tr>
                                             <tr>
                                                 <th>
-                                                    Giá trị hợp đồng: 
+                                                    Giá trị hợp đồng:
                                                 </th>
                                                 <td><input class="inputField form-control" type="text" name="vnd" value="" data-original-value=""></td>
                                                 <td>VNĐ</td>
@@ -266,7 +207,7 @@
                                 <button type="button" class="btn btn-primary">Reset</button>
                             </div>
                         </div>
-                    </div> 
+                    </div>
                 </div>
                 <div class="renewal-handle">
                     <h5>Danh sách khách hàng</h5>
@@ -352,14 +293,14 @@
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-5 col-xl-4">
-                            <div class="btn-group">
+                            <div>
                                 <button class="me-2 btn btn-dark" type="button">Gia hạn</button>
                                 <button class="btn btn-warning" type="button">Dowload File Gia hạn</button>
-      
+
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-5 col-xl-4">
-                            <div class="btn-group">
+                            <div>
                                 <button class="me-2 btn btn-dark" type="button">Xuất danh sách ra excel</button>
                                 <button class="btn btn-warning" type="button">Load Danh sách</button>
                             </div>
@@ -377,5 +318,5 @@
 <script src="/assets/js/datetimepicker/daterangepicker-init.js"></script>
 <script src="/assets/js/datetimepicker/bootstrap-datepicker.min.js"></script>
 <script src="/assets/js/datetimepicker/datepicker-init.js"></script>
-
+<script src="/js/pages/renewal.js"></script>
 @endsection

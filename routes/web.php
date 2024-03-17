@@ -27,6 +27,7 @@ use App\Http\Controllers\Ajax\HospitalController as HospitalAjax;
 use App\Http\Controllers\Ajax\UserHospitalController;
 use App\Http\Controllers\Ajax\DepartmentController as DepartmentAjax;
 use App\Http\Controllers\Diary\DiaryController;
+use App\Http\Controllers\RenewalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -124,11 +125,13 @@ Route::post('/contact', [ContactController::class, 'sendEmail'])->name('contact.
 Route::get('/account', [AccountController::class, 'index'])->name('account.index');
 Route::get('/account/insurance', [AccountController::class, 'insurance'])->name('account.insurance');
 Route::get('/account/insurance-expenses', [AccountController::class, 'expenses'])->name('account.expenses');
-Route::get('/account/renewal', [AccountController::class, 'renewal'])->name('renewal.index');
 Route::get('/account/create', [AccountController::class, 'create'])->name('account.create');
 Route::post('/account/create', [AccountController::class, 'store'])->name('user.store');
 Route::get('/account/edit/{id}', [AccountController::class, 'edit'])->name('account.edit');
 Route::post('/account/edit/{id}', [AccountController::class, 'update'])->name('account.update');
+
+// Routes for Renewal
+Route::get('/renewal', [RenewalController::class, 'index'])->name('renewal.index');
 
 Route::resource('role', RolesController::class);
 Route::resource('permission', PermissionsController::class);

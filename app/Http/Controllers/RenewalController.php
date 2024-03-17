@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Account;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Services\CustomerGroupService;
 use App\Services\CompanyService;
 use App\Services\ContractService;
 use App\Services\CustomerService;
 use App\Services\PeriodService;
-use Illuminate\Http\Request;
 
-class AccountController extends Controller
+class RenewalController extends Controller
 {
     protected $customerGroupService;
     protected $companyService;
@@ -26,16 +25,18 @@ class AccountController extends Controller
         $this->contractService = $contractService;
         $this->customerService = $customerService;
     }
+
     public function index(Request $request)
     {
         $params = $request->query();
-        $customerGroupList = $this->customerGroupService->getCustomerGroupActive();
         $companyList = $this->companyService->getCompanyActiveSortByOrder();
 
-        // Lấy danh sách niên hạn
         if (!isset($params['company'])) {
             $params['company'] = $companyList->first()->id;
         }
+        $companyName = $this->companyService->getCompanyNameInList($params['company'], $companyList);
+
+        // Lấy danh sách niên hạn
         $periodList = $this->periodService->getPeriodActiveByCompany($params['company']);
 
         // Lấy danh sách hợp đồng
@@ -43,23 +44,10 @@ class AccountController extends Controller
             $params['period'] = $periodList->first() ? $periodList->first()->id : 0;
         }
         $contractList = $this->contractService->getContractByPeriod($params['period']);
-        if (!isset($params['contract'])) {
-            $params['contract'] = $contractList->first() ? $contractList->first()->id : 0;
-        }
 
-        $accountList = $this->customerService->getListAccount($params);
-        return view('admin.account.index', compact(['customerGroupList', 'companyList', 'periodList', 'contractList', 'accountList']));
-    }
-    public function edit()
-    {
-        return view('admin.account.edit');
-    }
-    public function insurance()
-    {
-        return view('admin.account.insurance');
-    }
-    public function expenses()
-    {
-        return view('admin.account.expenses');
+        $contractDetail = $this->contractService->getContractDetail(isset($params['contract']) ? $params['contract'] : (isset($contractList->first()->id) ? $contractList->first()->id : 0));
+        $customerPrimary = $this->contractService->getCustomerPrimary($contractDetail->id);
+        $customerSecondary = $this->contractService->getCustomerSecondary($contractDetail->id);
+        return view('admin.renewal.index', compact(['contractDetail', 'companyList', 'periodList', 'contractList', 'companyName', 'customerPrimary', 'customerSecondary']));
     }
 }

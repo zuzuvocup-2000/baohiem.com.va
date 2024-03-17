@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Period;
+use App\Models\PeriodDetail;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -21,14 +22,12 @@ class PeriodService
 
     public function getPeriodActiveByCompany($company = 0)
     {
-        return DB::table('tbl_period')->select('tbl_period.from_year', 'tbl_period.to_year', 'tbl_period.period_name', 'tbl_period_detail.id as id_new')
-            ->where(['tbl_period.active' => STATUS_ACTIVE])
-            ->join('tbl_period_detail', function ($join) use ($company) {
-                $join->on('tbl_period_detail.period_id', '=', 'tbl_period.id')
-                    ->where('tbl_period_detail.active', STATUS_ACTIVE);
-
-                if (!empty($company)) $join->where('tbl_period_detail.company_id', $company);
-            })
+        return PeriodDetail::select(['tbl_period_detail.id', 'tbl_period.period_name'])
+            ->where([
+                'tbl_period_detail.active' => STATUS_ACTIVE,
+                'tbl_period_detail.company_id' => $company,
+            ])
+            ->join('tbl_period', 'tbl_period.id', '=', 'tbl_period_detail.period_id')
             ->orderBy('tbl_period.order', 'asc')
             ->orderBy('tbl_period.id')
             ->get();

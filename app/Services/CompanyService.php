@@ -38,4 +38,10 @@ class CompanyService
             ->orderBy('order', 'asc')
             ->get();
     }
+
+    public function getCompanyNameInList($companyId, $companyList){
+        foreach ($companyList as $value) {
+            if($value->id === $companyId) return $value->company_name;
+        }
+    }
 }

@@ -88,7 +88,6 @@ class CustomerService
         } elseif (isset($params['email']) && $params['email'] == 0) {
             $where['tbl_customer.email'] = '';
         }
-
         return $where;
     }
 }
