@@ -40,15 +40,16 @@
                                                 <tr>
                                                     <th class="text-center" width="1%">STT</th>
                                                     <th>Tên phòng ban</th>
-                                                    <th width="3%" colspan="3">Thao tác</th>
+                                                    <th class="text-center" width="3%" colspan="3">Thao tác</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td class="text-center">1</td>
+                                                @foreach ($departmentList as $key => $department)
+                                                <tr data-id="{{ $department->id }}">
+                                                    <td class="text-center">{{ ++$key }}</td>
                                                     <td>
-                                                    <input class="inputField form-control" type="text" name="department" value="Phòng giám đốc" data-original-value="Phòng giám đốc" disabled="">
-                                                </td>
+                                                        <input class="inputField form-control" type="text" name="update_department_name" value="{{ $department->department_name }}" data-original-value="{{ $department->department_name }}" disabled="">
+                                                    </td>
                                                     <td>
                                                         <h6 class="fs-4 fw-semibold mb-0">
                                                             <div class="btn-group d-flex">
@@ -57,12 +58,12 @@
                                                                         <img src="{{ asset('/img-system/system/edit_white.svg') }}">
                                                                     </span>
                                                                 </button>
-                                                                <button class="btn btn-danger tabledit-delete-button" data-id="24">
+                                                                <button class="btn btn-danger tabledit-delete-button delete-button-department">
                                                                     <span class="icon-item-icon">
                                                                         <img src="{{ asset('/img-system/system/trash_white.svg') }}" alt="">
                                                                     </span>
                                                                 </button>
-                                                                <button class="btn btn-info me-1 saveButton" style="display: none;">
+                                                                <button class="btn btn-info me-1 saveButton btn-update-department" style="display: none;">
                                                                     <span class="icon-item-icon">
                                                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-discount-check-filled" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -82,6 +83,7 @@
                                                         </h6>
                                                     </td>
                                                 </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -108,12 +110,15 @@
                     <form id="addDepartmentForm">
                         <div class="mb-3">
                             <label for="departmentName" class="form-label">Tên phòng ban:</label>
-                            <input type="text" class="form-control" id="departmentName" name="department_name" required>
+                            <input type="text" class="form-control" id="departmentName" name="create_department_name">
                         </div>
-                        <button type="submit" class="btn btn-success">Thêm mới</button>
+                        <button type="submit" class="btn-create-department btn btn-success">Thêm mới</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+<script src="/js/pages/department.js"></script>
 @endsection

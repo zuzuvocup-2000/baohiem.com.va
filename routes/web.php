@@ -23,6 +23,9 @@ use App\Http\Controllers\SupervisorController;
 use App\Http\Controllers\Revenue\RevenueController;
 use App\Http\Controllers\Physical\PhysicalController;
 use App\Http\Controllers\Hospital\HospitalController;
+use App\Http\Controllers\Ajax\HospitalController as HospitalAjax;
+use App\Http\Controllers\Ajax\UserHospitalController;
+use App\Http\Controllers\Ajax\DepartmentController as DepartmentAjax;
 use App\Http\Controllers\Diary\DiaryController;
 
 /*
@@ -85,6 +88,20 @@ Route::group(['prefix' => 'ajax'], function () {
     Route::post('/customer-type/create', [CustomerTypeController::class, 'create'])->name('customer-type.create');
     Route::post('/customer-type/delete', [CustomerTypeController::class, 'delete'])->name('customer-type.delete');
     Route::put('/customer-type/update', [CustomerTypeController::class, 'update'])->name('customer-type.update');
+
+    //Bệnh viện
+    Route::post('/hospital/create', [HospitalAjax::class, 'create'])->name('hospital-name.create');
+    Route::post('/hospital/delete', [HospitalAjax::class, 'delete'])->name('hospital-name.delete');
+    Route::put('/hospital/update', [HospitalAjax::class, 'update'])->name('hospital-name.update');
+
+    Route::post('/hospital-user/create', [UserHospitalController::class, 'create'])->name('hospital-user.create');
+    Route::post('/hospital-user/delete', [UserHospitalController::class, 'delete'])->name('hospital-user.delete');
+    Route::put('/hospital-user/update', [UserHospitalController::class, 'update'])->name('hospital-user.update');
+
+    //Phòng ban
+    Route::post('/department/create', [DepartmentAjax::class, 'create'])->name('department.create');
+    Route::post('/department/delete', [DepartmentAjax::class, 'delete'])->name('department.delete');
+    Route::put('/department/update', [DepartmentAjax::class, 'update'])->name('department.update');
 });
 
 // Routes for free design before

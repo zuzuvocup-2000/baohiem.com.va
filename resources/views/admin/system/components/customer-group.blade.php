@@ -27,7 +27,8 @@
                                         <img src="{{ asset('/img-system/system/trash_white.svg') }}" alt="" />
                                     </span>
                                 </button>
-                                <button class="btn btn-info me-1 saveButton btn-update-customer-group" style="display: none;">
+                                <button class="btn btn-info me-1 saveButton btn-update-customer-group"
+                                    style="display: none;">
                                     <span class="icon-item-icon">
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                             class="icon icon-tabler icon-tabler-discount-check-filled" width="24"
@@ -69,8 +70,8 @@
                     @include('common/button-loading', ['class' => 'btn-create-customer-group'])
                 </td>
                 <td>
-                    <input class="inputField form-control create-customer-group-group_name" type="text" name="company" value=""
-                        data-original-value="" style="width: 100%;" />
+                    <input class="inputField form-control create-customer-group-group_name" type="text"
+                        name="company" value="" data-original-value="" style="width: 100%;" />
                 </td>
             </tr>
         </tbody>

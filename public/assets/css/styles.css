@@ -32959,7 +32959,13 @@ span.unit{
 .system-table > thead > tr > th{
     vertical-align: middle;
 }
-
+.hospital-type .form-check-input{
+    height: 18px !important;
+    margin-top: 8px;
+}
+.hospital-type .form-check-label{
+    margin-top: 8px;
+}
 .w-100-px{
     width: 100px;
     min-width: 100px;

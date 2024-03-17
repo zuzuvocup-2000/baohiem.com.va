@@ -3,13 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Department;
+use App\Services\DepartmentService;
 use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
 {
+    protected $departmentService;
+
+    public function __construct(
+        DepartmentService $departmentService,
+    ) {
+        $this->departmentService = $departmentService;
+    }
+
     public function index()
     {
-        return view('admin.department.index');
+        $departmentList = $this->departmentService->getActiveDepartments();
+        return view('admin.department.index' , compact(['departmentList']));
     }
 
     public function store(Request $request)
