@@ -25,6 +25,7 @@ use App\Http\Controllers\Physical\PhysicalController;
 use App\Http\Controllers\Hospital\HospitalController;
 use App\Http\Controllers\Ajax\HospitalController as HospitalAjax;
 use App\Http\Controllers\Ajax\UserHospitalController;
+use App\Http\Controllers\Ajax\DepartmentController as DepartmentAjax;
 use App\Http\Controllers\Diary\DiaryController;
 
 /*
@@ -96,6 +97,11 @@ Route::group(['prefix' => 'ajax'], function () {
     Route::post('/hospital-user/create', [UserHospitalController::class, 'create'])->name('hospital-user.create');
     Route::post('/hospital-user/delete', [UserHospitalController::class, 'delete'])->name('hospital-user.delete');
     Route::put('/hospital-user/update', [UserHospitalController::class, 'update'])->name('hospital-user.update');
+
+    //Phòng ban
+    Route::post('/department/create', [DepartmentAjax::class, 'create'])->name('department.create');
+    Route::post('/department/delete', [DepartmentAjax::class, 'delete'])->name('department.delete');
+    Route::put('/department/update', [DepartmentAjax::class, 'update'])->name('department.update');
 });
 
 // Routes for free design before
