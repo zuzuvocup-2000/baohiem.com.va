@@ -6,18 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class LogUser extends Model
 {
-    protected $table = 'TBL_LOGUSER';
+    protected $table = 'tbl_log_user';
+    protected $primaryKey = 'id';
     public $timestamps = false;
 
     protected $fillable = [
-        'Mauser',
-        'hanhdong',
-        'datelog',
+        'user_id',
+        'action',
+        'date_log',
         'active',
-        'localIP',
-        'Computername',
-        'giatricu',
-        'machitietchitramoi',
+        'local_ip',
+        'computer_name',
+        'old_value',
+        'payment_detail_id',
     ];
 
     protected $dates = [
@@ -26,11 +27,11 @@ class LogUser extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'Mauser', 'MAUSER');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function chiTietChiTraMoi()
+    public function paymentDetail()
     {
-        return $this->belongsTo(ChiTietChiTra::class, 'machitietchitramoi', 'MACHITIETCHITRA');
+        return $this->belongsTo(PaymentDetail::class, 'payment_detail_id', 'id');
     }
 }

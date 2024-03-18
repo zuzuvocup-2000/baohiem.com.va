@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
@@ -40,21 +39,17 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'users' => [
+        'hospital' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'hospitals',
         ],
-        'users_nhan_su' => [
+        'customer' => [
             'driver' => 'session',
-            'provider' => 'users_nhan_su',
+            'provider' => 'customers',
         ],
-        'users_benh_vien' => [
+        'staff' => [
             'driver' => 'session',
-            'provider' => 'users_benh_vien',
-        ],
-        'users_khach_hang' => [
-            'driver' => 'session',
-            'provider' => 'users_khach_hang',
+            'provider' => 'staffs',
         ],
     ],
 
@@ -80,22 +75,18 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-        'users_nhan_su' => [
+        'staffs' => [
             'driver' => 'eloquent',
-            'model' => App\Models\UserNhansu::class,
+            'model' => App\Models\UserStaff::class,
         ],
-        'users_benh_vien' => [
+        'hospitals' => [
             'driver' => 'eloquent',
-            'model' => App\Models\UserBenhvien::class,
+            'model' => App\Models\UserHospital::class,
         ],
-        'users_khach_hang' => [
+        'customers' => [
             'driver' => 'eloquent',
-            'model' => App\Models\UserKhachhang::class,
+            'model' => App\Models\UserCustomer::class,
         ],
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
     ],
 
     /*
@@ -120,19 +111,22 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
-        'users_nhan_su' => [
+        'web' => [
             'driver' => 'eloquent',
-            'model' => App\Models\UserNhansu::class,
+            'model' => App\Models\User::class,
         ],
-        'users_benh_vien' => [
+        'user_employees' => [
             'driver' => 'eloquent',
-            'model' => App\Models\UserBenhvien::class,
+            'model' => App\Models\UserStaff::class,
         ],
-        'users_khach_hang' => [
+        'user_hospitals' => [
             'driver' => 'eloquent',
-            'model' => App\Models\UserKhachhang::class,
+            'model' => App\Models\UserHospital::class,
         ],
-
+        'user_customers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\UserCustomer::class,
+        ],
     ],
 
     /*
@@ -147,5 +141,4 @@ return [
     */
 
     'password_timeout' => 10800,
-
 ];

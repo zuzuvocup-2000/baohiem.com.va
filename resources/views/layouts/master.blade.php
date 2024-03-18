@@ -16,6 +16,7 @@
     <link rel="shortcut icon" type="image/png" href="{{ asset('/assets/images/logos/favicon.png') }}">
 
     <!-- Core Css -->
+    <link rel="stylesheet" href="/assets/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="/assets/css/styles.css">
     @yield('style')
 </head>
@@ -43,6 +44,8 @@
         </div>
     </div>
 
+    @yield('modal')
+
     <div class="dark-transparent sidebartoggler"></div>
 
     <!-- Import Js Files -->
@@ -56,6 +59,7 @@
     <script src="/assets/js/sidebarmenu.js"></script>
     <script src="/assets/js/theme.js"></script>
     <script src="/assets/js/feather.min.js"></script>
+    <script src="/assets/js/sweetalert2.js"></script>
     <script src="/js/library.js"></script>
     {{-- <script src="/assets/js/breadcrumb/breadcrumbChart.js"></script> --}}
     {{-- <script src="/assets/libs/apexcharts/dist/apexcharts.min.js"></script> --}}

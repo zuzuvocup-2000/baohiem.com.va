@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
@@ -13,17 +13,22 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
-        return view('pages.auth.login');
+        return view('auth.login');
     }
 
     public function login(LoginRequest $request)
     {
         $credentials = $request->only('username', 'password');
-        $guards = ['users', 'users_nhan_su', 'users_benh_vien', 'users_khach_hang'];
+        $guards = ['web', 'staff', 'hospital', 'customer'];
+        $remember = $request->filled('remember');
 
         foreach ($guards as $guard) {
-            if (Auth::guard($guard)->attempt($credentials)) {
-                return redirect('/dashboard');
+            if (Auth::guard($guard)->attempt($credentials, $remember)) {
+                if (Auth::guard('web')->check()) {
+                    return redirect('/dashboard')->with('success', 'Đăng nhập thành công!');
+                } else {
+                    return redirect('/');
+                }
             }
         }
 
@@ -35,9 +40,11 @@ class LoginController extends Controller
         // Custom logic after successful login
     }
 
-    public function logout()
+    public function logout(Request $request) : RedirectResponse
     {
         Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
         return redirect('/login');
     }
 }

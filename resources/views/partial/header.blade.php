@@ -1,8 +1,8 @@
+<?php
+$currentUser = getInfoUserAdmin();
+?>
 <header class="topbar">
     <div class="with-vertical">
-        <!-- ---------------------------------- -->
-        <!-- Start Vertical Layout Header -->
-        <!-- ---------------------------------- -->
         <nav class="navbar navbar-expand-lg px-lg-0 px-0 py-0">
             <ul class="navbar-nav">
                 <li class="nav-item ">
@@ -27,7 +27,6 @@
                         <div class="mega-dropdown-menu row">
                             <div class="col-lg-3 col-xl-2 mb-4">
                                 <h4 class="mb-3 fs-5 ">Carousel</h4>
-                                <!-- CAROUSEL -->
                                 <div id="carouselExampleControls" class="carousel slide carousel-dark"
                                     data-bs-ride="carousel">
                                     <div class="carousel-inner">
@@ -55,11 +54,9 @@
                                         <span class="visually-hidden">Next</span>
                                     </a>
                                 </div>
-                                <!-- End CAROUSEL -->
                             </div>
                             <div class="col-lg-3 mb-4">
                                 <h4 class="mb-3 fs-5">Accordion</h4>
-                                <!-- Accordian -->
                                 <div class="accordion accordion-flush" id="accordionFlushExample">
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="flush-headingOne">
@@ -114,7 +111,6 @@
                             </div>
                             <div class="col-lg-3 mb-4">
                                 <h4 class="mb-3 fs-5">Contact Us</h4>
-                                <!-- Contact -->
                                 <form>
                                     <div class="mb-3 form-floating">
                                         <input type="text" class="form-control" id="exampleInputname1"
@@ -254,10 +250,9 @@
                                                                 height="24">
                                                         </div>
                                                         <div class="d-inline-block">
-                                                            <h6 class="mb-1 fw-semibold fs-3">User Profile
+                                                            <h6 class="mb-1 fw-semibold fs-3">Thông tin cá nhân
                                                             </h6>
-                                                            <span class="fs-3 d-block text-secondary">learn
-                                                                more information</span>
+                                                            <span class="fs-3 d-block text-secondary">Xem thêm thông tin cá nhân</span>
                                                         </div>
                                                     </a>
                                                     <a href="app-calendar.html"
@@ -360,7 +355,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </li>
                 <li class="nav-item dropdown hover-dd d-none d-lg-block">
@@ -384,20 +378,13 @@
 
             <div class="d-block d-lg-none">
                 <div class="brand-logo d-flex align-items-center justify-content-between">
-                    <a href="index.html" class="text-nowrap logo-img">
-                        <b class="">
-                            <img src="/assets/images/logos/logo-light-icon.svg" alt="homepage" class="">
-                        </b>
-                        <!--End Logo icon -->
-                        <!-- Logo text -->
+                    <a href="/" class="text-nowrap logo-img">
                         <span class="">
-                            <img src="/assets/images/logos/logo-light-text.svg" class=" ps-2" alt="homepage">
+                            <img src="{{ asset('/img-system/system/logo.png') }}" class="logo-horizontal ps-2"
+                                alt="homepage">
                         </span>
                     </a>
                 </div>
-
-
-
             </div>
             <a class="navbar-toggler nav-icon-hover p-0 border-0 text-white" href="javascript:void(0)"
                 data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
@@ -922,13 +909,17 @@
                                 aria-labelledby="drop2">
                                 <div class="profile-dropdown position-relative" data-simplebar="">
                                     <div class="py-3 px-7 pb-0">
-                                        <h5 class="mb-0 fs-5 ">User Profile</h5>
+                                        <h5 class="mb-0 fs-5 ">Thông tin cá nhân</h5>
                                     </div>
                                     <div class="d-flex align-items-center py-9 mx-7 border-bottom">
                                         <img src="/assets/images/profile/user-6.jpg" class="rounded-circle"
                                             width="80" height="80" alt="">
                                         <div class="ms-3">
-                                            <h5 class="mb-1 fs-4 text-secondary">Steve Jobs</h5>
+                                            @if(isset($currentUser))
+                                            <h5 class="mb-1 fs-4 text-secondary">
+                                                {{ $currentUser->employee->employee_name }}
+                                            </h5>
+                                            @endif
                                             <span class="mb-1 d-block text-secondary">Designer</span>
                                             <p class="mb-0 d-flex align-items-center gap-2">
                                                 <i class="ti ti-mail fs-4"></i> info@xtreme.com
@@ -936,7 +927,7 @@
                                         </div>
                                     </div>
                                     <div class="message-body">
-                                        <a href="page-user-profile.html"
+                                        <a href="{{ route('profile.user') }}"
                                             class="py-8 px-7 mt-8 d-flex align-items-center">
                                             <span
                                                 class="d-flex align-items-center justify-content-center bg-primary-subtle rounded-circle round p-6 fs-6 text-primary">
@@ -944,88 +935,35 @@
                                                     class="text-primary"></iconify-icon>
                                             </span>
                                             <div class="w-75 d-inline-block v-middle ps-3">
-                                                <h6 class="mb-1 fs-3  lh-base">My Profile</h6>
-                                                <span class="fs-3 d-block text-secondary">Account
-                                                    Settings</span>
-                                            </div>
-                                        </a>
-                                        <a href="app-email.html" class="py-8 px-7 d-flex align-items-center">
-                                            <span
-                                                class="d-flex align-items-center justify-content-center bg-warning-subtle rounded-circle round p-6 fs-6 text-primary">
-                                                <iconify-icon icon="solar:inbox-line-line-duotone"
-                                                    class="text-warning"></iconify-icon>
-                                            </span>
-                                            <div class="w-75 d-inline-block v-middle ps-3">
-                                                <h6 class="mb-1 fs-3  lh-base">My Inbox</h6>
-                                                <span class="fs-3 d-block text-secondary ">Messages &
-                                                    Emails</span>
-                                            </div>
-                                        </a>
-                                        <a href="app-notes.html" class="py-8 px-7 d-flex align-items-center">
-                                            <span
-                                                class="d-flex align-items-center justify-content-center bg-success-subtle rounded-circle round p-6 fs-6 text-primary">
-                                                <iconify-icon icon="solar:checklist-minimalistic-line-duotone"
-                                                    class="text-success "></iconify-icon>
-                                            </span>
-                                            <div class="w-75 d-inline-block v-middle ps-3">
-                                                <h6 class="mb-1 fs-3  lh-base">My Task</h6>
-                                                <span class="fs-3 d-block text-secondary">To-do and Daily
-                                                    Tasks</span>
+                                                <h6 class="mb-1 fs-3  lh-base">Thông tin cá nhân</h6>
+                                                <span class="fs-3 d-block text-secondary">Cài đặt tài khoản</span>
                                             </div>
                                         </a>
                                     </div>
                                     <div class="d-grid py-4 px-7 pt-8">
-                                        <a href="authentication-login.html" class="btn btn-primary">Log
-                                            Out</a>
+                                        <a href="{{ route('logout') }}" class="btn btn-primary">Đăng xuất</a>
                                     </div>
                                 </div>
 
                             </div>
                         </li>
-
-                        <!-- ------------------------------- -->
-                        <!-- end profile Dropdown -->
-                        <!-- ------------------------------- -->
                     </ul>
                 </div>
             </div>
         </nav>
-        <!-- ---------------------------------- -->
-        <!-- End Vertical Layout Header -->
-        <!-- ---------------------------------- -->
 
-        <!-- ------------------------------- -->
-        <!-- apps Dropdown in Small screen -->
-        <!-- ------------------------------- -->
-        <!--  Mobilenavbar -->
         <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="mobilenavbar"
             aria-labelledby="offcanvasWithBothOptionsLabel">
             <nav class="sidebar-nav scroll-sidebar">
                 <div class="offcanvas-header justify-content-between">
                     <div class="brand-logo d-flex align-items-center justify-content-between">
-                        <a href="index.html" class="text-nowrap logo-img">
-                            <b class="logo-icon">
-                                <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                                <!-- Dark Logo icon -->
-                                <img src="/assets/images/logos/logo-icon.svg" alt="homepage" class="dark-logo">
-                                <!-- Light Logo icon -->
-                                <img src="/assets/images/logos/logo-light-icon.svg" alt="homepage"
-                                    class="light-logo">
-                            </b>
-                            <!--End Logo icon -->
-                            <!-- Logo text -->
+                        <a href="/" class="text-nowrap logo-img">
                             <span class="logo-text">
-                                <!-- dark Logo text -->
-                                <img src="/assets/images/logos/logo-text.svg" alt="homepage" class="dark-logo ps-2">
-                                <!-- Light Logo text -->
-                                <img src="/assets/images/logos/logo-light-text.svg" class="light-logo ps-2"
+                                <img src="{{ asset('/img-system/system/logo.png') }}" class="logo-horizontal ps-2"
                                     alt="homepage">
                             </span>
                         </a>
                     </div>
-
-
-
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
                 </div>
@@ -1228,14 +1166,10 @@
                 </li>
                 <li class="nav-item d-none d-xl-block">
                     <div class="brand-logo d-flex align-items-center justify-content-between">
-                        <a href="index.html" class="text-nowrap logo-img">
-                            <b class="">
-                                <img src="/assets/images/logos/logo-light-icon.svg" alt="homepage" class="">
-                            </b>
-                            <!--End Logo icon -->
-                            <!-- Logo text -->
+                        <a href="/" class="text-nowrap logo-img">
                             <span class="">
-                                <img src="/assets/images/logos/logo-light-text.svg" class=" ps-2" alt="homepage">
+                                <img src="{{ asset('/img-system/system/logo.png') }}" class="logo-horizontal ps-2"
+                                    alt="homepage">
                             </span>
                         </a>
                     </div>
@@ -1972,61 +1906,50 @@
                                 aria-labelledby="drop2">
                                 <div class="profile-dropdown position-relative" data-simplebar="">
                                     <div class="py-3 px-7 pb-0">
-                                        <h5 class="mb-0 fs-5 ">User Profile</h5>
+                                        <h5 class="mb-0 fs-5 ">Thông tin cá nhân</h5>
                                     </div>
                                     <div class="d-flex align-items-center py-9 mx-7 border-bottom">
                                         <img src="/assets/images/profile/user-6.jpg" class="rounded-circle"
                                             width="80" height="80" alt="">
+                                        @if(isset($currentUser))
                                         <div class="ms-3">
-                                            <h5 class="mb-1 fs-4 text-secondary">Steve Jobs</h5>
-                                            <span class="mb-1 d-block text-secondary">Designer</span>
+                                            <h5 class="mb-1 fs-4 text-secondary">
+                                                {{ $currentUser->employee->employee_name }}</h5>
+                                            <span
+                                                class="mb-1 d-block text-secondary">{{ $currentUser->Tenquyen }}</span>
                                             <p class="mb-0 d-flex align-items-center gap-2">
-                                                <i class="ti ti-mail fs-4"></i> info@xtreme.com
+                                                <i class="ti ti-mail fs-4"></i> {{ $currentUser->employee->email }}
                                             </p>
                                         </div>
+                                        @endif
                                     </div>
                                     <div class="message-body">
-                                        <a href="page-user-profile.html"
+                                        <a href="{{ route('profile.user') }}"
                                             class="py-8 px-7 mt-8 d-flex align-items-center">
                                             <span
-                                                class="d-flex align-items-center justify-content-center bg-primary-subtle rounded-circle round p-6 fs-6 text-primary">
+                                                class="d-flex align-items-center justify-content-center bg-warning-subtle rounded-circle round p-6 fs-6 text-primary">
                                                 <iconify-icon icon="solar:user-circle-line-duotone"
                                                     class="text-primary"></iconify-icon>
                                             </span>
                                             <div class="w-75 d-inline-block v-middle ps-3">
-                                                <h6 class="mb-1 fs-3  lh-base">My Profile</h6>
-                                                <span class="fs-3 d-block text-secondary">Account
-                                                    Settings</span>
+                                                <h6 class="mb-1 fs-3  lh-base">Thông tin cá nhân</h6>
+                                                <span class="fs-3 d-block text-secondary">Cài đặt tài khoản</span>
                                             </div>
                                         </a>
-                                        <a href="app-email.html" class="py-8 px-7 d-flex align-items-center">
-                                            <span
-                                                class="d-flex align-items-center justify-content-center bg-warning-subtle rounded-circle round p-6 fs-6 text-primary">
-                                                <iconify-icon icon="solar:inbox-line-line-duotone"
-                                                    class="text-warning"></iconify-icon>
-                                            </span>
-                                            <div class="w-75 d-inline-block v-middle ps-3">
-                                                <h6 class="mb-1 fs-3  lh-base">My Inbox</h6>
-                                                <span class="fs-3 d-block text-secondary ">Messages &
-                                                    Emails</span>
-                                            </div>
-                                        </a>
-                                        <a href="app-notes.html" class="py-8 px-7 d-flex align-items-center">
+                                        <a href="{{ route('profile.changePassword') }}"
+                                            class="py-8 px-7 mt-8 d-flex align-items-center">
                                             <span
                                                 class="d-flex align-items-center justify-content-center bg-success-subtle rounded-circle round p-6 fs-6 text-primary">
-                                                <iconify-icon icon="solar:checklist-minimalistic-line-duotone"
-                                                    class="text-success "></iconify-icon>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-password-fingerprint" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M17 8c.788 1 1 2 1 3v1"></path><path d="M9 11c0 -1.578 1.343 -3 3 -3s3 1.422 3 3v2"></path><path d="M12 11v2"></path><path d="M6 12v-1.397c-.006 -1.999 1.136 -3.849 2.993 -4.85a6.385 6.385 0 0 1 6.007 -.005"></path><path d="M12 17v4"></path><path d="M10 20l4 -2"></path><path d="M10 18l4 2"></path><path d="M5 17v4"></path><path d="M3 20l4 -2"></path><path d="M3 18l4 2"></path><path d="M19 17v4"></path><path d="M17 20l4 -2"></path><path d="M17 18l4 2"></path></svg>
                                             </span>
                                             <div class="w-75 d-inline-block v-middle ps-3">
-                                                <h6 class="mb-1 fs-3  lh-base">My Task</h6>
-                                                <span class="fs-3 d-block text-secondary">To-do and Daily
-                                                    Tasks</span>
+                                                <h6 class="mb-1 fs-3  lh-base">Đổi mật khẩu</h6>
+                                                <span class="fs-3 d-block text-secondary">Bảo mật</span>
                                             </div>
                                         </a>
                                     </div>
                                     <div class="d-grid py-4 px-7 pt-8">
-                                        <a href="authentication-login.html" class="btn btn-primary">Log
-                                            Out</a>
+                                        <a href="{{ route('logout') }}" class="btn btn-primary">Đăng xuất</a>
                                     </div>
                                 </div>
                             </div>

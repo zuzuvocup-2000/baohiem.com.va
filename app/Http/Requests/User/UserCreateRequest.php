@@ -29,10 +29,10 @@ class UserCreateRequest extends FormRequest
             'username' => [
                 'required',
                 'max:255',
-                Rule::unique('TBL_USER', 'username'),
-                Rule::unique('TBL_USER_BENHVIEN', 'username'),
-                Rule::unique('TBL_USERKHACHHANG', 'username'),
-                Rule::unique('tbl_usernhansu', 'username'),
+                Rule::unique('tbl_user', 'username'),
+                Rule::unique('tbl_user_hospital', 'username'),
+                Rule::unique('tbl_user_customer', 'username'),
+                Rule::unique('tbl_user_staff', 'username'),
             ],
             'password' => 'required|max:255|min:6',
         ];
