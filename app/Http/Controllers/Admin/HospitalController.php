@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Hospital;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Services\HospitalService;

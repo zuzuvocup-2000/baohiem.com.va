@@ -32764,6 +32764,17 @@ svg {
     color: white;
     background: var(--bs-primary) !important;
 }
+nav[aria-label="Pagination Navigation"] div:first-child{
+    display: none;
+}
+nav[aria-label="Pagination Navigation"] svg{
+    width: 20px;
+    height: 20px;
+}
+nav[aria-label="Pagination Navigation"] span[aria-current="page"] span{
+    background-color: var(--bs-primary) !important;
+    color: white !important;
+}
 .system-table input{
     overflow: hidden;
     white-space: nowrap;

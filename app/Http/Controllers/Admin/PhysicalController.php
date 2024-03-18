@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Services\CompanyService;
 use App\Services\ContractService;
 use App\Services\PeriodService;
 
-class SupervisorController extends Controller
+class PhysicalController extends Controller
 {
     protected $companyService;
     protected $periodService;
@@ -22,25 +22,19 @@ class SupervisorController extends Controller
         $this->periodService = $periodService;
         $this->contractService = $contractService;
     }
-
-    public function insuranceExpenses()
-    {
-        return view('admin.supervisor.insuranceExpenses');
-    }
-
-    public function account()
+    public function index()
     {
         $companyList = $this->companyService->getCompanyActiveSortByOrder();
         $periodList = $this->periodService->getPeriodActiveByCompany($companyList->first()->id);
         $contractList = $this->contractService->getContractByPeriod($periodList->first()->id);
-        return view('admin.supervisor.account', compact(['companyList', 'periodList', 'contractList']));
+        return view('admin.physical.index', compact(['companyList', 'periodList', 'contractList']));
     }
-
-    public function accountOnline()
+    public function detail()
     {
-        $companyList = $this->companyService->getCompanyActiveSortByOrder();
-        $periodList = $this->periodService->getPeriodActiveByCompany($companyList->first()->id);
-        $contractList = $this->contractService->getContractByPeriod($periodList->first()->id);
-        return view('admin.supervisor.account-online', compact(['companyList', 'periodList', 'contractList']));
+        return view('admin.physical.detail');
+    }
+    public function periodic()
+    {
+        return view('admin.physical.periodic');
     }
 }
