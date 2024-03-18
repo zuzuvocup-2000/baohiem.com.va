@@ -16,4 +16,8 @@ class Controller extends BaseController
     public function __construct()
     {
     }
+
+    public function saveLog($params = []){
+
+    }
 }

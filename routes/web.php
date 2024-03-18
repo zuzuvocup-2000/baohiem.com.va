@@ -1,33 +1,33 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Account\AccountController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Ajax\CompanyController;
 use App\Http\Controllers\Ajax\ContractController;
 use App\Http\Controllers\Ajax\AccountPackageController;
 use App\Http\Controllers\Ajax\PeriodController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\Auth\VerificationController;
-use App\Http\Controllers\User\UserController;
-use App\Http\Controllers\System\SystemController;
-use App\Http\Controllers\Contact\ContactController;
 use App\Http\Controllers\Ajax\CustomerGroupController;
 use App\Http\Controllers\Ajax\CustomerTypeController;
-use App\Http\Controllers\DepartmentController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\PermissionsController;
-use App\Http\Controllers\RolesController;
-use App\Http\Controllers\SupervisorController;
-use App\Http\Controllers\Revenue\RevenueController;
-use App\Http\Controllers\Physical\PhysicalController;
-use App\Http\Controllers\Hospital\HospitalController;
 use App\Http\Controllers\Ajax\HospitalController as HospitalAjax;
 use App\Http\Controllers\Ajax\UserHospitalController;
 use App\Http\Controllers\Ajax\DepartmentController as DepartmentAjax;
-use App\Http\Controllers\Diary\DiaryController;
-use App\Http\Controllers\RenewalController;
+use App\Http\Controllers\Admin\AccountController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\SystemController;
+use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\DepartmentController;
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\PermissionsController;
+use App\Http\Controllers\Admin\RolesController;
+use App\Http\Controllers\Admin\SupervisorController;
+use App\Http\Controllers\Admin\RevenueController;
+use App\Http\Controllers\Admin\PhysicalController;
+use App\Http\Controllers\Admin\HospitalController;
+use App\Http\Controllers\Admin\DiaryController;
+use App\Http\Controllers\Admin\RenewalController;
 
 /*
 |--------------------------------------------------------------------------
