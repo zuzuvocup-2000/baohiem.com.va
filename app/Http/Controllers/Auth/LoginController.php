@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 
 class LoginController extends Controller
 {
@@ -25,6 +25,7 @@ class LoginController extends Controller
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->attempt($credentials, $remember)) {
                 if (Auth::guard('web')->check()) {
+                    $this->saveLog(Auth::user()->id, 'Đăng nhập thành công');
                     return redirect('/dashboard')->with('success', 'Đăng nhập thành công!');
                 } else {
                     return redirect('/');
