@@ -26,7 +26,7 @@ return new class extends Migration
             $table->renameColumn('ACTIVE', 'active');
             $table->renameColumn('TENHOPDONG', 'contract_name');
             $table->renameColumn('mauser', 'user_id');
-            $table->renameColumn('giahan', 'extension');
+            $table->renameColumn('giahan', 'extend');
             $table->renameColumn('mahopdongcu', 'previous_contract_code');
             $table->renameColumn('machitietnienhan', 'period_id');
             $table->renameColumn('tenfile', 'file_name');
@@ -57,7 +57,7 @@ return new class extends Migration
             $table->renameColumn('active', 'ACTIVE');
             $table->renameColumn('contract_name', 'TENHOPDONG');
             $table->renameColumn('user_id', 'mauser');
-            $table->renameColumn('extension', 'giahan');
+            $table->renameColumn('extend', 'giahan');
             $table->renameColumn('previous_contract_code', 'mahopdongcu');
             $table->renameColumn('period_id', 'machitietnienhan');
             $table->renameColumn('file_name', 'tenfile');

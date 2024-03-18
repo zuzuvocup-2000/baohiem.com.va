@@ -138,8 +138,8 @@
                         </div>
                     </td>
                     <td class="text-center">
-                        <input type="checkbox" class="inputField custom-control-input update-contract-extension" disabled=""
-                            {{ $contract['extension'] ? 'checked' : '' }} name="extension" />
+                        <input type="checkbox" class="inputField custom-control-input update-contract-extend" disabled=""
+                            {{ $contract['extend'] ? 'checked' : '' }} name="extend" />
                     </td>
                     <td>
                         <input class="inputField form-control int update-contract-total_contract_value" type="text" name="total_contract_value"
@@ -191,8 +191,8 @@
                         name="end_time" value="" />
                 </td>
                 <td class="text-center">
-                    <input type="checkbox" class="inputField custom-control-input create-contract-extension"
-                        name="extension" />
+                    <input type="checkbox" class="inputField custom-control-input create-contract-extend"
+                        name="extend" />
                 </td>
                 <td class="text-center">
                     <input class="inputField form-control create-contract-total_contract_value int" type="text"

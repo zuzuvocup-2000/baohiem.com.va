@@ -22,7 +22,7 @@ class PeriodService
 
     public function getPeriodActiveByCompany($company = 0)
     {
-        return PeriodDetail::select(['tbl_period_detail.id', 'tbl_period.period_name'])
+        return PeriodDetail::select(['tbl_period.id', 'tbl_period.period_name'])
             ->where([
                 'tbl_period_detail.active' => STATUS_ACTIVE,
                 'tbl_period_detail.company_id' => $company,

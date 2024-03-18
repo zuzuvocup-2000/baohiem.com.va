@@ -564,7 +564,7 @@ $(document).on('click', '.btn-update-contract', function () {
         signature_date: row.find('.update-contract-signature_date').val(),
         effective_time: row.find('.update-contract-effective_time').val(),
         end_time: row.find('.update-contract-end_time').val(),
-        extension: row.find(".update-contract-extension").is(":checked") ? 1 : 0,
+        extend: row.find(".update-contract-extend").is(":checked") ? 1 : 0,
         total_contract_value: row.find('.update-contract-total_contract_value').val(),
         company_id: row.find('.update-contract-company_id').val(),
         period_id: row.find('.update-contract-period_id').val(),
@@ -602,7 +602,7 @@ $(document).on('click', '.btn-create-contract', function () {
         signature_date: $('.create-contract-signature_date').val(),
         effective_time: $('.create-contract-effective_time').val(),
         end_time: $('.create-contract-end_time').val(),
-        extension: $(".create-contract-extension").is(":checked") ? 1 : 0,
+        extend: $(".create-contract-extend").is(":checked") ? 1 : 0,
         total_contract_value: $('.create-contract-total_contract_value').val(),
     };
 

@@ -22,7 +22,7 @@ class Contract extends Model
         'active',
         'contract_name',
         'user_id',
-        'extension',
+        'extend',
         'previous_contract_code',
         'period_id',
         'file_name',

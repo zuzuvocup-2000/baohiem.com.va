@@ -47,7 +47,7 @@ class ContractController extends Controller
                 'signature_date' => Carbon::createFromFormat('d/m/Y', $data['signature_date'])->format('Y-m-d H:i:s'),
                 'effective_time' => Carbon::createFromFormat('d/m/Y', $data['effective_time'])->format('Y-m-d H:i:s'),
                 'end_time' => Carbon::createFromFormat('d/m/Y', $data['end_time'])->format('Y-m-d H:i:s'),
-                'extension' => (bool) $data['extension'],
+                'extend' => STATUS_INACTIVE,
                 'total_contract_value' => (int) str_replace('.', '', $data['total_contract_value']),
                 'period_id' => (int) $periodDetail->id,
                 'user_id' => $authUser->id,
@@ -108,7 +108,6 @@ class ContractController extends Controller
                     'signature_date' => Carbon::createFromFormat('d/m/Y', $data['signature_date'])->format('Y-m-d H:i:s'),
                     'effective_time' => Carbon::createFromFormat('d/m/Y', $data['effective_time'])->format('Y-m-d H:i:s'),
                     'end_time' => Carbon::createFromFormat('d/m/Y', $data['end_time'])->format('Y-m-d H:i:s'),
-                    'extension' => (bool) $data['extension'],
                     'total_contract_value' => (int) str_replace('.', '', $data['total_contract_value']),
                     'period_id' => (int) $periodDetail->id,
                 ]);

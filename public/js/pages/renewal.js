@@ -1,4 +1,3 @@
-
 $('#companySelect').on('change', function () {
     var companyId = $(this).val();
 
@@ -35,7 +34,24 @@ $('#periodSelect').on('change', function () {
             $.each(data, function (key, value) {
                 $('#contractSelect').append('<option value="' + value.id + '">' + value.contract_name + '</option>');
             });
+
+            $('#contractSelect').trigger('change')
         }
     });
 });
 
+
+$('#contractSelect').on('change', function () {
+    var contract = $(this).val();
+    var company = $('#companySelect').val();
+    var period = $('#periodSelect').val();
+    window.location.href = window.location.pathname + '?company=' + company + '&period=' + period + '&contract=' + contract;
+})
+
+$(".daterange").daterangepicker();
+
+$(".singledate").daterangepicker({
+    singleDatePicker: true,
+    showDropdowns: true,
+    drops: 'up',
+});
