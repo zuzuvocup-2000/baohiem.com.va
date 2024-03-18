@@ -7,6 +7,8 @@ use App\Http\Requests\User\UserCreateRequest;
 use App\Http\Requests\User\UserUpdateRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Activitylog\Models\Activity;
 use App\Services\EmployeeService;
 use App\Services\UserService;
 use App\Services\DepartmentService;

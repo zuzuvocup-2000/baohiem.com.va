@@ -62,11 +62,16 @@
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-xl-3" style="display: flex; flex-direction: column-reverse;width: 125px;">
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-danger">Xóa dữ liệu</button>
+                                            <button type="button" class="btn btn-danger"> 
+                                                <span class="icon-item-icon">
+                                                    <img src="{{ asset('/img-system/system/trash_white.svg') }}" alt="" />
+                                                </span>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
                             </form>
+                            
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="system-table table-responsive">
@@ -85,48 +90,24 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @foreach ($activities as $key => $activitie)
                                                 <tr>
                                                     <td>
                                                         <input type="checkbox" class="toggleCheckbox custom-control-input" id="user-" name="id[]" value="42">
                                                     </td>
-                                                    <td class="text-center">1</td>
-                                                    <td>PviAdmin</td>
-                                                    <td class="text-center">hviet</td>
-                                                    <td class="text-center">8/3/2022 00:52:23</td>
+                                                    <td class="text-center">{{ ++$key }}</td>
+                                                    <td>{{ $activitie->employee_name }}</td>
+                                                    <td class="text-center">{{ $activitie->username }}</td>
+                                                    <td class="text-center">{{ $activitie->date_log }}</td>
                                                     <td class="text-center">
-                                                        <span class="icon-item-icon me-1"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-discount-check-filled" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944zm3.697 7.282a1 1 0 0 0 -1.414 0l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.32 1.497l2 2l.094 .083a1 1 0 0 0 1.32 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z" stroke-width="0" fill="currentColor"></path></svg></span>
-                                                         Đăng nhập thành công
+                                                        {{ $activitie->action }}
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td>
-                                                        <input type="checkbox" class="toggleCheckbox custom-control-input" id="user-" name="id[]" value="42">
-                                                    </td>
-                                                    <td class="text-center">1</td>
-                                                    <td>PviAdmin</td>
-                                                    <td class="text-center">hviet</td>
-                                                    <td class="text-center">8/3/2022 00:52:23</td>
-                                                    <td class="text-center">
-                                                        <span class="icon-item-icon me-1"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-direction-sign-off" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M18.73 14.724l1.949 -1.95a1.095 1.095 0 0 0 0 -1.548l-7.905 -7.905a1.095 1.095 0 0 0 -1.548 0l-1.95 1.95m-2.01 2.01l-3.945 3.945a1.095 1.095 0 0 0 0 1.548l7.905 7.905c.427 .428 1.12 .428 1.548 0l3.95 -3.95"></path><path d="M8 12h4"></path><path d="M13.748 13.752l-1.748 1.748"></path><path d="M3 3l18 18"></path></svg></span>
-                                                         Đăng nhập thất bại
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <input type="checkbox" class="toggleCheckbox custom-control-input" id="user-" name="id[]" value="42">
-                                                    </td>
-                                                    <td class="text-center">1</td>
-                                                    <td>PviAdmin</td>
-                                                    <td class="text-center">hviet</td>
-                                                    <td class="text-center">8/3/2022 00:52:23</td>
-                                                    <td class="text-center">
-                                                        <span class="icon-item-icon me-1"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-http-delete" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M3 8v8h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-2z"></path><path d="M14 8h-4v8h4"></path><path d="M10 12h2.5"></path><path d="M17 8v8h4"></path></svg></span>
-                                                         Xóa thao tác user thành công
-                                                    </td>
-                                                </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
+                                    {!! $activities->onEachSide(1)->render() !!}
                                 </div>
                             </div>
                         </div>
@@ -386,7 +367,7 @@
                                 </div>
                             </div>
                             <div class="btn-export text-center"><button class="btn btn-primary" type="button">Xuất báo cáo</button></div>
-              
+                            
                     </div>
                 </div>
             </div>
