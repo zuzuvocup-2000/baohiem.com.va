@@ -8,10 +8,12 @@ use App\Services\CompanyService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Renewal\CreateRenewalRequest;
 use App\Models\Contract;
+use App\Models\GasContractList;
 use App\Services\ContractService;
 use App\Services\CustomerService;
 use App\Services\PeriodDetailService;
 use App\Services\PeriodService;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -37,7 +39,7 @@ class RenewalController extends Controller
     public function index(Request $request)
     {
         $params = $request->query();
-        $companyList = $this->companyService->getCompanyActiveSortByOrder();
+        $companyList = $this->companyService->getCompanyByContract();
 
         if (!isset($params['company'])) {
             $params['company'] = $companyList->first()->id;
@@ -55,8 +57,8 @@ class RenewalController extends Controller
         $contractList = $this->contractService->getContractByPeriod($params['period']);
 
         $contractDetail = $this->contractService->getContractDetail(isset($params['contract']) ? $params['contract'] : (isset($contractList->first()->id) ? $contractList->first()->id : 0));
-        $customerPrimary = $this->contractService->getCustomerPrimary($contractDetail->id);
-        $customerSecondary = $this->contractService->getCustomerSecondary($contractDetail->id);
+        $customerPrimary = $this->contractService->getCustomerPrimary(isset($contractDetail->id) ? $contractDetail->id : 0);
+        $customerSecondary = $this->contractService->getCustomerSecondary(isset($contractDetail->id) ? $contractDetail->id : 0);
         return view('admin.renewal.index', compact(['contractDetail', 'companyList', 'periodListByCompany', 'periodList', 'contractList', 'companyName', 'customerPrimary', 'customerSecondary']));
     }
 
@@ -81,16 +83,15 @@ class RenewalController extends Controller
                 $startDate = trim($dateParts[0]);
                 $endDate = trim($dateParts[1]);
                 $userId = Auth::user()->id;
-
                 $contractNew = Contract::create([
                     'user_id' => $userId,
                     'period_id' => $periodDetail->id,
                     'contract_name' => $createRequest->contract_name,
                     'contract_supplement_number' => $createRequest->contract_supplement_number,
-                    'signature_date' => date('Y-m-d', strtotime($createRequest->signature_date)),
+                    'signature_date' => Carbon::parse($createRequest->signature_date)->format('Y-m-d'),
                     'total_contract_value' => (int) str_replace('.', '', $createRequest->total_contract_value),
-                    'effective_time' => date('Y-m-d', strtotime($startDate)),
-                    'end_time' => date('Y-m-d', strtotime($endDate)),
+                    'effective_time' => Carbon::parse($startDate)->format('Y-m-d'),
+                    'end_time' => Carbon::parse($endDate)->format('Y-m-d'),
                     'extend' => STATUS_INACTIVE,
                     'status' => STATUS_ACTIVE,
                     'previous_contract_code' => (int) $createRequest->contract,
@@ -110,5 +111,17 @@ class RenewalController extends Controller
             DB::rollback();
             return redirect()->route('renewal.index')->with('error', 'Đã có lỗi xảy ra. Vui lòng thử lại sau.')->withInput();
         }
+    }
+
+    public function export($contractId = 0)
+    {
+        $contractDetail = GasContractList::select('id')->where('contract_id', $contractId)->distinct()->pluck('id');
+        if (count($contractDetail) != 0) {
+            $customers = $this->customerService->getCustomerByContractDetail($contractId);
+        }else{
+            $customers = $this->customerService->getCustomerNotByContractDetail($contractId);
+        }
+        dd($customers);
+        return $customers;
     }
 }

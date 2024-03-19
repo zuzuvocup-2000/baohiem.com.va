@@ -55,3 +55,13 @@ $(".singledate").daterangepicker({
     showDropdowns: true,
     drops: 'up',
 });
+
+$('#resetButton').click(function() {
+    if (confirm('Bạn có chắc muốn reset không?')) {
+        resetFields();
+    }
+});
+
+function resetFields() {
+    $('#tableCreateNewContract tbody input[type="text"]').val('');
+}
