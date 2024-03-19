@@ -64,7 +64,7 @@ class CustomerService
         }
 
         if (isset($params['period'])) {
-            $where['tbl_period_detail.id'] = $params['period'];
+            $where['tbl_period_detail.period_id'] = $params['period'];
         }
 
         if (isset($params['contract'])) {
