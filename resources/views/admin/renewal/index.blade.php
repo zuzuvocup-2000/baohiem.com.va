@@ -68,7 +68,7 @@
                                     Hợp đồng cũ
                                 </div>
                                 <div class="system-table table-responsive">
-                                    <table class="table search-table align-middle text-nowrap">
+                                    <table class="table excelExportTable search-table align-middle text-nowrap">
                                         <tbody>
                                             <tr>
                                                 <th>Tên hợp đồng:</th>
@@ -333,7 +333,7 @@
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-5 col-xl-4">
                         <div>
-                            <button class="me-2 btn btn-dark" type="button">Xuất danh sách ra excel</button>
+                            <a href="{{ url('/export-contract-details') }}" class="btn btn-dark me-2">Xuất danh sách ra Excel</a>
                             <button class="btn btn-warning" type="button">Load Danh sách</button>
                         </div>
                     </div>

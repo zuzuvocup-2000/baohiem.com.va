@@ -133,6 +133,7 @@ Route::post('/account/edit/{id}', [AccountController::class, 'update'])->name('a
 // Routes for Renewal
 Route::get('/renewal', [RenewalController::class, 'index'])->name('renewal.index');
 Route::post('/renewal/store', [RenewalController::class, 'store'])->name('renewal.store');
+Route::get('renewal/export', [RenewalController::class, 'export'])->name('renewal.export');
 
 Route::resource('role', RolesController::class);
 Route::resource('permission', PermissionsController::class);

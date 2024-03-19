@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\ContractExport;
 use Illuminate\Http\Request;
 use App\Services\CustomerGroupService;
 use App\Services\CompanyService;
@@ -14,6 +15,7 @@ use App\Services\PeriodDetailService;
 use App\Services\PeriodService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class RenewalController extends Controller
 {
@@ -111,4 +113,8 @@ class RenewalController extends Controller
             return redirect()->route('renewal.index')->with('error', 'Đã có lỗi xảy ra. Vui lòng thử lại sau.')->withInput();
         }
     }
+    public function export()
+{
+    return Excel::download(new ContractExport, 'contract_details.xlsx');
+}
 }
