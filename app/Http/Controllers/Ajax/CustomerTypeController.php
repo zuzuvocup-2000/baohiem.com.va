@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Ajax;
 use App\Models\CustomerType;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class CustomerTypeController extends Controller
@@ -12,20 +13,23 @@ class CustomerTypeController extends Controller
     public function create(Request $request)
     {
         try {
-            DB::beginTransaction();
-            $data = $request->all();
-            $customerType = CustomerType::create([
-                'type_name' => (string) $data['type_name'],
-                'order' => (int) $data['order'],
-                'active' => STATUS_ACTIVE,
-            ]);
+            if (Auth::guard('web')->check()) {
+                DB::beginTransaction();
+                $data = $request->all();
+                $customerType = CustomerType::create([
+                    'type_name' => (string) $data['type_name'],
+                    'order' => (int) $data['order'],
+                    'active' => STATUS_ACTIVE,
+                ]);
 
-            if (!$customerType) {
-                throw new \Exception('Error creating customerType');
+                if (!$customerType) {
+                    throw new \Exception('Error creating customerType');
+                }
+                $this->saveLog(Auth::user()->id, 'Thông tin phân loại khách hàng được tạo thành công.');
+                DB::commit();
+                return response()->json(['status' => STATUS_SUCCESS, 'message' => 'Thông tin phân loại khách hàng được tạo thành công.']);
             }
 
-            DB::commit();
-            return response()->json(['status' => STATUS_SUCCESS, 'message' => 'Thông tin phân loại khách hàng được tạo thành công.']);
         } catch (\Exception $e) {
             DB::rollback();
             return response()->json(['status' => STATUS_ERROR, 'message' => 'Thêm mới thất bại.']);
@@ -35,19 +39,20 @@ class CustomerTypeController extends Controller
     public function delete(Request $request)
     {
         try {
-            DB::beginTransaction();
+            if (Auth::guard('web')->check()) {
+                DB::beginTransaction();
 
-            $customerTypeId = $request->input('customerTypeId');
-            $customerType = CustomerType::find($customerTypeId);
+                $customerTypeId = $request->input('customerTypeId');
+                $customerType = CustomerType::find($customerTypeId);
 
-            if ($customerType) {
-                $customerType->update(['active' => STATUS_INACTIVE]);
+                if ($customerType) {
+                    $customerType->update(['active' => STATUS_INACTIVE]);
+                    $this->saveLog(Auth::user()->id, 'Xóa phân loại khách hàng thành công.');
+                    DB::commit();
 
-                DB::commit();
-
-                return response()->json(['status' => STATUS_SUCCESS, 'message' => 'Xóa phân loại khách hàng thành công.']);
+                    return response()->json(['status' => STATUS_SUCCESS, 'message' => 'Xóa phân loại khách hàng thành công.']);
+                }
             }
-
             throw new \Exception('Không tìm thấy phân nhóm khách hàng theo bệnh viện.');
         } catch (\Exception $e) {
             DB::rollback();
@@ -58,21 +63,22 @@ class CustomerTypeController extends Controller
     public function update(Request $request)
     {
         try {
-            DB::beginTransaction();
+            if (Auth::guard('web')->check()) {
+                DB::beginTransaction();
 
-            $data = $request->all();
-            $customerType = CustomerType::find($data['customerTypeId']);
-            if ($customerType) {
-                $customerType->update([
-                    'type_name' => (string) $data['type_name'],
-                    'order' => (int) $data['order'],
-                ]);
+                $data = $request->all();
+                $customerType = CustomerType::find($data['customerTypeId']);
+                if ($customerType) {
+                    $customerType->update([
+                        'type_name' => (string) $data['type_name'],
+                        'order' => (int) $data['order'],
+                    ]);
+                    $this->saveLog(Auth::user()->id, 'Cập nhật phân loại khách hàng thành công.');
+                    DB::commit();
 
-                DB::commit();
-
-                return response()->json(['status' => STATUS_SUCCESS, 'message' => 'Cập nhật phân loại khách hàng thành công.']);
+                    return response()->json(['status' => STATUS_SUCCESS, 'message' => 'Cập nhật phân loại khách hàng thành công.']);
+                }
             }
-
             throw new \Exception('Không tìm thấy phân nhóm khách hàng theo bệnh viện.');
         } catch (\Exception $e) {
             DB::rollback();
