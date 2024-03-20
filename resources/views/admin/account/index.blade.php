@@ -79,6 +79,7 @@
                             <label for="" class="mb-1">Niên hạn</label>
                             <select class="form-select mr-sm-2" id="periodSelect" name="period">
                                 @foreach ($periodList as $period)
+                                <?php if(isset($_GET['period']) && $_GET['period'] == $period->id) $periodId = $period->id; ?>
                                     <option value="{{ $period->id }}"
                                         {{ isset($_GET['period']) && $_GET['period']  == $period->id ? 'selected' : '' }}>
                                         {{ $period->period_name }}
@@ -92,7 +93,8 @@
                             <label for="" class="mb-1">Tên hợp đồng</label>
                             <select class="form-select mr-sm-2" id="contractSelect" name="contract">
                                 @foreach ($contractList as $contract)
-                                    <option value="{{ $contract->id }}"
+                                <?php if(isset($_GET['contract']) && $_GET['contract'] == $contract->id) $contractId = $contract->id; ?>
+                                <option value="{{ $contract->id }}"
                                         {{ isset($_GET['contract']) && $_GET['contract'] == $contract->id ? 'selected' : '' }}>
                                         {{ $contract->contract_name }}
                                     </option>
@@ -239,11 +241,15 @@
                                 <td class="text-center"><input type="checkbox" disabled="" {{ $account->account_holder ? 'checked' : '' }}/></td>
                                 <td class="text-center">{{ $account->group_name }}</td>
                                 <td class="text-center">
-                                    <button class="btn btn-success me-1 editButton">
-                                        <span class="icon-item-icon">
-                                            <img src="{{ asset('img-system/system/edit_white.svg') }}">
-                                        </span>
-                                    </button>
+                                    <a class="btn btn-success me-1" href="{{ route('account.detail', [
+                                        'id' => $account->id,
+                                        'periodId' => (isset($periodId) ? $periodId : $periodList->first()->id ),
+                                        'contractId' => (isset($contractId) ? $contractId : $contractList->first()->id )
+                                        ],
+                                        ) }}">
+                                        <span class="icon-item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-file-search"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M12 21h-5a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v4.5"></path><path d="M16.5 17.5m-2.5 0a2.5 2.5 0 1 0 5 0a2.5 2.5 0 1 0 -5 0"></path><path d="M18.5 19.5l2.5 2.5"></path></svg></span>
+                                    </a>
+                                   
                                 </td>
                             </tr>
                         @endforeach

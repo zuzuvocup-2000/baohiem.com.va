@@ -127,6 +127,7 @@ Route::get('/account/insurance', [AccountController::class, 'insurance'])->name(
 Route::get('/account/insurance-expenses', [AccountController::class, 'expenses'])->name('account.expenses');
 Route::get('/account/create', [AccountController::class, 'create'])->name('account.create');
 Route::post('/account/create', [AccountController::class, 'store'])->name('user.store');
+Route::get('/account/detail/{id}/{periodId}/{contractId}', [AccountController::class, 'detail'])->name('account.detail');
 Route::get('/account/edit/{id}', [AccountController::class, 'edit'])->name('account.edit');
 Route::post('/account/edit/{id}', [AccountController::class, 'update'])->name('account.update');
 
