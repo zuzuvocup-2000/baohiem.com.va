@@ -35,6 +35,7 @@ class UserUpdateRequest extends FormRequest
                 Rule::unique('tbl_user_customer', 'username')->ignore($userId),
                 Rule::unique('tbl_user_staff', 'username')->ignore($userId),
             ],
+            'role_id' => 'required',
         ];
     }
 
@@ -45,6 +46,7 @@ class UserUpdateRequest extends FormRequest
             'username.required' => __('validation.custom.user.username_required'),
             'username.max' => __('validation.custom.user.username_max'),
             'username.unique' => __('validation.custom.user.username_unique'),
+            'role_id.required' => 'Vui lòng chọn quyền tài khoản.',
         ];
     }
 }

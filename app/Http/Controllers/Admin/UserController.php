@@ -13,6 +13,7 @@ use App\Services\EmployeeService;
 use App\Services\UserService;
 use App\Services\DepartmentService;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -36,8 +37,9 @@ class UserController extends Controller
 
     public function create()
     {
+        $roles = Role::all();
         $employeeList = $this->employeeService->getEmployeeListActive();
-        return view('admin.user.create', compact('employeeList'));
+        return view('admin.user.create', compact('employeeList', 'roles'));
     }
 
     public function store(UserCreateRequest $request)
@@ -49,16 +51,16 @@ class UserController extends Controller
 
             $user = new User([
                 'employee_id' => $validatedData['employee_id'],
-                'QUYENYTRUYCAP' => $validatedData['QUYENYTRUYCAP'],
-                'username'      => $validatedData['username'],
-                'password'      => bcrypt($validatedData['password']),
-                'active'        => $validatedData['active'],
+                'role_id' => $validatedData['role_id'],
+                'username' => $validatedData['username'],
+                'password' => bcrypt($validatedData['password']),
+                'active' => $validatedData['active'],
             ]);
 
             $user->save();
 
             DB::commit();
-
+            $this->saveLog(Auth::user()->id, 'Thêm mới tài khoản thành công.');
             return redirect()->route('home')->with('success', __('accounts.add_new_success'));
         } catch (\Exception $e) {
             DB::rollBack();
@@ -68,28 +70,37 @@ class UserController extends Controller
 
     public function edit($id = 0)
     {
+        $roles = Role::all();
         $user = $this->userService->getUserById($id);
         if (!$user) {
             return redirect()->back()->with('error', 'Tài khoản không tồn tại.');
         }
         $employeeList = $this->employeeService->getEmployeeListActive();
-        return view('admin.user.edit', compact('employeeList', 'user'));
+        return view('admin.user.edit', compact('employeeList', 'user', 'roles'));
     }
 
     public function update($id, UserUpdateRequest $request)
     {
-        $user = $this->userService->getUserById($id);
-        if (!$user) {
-            return redirect()->back()->with('error', 'Tài khoản không tồn tại.');
-        }
+        try {
+            DB::beginTransaction();
+            $user = $this->userService->getUserById($id);
+            if (!$user) {
+                return redirect()->back()->with('error', 'Tài khoản không tồn tại.');
+            }
 
-        $user->update([
-            'employee_id' => $request->employee_id,
-            'QUYENYTRUYCAP' => $request->QUYENYTRUYCAP,
-            'username' => $request->username,
-            'active' => $request->active
-        ]);
-        return redirect()->route('user.index')->with('success', 'Tài khoản đã được cập nhật thành công.');
+            $user->update([
+                'employee_id' => $request->employee_id,
+                'role_id' => $request->role_id,
+                'username' => $request->username,
+            ]);
+
+            DB::commit();
+            $this->saveLog(Auth::user()->id, 'Cập nhật tài khoản thành công.');
+            return redirect()->route('user.index')->with('success', 'Tài khoản đã được cập nhật thành công.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Có lỗi xảy ra khi cập nhật tài khoản.');
+        }
     }
 
     public function delete($id)
@@ -100,7 +111,7 @@ class UserController extends Controller
         }
 
         $user->update([
-            'active' => STATUS_INACTIVE
+            'active' => STATUS_INACTIVE,
         ]);
         return response()->json(['success' => 'Xóa tài khoản thành công.']);
     }

@@ -51,123 +51,122 @@ Route::get('/change-password', [ProfileController::class, 'changePasswordIndex']
 Route::post('/change-password', [ProfileController::class, 'changePassword'])->name('change.password');
 // });
 
-// Route::middleware(['is_user_admin', 'permission'])->group(function () {
+Route::middleware(['is_user_admin', 'permission'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
+    // Routes for free design before
+    Route::group(['prefix' => 'ajax'], function () {
+        // Hợp đồng
+        Route::get('/contract/list', [ContractController::class, 'index'])->name('ajax.contract.index');
+        Route::post('/contract/create', [ContractController::class, 'create'])->name('ajax.contract.create');
+        Route::post('/contract/delete', [ContractController::class, 'delete'])->name('ajax.contract.delete');
+        Route::put('/contract/update', [ContractController::class, 'update'])->name('ajax.contract.update');
 
-// Routes for free design before
-Route::group(['prefix' => 'ajax'], function () {
-    // Hợp đồng
-    Route::get('/contract/list', [ContractController::class, 'index'])->name('contract.index');
-    Route::post('/contract/create', [ContractController::class, 'create'])->name('contract.create');
-    Route::post('/contract/delete', [ContractController::class, 'delete'])->name('contract.delete');
-    Route::put('/contract/update', [ContractController::class, 'update'])->name('contract.update');
+        // Công ty
+        Route::get('/company/list', [CompanyController::class, 'index'])->name('ajax.company.index');
+        Route::post('/company/create', [CompanyController::class, 'create'])->name('ajax.company.create');
+        Route::post('/company/delete', [CompanyController::class, 'delete'])->name('ajax.company.delete');
+        Route::put('/company/update', [CompanyController::class, 'update'])->name('ajax.company.update');
 
-    // Công ty
-    Route::get('/company/list', [CompanyController::class, 'index'])->name('company.index');
-    Route::post('/company/create', [CompanyController::class, 'create'])->name('company.create');
-    Route::post('/company/delete', [CompanyController::class, 'delete'])->name('company.delete');
-    Route::put('/company/update', [CompanyController::class, 'update'])->name('company.update');
+        // Niên hạn
+        Route::get('/period/list', [PeriodController::class, 'index'])->name('ajax.period.index');
+        Route::post('/period/create', [PeriodController::class, 'create'])->name('ajax.period.create');
+        Route::post('/period/delete', [PeriodController::class, 'delete'])->name('ajax.period.delete');
+        Route::put('/period/update', [PeriodController::class, 'update'])->name('ajax.period.update');
 
-    // Niên hạn
-    Route::get('/period/list', [PeriodController::class, 'index'])->name('period.index');
-    Route::post('/period/create', [PeriodController::class, 'create'])->name('period.create');
-    Route::post('/period/delete', [PeriodController::class, 'delete'])->name('period.delete');
-    Route::put('/period/update', [PeriodController::class, 'update'])->name('period.update');
+        // Gói bảo hiểm
+        Route::post('/account-package/create', [AccountPackageController::class, 'create'])->name('ajax.account-package.create');
+        Route::post('/account-package/delete', [AccountPackageController::class, 'delete'])->name('ajax.account-package.delete');
+        Route::put('/account-package/update', [AccountPackageController::class, 'update'])->name('ajax.account-package.update');
 
-    // Gói bảo hiểm
-    Route::post('/account-package/create', [AccountPackageController::class, 'create'])->name('account-package.create');
-    Route::post('/account-package/delete', [AccountPackageController::class, 'delete'])->name('account-package.delete');
-    Route::put('/account-package/update', [AccountPackageController::class, 'update'])->name('account-package.update');
+        // Phân nhóm khách hàng theo bệnh viện
+        Route::post('/customer-group/create', [CustomerGroupController::class, 'create'])->name('ajax.customer-group.create');
+        Route::post('/customer-group/delete', [CustomerGroupController::class, 'delete'])->name('ajax.customer-group.delete');
+        Route::put('/customer-group/update', [CustomerGroupController::class, 'update'])->name('ajax.customer-group.update');
 
-    // Phân nhóm khách hàng theo bệnh viện
-    Route::post('/customer-group/create', [CustomerGroupController::class, 'create'])->name('customer-group.create');
-    Route::post('/customer-group/delete', [CustomerGroupController::class, 'delete'])->name('customer-group.delete');
-    Route::put('/customer-group/update', [CustomerGroupController::class, 'update'])->name('customer-group.update');
+        // Phân loại khách hàng
+        Route::post('/customer-type/create', [CustomerTypeController::class, 'create'])->name('ajax.customer-type.create');
+        Route::post('/customer-type/delete', [CustomerTypeController::class, 'delete'])->name('ajax.customer-type.delete');
+        Route::put('/customer-type/update', [CustomerTypeController::class, 'update'])->name('ajax.customer-type.update');
 
-    // Phân loại khách hàng
-    Route::post('/customer-type/create', [CustomerTypeController::class, 'create'])->name('customer-type.create');
-    Route::post('/customer-type/delete', [CustomerTypeController::class, 'delete'])->name('customer-type.delete');
-    Route::put('/customer-type/update', [CustomerTypeController::class, 'update'])->name('customer-type.update');
+        //Bệnh viện
+        Route::post('/hospital/create', [HospitalAjax::class, 'create'])->name('ajax.hospital-name.create');
+        Route::post('/hospital/delete', [HospitalAjax::class, 'delete'])->name('ajax.hospital-name.delete');
+        Route::put('/hospital/update', [HospitalAjax::class, 'update'])->name('ajax.hospital-name.update');
 
-    //Bệnh viện
-    Route::post('/hospital/create', [HospitalAjax::class, 'create'])->name('hospital-name.create');
-    Route::post('/hospital/delete', [HospitalAjax::class, 'delete'])->name('hospital-name.delete');
-    Route::put('/hospital/update', [HospitalAjax::class, 'update'])->name('hospital-name.update');
+        Route::post('/hospital-user/create', [UserHospitalController::class, 'create'])->name('ajax.hospital-user.create');
+        Route::post('/hospital-user/delete', [UserHospitalController::class, 'delete'])->name('ajax.hospital-user.delete');
+        Route::put('/hospital-user/update', [UserHospitalController::class, 'update'])->name('ajax.hospital-user.update');
 
-    Route::post('/hospital-user/create', [UserHospitalController::class, 'create'])->name('hospital-user.create');
-    Route::post('/hospital-user/delete', [UserHospitalController::class, 'delete'])->name('hospital-user.delete');
-    Route::put('/hospital-user/update', [UserHospitalController::class, 'update'])->name('hospital-user.update');
+        //Phòng ban
+        Route::post('/department/create', [DepartmentAjax::class, 'create'])->name('ajax.department.create');
+        Route::post('/department/delete', [DepartmentAjax::class, 'delete'])->name('ajax.department.delete');
+        Route::put('/department/update', [DepartmentAjax::class, 'update'])->name('ajax.department.update');
+    });
 
-    //Phòng ban
-    Route::post('/department/create', [DepartmentAjax::class, 'create'])->name('department.create');
-    Route::post('/department/delete', [DepartmentAjax::class, 'delete'])->name('department.delete');
-    Route::put('/department/update', [DepartmentAjax::class, 'update'])->name('department.update');
+    // Routes for free design before
+    Route::group(['prefix' => 'user'], function () {
+        Route::get('/', [UserController::class, 'index'])->name('user.index');
+        Route::get('/index', [UserController::class, 'index']);
+        Route::get('/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+        Route::post('/edit/{id}', [UserController::class, 'update'])->name('user.update');
+        Route::get('/create', [UserController::class, 'create'])->name('user.create');
+        Route::post('/create', [UserController::class, 'store'])->name('user.store');
+        Route::delete('/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
+    });
+
+    // Routes for system
+    Route::get('/system', [SystemController::class, 'index'])->name('system.index');
+    // Routes for contact
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+    Route::post('/contact', [ContactController::class, 'sendEmail'])->name('contact.form');
+    // Routes Account
+    Route::get('/account', [AccountController::class, 'index'])->name('account.index');
+    Route::get('/account/insurance', [AccountController::class, 'insurance'])->name('account.insurance');
+    Route::get('/account/insurance-expenses', [AccountController::class, 'expenses'])->name('account.expenses');
+    Route::get('/account/create', [AccountController::class, 'create'])->name('account.create');
+    Route::post('/account/create', [AccountController::class, 'store'])->name('account.store');
+    Route::get('/account/detail/{id}/{periodId}/{contractId}', [AccountController::class, 'detail'])->name('account.detail');
+    Route::get('/account/edit/{id}', [AccountController::class, 'edit'])->name('account.edit');
+    Route::post('/account/edit/{id}', [AccountController::class, 'update'])->name('account.update');
+
+    // Routes for Renewal
+    Route::get('/renewal', [RenewalController::class, 'index'])->name('renewal.index');
+    Route::get('/renewal/export/{id}', [RenewalController::class, 'export'])->name('renewal.export');
+    Route::post('/renewal/store', [RenewalController::class, 'store'])->name('renewal.store');
+
+    Route::resource('role', RolesController::class);
+    Route::resource('permission', PermissionsController::class);
+
+    // Routes for Supervisor
+    Route::get('/supervisor/insurance-expenses', [SupervisorController::class, 'insuranceExpenses'])->name('supervisor.insuranceExpenses');
+    Route::get('/supervisor/account', [SupervisorController::class, 'account'])->name('supervisor.account');
+    Route::get('/supervisor/account-online', [SupervisorController::class, 'accountOnline'])->name('supervisor.accountOnline');
+
+    // Routes for Supervisor
+    Route::get('/supervisor', [SupervisorController::class, 'index'])->name('supervisor.index');
+
+    // Routes Physical
+    Route::get('/physical', [PhysicalController::class, 'index'])->name('physical.index');
+    Route::get('/physical-detail', [PhysicalController::class, 'detail'])->name('physical.detail');
+    Route::get('/physical-periodic', [PhysicalController::class, 'periodic'])->name('physical.periodic');
+
+    // Routes Department
+    Route::get('/department', [DepartmentController::class, 'index'])->name('department.index');
+    Route::post('/department/store', 'DepartmentController@store')->name('department.store');
+    Route::put('/department/update/{id}', 'DepartmentController@update')->name('department.update');
+    Route::delete('/department/delete/{id}', 'DepartmentController@destroy')->name('department.delete');
+
+    // Routes Hospital
+    Route::get('/hospital', [HospitalController::class, 'index'])->name('hospital.index');
+    Route::get('/health-report', [HospitalController::class, 'healthReport'])->name('healthReport.index');
+
+    // Routes Revenue
+    Route::get('/revenue', [RevenueController::class, 'index'])->name('revenue.index');
+
+    // Routes Diary
+    Route::get('/diary', [DiaryController::class, 'index'])->name('diary.index');
 });
-
-// Routes for free design before
-Route::group(['prefix' => 'user'], function () {
-    Route::get('/', [UserController::class, 'index'])->name('user.index');
-    Route::get('/index', [UserController::class, 'index']);
-    Route::get('/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
-    Route::post('/edit/{id}', [UserController::class, 'update'])->name('user.update');
-    Route::get('/create', [UserController::class, 'create'])->name('user.create');
-    Route::post('/create', [UserController::class, 'store'])->name('user.store');
-    Route::delete('/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
-});
-
-// Routes for system
-Route::get('/system', [SystemController::class, 'index'])->name('system.index');
-// Routes for contact
-Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
-Route::post('/contact', [ContactController::class, 'sendEmail'])->name('contact.form');
-// Routes Account
-Route::get('/account', [AccountController::class, 'index'])->name('account.index');
-Route::get('/account/insurance', [AccountController::class, 'insurance'])->name('account.insurance');
-Route::get('/account/insurance-expenses', [AccountController::class, 'expenses'])->name('account.expenses');
-Route::get('/account/create', [AccountController::class, 'create'])->name('account.create');
-Route::post('/account/create', [AccountController::class, 'store'])->name('user.store');
-Route::get('/account/detail/{id}/{periodId}/{contractId}', [AccountController::class, 'detail'])->name('account.detail');
-Route::get('/account/edit/{id}', [AccountController::class, 'edit'])->name('account.edit');
-Route::post('/account/edit/{id}', [AccountController::class, 'update'])->name('account.update');
-
-// Routes for Renewal
-Route::get('/renewal', [RenewalController::class, 'index'])->name('renewal.index');
-Route::get('/renewal/export/{id}', [RenewalController::class, 'export'])->name('renewal.export');
-Route::post('/renewal/store', [RenewalController::class, 'store'])->name('renewal.store');
-
-Route::resource('role', RolesController::class);
-Route::resource('permission', PermissionsController::class);
-
-// Routes for Supervisor
-Route::get('/supervisor/insurance-expenses', [SupervisorController::class, 'insuranceExpenses'])->name('supervisor.insuranceExpenses');
-Route::get('/supervisor/account', [SupervisorController::class, 'account'])->name('supervisor.account');
-Route::get('/supervisor/account-online', [SupervisorController::class, 'accountOnline'])->name('supervisor.accountOnline');
-
-// Routes for Supervisor
-Route::get('/supervisor', [SupervisorController::class, 'index'])->name('supervisor.index');
-
-// Routes Physical
-Route::get('/physical', [PhysicalController::class, 'index'])->name('physical.index');
-Route::get('/physical-detail', [PhysicalController::class, 'detail'])->name('physical.detail');
-Route::get('/physical-periodic', [PhysicalController::class, 'periodic'])->name('physical.periodic');
-
-// Routes Department
-Route::get('/department', [DepartmentController::class, 'index'])->name('department.index');
-Route::post('/department/store', 'DepartmentController@store')->name('department.store');
-Route::put('/department/update/{id}', 'DepartmentController@update')->name('department.update');
-Route::delete('/department/delete/{id}', 'DepartmentController@destroy')->name('department.delete');
-
-// Routes Hospital
-Route::get('/hospital', [HospitalController::class, 'index'])->name('hospital.index');
-Route::get('/health-report', [HospitalController::class, 'healthReport'])->name('healthReport.index');
-
-// Routes Revenue
-Route::get('/revenue', [RevenueController::class, 'index'])->name('revenue.index');
-
-// Routes Diary
-Route::get('/diary', [DiaryController::class, 'index'])->name('diary.index');
-// });
 
 // Route for login page
 Route::get('/', [LoginController::class, 'showLoginForm']);

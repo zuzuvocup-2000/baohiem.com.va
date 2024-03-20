@@ -63,12 +63,10 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        // 'web' => \App\Http\Middleware\IsUserAdmin::class,
-        // 'customer' => \App\Http\Middleware\IsUserCustomer::class,
-        // 'is_user_hospital' => \App\Http\Middleware\IsUserHospital::class,
-        // 'is_user_employee' => \App\Http\Middleware\IsUserEmployee::class,
-        // 'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
-        // 'permission' => \App\Http\Middleware\PermissionMiddleware::class,
-        // 'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
+        'is_user_admin' => \App\Http\Middleware\IsUserAdmin::class,
+        'is_user_customer' => \App\Http\Middleware\IsUserCustomer::class,
+        'is_user_hospital' => \App\Http\Middleware\IsUserHospital::class,
+        'is_user_employee' => \App\Http\Middleware\IsUserEmployee::class,
+        'permission' => \App\Http\Middleware\PermissionMiddleware::class,
     ];
 }

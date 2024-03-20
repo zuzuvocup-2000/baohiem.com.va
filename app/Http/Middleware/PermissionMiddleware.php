@@ -6,6 +6,8 @@ use Closure;
 use Illuminate\Http\Request;
 use Spatie\Permission\Exceptions\UnauthorizedException;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class PermissionMiddleware
 {
@@ -18,29 +20,20 @@ class PermissionMiddleware
      */
     public function handle($request, Closure $next, $permission = null, $guard = null)
     {
-        if (!Auth::guard('web')->check()) {
-            return redirect('/')->with('error', "Bạn không có quyền truy cập vào chức năng này.");
-        }
-        $authGuard = app('auth')->guard('web');
-        if (!is_null($permission)) {
-            $permissions = is_array($permission)
-                ? $permission
-                : explode('|', $permission);
+        $user = auth()->user();
+        if (!$user) {
+            return redirect('/')->with('error', 'Bạn không có quyền truy cập vào chức năng này.');
         }
 
-        if (is_null($permission)) {
-            $permission = $request->route()->getName();
+        $role = Role::findById($user->role_id);
+        $rolePermissions = $role->permissions->pluck('name')->toArray();
 
-            $permissions = array($permission);
+        foreach ($rolePermissions as $permission) {
+            if ($request->route()->getName() === $permission) {
+                return $next($request);
+            }
         }
 
-
-        // foreach ($permissions as $permission) {
-        //     if ($authGuard->user()->can($permission)) {
-        return $next($request);
-        //     }
-        // }
-
-        throw UnauthorizedException::forPermissions($permissions);
+        return redirect('/')->with('error', 'Bạn không có quyền truy cập vào chức năng này.');
     }
 }

@@ -31,32 +31,34 @@
                             <label for="permissions" class="form-label">Gán quyền</label>
 
                             <div class="row">
-                                @foreach (array_chunk($permissions->all(), ceil(count($permissions) / 4)) as $chunk)
-                                    <div class="col-md-3">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <th scope="col" width="1%"><input type="checkbox"
-                                                        name="all_permission"></th>
-                                                <th scope="col" width="20%">Tên quyền</th>
-                                                <th scope="col" width="1%">Vị trí</th>
-                                            </thead>
-                                            @foreach ($chunk as $permission)
-                                                <tr>
-                                                    <td>
-                                                        <input type="checkbox" name="permission[{{ $permission->name }}]"
-                                                            value="{{ $permission->name }}" class='permission'>
-                                                    </td>
-                                                    <td>
-                                                        {{ $permission->description }}
-                                                        <br>
-                                                        {{ $permission->name }}
-                                                    </td>
-                                                    <td>{{ $permission->guard_name }}</td>
-                                                </tr>
-                                            @endforeach
-                                        </table>
-                                    </div>
-                                @endforeach
+                                @if(count($permissions->all()))
+                                    @foreach (array_chunk($permissions->all(), ceil(count($permissions) / 4)) as $chunk)
+                                        <div class="col-md-3">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <th scope="col" width="1%"><input type="checkbox"
+                                                            name="all_permission"></th>
+                                                    <th scope="col" width="20%">Tên quyền</th>
+                                                    <th scope="col" width="1%">Vị trí</th>
+                                                </thead>
+                                                @foreach ($chunk as $permission)
+                                                    <tr>
+                                                        <td>
+                                                            <input type="checkbox" name="permission[{{ $permission->name }}]"
+                                                                value="{{ $permission->name }}" class='permission'>
+                                                        </td>
+                                                        <td>
+                                                            {{ $permission->description }}
+                                                            <br>
+                                                            {{ $permission->name }}
+                                                        </td>
+                                                        <td>{{ $permission->guard_name }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </table>
+                                        </div>
+                                    @endforeach
+                                @endif
                             </div>
 
                             <div style="text-align: right;">

@@ -35,6 +35,7 @@ class UserCreateRequest extends FormRequest
                 Rule::unique('tbl_user_staff', 'username'),
             ],
             'password' => 'required|max:255|min:6',
+            'role_id' => 'required',
         ];
     }
 
@@ -42,6 +43,7 @@ class UserCreateRequest extends FormRequest
     {
         return [
             'employee_id.required' => __('validation.custom.user.employee_id_required'),
+            'role_id.required' => 'Vui lòng chọn quyền tài khoản.',
             'username.required' => __('validation.custom.user.username_required'),
             'username.max' => __('validation.custom.user.username_max'),
             'username.unique' => __('validation.custom.user.username_unique'),

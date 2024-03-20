@@ -48,13 +48,19 @@
                                             {{ __('accounts.role') }}
                                             <span class="text-danger"> *</span>
                                         </label>
-                                        <div class="{{ $errors->has('QUYENYTRUYCAP') ? 'is-invalid' : '' }}">
-                                            <select class="select2" name="QUYENYTRUYCAP">
-                                                <option value="">{{ __('accounts.role_select') }}</option>
+                                        <div class="{{ $errors->has('role_id') ? 'is-invalid' : '' }}">
+                                            <select class="select2" name="role_id">
+                                                <option value="">-- Chọn quyền --</option>
+                                                @foreach ($roles as $role)
+                                                    <option {{ old('role_id', $user->role_id) == $role->id ? 'selected' : '' }}
+                                                        value="{{ $role->id }}">
+                                                        {{ $role->name }}
+                                                    </option>
+                                                @endforeach
                                             </select>
-                                            @if ($errors->has('QUYENYTRUYCAP'))
+                                            @if ($errors->has('role_id'))
                                                 <div class="invalid-feedback">
-                                                    {{ $errors->first('QUYENYTRUYCAP') }}
+                                                    {{ $errors->first('role_id') }}
                                                 </div>
                                             @endif
                                         </div>
