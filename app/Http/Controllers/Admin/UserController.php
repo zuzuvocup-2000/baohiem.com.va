@@ -34,7 +34,10 @@ class UserController extends Controller
         $userList = $this->userService->getUserList($request);
         return view('admin.user.index', compact(['activeDepartments', 'userList']));
     }
-
+    public function management()
+    {
+        return view('admin.user.management');
+    }
     public function create()
     {
         $roles = Role::all();
@@ -115,4 +118,5 @@ class UserController extends Controller
         ]);
         return response()->json(['success' => 'Xóa tài khoản thành công.']);
     }
+ 
 }

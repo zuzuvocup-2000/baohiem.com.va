@@ -94,7 +94,7 @@
                                     {!! $roles->links() !!}
                                 </div>
                             </div>
-                            {!! $roles->onEachSide(1)->render() !!}
+                            {!! $roles->onEachSide(1)->render('pagination::bootstrap-5') !!}
                         </div>
                     </div>
                 </div>

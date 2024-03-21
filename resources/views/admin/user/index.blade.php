@@ -142,7 +142,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            {!! $userList->onEachSide(1)->render() !!}
+                            {!! $userList->onEachSide(1)->render('pagination::bootstrap-5') !!}
                         </div>
                     </div>
                 </div>

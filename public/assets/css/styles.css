@@ -6623,8 +6623,16 @@ textarea.form-control-lg {
     background-color: var(--bs-pagination-bg);
     border: var(--bs-pagination-border-width) solid var(--bs-pagination-border-color);
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    border-radius: 100%;
+    width: 55px;
+    line-height: 42px;
+    height: 55px;
+    text-align: center;
+    margin: 0 5px;
 }
-
+.page-item:first-child .page-link,.page-item:last-child .page-link{
+    border-radius: 100% !important;
+}
 @media (prefers-reduced-motion: reduce) {
     .page-link {
         transition: none;
@@ -6649,8 +6657,8 @@ textarea.form-control-lg {
 .page-link.active, .active>.page-link {
     z-index: 3;
     color: var(--bs-pagination-active-color);
-    background-color: var(--bs-pagination-active-bg);
-    border-color: var(--bs-pagination-active-border-color);
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
 }
 
 .page-link.disabled, .disabled>.page-link {
@@ -32763,9 +32771,6 @@ svg {
 .user-list nav a:hover {
     color: white;
     background: var(--bs-primary) !important;
-}
-nav[aria-label="Pagination Navigation"] div:first-child{
-    display: none;
 }
 nav[aria-label="Pagination Navigation"] svg{
     width: 20px;

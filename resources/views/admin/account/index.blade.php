@@ -256,7 +256,7 @@
                     </tbody>
                 </table>
             </div>
-            {!! $accountList->onEachSide(1)->render() !!}
+            {!! $accountList->onEachSide(1)->render('pagination::bootstrap-5') !!}
         </div>
     </div>
 @endsection
