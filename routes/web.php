@@ -50,6 +50,7 @@ Route::put('/profile', [ProfileController::class, 'update'])->name('profile.upda
 Route::get('/change-password', [ProfileController::class, 'changePasswordIndex'])->name('profile.changePassword');
 Route::post('/change-password', [ProfileController::class, 'changePassword'])->name('change.password');
 // });
+Route::get('/management', [UserController::class, 'management'])->name('user.management');
 
 Route::middleware(['is_user_admin', 'permission'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');

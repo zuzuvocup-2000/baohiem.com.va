@@ -107,7 +107,7 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    {!! $activities->onEachSide(1)->render() !!}
+                                    {!! $activities->onEachSide(1)->render('pagination::bootstrap-5') !!}
                                 </div>
                             </div>
                         </div>

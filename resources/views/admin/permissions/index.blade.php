@@ -72,7 +72,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            {!! $permissions->onEachSide(1)->render() !!}
+                            {!! $permissions->onEachSide(1)->render('pagination::bootstrap-5') !!}
                         </div>
                     </div>
                 </div>
