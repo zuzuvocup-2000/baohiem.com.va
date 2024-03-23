@@ -15,19 +15,25 @@
                         <div class="col-xs-12 col-sm-12 col-xl-3 mb-3">
                             <div class="info-contract-item">
                                 <div class="title me-2">Tên công ty:</div>
-                                <div class="content">Cửu Long JOC</div>
+                                <div class="content">
+                                    {{ isset($contractDetail->company_name) ? $contractDetail->company_name : '' }}
+                                </div>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-xl-3 mb-3">
                             <div class="info-contract-item">
                                 <div class="title me-2">Tên HĐ:</div>
-                                <div class="content">DH CUU LONG 2023</div>
+                                <div class="content">
+                                    {{ isset($contractDetail->contract_name) ? $contractDetail->contract_name : '' }}
+                                </div>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-xl-3 mb-3">
                             <div class="info-contract-item">
                                 <div class="title me-2">Số HĐ:</div>
-                                <div class="content">01/2022HĐ CL</div>
+                                <div class="content">
+                                    {{ isset($contractDetail->contract_supplement_number) ? $contractDetail->contract_supplement_number : '' }}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -35,13 +41,18 @@
                         <div class="col-xs-12 col-sm-12 col-xl-3 mb-3">
                             <div class="info-contract-item">
                                 <div class="title me-2">Ngày ký HĐ:</div>
-                                <div class="content">01/01/2023</div>
+                                <div class="content">
+                                    {{ isset($contractDetail->signature_date) ? date('d/m/Y', strtotime($contractDetail->signature_date)) : '' }}
+                                </div>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-xl-3">
                             <div class="info-contract-item">
                                 <div class="title me-2">Giá trị HĐ:</div>
-                                <div class="content">0 <span>đồng</span></div>
+                                <div class="content">
+                                    {{ isset($contractDetail->total_contract_value) ? number_format($contractDetail->total_contract_value) : '' }}
+                                    <span>đồng</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -49,13 +60,19 @@
                         <div class="col-xs-12 col-sm-12 col-xl-3 mb-3">
                             <div class="info-contract-item">
                                 <div class="title me-2">Thời hạn từ:</div>
-                                <div class="content">01/01/2023 <span>đến:</span> 31/12/2023</div>
+                                <div class="content">
+                                    {{ isset($contractDetail->effective_time) ? date('d/m/Y', strtotime($contractDetail->effective_time)) : '' }}
+                                    <span>đến:</span>
+                                    {{ isset($contractDetail->end_time) ? date('d/m/Y', strtotime($contractDetail->end_time)) : '' }}
+                                </div>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-xl-3">
                             <div class="info-contract-item">
                                 <div class="title me-2">Tên niên hạn:</div>
-                                <div class="content">CL 2023</div>
+                                <div class="content">
+                                    {{ isset($contractDetail->period_name) ? $contractDetail->period_name : '' }}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -67,7 +84,7 @@
                             <select class="form-select mr-sm-2" id="companySelect" name="company">
                                 @foreach ($companyList as $company)
                                     <option value="{{ $company->id }}"
-                                        {{ isset($_GET['company']) && $_GET['company']  == $company->id ? 'selected' : '' }}>
+                                        {{ isset($_GET['company']) && $_GET['company'] == $company->id ? 'selected' : '' }}>
                                         {{ $company->company_name }}
                                     </option>
                                 @endforeach
@@ -79,9 +96,11 @@
                             <label for="" class="mb-1">Niên hạn</label>
                             <select class="form-select mr-sm-2" id="periodSelect" name="period">
                                 @foreach ($periodList as $period)
-                                <?php if(isset($_GET['period']) && $_GET['period'] == $period->id) $periodId = $period->id; ?>
+                                    <?php if (isset($_GET['period']) && $_GET['period'] == $period->id) {
+                                        $periodId = $period->id;
+                                    } ?>
                                     <option value="{{ $period->id }}"
-                                        {{ isset($_GET['period']) && $_GET['period']  == $period->id ? 'selected' : '' }}>
+                                        {{ isset($_GET['period']) && $_GET['period'] == $period->id ? 'selected' : '' }}>
                                         {{ $period->period_name }}
                                     </option>
                                 @endforeach
@@ -93,8 +112,10 @@
                             <label for="" class="mb-1">Tên hợp đồng</label>
                             <select class="form-select mr-sm-2" id="contractSelect" name="contract">
                                 @foreach ($contractList as $contract)
-                                <?php if(isset($_GET['contract']) && $_GET['contract'] == $contract->id) $contractId = $contract->id; ?>
-                                <option value="{{ $contract->id }}"
+                                    <?php if (isset($_GET['contract']) && $_GET['contract'] == $contract->id) {
+                                        $contractId = $contract->id;
+                                    } ?>
+                                    <option value="{{ $contract->id }}"
                                         {{ isset($_GET['contract']) && $_GET['contract'] == $contract->id ? 'selected' : '' }}>
                                         {{ $contract->contract_name }}
                                     </option>
@@ -160,8 +181,9 @@
                     <div class="col-xs-12 col-md-6 mb-3">
                         <div class="form-field">
                             <label for="" class="mb-1">Từ khoá</label>
-                            <input type="search" class="form-control" value="{{ isset($_GET['email']) ? $_GET['keyword'] : '' }}" name="keyword" id="input-search"
-                                placeholder="Tìm kiếm...">
+                            <input type="search" class="form-control"
+                                value="{{ isset($_GET['email']) ? $_GET['keyword'] : '' }}" name="keyword"
+                                id="input-search" placeholder="Tìm kiếm...">
                         </div>
                     </div>
                     <div class="col-xs-12">
@@ -203,7 +225,8 @@
                     <tbody>
                         @foreach ($accountList as $key => $account)
                             <tr role="row" data-id="{{ $account->id }}">
-                                <th class="text-center"><input class="toggleCheckbox" value="{{ $account->id }}" name="id[]" type="checkbox" /></th>
+                                <th class="text-center"><input class="toggleCheckbox" value="{{ $account->id }}"
+                                        name="id[]" type="checkbox" /></th>
                                 <td class="text-center">{{ ++$key }}</td>
                                 <td class="text-center">
                                     <a href="mailto:{{ $account->email }}">
@@ -238,18 +261,29 @@
                                         </svg>
                                     </span>
                                 </td>
-                                <td class="text-center"><input type="checkbox" disabled="" {{ $account->account_holder ? 'checked' : '' }}/></td>
+                                <td class="text-center"><input type="checkbox" disabled=""
+                                        {{ $account->account_holder ? 'checked' : '' }} /></td>
                                 <td class="text-center">{{ $account->group_name }}</td>
                                 <td class="text-center">
-                                    <a class="btn btn-success me-1" href="{{ route('account.detail', [
-                                        'id' => $account->id,
-                                        'periodId' => (isset($periodId) ? $periodId : $periodList->first()->id ),
-                                        'contractId' => (isset($contractId) ? $contractId : $contractList->first()->id )
-                                        ],
-                                        ) }}">
-                                        <span class="icon-item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-file-search"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M12 21h-5a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v4.5"></path><path d="M16.5 17.5m-2.5 0a2.5 2.5 0 1 0 5 0a2.5 2.5 0 1 0 -5 0"></path><path d="M18.5 19.5l2.5 2.5"></path></svg></span>
+                                    <a class="btn btn-success me-1"
+                                        href="{{ route('account.detail', [
+                                            'id' => $account->id,
+                                            'periodId' => isset($periodId) ? $periodId : $periodList->first()->id,
+                                            'contractId' => isset($contractId) ? $contractId : $contractList->first()->id,
+                                        ]) }}">
+                                        <span class="icon-item-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                class="icon icon-tabler icons-tabler-outline icon-tabler-file-search">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
+                                                <path d="M12 21h-5a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v4.5"></path>
+                                                <path d="M16.5 17.5m-2.5 0a2.5 2.5 0 1 0 5 0a2.5 2.5 0 1 0 -5 0"></path>
+                                                <path d="M18.5 19.5l2.5 2.5"></path>
+                                            </svg>
+                                        </span>
                                     </a>
-
                                 </td>
                             </tr>
                         @endforeach

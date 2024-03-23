@@ -21,9 +21,10 @@ class ContractService
     public function getContractDetail($contractId = 0)
     {
         return DB::table('tbl_contract')
-            ->select('tbl_contract.id', 'tbl_contract.contract_name', 'tbl_contract.contract_supplement_number', 'tbl_contract.extend', 'tbl_contract.signature_date', 'tbl_contract.effective_time', 'tbl_contract.end_time', 'tbl_contract.total_contract_value', 'tbl_contract.period_id', 'tbl_period.period_name')
+            ->select('tbl_contract.id', 'tbl_contract.contract_name', 'tbl_contract.contract_supplement_number', 'tbl_contract.extend', 'tbl_contract.signature_date', 'tbl_contract.effective_time', 'tbl_contract.end_time', 'tbl_contract.total_contract_value', 'tbl_contract.period_id', 'tbl_period.period_name', 'tbl_company.company_name')
             ->join('tbl_period_detail', 'tbl_contract.period_id', '=', 'tbl_period_detail.id')
             ->join('tbl_period', 'tbl_period_detail.period_id', '=', 'tbl_period.id')
+            ->join('tbl_company', 'tbl_period_detail.company_id', '=', 'tbl_company.id')
             ->where('tbl_contract.active', STATUS_ACTIVE)
             ->where('tbl_contract.id', $contractId)
             ->distinct()

@@ -49,8 +49,9 @@ class AccountController extends Controller
         if (!isset($params['contract'])) {
             $params['contract'] = $contractList->first() ? $contractList->first()->id : 0;
         }
+        $contractDetail = $this->contractService->getContractDetail($params['contract']);
         $accountList = $this->customerService->getListAccount($params);
-        return view('admin.account.index', compact(['customerGroupList', 'companyList', 'periodList', 'contractList', 'accountList']));
+        return view('admin.account.index', compact(['customerGroupList', 'companyList', 'periodList', 'contractList', 'accountList', 'contractDetail']));
     }
 
     public function detail($id, $periodId, $contractId)
