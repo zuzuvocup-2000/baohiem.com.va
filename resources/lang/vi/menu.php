@@ -37,7 +37,7 @@ return [
     [
         'name' => 'Quản lý sức khỏe',
         'icon' => 'carbon:health-cross',
-        'url' => route('account.index'),
+        'url' => route('physical.index'),
         'items' => [
             [
                 'name' => 'Danh sách khám sức khỏe',

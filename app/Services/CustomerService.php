@@ -13,8 +13,7 @@ class CustomerService
     public function getListAccount($params = [])
     {
         $whereConditions = $this->conditionWhere($params);
-        $query = Contract::distinct()
-            ->select('tbl_customer.id', 'tbl_customer.full_name', 'tbl_customer.images', 'tbl_customer.folder', 'tbl_customer.birth_year', 'tbl_customer.address', 'tbl_customer.issue_date', 'tbl_customer.issue_place', 'tbl_customer.identity_card_number', 'tbl_customer.email', 'tbl_customer.gender', 'tbl_customer.contact_phone', 'tbl_information_insurance.card_number', 'tbl_customer_group.group_name', 'tbl_customer_group.id as group_id', 'tbl_contract.id as contract_id', 'tbl_contract.effective_time', 'tbl_account_detail.account_holder', 'tbl_contract.end_time', 'tbl_account.note', 'tbl_province.province_name', 'tbl_province.id as province_id', 'tbl_account_detail.account_id', 'tbl_customer.locked', 'tbl_information_insurance.old_card_number')
+        $query = Contract::select('tbl_customer.id', 'tbl_customer.full_name', 'tbl_customer.images', 'tbl_customer.folder', 'tbl_customer.birth_year', 'tbl_customer.address', 'tbl_customer.issue_date', 'tbl_customer.issue_place', 'tbl_customer.identity_card_number', 'tbl_customer.email', 'tbl_customer.gender', 'tbl_customer.contact_phone', 'tbl_information_insurance.card_number', 'tbl_customer_group.group_name', 'tbl_customer_group.id as group_id', 'tbl_contract.id as contract_id', 'tbl_contract.effective_time', 'tbl_account_detail.account_holder', 'tbl_contract.end_time', 'tbl_account.note', 'tbl_province.province_name', 'tbl_province.id as province_id', 'tbl_account_detail.account_id', 'tbl_customer.locked', 'tbl_information_insurance.old_card_number')
             ->join('tbl_period_detail', 'tbl_contract.period_id', '=', 'tbl_period_detail.id')
             ->join('tbl_company', 'tbl_period_detail.company_id', '=', 'tbl_company.id')
             ->join('tbl_package_detail', 'tbl_package_detail.company_id', '=', 'tbl_company.id')
@@ -42,7 +41,9 @@ class CustomerService
             });
         }
         $query->orderBy('tbl_account_detail.account_id')->orderBy('tbl_account_detail.account_holder', 'DESC')->orderBy('tbl_customer.full_name');
-        return $query->paginate(PER_PAGE_MEDIUM);
+        $query->groupBy('tbl_customer.id', 'tbl_customer.full_name', 'tbl_customer.images', 'tbl_customer.folder', 'tbl_customer.birth_year', 'tbl_customer.address', 'tbl_customer.issue_date', 'tbl_customer.issue_place', 'tbl_customer.identity_card_number', 'tbl_customer.email', 'tbl_customer.gender', 'tbl_customer.contact_phone', 'tbl_information_insurance.card_number', 'tbl_customer_group.group_name', 'tbl_customer_group.id', 'tbl_contract.id', 'tbl_contract.effective_time', 'tbl_account_detail.account_holder', 'tbl_contract.end_time', 'tbl_account.note', 'tbl_province.province_name', 'tbl_province.id', 'tbl_account_detail.account_id', 'tbl_customer.locked', 'tbl_information_insurance.old_card_number');
+
+        return $query->paginate(PER_PAGE_SMALL)->setPath(route('account.index', $params));
     }
 
     private function conditionWhere($params = [])

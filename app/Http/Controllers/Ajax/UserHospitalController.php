@@ -23,12 +23,12 @@ class UserHospitalController extends Controller
                     'password' => bcrypt((string)$data['password']),
                     'active' => STATUS_ACTIVE
                 ]);
-    
+
                 if (!$userhospital) {
                     throw new \Exception('Error creating Hospital');
                 }
                 $this->saveLog(Auth::user()->id, 'Thông tin tài khoản bệnh viện được tạo thành công.');
-        
+
                 DB::commit();
                 return response()->json(['status' => STATUS_SUCCESS, 'message' => 'Thông tin tài khoản bệnh viện được tạo thành công.']);
             }
@@ -76,7 +76,7 @@ class UserHospitalController extends Controller
                         'hospital_id' => (int)$data['hospital_id'],
                         'employee_name' => (string)$data['employee_name'],
                         'username' => (string)$data['username'],
-                        'password' => bcrypt((string)$data['password']),
+                        // 'password' => bcrypt((string)$data['password']),
                     ]);
                     $this->saveLog(Auth::user()->id, 'Cập nhật thông tin tài khoản bệnh viện thành công.');
                     DB::commit();

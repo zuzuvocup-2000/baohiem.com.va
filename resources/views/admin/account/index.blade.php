@@ -249,7 +249,7 @@
                                         ) }}">
                                         <span class="icon-item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-file-search"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M12 21h-5a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v4.5"></path><path d="M16.5 17.5m-2.5 0a2.5 2.5 0 1 0 5 0a2.5 2.5 0 1 0 -5 0"></path><path d="M18.5 19.5l2.5 2.5"></path></svg></span>
                                     </a>
-                                   
+
                                 </td>
                             </tr>
                         @endforeach
@@ -257,6 +257,11 @@
                 </table>
             </div>
             {!! $accountList->onEachSide(1)->render('pagination::bootstrap-5') !!}
+            <div class="d-flex justify-content-center">
+                <button class="btn btn-primary me-4">Xuất danh sách ra Excel</button>
+                <button class="btn btn-primary me-4">Khoá tài khoản khách hàng</button>
+                <button class="btn btn-primary me-4">Mở tài khoản khách hàng</button>
+            </div>
         </div>
     </div>
 @endsection

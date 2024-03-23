@@ -6616,7 +6616,6 @@ textarea.form-control-lg {
 .page-link {
     position: relative;
     display: block;
-    padding: var(--bs-pagination-padding-y) var(--bs-pagination-padding-x);
     font-size: var(--bs-pagination-font-size);
     color: var(--bs-pagination-color);
     text-decoration: none;
@@ -6624,13 +6623,18 @@ textarea.form-control-lg {
     border: var(--bs-pagination-border-width) solid var(--bs-pagination-border-color);
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     border-radius: 100%;
-    width: 55px;
-    line-height: 42px;
-    height: 55px;
+    width: 40px;
+    line-height: 40px;
+    height: 40px;
     text-align: center;
     margin: 0 5px;
     font-size: 15px;
 }
+
+.pagination .page-item:last-child .page-link{
+    margin-right: 0;
+}
+
 .page-item:first-child .page-link,.page-item:last-child .page-link{
     border-radius: 100% !important;
 }
@@ -33002,13 +33006,13 @@ span.unit{
 .sticky-column thead th:first-child {
   position: sticky;
   left: 0;
-  z-index: 2; 
-  background-color: white; 
+  z-index: 2;
+  background-color: white;
 }
 
 .sticky-column tbody td:first-child {
   position: sticky;
   left: 0;
   z-index: 1;
-  background-color: white; 
+  background-color: white;
 }

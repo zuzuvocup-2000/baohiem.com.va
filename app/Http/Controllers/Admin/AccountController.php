@@ -33,7 +33,7 @@ class AccountController extends Controller
     {
         $params = $request->query();
         $customerGroupList = $this->customerGroupService->getCustomerGroupActive();
-        $companyList = $this->companyService->getCompanyActiveSortByOrder();
+        $companyList = $this->companyService->getCompanyByContract();
 
         // Lấy danh sách niên hạn
         if (!isset($params['company'])) {
@@ -52,21 +52,10 @@ class AccountController extends Controller
         $accountList = $this->customerService->getListAccount($params);
         return view('admin.account.index', compact(['customerGroupList', 'companyList', 'periodList', 'contractList', 'accountList']));
     }
+
     public function detail($id, $periodId, $contractId)
     {
-        $distinctid = Customer::join('tbl_account_detail', 'tbl_customer.id', '=', 'tbl_account_detail.customer_id')
-        ->join('tbl_account', 'tbl_account_detail.account_id', '=', 'tbl_account.id')
-        ->crossJoin('tbl_package_detail')
-        ->join('tbl_company', 'tbl_package_detail.company_id', '=', 'tbl_company.id')
-        ->join('tbl_account_detail_detail', 'tbl_package_detail.id', '=', 'tbl_account_detail_detail.package_detail_id')
-        ->join('tbl_period_detail', 'tbl_company.id', '=', 'tbl_period_detail.company_id')
-        ->join('tbl_contract', 'tbl_period_detail.id', '=', 'tbl_contract.period_id')
-        ->select('tbl_contract.id')
-        ->where('tbl_account_detail.customer_id', '=', $id)
-        ->where('tbl_period_detail.period_id', '=', $periodId)
-        ->where('tbl_contract.active', '=', 1)
-        ->distinct()
-        ->get();
+        $distinctid = Customer::join('tbl_account_detail', 'tbl_customer.id', '=', 'tbl_account_detail.customer_id')->join('tbl_account', 'tbl_account_detail.account_id', '=', 'tbl_account.id')->crossJoin('tbl_package_detail')->join('tbl_company', 'tbl_package_detail.company_id', '=', 'tbl_company.id')->join('tbl_account_detail_detail', 'tbl_package_detail.id', '=', 'tbl_account_detail_detail.package_detail_id')->join('tbl_period_detail', 'tbl_company.id', '=', 'tbl_period_detail.company_id')->join('tbl_contract', 'tbl_period_detail.id', '=', 'tbl_contract.period_id')->select('tbl_contract.id')->where('tbl_account_detail.customer_id', '=', $id)->where('tbl_period_detail.period_id', '=', $periodId)->where('tbl_contract.active', '=', 1)->distinct()->get();
         $distinctData = PeriodDetail::join('tbl_company', 'tbl_period_detail.company_id', '=', 'tbl_company.id')
             ->join('tbl_contract', 'tbl_period_detail.id', '=', 'tbl_contract.period_id')
             ->join('tbl_period', 'tbl_period_detail.period_id', '=', 'tbl_period.id')
@@ -83,7 +72,7 @@ class AccountController extends Controller
             ->select(
                 'tbl_customer.id',
                 'tbl_customer.full_name',
-                DB::raw("CONVERT(nvarchar, tbl_customer.birth_year, 103) AS birth_year"),
+                DB::raw('CONVERT(nvarchar, tbl_customer.birth_year, 103) AS birth_year'),
                 'tbl_customer.address',
                 'tbl_customer.images',
                 'tbl_account.note',
@@ -95,8 +84,8 @@ class AccountController extends Controller
                 'tbl_customer.email',
                 'tbl_customer.gender',
                 'tbl_information_insurance.card_number',
-                DB::raw("CONVERT(nvarchar, tbl_contract.effective_time, 103) AS effective_time"),
-                DB::raw("CONVERT(nvarchar, tbl_contract.end_time, 103) AS end_time"),
+                DB::raw('CONVERT(nvarchar, tbl_contract.effective_time, 103) AS effective_time'),
+                DB::raw('CONVERT(nvarchar, tbl_contract.end_time, 103) AS end_time'),
                 'tbl_account_package.package_price',
                 'tbl_account_package.id',
                 'tbl_account_package.package_name',
@@ -118,7 +107,7 @@ class AccountController extends Controller
                 'tbl_customer_type.type_name',
                 'tbl_customer.locked',
                 'tbl_information_insurance.old_card_number',
-                'tbl_account_detail.first_visit_date'
+                'tbl_account_detail.first_visit_date',
             )
             ->where('tbl_customer.id', '=', $id)
             ->where('tbl_contract.active', '=', 1)
@@ -127,9 +116,7 @@ class AccountController extends Controller
             ->where('tbl_contract.id', '=', $contractId)
             ->distinct()
             ->get();
-        return view('admin.account.detail', compact(['distinctid','distinctData']));
-
-        
+        return view('admin.account.detail', compact(['distinctid', 'distinctData']));
     }
     public function insurance()
     {

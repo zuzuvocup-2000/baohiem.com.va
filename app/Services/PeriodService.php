@@ -25,6 +25,7 @@ class PeriodService
         return PeriodDetail::select(['tbl_period.id', 'tbl_period.period_name'])
             ->where([
                 'tbl_period_detail.active' => STATUS_ACTIVE,
+                'tbl_period.active' => STATUS_ACTIVE,
                 'tbl_period_detail.company_id' => $company,
             ])
             ->join('tbl_period', 'tbl_period.id', '=', 'tbl_period_detail.period_id')
