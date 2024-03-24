@@ -6,6 +6,7 @@
     @include('partial.breadcrumb', ['breadcrumbTitle' => 'Thông tin tài khoản bảo hiểm'])
     <div class="widget-content searchable-container list">
         <form action="">
+            @csrf
             <div class="card card-body">
                 <div class="bg-infor bg-primary-subtle py-2 px-3 mb-2">
                     Thông tin đơn/hợp đồng bảo hiểm
@@ -182,7 +183,7 @@
                         <div class="form-field">
                             <label for="" class="mb-1">Từ khoá</label>
                             <input type="search" class="form-control"
-                                value="{{ isset($_GET['email']) ? $_GET['keyword'] : '' }}" name="keyword"
+                                value="{{ isset($_GET['keyword']) ? $_GET['keyword'] : '' }}" name="keyword"
                                 id="input-search" placeholder="Tìm kiếm...">
                         </div>
                     </div>
