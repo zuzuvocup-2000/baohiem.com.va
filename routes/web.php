@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Ajax\CompanyController;
 use App\Http\Controllers\Ajax\ContractController;
 use App\Http\Controllers\Ajax\AccountPackageController;
+use App\Http\Controllers\Ajax\AccountController as AccountAjax;
 use App\Http\Controllers\Ajax\PeriodController;
 use App\Http\Controllers\Ajax\CustomerGroupController;
 use App\Http\Controllers\Ajax\CustomerTypeController;
@@ -28,7 +29,7 @@ use App\Http\Controllers\Admin\PhysicalController;
 use App\Http\Controllers\Admin\HospitalController;
 use App\Http\Controllers\Admin\DiaryController;
 use App\Http\Controllers\Admin\RenewalController;
-
+use App\Http\Controllers\ExportController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -103,6 +104,10 @@ Route::middleware(['is_user_admin', 'permission'])->group(function () {
         Route::post('/department/create', [DepartmentAjax::class, 'create'])->name('ajax.department.create');
         Route::post('/department/delete', [DepartmentAjax::class, 'delete'])->name('ajax.department.delete');
         Route::put('/department/update', [DepartmentAjax::class, 'update'])->name('ajax.department.update');
+
+        //Tài khoản
+        Route::put('/account/locked', [AccountAjax::class, 'locked'])->name('ajax.account.locked');
+        Route::put('/account/unlocked', [AccountAjax::class, 'unlocked'])->name('ajax.account.unlocked');
     });
 
     // Routes for free design before
@@ -167,6 +172,9 @@ Route::middleware(['is_user_admin', 'permission'])->group(function () {
 
     // Routes Diary
     Route::get('/diary', [DiaryController::class, 'index'])->name('diary.index');
+    
+    // Routes Export 
+    Route::get('/export', [ExportController::class, 'export'])->name('export');
 });
 
 // Route for login page

@@ -5,7 +5,6 @@ $(document).on('click', '.btn-create-hospital', function () {
         hospital_name: $('input[name="create_hospital_name"]').val(),
         hospital_type_id: $('select[name="creat_hospital_type_id"]').val(),
     };
-
     disabledButtonLoading(_this)
     $.ajax({
         type: 'POST',

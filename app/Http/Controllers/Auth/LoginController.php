@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request as HttpRequest;
 
 class LoginController extends Controller
 {
@@ -41,7 +43,7 @@ class LoginController extends Controller
         // Custom logic after successful login
     }
 
-    public function logout(Request $request) : RedirectResponse
+    public function logout(HttpRequest $request) : RedirectResponse
     {
         if (Auth::check()) {
             $this->saveLog(Auth::user()->id, 'Đăng xuất thành công');

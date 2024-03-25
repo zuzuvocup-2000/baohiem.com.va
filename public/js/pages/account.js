@@ -48,3 +48,67 @@ $('#periodSelect').on('change', function () {
 });
 
 // $('#companySelect').trigger('change');
+$(document).ready(function() {
+    $('.btn-locked').click(function() {
+        var selectedIds = [];
+        $('.toggleCheckbox:checked').each(function() {
+            selectedIds.push($(this).val());
+        });
+        if (selectedIds.length > 0) {
+            $.ajax({
+                url: '/ajax/account/locked',
+                type: 'PUT',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    ids: selectedIds
+                },
+                success: function(response) {
+                    if (response.status === 'success') {
+                        toastr.success(response.message);
+                    } else {
+                        toastr.error(response.message);
+                    }
+                },
+                error: function(error) {
+                    toastr.error(error.responseJSON.message);
+                }
+            });
+        } else {
+            alert('Vui lòng chọn ít nhất một tài khoản!');
+        }
+    });
+});
+$(document).ready(function() {
+    $('.btn-unlocked').click(function() {
+        var selectedIds = [];
+        $('.toggleCheckbox:checked').each(function() {
+            selectedIds.push($(this).val());
+        });
+        if (selectedIds.length > 0) {
+            $.ajax({
+                url: '/ajax/account/unlocked',
+                type: 'PUT',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    ids: selectedIds
+                },
+                success: function(response) {
+                    if (response.status === 'success') {
+                        toastr.success(response.message);
+                    } else {
+                        toastr.error(response.message);
+                    }
+                },
+                error: function(error) {
+                    toastr.error(error.responseJSON.message);
+                }
+            });
+        } else {
+            alert('Vui lòng chọn ít nhất một tài khoản!');
+        }
+    });
+});
