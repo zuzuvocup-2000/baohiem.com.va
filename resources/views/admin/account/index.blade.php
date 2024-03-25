@@ -80,49 +80,22 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-6 col-xl-3 mb-3">
-                        <div class="form-field">
-                            <label for="" class="mb-1">Tên công ty</label>
-                            <select class="form-select mr-sm-2" id="companySelect" name="company">
-                                @foreach ($companyList as $company)
-                                    <option value="{{ $company->id }}"
-                                        {{ isset($_GET['company']) && $_GET['company'] == $company->id ? 'selected' : '' }}>
-                                        {{ $company->company_name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
+                        @include('common/select-company', [
+                            'companyId' => (isset($_GET['company']) ? $_GET['company'] : 0),
+                            'companyList' => $companyList
+                        ])
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-6 col-xl-3 mb-3">
-                        <div class="form-field">
-                            <label for="" class="mb-1">Niên hạn</label>
-                            <select class="form-select mr-sm-2" id="periodSelect" name="period">
-                                @foreach ($periodList as $period)
-                                    <?php if (isset($_GET['period']) && $_GET['period'] == $period->id) {
-                                        $periodId = $period->id;
-                                    } ?>
-                                    <option value="{{ $period->id }}"
-                                        {{ isset($_GET['period']) && $_GET['period'] == $period->id ? 'selected' : '' }}>
-                                        {{ $period->period_name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
+                        @include('common/select-period', [
+                            'periodId' => (isset($_GET['period']) ? $_GET['period'] : 0),
+                            'periodList' => $periodList
+                        ])
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-6 col-xl-3 mb-3">
-                        <div class="form-field">
-                            <label for="" class="mb-1">Tên hợp đồng</label>
-                            <select class="form-select mr-sm-2" id="contractSelect" name="contract">
-                                @foreach ($contractList as $contract)
-                                    <?php if (isset($_GET['contract']) && $_GET['contract'] == $contract->id) {
-                                        $contractId = $contract->id;
-                                    } ?>
-                                    <option value="{{ $contract->id }}"
-                                        {{ isset($_GET['contract']) && $_GET['contract'] == $contract->id ? 'selected' : '' }}>
-                                        {{ $contract->contract_name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
+                        @include('common/select-contract', [
+                            'contractId' => (isset($_GET['contract']) ? $_GET['contract'] : 0),
+                            'contractList' => $contractList
+                        ])
                     </div>
                 </div>
                 <div class="row">
@@ -269,8 +242,8 @@
                                     <a class="btn btn-success me-1"
                                         href="{{ route('account.detail', [
                                             'id' => $account->id,
-                                            'periodId' => isset($periodId) ? $periodId : $periodList->first()->id,
-                                            'contractId' => isset($contractId) ? $contractId : $contractList->first()->id,
+                                            'periodId' => isset($_GET['period']) ? $_GET['period'] : $periodList->first()->id,
+                                            'contractId' => isset($_GET['contract']) ? $_GET['contract'] : $contractList->first()->id,
                                         ]) }}">
                                         <span class="icon-item-icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
