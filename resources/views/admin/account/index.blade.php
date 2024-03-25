@@ -293,7 +293,7 @@
             </div>
             {!! $accountList->onEachSide(1)->render('pagination::bootstrap-5') !!}
             <div class="d-flex justify-content-center">
-                <a class="btn btn-primary me-4" href="{{ route('export') }}" class="btn btn-primary">Xuất danh sách ra Excel</a>
+                <a class="btn btn-primary me-4" href="{{ route('export.accountList') }}" class="btn btn-primary">Xuất danh sách ra Excel</a>
                 <button class="btn btn-primary me-4 btn-locked">Khoá tài khoản khách hàng</button>
                 <button class="btn btn-primary me-4 btn-unlocked">Mở tài khoản khách hàng</button>
             </div>

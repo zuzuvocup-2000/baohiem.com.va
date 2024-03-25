@@ -174,11 +174,12 @@ Route::middleware(['is_user_admin', 'permission'])->group(function () {
     Route::get('/diary', [DiaryController::class, 'index'])->name('diary.index');
     
     // Routes Export 
-    Route::get('/export', [ExportController::class, 'export'])->name('export');
+    Route::get('/export/account', [ExportController::class, 'exportAccountList'])->name('export.accountList');
 });
 
 // Route for login page
 Route::get('/', [LoginController::class, 'showLoginForm']);
+
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.post');
 

@@ -12,12 +12,13 @@ class ExportController extends Controller
 {
     protected $customerService;
 
+
     public function __construct(CustomerService $customerService)
     {
         $this->customerService = $customerService;
     }
 
-    public function export(Request $request)
+    public function exportAccountList(Request $request)
     {
         $data = $this->customerService->getListAccountExport($request->all());
 
