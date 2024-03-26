@@ -1,5 +1,6 @@
 <?php
 $currentUser = getInfoUserAdmin();
+$menu = __('menu');
 ?>
 <header class="topbar">
     <div class="with-vertical">
@@ -386,6 +387,59 @@ $currentUser = getInfoUserAdmin();
                     </a>
                 </div>
             </div>
+            <aside class="left-sidebar with-horizontal">
+                <div>
+                    <nav class="sidebar-nav scroll-sidebar container-fluid">
+                        <ul id="sidebarnav">
+                            @if (is_array($menu) && count($menu))
+                                @foreach ($menu as $key => $value)
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link {{ isset($value['items']) && is_array($value['items']) && count($value['items']) ? 'has-arrow' : '' }}"
+                                            href="{{ $value['url'] }}" aria-expanded="false">
+                                            @if (!empty($value['icon']))
+                                                <span class="d-flex"><iconify-icon icon="{{ $value['icon'] }}"
+                                                        class="fs-6"></iconify-icon></span>
+                                            @endif
+                                            <span class="hide-menu">{{ $value['name'] }}</span>
+                                        </a>
+                                        @if (isset($value['items']) && is_array($value['items']) && count($value['items']))
+                                            <ul aria-expanded="false" class="collapse first-level">
+                                                @foreach ($value['items'] as $keyItem => $valueItem)
+                                                    <li class="sidebar-item">
+                                                        <a href="{{ $valueItem['url'] }}"
+                                                            class="sidebar-link {{ isset($valueItem['items']) && is_array($valueItem['items']) && count($valueItem['items']) ? 'has-arrow' : 'sublink' }}">
+                                                            <div class="round-16 d-flex align-items-center justify-content-center">
+                                                                <i class="sidebar-icon"></i>
+                                                            </div>
+                                                            <span class="hide-menu">{{ $valueItem['name'] }}</span>
+                                                        </a>
+                                                        @if (isset($valueItem['items']) && is_array($valueItem['items']) && count($valueItem['items']))
+                                                            <ul aria-expanded="false" class="collapse second-level">
+                                                                @foreach ($valueItem['items'] as $keyItemChild => $valueItemChild)
+                                                                    <li class="sidebar-item">
+                                                                        <a href="{{ $valueItemChild['url'] }}"
+                                                                            class="sidebar-link sublink">
+                                                                            <div
+                                                                                class="round-16 d-flex align-items-center justify-content-center">
+                                                                                <i class="sidebar-icon"></i>
+                                                                            </div><span
+                                                                                class="hide-menu">{{ $valueItemChild['name'] }}</span>
+                                                                        </a>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        @endif
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        @endif
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </nav>
+                </div>
+            </aside>
             <a class="navbar-toggler nav-icon-hover p-0 border-0 text-white" href="javascript:void(0)"
                 data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -626,7 +680,7 @@ $currentUser = getInfoUserAdmin();
                         <li class="nav-item dropdown">
                             <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="/assets/images/profile/user-6.jpg" alt="user" width="30"
+                                <img src="/assets/images/profile/Header-Icon-User.png" alt="user" width="30"
                                     class="profile-pic rounded-circle">
                             </a>
                             <div class="dropdown-menu message-box pt-0 content-dd mailbox dropdown-menu-end dropdown-menu-animate-up"
@@ -636,7 +690,7 @@ $currentUser = getInfoUserAdmin();
                                         <h5 class="mb-0 fs-5 ">Thông tin cá nhân</h5>
                                     </div>
                                     <div class="d-flex align-items-center py-9 mx-7 border-bottom">
-                                        <img src="/assets/images/profile/user-6.jpg" class="rounded-circle"
+                                        <img src="/assets/images/profile/Header-Icon-User.png" class="rounded-circle"
                                             width="80" height="80" alt="">
                                         <div class="ms-3">
                                             @if(isset($currentUser))
@@ -882,100 +936,153 @@ $currentUser = getInfoUserAdmin();
     </div>
     <div class="app-header with-horizontal">
         <nav class="navbar navbar-expand-xl container-fluid p-0">
-            <ul class="navbar-nav">
-                <li class="nav-item d-block d-xl-none">
-                    <a class="nav-link sidebartoggler ms-n3" id="sidebarCollapse" href="javascript:void(0)">
-                        <i class="ti ti-menu-2"></i>
-                    </a>
-                </li>
-                <li class="nav-item d-none d-xl-block">
-                    <div class="brand-logo d-flex align-items-center justify-content-between">
-                        <a href="/" class="text-nowrap logo-img">
-                            <span class="">
-                                <img src="{{ asset('/img-system/system/logo.png') }}" class="logo-horizontal ps-2"
-                                    alt="homepage">
-                            </span>
+            <div class="container-xxl">
+                <ul class="navbar-nav">
+                    <li class="nav-item d-block d-xl-none">
+                        <a class="nav-link sidebartoggler ms-n3" id="sidebarCollapse" href="javascript:void(0)">
+                            <i class="ti ti-menu-2"></i>
                         </a>
-                    </div>
-                </li>
-            </ul>
-
-
-            <a class="navbar-toggler nav-icon-hover p-0 border-0" href="javascript:void(0)"
-                data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
-                aria-expanded="false" aria-label="Toggle navigation">
-                <span class="p-2">
-                    <iconify-icon icon="solar:menu-dots-bold" class="fs-7"></iconify-icon>
-                </span>
-            </a>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <div class="d-flex align-items-center justify-content-between px-0 px-xl-8">
-                    <a href="javascript:void(0)"
-                        class="nav-link round p-1 ps-0 d-flex d-xl-none align-items-center justify-content-center"
-                        type="button" data-bs-toggle="offcanvas" data-bs-target="#mobilenavbar"
-                        aria-controls="offcanvasWithBothOptions">
-                        <i class="ti ti-align-justified fs-7"></i>
-                    </a>
-                    <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-center">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="/assets/images/profile/user-6.jpg" alt="user" width="30"
-                                    class="profile-pic rounded-circle">
+                    </li>
+                    <li class="nav-item d-none d-xl-block">
+                        <div class="brand-logo d-flex align-items-center justify-content-between">
+                            <a href="/" class="text-nowrap logo-img">
+                                <span class="">
+                                    <img src="{{ asset('/img-system/system/logo.png') }}" class="logo-horizontal ps-2"
+                                        alt="homepage">
+                                </span>
                             </a>
-                            <div class="dropdown-menu message-box pt-0 content-dd mailbox dropdown-menu-end dropdown-menu-animate-up"
-                                aria-labelledby="drop2">
-                                <div class="profile-dropdown position-relative" data-simplebar="">
-                                    <div class="py-3 px-7 pb-0">
-                                        <h5 class="mb-0 fs-5 ">Thông tin cá nhân</h5>
-                                    </div>
-                                    <div class="d-flex align-items-center py-9 mx-7 border-bottom">
-                                        <img src="/assets/images/profile/user-6.jpg" class="rounded-circle"
-                                            width="80" height="80" alt="">
-                                        @if(isset($currentUser))
-                                        <div class="ms-3">
-                                            <h5 class="mb-1 fs-4 text-secondary">
-                                                {{ $currentUser->employee->employee_name }}</h5>
-                                            <span
-                                                class="mb-1 d-block text-secondary">{{ $currentUser->role_name }}</span>
-                                            <p class="mb-0 d-flex align-items-center gap-2">
-                                                <i class="ti ti-mail fs-4"></i> {{ $currentUser->employee->email }}
-                                            </p>
+                        </div>
+                    </li>
+                </ul>
+                <aside class="justify-content-center">
+                    <div>
+                        <nav class="sidebar-nav scroll-sidebar container-fluid">
+                            <ul id="sidebarnav">
+                                @if (is_array($menu) && count($menu))
+                                    @foreach ($menu as $key => $value)
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link {{ isset($value['items']) && is_array($value['items']) && count($value['items']) ? 'has-arrow' : '' }}"
+                                                href="{{ $value['url'] }}" aria-expanded="false">
+                                                @if (!empty($value['icon']))
+                                                    <span class="d-flex"><iconify-icon icon="{{ $value['icon'] }}"
+                                                            class="fs-6"></iconify-icon></span>
+                                                @endif
+                                                <span class="hide-menu">{{ $value['name'] }}</span>
+                                            </a>
+                                            @if (isset($value['items']) && is_array($value['items']) && count($value['items']))
+                                                <ul aria-expanded="false" class="collapse first-level">
+                                                    @foreach ($value['items'] as $keyItem => $valueItem)
+                                                        <li class="sidebar-item">
+                                                            <a href="{{ $valueItem['url'] }}"
+                                                                class="sidebar-link {{ isset($valueItem['items']) && is_array($valueItem['items']) && count($valueItem['items']) ? 'has-arrow' : 'sublink' }}">
+                                                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                                                    <i class="sidebar-icon"></i>
+                                                                </div>
+                                                                <span class="hide-menu">{{ $valueItem['name'] }}</span>
+                                                            </a>
+                                                            @if (isset($valueItem['items']) && is_array($valueItem['items']) && count($valueItem['items']))
+                                                                <ul aria-expanded="false" class="collapse second-level">
+                                                                    @foreach ($valueItem['items'] as $keyItemChild => $valueItemChild)
+                                                                        <li class="sidebar-item">
+                                                                            <a href="{{ $valueItemChild['url'] }}"
+                                                                                class="sidebar-link sublink">
+                                                                                <div
+                                                                                    class="round-16 d-flex align-items-center justify-content-center">
+                                                                                    <i class="sidebar-icon"></i>
+                                                                                </div><span
+                                                                                    class="hide-menu">{{ $valueItemChild['name'] }}</span>
+                                                                            </a>
+                                                                        </li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            @endif
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
+                                        </li>
+                                    @endforeach
+                                @endif
+                            </ul>
+                        </nav>
+                    </div>
+                </aside>
+                <a class="navbar-toggler nav-icon-hover p-0 border-0" href="javascript:void(0)"
+                    data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="p-2">
+                        <iconify-icon icon="solar:menu-dots-bold" class="fs-7"></iconify-icon>
+                    </span>
+                </a>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <div class="d-flex align-items-center justify-content-between px-0 px-xl-8">
+                        <a href="javascript:void(0)"
+                            class="nav-link round p-1 ps-0 d-flex d-xl-none align-items-center justify-content-center"
+                            type="button" data-bs-toggle="offcanvas" data-bs-target="#mobilenavbar"
+                            aria-controls="offcanvasWithBothOptions">
+                            <i class="ti ti-align-justified fs-7"></i>
+                        </a>
+                        <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-center">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="/assets/images/profile/Header-Icon-User.png" alt="user" width="30"
+                                        class="profile-pic rounded-circle">
+                                </a>
+                                <div class="dropdown-menu message-box pt-0 content-dd mailbox dropdown-menu-end dropdown-menu-animate-up"
+                                    aria-labelledby="drop2">
+                                    <div class="profile-dropdown position-relative" data-simplebar="">
+                                        <div class="py-3 px-7 pb-0">
+                                            <h5 class="mb-0 fs-5 ">Thông tin cá nhân</h5>
                                         </div>
-                                        @endif
-                                    </div>
-                                    <div class="message-body">
-                                        <a href="{{ route('profile.user') }}"
-                                            class="py-8 px-7 mt-8 d-flex align-items-center">
-                                            <span
-                                                class="d-flex align-items-center justify-content-center bg-warning-subtle rounded-circle round p-6 fs-6 text-primary">
-                                                <iconify-icon icon="solar:user-circle-line-duotone"
-                                                    class="text-primary"></iconify-icon>
-                                            </span>
-                                            <div class="w-75 d-inline-block v-middle ps-3">
-                                                <h6 class="mb-1 fs-3  lh-base">Thông tin cá nhân</h6>
-                                                <span class="fs-3 d-block text-secondary">Cài đặt tài khoản</span>
+                                        <div class="d-flex align-items-center py-9 mx-7 border-bottom">
+                                            <img src="/assets/images/profile/Header-Icon-User.png" class="rounded-circle"
+                                                width="80" height="80" alt="">
+                                            @if(isset($currentUser))
+                                            <div class="ms-3">
+                                                <h5 class="mb-1 fs-4 text-secondary">
+                                                    {{ $currentUser->employee->employee_name }}</h5>
+                                                <span
+                                                    class="mb-1 d-block text-secondary">{{ $currentUser->role_name }}</span>
+                                                <p class="mb-0 d-flex align-items-center gap-2">
+                                                    <i class="ti ti-mail fs-4"></i> {{ $currentUser->employee->email }}
+                                                </p>
                                             </div>
-                                        </a>
-                                        <a href="{{ route('profile.changePassword') }}"
-                                            class="py-8 px-7 mt-8 d-flex align-items-center">
-                                            <span
-                                                class="d-flex align-items-center justify-content-center bg-success-subtle rounded-circle round p-6 fs-6 text-primary">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-password-fingerprint" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M17 8c.788 1 1 2 1 3v1"></path><path d="M9 11c0 -1.578 1.343 -3 3 -3s3 1.422 3 3v2"></path><path d="M12 11v2"></path><path d="M6 12v-1.397c-.006 -1.999 1.136 -3.849 2.993 -4.85a6.385 6.385 0 0 1 6.007 -.005"></path><path d="M12 17v4"></path><path d="M10 20l4 -2"></path><path d="M10 18l4 2"></path><path d="M5 17v4"></path><path d="M3 20l4 -2"></path><path d="M3 18l4 2"></path><path d="M19 17v4"></path><path d="M17 20l4 -2"></path><path d="M17 18l4 2"></path></svg>
-                                            </span>
-                                            <div class="w-75 d-inline-block v-middle ps-3">
-                                                <h6 class="mb-1 fs-3  lh-base">Đổi mật khẩu</h6>
-                                                <span class="fs-3 d-block text-secondary">Bảo mật</span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="d-grid py-4 px-7 pt-8">
-                                        <a href="{{ route('logout') }}" class="btn btn-primary">Đăng xuất</a>
+                                            @endif
+                                        </div>
+                                        <div class="message-body">
+                                            <a href="{{ route('profile.user') }}"
+                                                class="py-8 px-7 mt-8 d-flex align-items-center">
+                                                <span
+                                                    class="d-flex align-items-center justify-content-center bg-warning-subtle rounded-circle round p-6 fs-6 text-primary">
+                                                    <iconify-icon icon="solar:user-circle-line-duotone"
+                                                        class="text-primary"></iconify-icon>
+                                                </span>
+                                                <div class="w-75 d-inline-block v-middle ps-3">
+                                                    <h6 class="mb-1 fs-3  lh-base">Thông tin cá nhân</h6>
+                                                    <span class="fs-3 d-block text-secondary">Cài đặt tài khoản</span>
+                                                </div>
+                                            </a>
+                                            <a href="{{ route('profile.changePassword') }}"
+                                                class="py-8 px-7 mt-8 d-flex align-items-center">
+                                                <span
+                                                    class="d-flex align-items-center justify-content-center bg-success-subtle rounded-circle round p-6 fs-6 text-primary">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-password-fingerprint" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M17 8c.788 1 1 2 1 3v1"></path><path d="M9 11c0 -1.578 1.343 -3 3 -3s3 1.422 3 3v2"></path><path d="M12 11v2"></path><path d="M6 12v-1.397c-.006 -1.999 1.136 -3.849 2.993 -4.85a6.385 6.385 0 0 1 6.007 -.005"></path><path d="M12 17v4"></path><path d="M10 20l4 -2"></path><path d="M10 18l4 2"></path><path d="M5 17v4"></path><path d="M3 20l4 -2"></path><path d="M3 18l4 2"></path><path d="M19 17v4"></path><path d="M17 20l4 -2"></path><path d="M17 18l4 2"></path></svg>
+                                                </span>
+                                                <div class="w-75 d-inline-block v-middle ps-3">
+                                                    <h6 class="mb-1 fs-3  lh-base">Đổi mật khẩu</h6>
+                                                    <span class="fs-3 d-block text-secondary">Bảo mật</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="d-grid py-4 px-7 pt-8">
+                                            <a href="{{ route('logout') }}" class="btn btn-primary">Đăng xuất</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                    </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </nav>
