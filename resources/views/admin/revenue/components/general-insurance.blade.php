@@ -4,36 +4,44 @@
         <label class="form-check-label" for="success2-check">Toàn bộ theo niên hạn</label>
     </div>
     <div class="row mb-2">
-        <div class="col-sm-12 col-md-6 col-xl-3">
-            @include('common/select-company', [
-                'companyId' => isset($_GET['company']) ? $_GET['company'] : 0,
-                'companyList' => $companyList,
-            ])
-        </div>
-        <div class="col-sm-12 col-md-6 col-xl-3">
-            @include('common/select-period', [
-                'periodId' => isset($_GET['period']) ? $_GET['period'] : 0,
-                'periodList' => $periodList,
-            ])
-        </div>
-        <div class="col-sm-12 col-md-6 col-xl-3">
-            @include('common/select-contract', [
-                'contractId' => isset($_GET['contract']) ? $_GET['contract'] : 0,
-                'contractList' => $contractList,
-            ])
-        </div>
-        <div class="col-sm-12 col-md-6 col-xl-3">
-            <div class="form-group ">
-                <label for="">Thời gian hiệu lực từ:</label>
-                <div class="input-group">
-                    <input type="text" class="form-control daterange" id="dateInput">
-                    <span class="input-group-text">
-                        <i class="ti ti-calendar fs-5"></i>
-                    </span>
+        <div class="col-11">
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-xl-3">
+                    @include('common/select-company', [
+                        'companyId' => isset($_GET['company']) ? $_GET['company'] : 0,
+                        'companyList' => $companyList,
+                    ])
+                </div>
+                <div class="col-sm-12 col-md-6 col-xl-3">
+                    @include('common/select-period', [
+                        'periodId' => isset($_GET['period']) ? $_GET['period'] : 0,
+                        'periodList' => $periodList,
+                    ])
+                </div>
+                <div class="col-sm-12 col-md-6 col-xl-3">
+                    @include('common/select-contract', [
+                        'contractId' => isset($_GET['contract']) ? $_GET['contract'] : 0,
+                        'contractList' => $contractList,
+                    ])
+                </div>
+                <div class="col-sm-12 col-md-6 col-xl-3">
+                    <div class="form-field">
+                        <label for="" class="mb-1">Thời gian hiệu lực từ:</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control daterange" id="dateInput" name="time_range" value="{{ isset($_GET['time_range']) ? $_GET['time_range'] : date('01/01/Y') . ' - ' . date('d/m/Y') }}">
+                            <span class="input-group-text">
+                                <i class="ti ti-calendar fs-5"></i>
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="col-1 d-flex flex-column-reverse">
+            <button class="btn btn-primary w-100" type="submit">Tìm kiếm</button>
+        </div>
     </div>
+
 </form>
 <div class="row">
     <div class="col-md-12 col-xl-6">

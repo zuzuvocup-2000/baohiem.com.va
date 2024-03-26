@@ -9,6 +9,7 @@ use App\Services\ContractService;
 use App\Services\CustomerGroupService;
 use App\Services\CustomerService;
 use App\Services\PeriodService;
+use App\Services\RevenueService;
 use Illuminate\Http\Request;
 
 class RevenueController extends Controller
@@ -19,14 +20,16 @@ class RevenueController extends Controller
     protected $accountService;
     protected $customerService;
     protected $customerGroupService;
+    protected $revenueService;
 
-    public function __construct(CompanyService $companyService, PeriodService $periodService, ContractService $contractService, CustomerGroupService $customerGroupService, CustomerService $customerService, AccountService $accountService)
+    public function __construct(CompanyService $companyService, PeriodService $periodService, ContractService $contractService, CustomerGroupService $customerGroupService, CustomerService $customerService, AccountService $accountService, RevenueService $revenueService)
     {
         $this->customerGroupService = $customerGroupService;
         $this->companyService = $companyService;
         $this->periodService = $periodService;
         $this->contractService = $contractService;
         $this->customerService = $customerService;
+        $this->revenueService = $revenueService;
         $this->accountService = $accountService;
     }
 
@@ -46,8 +49,12 @@ class RevenueController extends Controller
             $params['period'] = $periodList->first() ? $periodList->first()->id : 0;
         }
         $contractList = $this->contractService->getContractByPeriod($params['period']);
+        if (!isset($params['contract'])) {
+            $params['contract'] = $contractList->first() ? $contractList->first()->id : 0;
+        }
 
-
+        $generalInsurance = $this->revenueService->getAllGeneralInsurance($params['company'], $params['period'], $params['contract']);
+        dd($generalInsurance);
         return view('admin.revenue.index', compact(['companyList', 'periodList', 'contractList']));
     }
 }

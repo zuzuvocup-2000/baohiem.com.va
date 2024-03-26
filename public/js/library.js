@@ -1,14 +1,53 @@
 $(document).ready(function () {
+    $('#companySelectGeneral').on('change', function () {
+        var companyId = $(this).val();
+
+        $.ajax({
+            type: 'GET',
+            url: '/ajax/period/list',
+            data: {
+                'company_id': companyId
+            },
+            success: function (data) {
+                $('#periodSelectGeneral').empty();
+
+                $.each(data, function (key, value) {
+                    $('#periodSelectGeneral').append('<option value="' + value.id + '">' + value.period_name + '</option>');
+                });
+
+                $('#periodSelectGeneral').trigger('change');
+            }
+        });
+    });
+
+    $('#periodSelectGeneral').on('change', function () {
+        var periodId = $(this).val();
+
+        $.ajax({
+            type: 'GET',
+            url: '/ajax/contract/list',
+            data: {
+                'period_id': periodId
+            },
+            success: function (data) {
+                $('#contractSelectGeneral').empty();
+
+                $.each(data, function (key, value) {
+                    $('#contractSelectGeneral').append('<option value="' + value.id + '">' + value.contract_name + '</option>');
+                });
+            }
+        });
+    });
+
     $(".toggleAll").on("change", function () {
         $(this).parents('table').find(".toggleCheckbox").prop("checked", $(this).prop("checked"));
     });
+
     $(".toggleCheckbox").on("change", function () {
         $(this).parents('table').find(".toggleAll").prop("checked", $(this).parents('table').find(".toggleCheckbox:checked").length === $(this).parents('table').find(".toggleCheckbox")
             .length);
     });
-});
 
-$(document).ready(function () {
     $(document).on('click', '.editButton', function () {
         var row = $(this).closest("tr");
         var inputFields = row.find(".inputField");
