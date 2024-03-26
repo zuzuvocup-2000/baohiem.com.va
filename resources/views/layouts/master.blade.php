@@ -31,9 +31,6 @@
         @include('partial.aside-vertical')
         <div class="page-wrapper">
             @include('partial.header')
-
-            @include('partial.aside-horizontal')
-
             <div class="body-wrapper">
                 <div class="container-fluid">
                     @yield('content')

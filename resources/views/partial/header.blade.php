@@ -1,5 +1,6 @@
 <?php
 $currentUser = getInfoUserAdmin();
+$menu = __('menu');
 ?>
 <header class="topbar">
     <div class="with-vertical">
@@ -11,368 +12,6 @@ $currentUser = getInfoUserAdmin();
                         <iconify-icon icon="solar:list-bold-duotone" class="fs-7"></iconify-icon>
                     </a>
                 </li>
-                <li class="nav-item d-none d-lg-block search-box">
-                    <a class="nav-link nav-icon-hover d-none d-md-flex waves-effect waves-dark"
-                        href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        <iconify-icon icon="solar:magnifer-linear"></iconify-icon>
-                    </a>
-                </li>
-                <li class="nav-item dropdown mega-dropdown d-none d-lg-block">
-                    <a class="nav-link" id="drop2" href="#" data-bs-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        Mega <iconify-icon icon="solar:alt-arrow-down-outline" class=" ps-1 fs-4">
-                        </iconify-icon>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-animate-up mt-2" aria-labelledby="drop2">
-                        <div class="mega-dropdown-menu row">
-                            <div class="col-lg-3 col-xl-2 mb-4">
-                                <h4 class="mb-3 fs-5 ">Carousel</h4>
-                                <div id="carouselExampleControls" class="carousel slide carousel-dark"
-                                    data-bs-ride="carousel">
-                                    <div class="carousel-inner">
-                                        <div class="carousel-item active">
-                                            <img class="d-block img-fluid" src="/assets/images/blog/blog-img1.jpg"
-                                                alt="First slide">
-                                        </div>
-                                        <div class="carousel-item">
-                                            <img class="d-block img-fluid" src="/assets/images/blog/blog-img2.jpg"
-                                                alt="Second slide">
-                                        </div>
-                                        <div class="carousel-item">
-                                            <img class="d-block img-fluid" src="/assets/images/blog/blog-img3.jpg"
-                                                alt="Third slide">
-                                        </div>
-                                    </div>
-                                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
-                                        data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Previous</span>
-                                    </a>
-                                    <a class="carousel-control-next" href="#carouselExampleControls" role="button"
-                                        data-bs-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Next</span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 mb-4">
-                                <h4 class="mb-3 fs-5">Accordion</h4>
-                                <div class="accordion accordion-flush" id="accordionFlushExample">
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="flush-headingOne">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
-                                                aria-expanded="false" aria-controls="flush-collapseOne">
-                                                Accordion Item #1
-                                            </button>
-                                        </h2>
-                                        <div id="flush-collapseOne" class="accordion-collapse collapse"
-                                            aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                            <div class="accordion-body">
-                                                Anim pariatur cliche reprehenderit, enim eiusmod
-                                                high life accusamus terry richardson ad squid.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="flush-headingTwo">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo"
-                                                aria-expanded="false" aria-controls="flush-collapseTwo">
-                                                Accordion Item #2
-                                            </button>
-                                        </h2>
-                                        <div id="flush-collapseTwo" class="accordion-collapse collapse"
-                                            aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                                            <div class="accordion-body">
-                                                Anim pariatur cliche reprehenderit, enim eiusmod
-                                                high life accusamus terry richardson ad squid.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="flush-headingThree">
-                                            <button class="accordion-button collapsed" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#flush-collapseThree"
-                                                aria-expanded="false" aria-controls="flush-collapseThree">
-                                                Accordion Item #3
-                                            </button>
-                                        </h2>
-                                        <div id="flush-collapseThree" class="accordion-collapse collapse"
-                                            aria-labelledby="flush-headingThree"
-                                            data-bs-parent="#accordionFlushExample">
-                                            <div class="accordion-body">
-                                                Anim pariatur cliche reprehenderit, enim eiusmod
-                                                high life accusamus terry richardson ad squid.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 mb-4">
-                                <h4 class="mb-3 fs-5">Contact Us</h4>
-                                <form>
-                                    <div class="mb-3 form-floating">
-                                        <input type="text" class="form-control" id="exampleInputname1"
-                                            placeholder="Enter Name">
-                                        <label>Enter Name</label>
-                                    </div>
-                                    <div class="mb-3 form-floating">
-                                        <input type="email" class="form-control" placeholder="Enter email">
-                                        <label>Enter Email address</label>
-                                    </div>
-                                    <div class="mb-3 form-floating">
-                                        <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Message"></textarea>
-                                        <label>Enter Message</label>
-                                    </div>
-                                    <button type="submit" class="btn px-4 rounded-pill btn-primary">
-                                        Submit
-                                    </button>
-                                </form>
-                            </div>
-                            <div class="col-lg-3 col-xlg-4 mb-4">
-                                <h4 class="mb-3 fs-5">List style</h4>
-                                <ol class="list-group list-group-numbered px-0">
-                                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                                        <div class="ms-2 me-auto">
-                                            <h6 class="fw-semibold mb-0">Subheading</h6>
-                                            <div class=" d-block text-muted text-truncate text-truncate">
-                                                Content for list item</div>
-                                        </div>
-                                        <span class="badge bg-primary rounded-pill">14</span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                                        <div class="ms-2 me-auto">
-                                            <h6 class="fw-semibold mb-0">Subheading</h6>
-                                            <div class=" d-block text-muted text-truncate text-truncate">
-                                                Content for list item</div>
-                                        </div>
-                                        <span class="badge bg-primary rounded-pill">14</span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                                        <div class="ms-2 me-auto">
-                                            <h6 class="fw-semibold mb-0">Subheading</h6>
-                                            <div class=" d-block text-muted text-truncate text-truncate">
-                                                Content for list item</div>
-                                        </div>
-                                        <span class="badge bg-primary rounded-pill">14</span>
-                                    </li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="nav-item dropdown hover-dd d-none d-lg-block">
-                    <a class="nav-link" id="drop2" href="#" data-bs-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        Apps <iconify-icon icon="solar:alt-arrow-down-outline" class=" ps-1 fs-4">
-                        </iconify-icon>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-nav dropdown-menu-animate-up py-0">
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="ps-7 pt-7">
-                                    <div class="border-bottom">
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <div class="position-relative">
-                                                    <a href="app-chat.html"
-                                                        class="d-flex align-items-center pb-9 position-relative">
-                                                        <div
-                                                            class="bg-primary-subtle rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
-                                                            <img src="/assets/images/svgs/icon-dd-chat.svg"
-                                                                alt="" class="img-fluid" width="24"
-                                                                height="24">
-                                                        </div>
-                                                        <div class="d-inline-block">
-                                                            <h6 class="mb-1 fw-semibold fs-3">Chat
-                                                                Application</h6>
-                                                            <span class="fs-3 d-block text-secondary ">New
-                                                                messages arrived</span>
-                                                        </div>
-                                                    </a>
-                                                    <a href="app-invoice.html"
-                                                        class="d-flex align-items-center pb-9 position-relative">
-                                                        <div
-                                                            class="bg-primary-subtle rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
-                                                            <img src="/assets/images/svgs/icon-dd-invoice.svg"
-                                                                alt="" class="img-fluid" width="24"
-                                                                height="24">
-                                                        </div>
-                                                        <div class="d-inline-block">
-                                                            <h6 class="mb-1 fw-semibold fs-3">Invoice App
-                                                            </h6>
-                                                            <span class="fs-3 d-block text-secondary">Get
-                                                                latest invoice</span>
-                                                        </div>
-                                                    </a>
-                                                    <a href="app-contact.html"
-                                                        class="d-flex align-items-center pb-9 position-relative">
-                                                        <div
-                                                            class="bg-primary-subtle rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
-                                                            <img src="/assets/images/svgs/icon-dd-mobile.svg"
-                                                                alt="" class="img-fluid" width="24"
-                                                                height="24">
-                                                        </div>
-                                                        <div class="d-inline-block">
-                                                            <h6 class="mb-1 fw-semibold fs-3">Contact
-                                                                Application</h6>
-                                                            <span class="fs-3 d-block text-secondary">2
-                                                                Unsaved Contacts</span>
-                                                        </div>
-                                                    </a>
-                                                    <a href="app-email.html"
-                                                        class="d-flex align-items-center pb-9 position-relative">
-                                                        <div
-                                                            class="bg-primary-subtle rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
-                                                            <img src="/assets/images/svgs/icon-dd-message-box.svg"
-                                                                alt="" class="img-fluid" width="24"
-                                                                height="24">
-                                                        </div>
-                                                        <div class="d-inline-block">
-                                                            <h6 class="mb-1 fw-semibold fs-3">Email App
-                                                            </h6>
-                                                            <span class="fs-3 d-block text-secondary">Get
-                                                                new emails</span>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="position-relative">
-                                                    <a href="page-user-profile.html"
-                                                        class="d-flex align-items-center pb-9 position-relative">
-                                                        <div
-                                                            class="bg-primary-subtle rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
-                                                            <img src="/assets/images/svgs/icon-dd-cart.svg"
-                                                                alt="" class="img-fluid" width="24"
-                                                                height="24">
-                                                        </div>
-                                                        <div class="d-inline-block">
-                                                            <h6 class="mb-1 fw-semibold fs-3">Thông tin cá nhân
-                                                            </h6>
-                                                            <span class="fs-3 d-block text-secondary">Xem thêm thông tin cá nhân</span>
-                                                        </div>
-                                                    </a>
-                                                    <a href="app-calendar.html"
-                                                        class="d-flex align-items-center pb-9 position-relative">
-                                                        <div
-                                                            class="bg-primary-subtle rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
-                                                            <img src="/assets/images/svgs/icon-dd-date.svg"
-                                                                alt="" class="img-fluid" width="24"
-                                                                height="24">
-                                                        </div>
-                                                        <div class="d-inline-block">
-                                                            <h6 class="mb-1 fw-semibold fs-3">Calendar App
-                                                            </h6>
-                                                            <span class="fs-3 d-block text-secondary">Get
-                                                                dates</span>
-                                                        </div>
-                                                    </a>
-                                                    <a href="app-contact2.html"
-                                                        class="d-flex align-items-center pb-9 position-relative">
-                                                        <div
-                                                            class="bg-primary-subtle rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
-                                                            <img src="/assets/images/svgs/icon-dd-lifebuoy.svg"
-                                                                alt="" class="img-fluid" width="24"
-                                                                height="24">
-                                                        </div>
-                                                        <div class="d-inline-block">
-                                                            <h6 class="mb-1 fw-semibold fs-3">Contact List
-                                                                Table</h6>
-                                                            <span class="fs-3 d-block text-secondary">Add
-                                                                new contact</span>
-                                                        </div>
-                                                    </a>
-                                                    <a href="app-notes.html"
-                                                        class="d-flex align-items-center pb-9 position-relative">
-                                                        <div
-                                                            class="bg-primary-subtle rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
-                                                            <img src="/assets/images/svgs/icon-dd-application.svg"
-                                                                alt="" class="img-fluid" width="24"
-                                                                height="24">
-                                                        </div>
-                                                        <div class="d-inline-block">
-                                                            <h6 class="mb-1 fw-semibold fs-3">Notes
-                                                                Application</h6>
-                                                            <span class="fs-3 d-block text-secondary">To-do
-                                                                and Daily tasks</span>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row align-items-center py-3">
-                                        <div class="col-8">
-                                            <a class="fw-semibold text-dark d-flex align-items-center lh-1"
-                                                href="page-faq.html"><i class="ti ti-help fs-6 me-2"></i>Frequently
-                                                Asked
-                                                Questions</a>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="d-flex justify-content-end pe-4">
-                                                <button class="btn btn-primary">Check</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-4 ms-n4">
-                                <div class="position-relative p-7 border-start h-100">
-                                    <h5 class="fs-5 mb-9 fw-semibold">Quick Links</h5>
-                                    <ul class="">
-                                        <li class="mb-3">
-                                            <a class="fw-semibold bg-hover-primary" href="page-pricing.html">Pricing
-                                                Page</a>
-                                        </li>
-                                        <li class="mb-3">
-                                            <a class="fw-semibold bg-hover-primary"
-                                                href="authentication-login.html">Authentication Design</a>
-                                        </li>
-                                        <li class="mb-3">
-                                            <a class="fw-semibold bg-hover-primary"
-                                                href="authentication-register.html">Register Now</a>
-                                        </li>
-                                        <li class="mb-3">
-                                            <a class="fw-semibold bg-hover-primary"
-                                                href="authentication-error.html">404 Error Page</a>
-                                        </li>
-                                        <li class="mb-3">
-                                            <a class="fw-semibold bg-hover-primary" href="app-notes.html">Notes
-                                                App</a>
-                                        </li>
-                                        <li class="mb-3">
-                                            <a class="fw-semibold bg-hover-primary" href="page-user-profile.html">User
-                                                Application</a>
-                                        </li>
-                                        <li class="mb-3">
-                                            <a class="fw-semibold bg-hover-primary"
-                                                href="page-account-settings.html">Account Settings</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="nav-item dropdown hover-dd d-none d-lg-block">
-                    <a class="nav-link" href="app-chat.html">
-                        Chat
-                    </a>
-                </li>
-                <li class="nav-item dropdown hover-dd d-none d-lg-block">
-                    <a class="nav-link" href="app-calendar.html">
-                        Calendar
-                    </a>
-                </li>
-                <li class="nav-item dropdown hover-dd d-none d-lg-block">
-                    <a class="nav-link" href="app-email.html">
-                        Email
-                    </a>
-                </li>
-
             </ul>
 
 
@@ -386,6 +25,59 @@ $currentUser = getInfoUserAdmin();
                     </a>
                 </div>
             </div>
+            <aside class="left-sidebar with-horizontal">
+                <div>
+                    <nav class="sidebar-nav scroll-sidebar container-fluid">
+                        <ul id="sidebarnav">
+                            @if (is_array($menu) && count($menu))
+                                @foreach ($menu as $key => $value)
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link {{ isset($value['items']) && is_array($value['items']) && count($value['items']) ? 'has-arrow' : '' }}"
+                                            href="{{ $value['url'] }}" aria-expanded="false">
+                                            @if (!empty($value['icon']))
+                                                <span class="d-flex"><iconify-icon icon="{{ $value['icon'] }}"
+                                                        class="fs-6"></iconify-icon></span>
+                                            @endif
+                                            <span class="hide-menu">{{ $value['name'] }}</span>
+                                        </a>
+                                        @if (isset($value['items']) && is_array($value['items']) && count($value['items']))
+                                            <ul aria-expanded="false" class="collapse first-level">
+                                                @foreach ($value['items'] as $keyItem => $valueItem)
+                                                    <li class="sidebar-item">
+                                                        <a href="{{ $valueItem['url'] }}"
+                                                            class="sidebar-link {{ isset($valueItem['items']) && is_array($valueItem['items']) && count($valueItem['items']) ? 'has-arrow' : 'sublink' }}">
+                                                            <div class="round-16 d-flex align-items-center justify-content-center">
+                                                                <i class="sidebar-icon"></i>
+                                                            </div>
+                                                            <span class="hide-menu">{{ $valueItem['name'] }}</span>
+                                                        </a>
+                                                        @if (isset($valueItem['items']) && is_array($valueItem['items']) && count($valueItem['items']))
+                                                            <ul aria-expanded="false" class="collapse second-level">
+                                                                @foreach ($valueItem['items'] as $keyItemChild => $valueItemChild)
+                                                                    <li class="sidebar-item">
+                                                                        <a href="{{ $valueItemChild['url'] }}"
+                                                                            class="sidebar-link sublink">
+                                                                            <div
+                                                                                class="round-16 d-flex align-items-center justify-content-center">
+                                                                                <i class="sidebar-icon"></i>
+                                                                            </div><span
+                                                                                class="hide-menu">{{ $valueItemChild['name'] }}</span>
+                                                                        </a>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        @endif
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        @endif
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </nav>
+                </div>
+            </aside>
             <a class="navbar-toggler nav-icon-hover p-0 border-0 text-white" href="javascript:void(0)"
                 data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -626,7 +318,7 @@ $currentUser = getInfoUserAdmin();
                         <li class="nav-item dropdown">
                             <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="/assets/images/profile/user-6.jpg" alt="user" width="30"
+                                <img src="/assets/images/profile/Header-Icon-User.png" alt="user" width="30"
                                     class="profile-pic rounded-circle">
                             </a>
                             <div class="dropdown-menu message-box pt-0 content-dd mailbox dropdown-menu-end dropdown-menu-animate-up"
@@ -636,7 +328,7 @@ $currentUser = getInfoUserAdmin();
                                         <h5 class="mb-0 fs-5 ">Thông tin cá nhân</h5>
                                     </div>
                                     <div class="d-flex align-items-center py-9 mx-7 border-bottom">
-                                        <img src="/assets/images/profile/user-6.jpg" class="rounded-circle"
+                                        <img src="/assets/images/profile/Header-Icon-User.png" class="rounded-circle"
                                             width="80" height="80" alt="">
                                         <div class="ms-3">
                                             @if(isset($currentUser))
@@ -882,100 +574,102 @@ $currentUser = getInfoUserAdmin();
     </div>
     <div class="app-header with-horizontal">
         <nav class="navbar navbar-expand-xl container-fluid p-0">
-            <ul class="navbar-nav">
-                <li class="nav-item d-block d-xl-none">
-                    <a class="nav-link sidebartoggler ms-n3" id="sidebarCollapse" href="javascript:void(0)">
-                        <i class="ti ti-menu-2"></i>
-                    </a>
-                </li>
-                <li class="nav-item d-none d-xl-block">
-                    <div class="brand-logo d-flex align-items-center justify-content-between">
-                        <a href="/" class="text-nowrap logo-img">
-                            <span class="">
-                                <img src="{{ asset('/img-system/system/logo.png') }}" class="logo-horizontal ps-2"
-                                    alt="homepage">
-                            </span>
+            <div class="container-xxxl">
+                <ul class="navbar-nav">
+                    <li class="nav-item d-block d-xl-none">
+                        <a class="nav-link sidebartoggler ms-n3" id="sidebarCollapse" href="javascript:void(0)">
+                            <i class="ti ti-menu-2"></i>
                         </a>
-                    </div>
-                </li>
-            </ul>
-
-
-            <a class="navbar-toggler nav-icon-hover p-0 border-0" href="javascript:void(0)"
-                data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
-                aria-expanded="false" aria-label="Toggle navigation">
-                <span class="p-2">
-                    <iconify-icon icon="solar:menu-dots-bold" class="fs-7"></iconify-icon>
-                </span>
-            </a>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <div class="d-flex align-items-center justify-content-between px-0 px-xl-8">
-                    <a href="javascript:void(0)"
-                        class="nav-link round p-1 ps-0 d-flex d-xl-none align-items-center justify-content-center"
-                        type="button" data-bs-toggle="offcanvas" data-bs-target="#mobilenavbar"
-                        aria-controls="offcanvasWithBothOptions">
-                        <i class="ti ti-align-justified fs-7"></i>
-                    </a>
-                    <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-center">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="/assets/images/profile/user-6.jpg" alt="user" width="30"
-                                    class="profile-pic rounded-circle">
+                    </li>
+                    <li class="nav-item d-none d-xl-block">
+                        <div class="brand-logo d-flex align-items-center justify-content-between">
+                            <a href="/" class="text-nowrap logo-img">
+                                <span class="">
+                                    <img src="{{ asset('/img-system/system/logo.png') }}" class="logo-horizontal ps-2"
+                                        alt="homepage">
+                                </span>
                             </a>
-                            <div class="dropdown-menu message-box pt-0 content-dd mailbox dropdown-menu-end dropdown-menu-animate-up"
-                                aria-labelledby="drop2">
-                                <div class="profile-dropdown position-relative" data-simplebar="">
-                                    <div class="py-3 px-7 pb-0">
-                                        <h5 class="mb-0 fs-5 ">Thông tin cá nhân</h5>
-                                    </div>
-                                    <div class="d-flex align-items-center py-9 mx-7 border-bottom">
-                                        <img src="/assets/images/profile/user-6.jpg" class="rounded-circle"
-                                            width="80" height="80" alt="">
-                                        @if(isset($currentUser))
-                                        <div class="ms-3">
-                                            <h5 class="mb-1 fs-4 text-secondary">
-                                                {{ $currentUser->employee->employee_name }}</h5>
-                                            <span
-                                                class="mb-1 d-block text-secondary">{{ $currentUser->role_name }}</span>
-                                            <p class="mb-0 d-flex align-items-center gap-2">
-                                                <i class="ti ti-mail fs-4"></i> {{ $currentUser->employee->email }}
-                                            </p>
+                        </div>
+                    </li>
+                </ul>
+                @include('partial.aside-horizontal')
+                
+                <a class="navbar-toggler nav-icon-hover p-0 border-0" href="javascript:void(0)"
+                    data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="p-2">
+                        <iconify-icon icon="solar:menu-dots-bold" class="fs-7"></iconify-icon>
+                    </span>
+                </a>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <div class="d-flex align-items-center justify-content-between px-0 px-xl-8">
+                        <a href="javascript:void(0)"
+                            class="nav-link round p-1 ps-0 d-flex d-xl-none align-items-center justify-content-center"
+                            type="button" data-bs-toggle="offcanvas" data-bs-target="#mobilenavbar"
+                            aria-controls="offcanvasWithBothOptions">
+                            <i class="ti ti-align-justified fs-7"></i>
+                        </a>
+                        <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-center">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="/assets/images/profile/Header-Icon-User.png" alt="user" width="30"
+                                        class="profile-pic rounded-circle">
+                                </a>
+                                <div class="dropdown-menu message-box pt-0 content-dd mailbox dropdown-menu-end dropdown-menu-animate-up"
+                                    aria-labelledby="drop2">
+                                    <div class="profile-dropdown position-relative" data-simplebar="">
+                                        <div class="py-3 px-7 pb-0">
+                                            <h5 class="mb-0 fs-5 ">Thông tin cá nhân</h5>
                                         </div>
-                                        @endif
-                                    </div>
-                                    <div class="message-body">
-                                        <a href="{{ route('profile.user') }}"
-                                            class="py-8 px-7 mt-8 d-flex align-items-center">
-                                            <span
-                                                class="d-flex align-items-center justify-content-center bg-warning-subtle rounded-circle round p-6 fs-6 text-primary">
-                                                <iconify-icon icon="solar:user-circle-line-duotone"
-                                                    class="text-primary"></iconify-icon>
-                                            </span>
-                                            <div class="w-75 d-inline-block v-middle ps-3">
-                                                <h6 class="mb-1 fs-3  lh-base">Thông tin cá nhân</h6>
-                                                <span class="fs-3 d-block text-secondary">Cài đặt tài khoản</span>
+                                        <div class="d-flex align-items-center py-9 mx-7 border-bottom">
+                                            <img src="/assets/images/profile/Header-Icon-User.png" class="rounded-circle"
+                                                width="80" height="80" alt="">
+                                            @if(isset($currentUser))
+                                            <div class="ms-3">
+                                                <h5 class="mb-1 fs-4 text-secondary">
+                                                    {{ $currentUser->employee->employee_name }}</h5>
+                                                <span
+                                                    class="mb-1 d-block text-secondary">{{ $currentUser->role_name }}</span>
+                                                <p class="mb-0 d-flex align-items-center gap-2">
+                                                    <i class="ti ti-mail fs-4"></i> {{ $currentUser->employee->email }}
+                                                </p>
                                             </div>
-                                        </a>
-                                        <a href="{{ route('profile.changePassword') }}"
-                                            class="py-8 px-7 mt-8 d-flex align-items-center">
-                                            <span
-                                                class="d-flex align-items-center justify-content-center bg-success-subtle rounded-circle round p-6 fs-6 text-primary">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-password-fingerprint" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M17 8c.788 1 1 2 1 3v1"></path><path d="M9 11c0 -1.578 1.343 -3 3 -3s3 1.422 3 3v2"></path><path d="M12 11v2"></path><path d="M6 12v-1.397c-.006 -1.999 1.136 -3.849 2.993 -4.85a6.385 6.385 0 0 1 6.007 -.005"></path><path d="M12 17v4"></path><path d="M10 20l4 -2"></path><path d="M10 18l4 2"></path><path d="M5 17v4"></path><path d="M3 20l4 -2"></path><path d="M3 18l4 2"></path><path d="M19 17v4"></path><path d="M17 20l4 -2"></path><path d="M17 18l4 2"></path></svg>
-                                            </span>
-                                            <div class="w-75 d-inline-block v-middle ps-3">
-                                                <h6 class="mb-1 fs-3  lh-base">Đổi mật khẩu</h6>
-                                                <span class="fs-3 d-block text-secondary">Bảo mật</span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="d-grid py-4 px-7 pt-8">
-                                        <a href="{{ route('logout') }}" class="btn btn-primary">Đăng xuất</a>
+                                            @endif
+                                        </div>
+                                        <div class="message-body">
+                                            <a href="{{ route('profile.user') }}"
+                                                class="py-8 px-7 mt-8 d-flex align-items-center">
+                                                <span
+                                                    class="d-flex align-items-center justify-content-center bg-warning-subtle rounded-circle round p-6 fs-6 text-primary">
+                                                    <iconify-icon icon="solar:user-circle-line-duotone"
+                                                        class="text-primary"></iconify-icon>
+                                                </span>
+                                                <div class="w-75 d-inline-block v-middle ps-3">
+                                                    <h6 class="mb-1 fs-3  lh-base">Thông tin cá nhân</h6>
+                                                    <span class="fs-3 d-block text-secondary">Cài đặt tài khoản</span>
+                                                </div>
+                                            </a>
+                                            <a href="{{ route('profile.changePassword') }}"
+                                                class="py-8 px-7 mt-8 d-flex align-items-center">
+                                                <span
+                                                    class="d-flex align-items-center justify-content-center bg-success-subtle rounded-circle round p-6 fs-6 text-primary">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-password-fingerprint" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M17 8c.788 1 1 2 1 3v1"></path><path d="M9 11c0 -1.578 1.343 -3 3 -3s3 1.422 3 3v2"></path><path d="M12 11v2"></path><path d="M6 12v-1.397c-.006 -1.999 1.136 -3.849 2.993 -4.85a6.385 6.385 0 0 1 6.007 -.005"></path><path d="M12 17v4"></path><path d="M10 20l4 -2"></path><path d="M10 18l4 2"></path><path d="M5 17v4"></path><path d="M3 20l4 -2"></path><path d="M3 18l4 2"></path><path d="M19 17v4"></path><path d="M17 20l4 -2"></path><path d="M17 18l4 2"></path></svg>
+                                                </span>
+                                                <div class="w-75 d-inline-block v-middle ps-3">
+                                                    <h6 class="mb-1 fs-3  lh-base">Đổi mật khẩu</h6>
+                                                    <span class="fs-3 d-block text-secondary">Bảo mật</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="d-grid py-4 px-7 pt-8">
+                                            <a href="{{ route('logout') }}" class="btn btn-primary">Đăng xuất</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                    </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </nav>

@@ -2,7 +2,7 @@
 $menu = __('menu');
 ?>
 
-<aside class="left-sidebar with-horizontal">
+<aside class="justify-content-center">
     <div>
         <nav class="sidebar-nav scroll-sidebar container-fluid">
             <ul id="sidebarnav">
