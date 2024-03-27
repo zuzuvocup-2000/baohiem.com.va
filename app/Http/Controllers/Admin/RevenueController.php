@@ -36,6 +36,7 @@ class RevenueController extends Controller
     public function index(Request $request)
     {
         $params = $request->query();
+        if(!isset($params['time_range'])) $params['time_range'] = date('01/01/Y') . ' - ' . date('d/m/Y');
         $companyList = $this->companyService->getCompanyByContract();
 
         // Lấy danh sách niên hạn
@@ -53,8 +54,7 @@ class RevenueController extends Controller
             $params['contract'] = $contractList->first() ? $contractList->first()->id : 0;
         }
 
-        $generalInsurance = $this->revenueService->getAllGeneralInsurance($params['company'], $params['period'], $params['contract']);
-        dd($generalInsurance);
-        return view('admin.revenue.index', compact(['companyList', 'periodList', 'contractList']));
+        $generalInsurance = $this->revenueService->getAllGeneralInsurance($params['company'], $params['period'], $params['contract'], $params['time_range']);
+        return view('admin.revenue.index', compact(['companyList', 'periodList', 'contractList', 'generalInsurance']));
     }
 }

@@ -11,7 +11,7 @@ class Account extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'account_code',
+        'account_package_id',
         'contract_id',
         'note',
         'active',

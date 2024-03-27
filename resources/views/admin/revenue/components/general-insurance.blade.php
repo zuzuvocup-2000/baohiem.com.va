@@ -50,7 +50,7 @@
                 <tbody>
                     <tr>
                         <th class="main-th">Tổng số tài khoản chủ:</th>
-                        <td class="main-color">5</td>
+                        <td class="main-color">{{ isset($generalInsurance['account_holder']['total_accounts']) ? $generalInsurance['account_holder']['total_accounts'] : 0 }}</td>
                         <td></td>
                     </tr>
                     <tr>
@@ -64,7 +64,7 @@
                                 </svg></span>
                             Tài khoản chủ hoạt động:
                         </th>
-                        <td class="main-color">5</td>
+                        <td class="main-color">{{ isset($generalInsurance['account_holder']['total_not_locked_accounts']) ? $generalInsurance['account_holder']['total_not_locked_accounts'] : 0 }}</td>
                         <td></td>
                     </tr>
                     <tr>
@@ -78,12 +78,12 @@
                                 </svg></span>
                             Tài khoản chủ bị khóa:
                         </th>
-                        <td class="main-color">0</td>
+                        <td class="main-color">{{ isset($generalInsurance['account_holder']['total_locked_accounts']) ? $generalInsurance['account_holder']['total_locked_accounts'] : 0 }}</td>
                         <td></td>
                     </tr>
                     <tr>
                         <th class="main-th">TS tài khoản thành viên gia đình:</th>
-                        <td class="main-color">8</td>
+                        <td class="main-color">{{ isset($generalInsurance['account_holder']['total_accounts']) ? $generalInsurance['account_holder']['total_accounts'] : 0 }}</td>
                         <td></td>
                     </tr>
                     <tr>
@@ -97,7 +97,7 @@
                                 </svg></span>
                             Thành viên gia đình hoạt động:
                         </th>
-                        <td class="main-color">7</td>
+                        <td class="main-color">{{ isset($generalInsurance['account_holder']['total_not_locked_accounts']) ? $generalInsurance['account_holder']['total_not_locked_accounts'] : 0 }}</td>
                         <td></td>
                     </tr>
                     <tr>
@@ -111,7 +111,7 @@
                                 </svg></span>
                             Thành viên gia đình bị khóa:
                         </th>
-                        <td class="main-color">1</td>
+                        <td class="main-color">{{ isset($generalInsurance['account_holder']['total_locked_accounts']) ? $generalInsurance['account_holder']['total_locked_accounts'] : 0 }}</td>
                         <td></td>
                     </tr>
                     <tr>
@@ -125,7 +125,7 @@
                                 </svg></span>
                             Tổng giá trị giới hạn niên hạn trước chuyển sang:
                         </th>
-                        <td class="main-color">0</td>
+                        <td class="main-color">{{ number_format(isset($generalInsurance['total_value_period_before']) ? $generalInsurance['total_value_period_before'] : 0) }}</td>
                         <td>đồng</td>
                     </tr>
                     <tr>
@@ -139,7 +139,7 @@
                                 </svg></span>
                             Tổng giá trị gói TK(plan):
                         </th>
-                        <td class="main-color">53 628 080</td>
+                        <td class="main-color">{{ number_format(isset($generalInsurance['total_package']) ? $generalInsurance['total_package'] : 0) }}</td>
                         <td>đồng</td>
                     </tr>
                     <tr>
@@ -153,7 +153,7 @@
                                 </svg></span>
                             Tổng giá trị giới hạn đầu kỳ:
                         </th>
-                        <td class="main-color">53 628 080</td>
+                        <td class="main-color">{{ number_format(isset($generalInsurance['total_initial_limit_value']) ? $generalInsurance['total_initial_limit_value'] : 0) }}</td>
                         <td>đồng</td>
                     </tr>
                     <tr>
@@ -167,8 +167,8 @@
                                 </svg></span>
                             Tổng số lượt chi bảo hiểm:
                         </th>
-                        <td class="main-color">3 170 000</td>
-                        <td>đồng</td>
+                        <td class="main-color">{{ isset($generalInsurance['number_of_insurance_payments']) ? $generalInsurance['number_of_insurance_payments'] : 0 }}</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th class="extra-th">
@@ -181,7 +181,7 @@
                                 </svg></span>
                             Tổng giá trị chi bảo hiểm:
                         </th>
-                        <td class="main-color">1</td>
+                        <td class="main-color">{{ number_format(isset($generalInsurance['total_insurance_payout']['total']) ? $generalInsurance['total_insurance_payout']['total'] : 0) }}</td>
                         <td>đồng</td>
                     </tr>
                     <tr>
