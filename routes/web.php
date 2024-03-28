@@ -175,6 +175,7 @@ Route::middleware(['is_user_admin', 'permission'])->group(function () {
     
     // Routes Export 
     Route::get('/export/account', [ExportController::class, 'exportAccountList'])->name('export.accountList');
+    Route::get('/export/account', [ExportController::class, 'exportAccountList'])->name('export.accountList');  
 });
 
 // Route for login page
