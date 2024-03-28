@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\DB;
  */
 class PeriodService
 {
+    public function findOne($periodId = 0)
+    {
+        return Period::where(['id' => $periodId])->first();
+    }
+
     public function getPeriodList()
     {
         return Period::select('*')
@@ -22,7 +27,7 @@ class PeriodService
 
     public function getPeriodActiveByCompany($company = 0)
     {
-        return PeriodDetail::select(['tbl_period.id', 'tbl_period.period_name'])
+        return PeriodDetail::select(['tbl_period.id', 'tbl_period.period_name', 'tbl_period.from_year'])
             ->where([
                 'tbl_period_detail.active' => STATUS_ACTIVE,
                 'tbl_period.active' => STATUS_ACTIVE,

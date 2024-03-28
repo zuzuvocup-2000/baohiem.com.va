@@ -23,22 +23,9 @@ $(document).ready(function() {
     });
 });
 $(document).ready(function() {
-    $('#periodSelectGeneral option').each(function() {
-        var periodText = $(this).text().trim(); 
-        var startDate, endDate;
-        var matches = periodText.match(/\d{4}/); 
-        if (matches) {
-            var year = matches[0];
-            startDate = '01/01/' + year;
-            endDate = getCurrentDate(); 
-        }
-        $(this).attr('data-time', startDate + ' - ' + endDate);
-    });
-
     $('#periodSelectGeneral').change(function() {
         var selectedOption = $(this).find('option:selected');
-        var timeRange = selectedOption.attr('data-time');
-        var startDate = timeRange.split(' - ')[0]; 
+        var startDate = selectedOption.attr('data-time-start');
         var currentDate = getCurrentDate();
         var combinedDate = startDate + ' - ' + currentDate
         $('#dateInput').val(combinedDate);
