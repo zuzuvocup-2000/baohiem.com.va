@@ -168,8 +168,12 @@ Route::middleware(['is_user_admin', 'permission'])->group(function () {
     Route::get('/health-report', [HospitalController::class, 'healthReport'])->name('healthReport.index');
 
     // Routes Revenue
-    Route::get('/revenue', [RevenueController::class, 'index'])->name('revenue.index');
-
+    Route::get('/revenue/general-insurance', [RevenueController::class, 'generalInsurance'])->name('revenue.generalInsurance');
+    Route::get('/revenue/detail-report', [RevenueController::class, 'detailReport'])->name('revenue.detailReport');
+    Route::get('/revenue/hospital', [RevenueController::class, 'reportByHospital'])->name('revenue.reportByHospital');
+    Route::get('/revenue/content', [RevenueController::class, 'reportByContent'])->name('revenue.reportByContent');
+    Route::get('/revenue/health', [RevenueController::class, 'reportByHealth'])->name('revenue.reportByHealth');
+    Route::get('/revenue/account', [RevenueController::class, 'reportByAccount'])->name('revenue.reportByAccount');
     // Routes Diary
     Route::get('/diary', [DiaryController::class, 'index'])->name('diary.index');
     

@@ -30,7 +30,7 @@ return [
             ],
             [
                 'name' => 'Báo cáo thống kê',
-                'url' => route('revenue.index'),
+                'url' => route('revenue.generalInsurance'),
             ]
         ]
     ],

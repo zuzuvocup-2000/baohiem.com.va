@@ -32,8 +32,7 @@ class RevenueController extends Controller
         $this->revenueService = $revenueService;
         $this->accountService = $accountService;
     }
-
-    public function index(Request $request)
+    public function generalInsurance(Request $request)
     {
         $params = $request->query();
         if(!isset($params['time_range'])) $params['time_range'] = date('01/01/Y') . ' - ' . date('d/m/Y');
@@ -55,6 +54,26 @@ class RevenueController extends Controller
         }
 
         $generalInsurance = $this->revenueService->getAllGeneralInsurance($params['company'], $params['period'], $params['contract'], $params['time_range']);
-        return view('admin.revenue.index', compact(['companyList', 'periodList', 'contractList', 'generalInsurance']));
+        return view('admin.revenue.general-insurance', compact(['companyList', 'periodList', 'contractList', 'generalInsurance']));
+    }
+    public function detailReport(Request $request)
+    {
+        return view('admin.revenue.detail-report');
+    }
+    public function reportByHospital(Request $request)
+    {
+        return view('admin.revenue.hospital-report');
+    }
+    public function reportByContent(Request $request)
+    {
+        return view('admin.revenue.content-report');
+    }
+    public function reportByHealth(Request $request)
+    {
+        return view('admin.revenue.health-report');
+    }
+    public function reportByAccount(Request $request)
+    {
+        return view('admin.revenue.account-report');
     }
 }

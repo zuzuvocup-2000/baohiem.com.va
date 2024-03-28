@@ -19128,7 +19128,7 @@ html[data-boxed-layout=boxed] .container-xxxl{
 }
 
 .sidebar-nav ul .sidebar-item.selected .sidebar-link.has-arrow::after {
-    border-color: var(--bs-primary);
+    border-color: #000000;
 }
 
 .sidebar-nav .sidebar-list .sidebar-list-item {
