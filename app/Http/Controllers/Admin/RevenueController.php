@@ -108,8 +108,8 @@ class RevenueController extends Controller
             $params['hospital'] = $hospitalList->first()->id;
         }
 
-        $hospitalList = $this->customerService->getPaymentCustomerByHospital($params);
-        return view('admin.revenue.hospital-report', compact(['hospitalList']));
+        $recordList = $this->customerService->getPaymentCustomerByHospital($params);
+        return view('admin.revenue.hospital-report', compact(['hospitalList', 'recordList']));
     }
 
     public function reportByContent(Request $request)
