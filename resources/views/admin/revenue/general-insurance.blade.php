@@ -84,19 +84,9 @@
                                             ])
                                         </div>
                                         <div class="col-sm-12 col-md-6 col-xl-3">
-                                            <div class="form-field">
-                                                <label for="" class="mb-1">Thời gian hiệu lực từ:</label>
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control daterange" id="dateInput"
-                                                        name="time_range"
-                                                        value="{{ (isset($periodDetail->from_year) ? date('01/01/' . $periodDetail->from_year) : date('01/01/Y')) .
-                                                            ' - ' .
-                                                            date('d/m/Y') }}">
-                                                    <span class="input-group-text">
-                                                        <i class="ti ti-calendar fs-5"></i>
-                                                    </span>
-                                                </div>
-                                            </div>
+                                            @include('common/input-time-range', [
+                                                'time_range' => (isset($periodDetail->from_year) ? date('01/01/' . $periodDetail->from_year) : date('01/01/Y')) . ' - ' . date('d/m/Y')
+                                            ])
                                         </div>
                                     </div>
                                 </div>

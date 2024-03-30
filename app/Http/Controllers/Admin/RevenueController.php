@@ -9,6 +9,7 @@ use App\Services\ContractService;
 use App\Services\CustomerGroupService;
 use App\Services\CustomerService;
 use App\Services\HospitalService;
+use App\Services\PaymentTypeService;
 use App\Services\PeriodService;
 use App\Services\RevenueService;
 use Illuminate\Http\Request;
@@ -22,9 +23,10 @@ class RevenueController extends Controller
     protected $customerService;
     protected $customerGroupService;
     protected $revenueService;
+    protected $paymentTypeService;
     protected $hospitalService;
 
-    public function __construct(CompanyService $companyService, PeriodService $periodService, ContractService $contractService, CustomerGroupService $customerGroupService, CustomerService $customerService, AccountService $accountService, RevenueService $revenueService, HospitalService $hospitalService)
+    public function __construct(CompanyService $companyService, PeriodService $periodService, ContractService $contractService, CustomerGroupService $customerGroupService, CustomerService $customerService, AccountService $accountService, RevenueService $revenueService, HospitalService $hospitalService, PaymentTypeService $paymentTypeService)
     {
         $this->customerGroupService = $customerGroupService;
         $this->companyService = $companyService;
@@ -34,6 +36,7 @@ class RevenueController extends Controller
         $this->revenueService = $revenueService;
         $this->accountService = $accountService;
         $this->hospitalService = $hospitalService;
+        $this->paymentTypeService = $paymentTypeService;
     }
 
     public function generalInsurance(Request $request)
@@ -114,7 +117,20 @@ class RevenueController extends Controller
 
     public function reportByContent(Request $request)
     {
-        return view('admin.revenue.content-report');
+        $params = $request->query();
+        if (!isset($params['time_range'])) {
+            $params['time_range'] = date('01/01/Y') . ' - ' . date('d/m/Y');
+        }
+
+        $paymentTypeList = $this->paymentTypeService->getPaymentTypeList();
+        if (isset($paymentTypeList) && is_array($paymentTypeList) && count($paymentTypeList)) {
+            foreach ($paymentTypeList as $key => $value) {
+                $paymentTypeList[$key]['data'] = $this->paymentTypeService->countPaymentInsuranceById($value['id'], $params['time_range']);
+            }
+        }
+
+        $paymentTypeListAnother = $this->paymentTypeService->getPaymentTypeListAnother($params['time_range']);
+        return view('admin.revenue.content-report', compact(['paymentTypeList', 'paymentTypeListAnother']));
     }
 
     public function reportByHealth(Request $request)

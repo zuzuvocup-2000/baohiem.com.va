@@ -62,17 +62,9 @@
                                             ])
                                         </div>
                                         <div class="col-sm-12 col-md-6">
-                                            <div class="form-field">
-                                                <label for="" class="mb-1">Thời gian hiệu lực từ:</label>
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control daterange" id="dateInput"
-                                                        name="time_range"
-                                                        value="{{ isset($_GET['time_range']) ? $_GET['time_range'] : date('01/01/Y') . ' - ' . date('d/m/Y') }}">
-                                                    <span class="input-group-text">
-                                                        <i class="ti ti-calendar fs-5"></i>
-                                                    </span>
-                                                </div>
-                                            </div>
+                                            @include('common/input-time-range', [
+                                                'time_range' => isset($_GET['time_range']) ? $_GET['time_range'] : date('01/01/Y') . ' - ' . date('d/m/Y')
+                                            ])
                                         </div>
                                     </div>
                                 </div>
@@ -84,7 +76,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="system-table table-responsive">
-                                    <table id="simpletable"
+                                    <table id="tableHosiptalList"
                                         class="table border text-nowrap customize-table mb-0 align-middle mb-3">
                                         <thead>
                                             <tr>
@@ -130,7 +122,7 @@
     <script src="/assets/js/datetimepicker/datepicker-init.js"></script>
     <script>
         function updateTable() {
-            $('#simpletable').show();
+            $('#tableHosiptalList').show();
         }
         $('#companySelect,#hospital ,#periodSelect, #contractSelect, #dateInput').on('change', updateTable);
     </script>
