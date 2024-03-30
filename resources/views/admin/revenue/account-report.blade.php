@@ -45,51 +45,40 @@
                     <div class="tab-content" id="pills-tabContent">
                         <form action="">
                             <div class="row mb-2">
-                                <div class="col-sm-12 col-md-6 col-xl-3">
-                                    <div class="form-field">
-                                        <label for="">Tên công ty</label>
-                                        <select name="company" class="form-select" id="companySelect">
-                                            <option value="20067" selected="selected">CỬU LONG JOC 2</option>
-                                            <option value="20058">PVFCCO</option>
-                                            <option value="20059">TRƯỜNG SƠN JOC</option>
-                                            <option value="49">CỬU LONG JOC (O)</option>
-                                            <option value="20066">TALISMAN</option>
-                                            <option value="20068">GAS SOUTH (KMN)</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-6 col-xl-3">
-                                    <div class="form-field">
-                                        <label for="">Niên hạn</label>
-                                        <select name="period" class="form-select" id="periodSelect">
-                                            <option value="10106" selected="selected">CL2023</option>
-                                            <option value="10104">CL2022</option>
-                                            <option value="10102">CL2021</option>
-                                            <option value="10098">2019-2020</option>
-                                            <option value="10097">2018-2019</option>
-                                            <option value="10095">2017-2018</option>
-                                            <option value="10093">2016-2017</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-6 col-xl-3">
-                                    <div class="form-field">
-                                        <label for="">Tên hợp đồng</label>
-                                        <select name="contract" class="form-select" id="contractSelect">
-                                            <option value="10161" selected="selected">DH Cuu Long 2023</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-6 col-xl-3">
-                                    <div class="form-group ">
-                                        <label for="">Thời gian hiệu lực từ:</label>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control daterange" id="dateInput">
-                                            <span class="input-group-text">
-                                                <i class="ti ti-calendar fs-5"></i>
-                                            </span>
+                                <div class="col-11">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6 col-xl-3">
+                                            @include('common/select-company', [
+                                                'companyId' => isset($_GET['company']) ? $_GET['company'] : 0,
+                                                'companyList' => $companyList,
+                                            ])
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-xl-3">
+                                            @include('common/select-period', [
+                                                'periodId' => isset($_GET['period']) ? $_GET['period'] : 0,
+                                                'periodList' => $periodList,
+                                                'attr' => [
+                                                    'data-time-start' => isset($periodDetail->from_year)
+                                                        ? date('01/01/' . $periodDetail->from_year)
+                                                        : date('01/01/Y'),
+                                                ],
+                                            ])
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-xl-3">
+                                            @include('common/select-contract', [
+                                                'contractId' => isset($_GET['contract']) ? $_GET['contract'] : 0,
+                                                'contractList' => $contractList,
+                                            ])
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-xl-3">
+                                            @include('common/input-time-range', [
+                                                'time_range' => (isset($periodDetail->from_year) ? date('01/01/' . $periodDetail->from_year) : date('01/01/Y')) . ' - ' . date('d/m/Y')
+                                            ])
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-1 d-flex flex-column-reverse">
+                                    <button class="btn btn-primary w-100" type="submit">Tìm kiếm</button>
                                 </div>
                             </div>
                         </form>

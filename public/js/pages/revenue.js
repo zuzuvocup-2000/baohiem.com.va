@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
     var checkbox = $("#success2-check");
     var companySelect = $("#companySelectGeneral");
     var contractSelect = $("#contractSelectGeneral");
@@ -18,8 +18,19 @@ $(document).ready(function() {
     toggleSelects();
 
     // Add event listener to checkbox
-    checkbox.change(function() {
+    checkbox.change(function () {
         toggleSelects();
     });
 });
 
+if ($("#tableIdc10").length > 0) {
+    var table = $("#tableIdc10").DataTable({
+        "bLengthChange" : false
+    });
+}
+
+if ($("#tableHospital").length > 0) {
+    var table = $("#tableHospital").DataTable({
+        "bLengthChange" : false
+    });
+}

@@ -71,7 +71,6 @@ class RevenueService
             ->join('tbl_contract', 'tbl_account.contract_id', '=', 'tbl_contract.id')
             ->join('tbl_period_detail', 'tbl_contract.period_id', '=', 'tbl_period_detail.id')
             ->join('tbl_payment_detail', 'tbl_account_detail.id', '=', 'tbl_payment_detail.account_detail_id')
-
             ->selectRaw(
                 'COUNT(tbl_account.id) AS total_accounts,
                 SUM(CASE WHEN tbl_account_detail.account_holder = 1 THEN 1 ELSE 0 END) AS total_account_holder,

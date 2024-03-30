@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="/assets/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="/assets/css/styles.css">
     @yield('style')
+    <script src="/assets/libs/jquery/dist/jquery.min.js"></script>
 </head>
 
 <body data-sidebartype="full">
@@ -46,7 +47,6 @@
     <div class="dark-transparent sidebartoggler"></div>
 
     <!-- Import Js Files -->
-    <script src="/assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="/assets/js/app.min.js"></script>
     <script src="/assets/js/app.init.js"></script>
     <script src="/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

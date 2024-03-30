@@ -20,12 +20,6 @@
             var combinedDate = startDate + ' - ' + currentDate
             $('#dateInput').val(combinedDate);
         });
-        var initialPeriodOption = $('#periodSelectGeneral option:selected');
-        var initialTimeRange = initialPeriodOption.attr('data-time');
-        var initialStartDate = initialTimeRange.split(' - ')[0];
-        var initialCurrentDate = getCurrentDate();
-        var initialCombinedDate = initialStartDate + ' - ' + initialCurrentDate;
-        $('#dateInput').val(initialCombinedDate);
     });
 
     function getCurrentDate() {

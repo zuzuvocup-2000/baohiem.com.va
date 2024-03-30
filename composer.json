@@ -40,7 +40,8 @@
             "Tests\\": "tests/"
         },
         "files": [
-            "app/Helpers/AuthenticationHelper.php"
+            "app/Helpers/AuthenticationHelper.php",
+            "app/Helpers/GeneralHelper.php"
         ]
     },
     "scripts": {
