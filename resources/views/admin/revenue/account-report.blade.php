@@ -98,24 +98,19 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td class="text-center">1</td>
-                                                <td>15P054/13/000378</td>
-                                                <td>Bùi Ngọc Bích</td>
-                                                <td>21 503 680</td>
-                                                <td>0</td>
-                                                <td>21 503 680</td>
+                                            @foreach ($accountReport as $key => $value)
+                                            <tr data-id="{{ $value->id }}">
+                                                <td class="text-center">{{ ++$key }}</td>
+                                                <td>{{ $value->card_number }}</td>
+                                                <td>{{ $value->full_name }}</td>
+                                                <td>{{ number_format($value->data['moneyStartPeriod']) }}</td>
+                                                <td>{{ number_format($value->data['totalAmountSpent']) }}</td>
+                                                <td>{{ number_format($value->data['theRemainingAmount']) }}</td>
                                             </tr>
-                                            <tr>
-                                                <td class="text-center">2</td>
-                                                <td>15P054/13/000379</td>
-                                                <td>Nguyễn Văn Hoàng</td>
-                                                <td>47 680 000</td>
-                                                <td>5 600 000</td>
-                                                <td>42 080 000</td>
-                                            </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
+                                    {!! $accountReport->onEachSide(1)->render('pagination::bootstrap-5') !!}
                                 </div>
                             </div>
                         </div>

@@ -191,7 +191,7 @@ class RevenueController extends Controller
         if (!isset($params['time_range'])) {
             $params['time_range'] = (isset($periodDetail->from_year) ? date('01/01/' . $periodDetail->from_year) : date('01/01/Y')) . ' - ' . date('d/m/Y');
         }
-        $accountReport = 1;
+        $accountReport = $this->accountService->getAccountReport($params);
         return view('admin.revenue.account-report', compact(['companyList', 'periodList', 'contractList', 'accountReport', 'periodDetail']));
     }
 }
