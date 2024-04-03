@@ -33,7 +33,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('english_in_tbl_thongtinthebh', function (Blueprint $table) {
+        Schema::table('tbl_information_insurance', function (Blueprint $table) {
             //
         });
     }

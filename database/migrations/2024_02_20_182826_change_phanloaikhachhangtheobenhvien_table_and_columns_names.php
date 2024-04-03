@@ -30,13 +30,13 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('customer_types_by_hospital', function (Blueprint $table) {
+        Schema::table('tbl_customer_type', function (Blueprint $table) {
             $table->renameColumn('id', 'maphanloaiKH_BV');
             $table->renameColumn('type_name', 'tenphanloai');
             $table->renameColumn('active', 'active');
             $table->renameColumn('order', 'thutu');
         });
 
-        Schema::rename('customer_types_by_hospital', 'tbl_phanloaikhachhang_theobenhvien');
+        Schema::rename('tbl_customer_type', 'tbl_phanloaikhachhang_theobenhvien');
     }
 };

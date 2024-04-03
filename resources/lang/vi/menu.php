@@ -22,7 +22,7 @@ return [
             ],
             [
                 'name' => 'Chi bảo hiểm',
-                'url' => route('account.expenses'),
+                'url' => route('insuranceExpenses.index'),
             ],
             [
                 'name' => 'Gia hạn tài khoản',

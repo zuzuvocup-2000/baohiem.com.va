@@ -113,7 +113,7 @@ class AccountService
         return $accountList;
     }
 
-    private function calculationMoneyPayment($customer)
+    public function calculationMoneyPayment($customer)
     {
         $moneyStartPeriod = 0;
         $totalAmountSpent = 0;

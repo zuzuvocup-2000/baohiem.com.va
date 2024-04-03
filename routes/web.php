@@ -28,6 +28,7 @@ use App\Http\Controllers\Admin\RevenueController;
 use App\Http\Controllers\Admin\PhysicalController;
 use App\Http\Controllers\Admin\HospitalController;
 use App\Http\Controllers\Admin\DiaryController;
+use App\Http\Controllers\Admin\InsuranceExpensesController;
 use App\Http\Controllers\Admin\RenewalController;
 use App\Http\Controllers\ExportController;
 /*
@@ -129,7 +130,6 @@ Route::middleware(['is_user_admin', 'permission'])->group(function () {
     // Routes Account
     Route::get('/account', [AccountController::class, 'index'])->name('account.index');
     Route::get('/account/insurance', [AccountController::class, 'insurance'])->name('account.insurance');
-    Route::get('/account/insurance-expenses', [AccountController::class, 'expenses'])->name('account.expenses');
     Route::get('/account/create', [AccountController::class, 'create'])->name('account.create');
     Route::post('/account/create', [AccountController::class, 'store'])->name('account.store');
     Route::get('/account/detail/{id}/{periodId}/{contractId}', [AccountController::class, 'detail'])->name('account.detail');
@@ -143,6 +143,9 @@ Route::middleware(['is_user_admin', 'permission'])->group(function () {
 
     Route::resource('role', RolesController::class);
     Route::resource('permission', PermissionsController::class);
+
+    // Routes for Insurance
+    Route::get('/insurance-expenses/index', [InsuranceExpensesController::class, 'index'])->name('insuranceExpenses.index');
 
     // Routes for Supervisor
     Route::get('/supervisor/insurance-expenses', [SupervisorController::class, 'insuranceExpenses'])->name('supervisor.insuranceExpenses');
@@ -176,8 +179,8 @@ Route::middleware(['is_user_admin', 'permission'])->group(function () {
     Route::get('/revenue/account', [RevenueController::class, 'reportByAccount'])->name('revenue.reportByAccount');
     // Routes Diary
     Route::get('/diary', [DiaryController::class, 'index'])->name('diary.index');
-    
-    // Routes Export 
+
+    // Routes Export
     Route::get('/export/account', [ExportController::class, 'exportAccountList'])->name('export.accountList');
 });
 

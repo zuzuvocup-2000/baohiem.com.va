@@ -34,6 +34,6 @@ class PermissionMiddleware
             }
         }
 
-        return redirect('/')->with('error', 'Bạn không có quyền truy cập vào chức năng này.');
+        return back()->with('error', 'Bạn không có quyền truy cập vào chức năng này.');
     }
 }
