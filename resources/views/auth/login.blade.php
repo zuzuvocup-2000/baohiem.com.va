@@ -24,7 +24,7 @@
                     method="post">
                     @csrf
                     <span class="login100-form-title ">
-                        {{ __('login.system_name') }}
+                        {{-- {{ __('login.system_name') }} --}}
                     </span>
                     <div class="p-t-31 p-b-9">
                         <span class="txt1">

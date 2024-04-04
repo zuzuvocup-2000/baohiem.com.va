@@ -32,15 +32,17 @@ class CustomerService
             ->join('tbl_period_detail', 'tbl_period.id', '=', 'tbl_period_detail.period_id')
             ->where('tbl_customer.full_name', 'like', '%' . $params['keyword'] . '%')
             ->where('tbl_account_detail.active', STATUS_ACTIVE)
-            ->where('tbl_period_detail.period_id', $params['period'])
             ->where('locked', 0)
             ->distinct()
-            ->get();
-
-        foreach ($customerList as $key => $value) {
-            $value->data = (object) [];
-            $accountChildList = $this->getCustomerByAccountHolder($value->account_id);
+            ->get()
+            ->toArray();
+        $accountList = [];
+        if (isset($customerList) && is_array($customerList) && count($customerList)) {
+            foreach ($customerList as $value) {
+                $accountList = array_merge($accountList, $this->getCustomerByAccountHolder($value->account_id, $params));
+            }
         }
+        return $accountList;
     }
 
     public function getPaymentCustomerByHospital($params)
@@ -237,59 +239,101 @@ class CustomerService
             ->get();
     }
 
-    private function getCustomerByAccountHolder($accountId)
+    private function getCustomerByAccountHolder($accountId, $params)
     {
         $customerList = [];
-        $result = DB::table('tbl_customer')
-            ->select('tbl_payment_detail.id as payment_detail_id', 'tbl_payment_detail.hospital_id', 'tbl_payment_detail.amount_paid', 'tbl_payment_detail.payment_date', DB::raw("tbl_customer.full_name + ' - ' + card_number as name_card"), 'tbl_payment_detail.note', 'tbl_contract.id as contract_id', 'tbl_customer.id as id', 'full_name', 'tbl_customer.active', 'tbl_contract.period_id', 'tbl_period.period_name', 'tbl_account_package.package_name', 'account_holder', 'card_number', 'tbl_account.id as account_id')
-            ->join('tbl_account_detail', 'tbl_customer.id', '=', 'tbl_account_detail.customer_id')
-            ->join('tbl_payment_detail', 'tbl_account_detail.id', '=', 'tbl_payment_detail.account_detail_id')
-            ->join('tbl_account', 'tbl_account_detail.account_id', '=', 'tbl_account.id')
-            ->join('tbl_contract', 'tbl_account.contract_id', '=', 'tbl_contract.id')
-            ->join('tbl_period_detail', 'tbl_contract.period_id', '=', 'tbl_period_detail.id')
-            ->join('tbl_period', 'tbl_period_detail.period_id', '=', 'tbl_period.id')
-            ->join('tbl_account_package', 'tbl_account.account_package_id', '=', 'tbl_account_package.id')
-            ->join('tbl_information_insurance', 'tbl_customer.id', '=', 'tbl_information_insurance.customer_id')
-            ->where('tbl_account.id', $accountId)
-            ->where('tbl_account.active', STATUS_ACTIVE)
-            ->where('tbl_account_detail.active', STATUS_ACTIVE)
-            ->where('tbl_information_insurance.active', STATUS_ACTIVE)
-            ->where('tbl_customer.active', STATUS_ACTIVE)
-            ->orderBy('tbl_account_detail.account_id')
-            ->orderBy('tbl_account_detail.account_holder', 'DESC')
-            ->orderBy('tbl_customer.full_name')
-            ->get();
+        $result = DB::select(
+            "
+            SELECT
+                tbl_customer.id,
+                tbl_customer.full_name,
+                tbl_customer.birth_year,
+                tbl_customer.address,
+                tbl_customer.issue_date,
+                tbl_customer.issue_place,
+                tbl_customer.images,
+                tbl_customer.folder,
+                tbl_customer.identity_card_number,
+                tbl_customer.email,
+                tbl_customer.gender,
+                tbl_customer.contact_phone,
+                tbl_information_insurance.card_number,
+                tbl_customer_group.group_name,
+                tbl_customer_group.id as customer_group_id,
+                tbl_account_package.package_price,
+                tbl_account_package.id as account_package_id,
+                tbl_account_package.package_name,
+                tbl_contract.effective_time,
+                tbl_contract.end_time,
+                tbl_contract.id as contract_id,
+                tbl_account_detail.account_holder,
+                tbl_account.id as account_id,
+                tbl_account.note,
+                tbl_province.province_name,
+                tbl_province.id as province_id,
+                tbl_account_detail_detail.prepayment,
+                tbl_account_detail.first_visit_date
+            FROM
+                tbl_period_detail
+            INNER JOIN
+                tbl_company ON tbl_period_detail.company_id = tbl_company.id
+            INNER JOIN
+                tbl_contract ON tbl_period_detail.id = tbl_contract.period_id
+            INNER JOIN
+                tbl_period ON tbl_period_detail.period_id = tbl_period.id
+            INNER JOIN
+                tbl_account_detail_detail
+                INNER JOIN
+                    tbl_package_detail ON tbl_account_detail_detail.package_detail_id = tbl_package_detail.id
+                INNER JOIN
+                    tbl_account ON tbl_account_detail_detail.account_id = tbl_account.id
+                INNER JOIN
+                    tbl_account_detail ON tbl_account.id = tbl_account_detail.account_id
+                INNER JOIN
+                    tbl_customer ON tbl_account_detail.customer_id = tbl_customer.id
+                INNER JOIN
+                    tbl_account_package ON tbl_package_detail.account_package_id = tbl_account_package.id
+                INNER JOIN
+                    tbl_information_insurance ON tbl_customer.id = tbl_information_insurance.customer_id
+                INNER JOIN
+                    tbl_customer_group ON tbl_customer.customer_group_id = tbl_customer_group.id
+                INNER JOIN
+                    tbl_province ON tbl_customer.province_id = tbl_province.id
+            ON
+                tbl_period.id = tbl_package_detail.period_id
+            WHERE
+                tbl_account.id = :accountId
+                AND tbl_account.active = 1
+                AND tbl_account_detail.active = 1
+                AND tbl_information_insurance.active = 1
+                AND tbl_customer.active = 1
+                AND locked = 0
+                AND tbl_contract.id = :contractId
+            ORDER BY
+                tbl_account_detail.account_id,
+                tbl_account_detail.account_holder DESC,
+                tbl_information_insurance.card_number DESC
+            ",
+            [$accountId, $params['contract']],
+        );
         $accountHolderId = 0;
         foreach ($result as $value) {
-            $customerExist = isset($customerList[$accountHolderId]['data'][$value->id]) ? true: false;
+            $customerExist = isset($customerList[$accountHolderId]['data'][$value->id]) ? true : false;
             if (!$customerExist) {
                 $moneyPayment = $this->accountService->calculationMoneyPayment($value);
-                dd($moneyPayment);
-                $value->total_first = 1;
-                $value->total_pay = 1;
-                $value->total_remaining = 1;
+                $value->moneyStartPeriod = (int) (isset($moneyPayment['moneyStartPeriod']) ? $moneyPayment['moneyStartPeriod'] : 0);
+                $value->totalAmountSpent = (int) (isset($moneyPayment['totalAmountSpent']) ? $moneyPayment['totalAmountSpent'] : 0);
+                $value->theRemainingAmount = (int) (isset($moneyPayment['theRemainingAmount']) ? $moneyPayment['theRemainingAmount'] : 0);
             }
             if ($value->account_holder && !$customerExist) {
                 $accountHolderId = $value->id;
-                $customerList[$value->id]['fullname'] = $value->name_card;
+                $customerList[$value->id]['fullname'] = $value->full_name . ' - ' . $value->card_number;
                 $customerList[$value->id]['data'][$value->id] = $value;
             } elseif (!$customerExist) {
                 $customerList[$accountHolderId]['data'][$value->id] = $value;
             }
         }
 
-        // foreach ($result as $value) {
-        //     if(isset($customerList) && is_array($customerList) && count($customerList)){
-        //         foreach ($customerList as $keyCustomer => $valueCustomer) {
-        //             // $customerList[$keyCustomer]['data'][] = $value
-        //         }
-        //     }
-        // }
-
-        dd($customerList);
-    }
-
-    private function getMoneyPayment(){
-
+        return $customerList;
     }
 }

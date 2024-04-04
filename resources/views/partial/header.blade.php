@@ -19,8 +19,8 @@ $menu = __('menu');
                 <div class="brand-logo d-flex align-items-center justify-content-between">
                     <a href="/" class="text-nowrap logo-img">
                         <span class="">
-                            <img src="{{ asset('/img-system/system/logo.png') }}" class="logo-horizontal ps-2"
-                                alt="homepage">
+                            {{-- <img src="{{ asset('/img-system/system/logo.png') }}" class="logo-horizontal ps-2"
+                                alt="homepage"> --}}
                         </span>
                     </a>
                 </div>
@@ -375,8 +375,8 @@ $menu = __('menu');
                     <div class="brand-logo d-flex align-items-center justify-content-between">
                         <a href="/" class="text-nowrap logo-img">
                             <span class="logo-text">
-                                <img src="{{ asset('/img-system/system/logo.png') }}" class="logo-horizontal ps-2"
-                                    alt="homepage">
+                                {{-- <img src="{{ asset('/img-system/system/logo.png') }}" class="logo-horizontal ps-2"
+                                    alt="homepage"> --}}
                             </span>
                         </a>
                     </div>
@@ -585,15 +585,15 @@ $menu = __('menu');
                         <div class="brand-logo d-flex align-items-center justify-content-between">
                             <a href="/" class="text-nowrap logo-img">
                                 <span class="">
-                                    <img src="{{ asset('/img-system/system/logo.png') }}" class="logo-horizontal ps-2"
-                                        alt="homepage">
+                                    {{-- <img src="{{ asset('/img-system/system/logo.png') }}" class="logo-horizontal ps-2"
+                                        alt="homepage"> --}}
                                 </span>
                             </a>
                         </div>
                     </li>
                 </ul>
                 @include('partial.aside-horizontal')
-                
+
                 <a class="navbar-toggler nav-icon-hover p-0 border-0" href="javascript:void(0)"
                     data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
                     aria-expanded="false" aria-label="Toggle navigation">

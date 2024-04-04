@@ -178,56 +178,98 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr role="row">
-                                    <td rowspan="2">
-                                        <h6 class="fs-4 fw-semibold mb-0">Cao Nhật Minh</h6>
-                                        <span class="fw-normal">15P897/16/000287</span>
-                                    </td>
-                                    <td>
-                                        15P897/16/000287
-                                    </td>
-                                    <td>Cao Nhật Minh</td>
-                                    <td>Nam</td>
-                                    <td>09/09/1989</td>
-                                    <td class="text-center">26 451 480</td>
-                                    <td class="text-center">162 000</td>
-                                    <td class="text-center">25 231 080</td>
-                                    <td>
-                                        <h6 class="fs-4 fw-semibold mb-0">
-                                            <div class="btn-group justify-content-center d-flex">
-                                                <button class="btn btn-success me-1" data-bs-toggle="modal"
-                                                    data-bs-target="#detailclient1">
-                                                    <span class="icon-item-icon">
-                                                        <img src="{{ asset('/img-system/system/edit_white.svg') }}" />
-                                                    </span>
-                                                </button>
-                                            </div>
-                                        </h6>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        15P806/19/000914
-                                    </td>
-                                    <td>Cao Vũ Quang Minh</td>
-                                    <td>Nam</td>
-                                    <td>02/02/2020</td>
-                                    <td class="text-center">0</td>
-                                    <td class="text-center">1 058 400</td>
-                                    <td class="text-center">0</td>
-                                    <td>
-                                        <h6 class="fs-4 fw-semibold mb-0">
-                                            <div class="btn-group justify-content-center d-flex">
-                                                <button class="btn btn-success me-1" data-bs-toggle="modal"
-                                                    data-bs-target="#detailclient2">
-                                                    <span class="icon-item-icon">
-                                                        <img src="{{ asset('/img-system/system/edit_white.svg') }}" />
-                                                    </span>
-                                                </button>
-                                            </div>
-                                        </h6>
-                                    </td>
-                                </tr>
+
+                                @if (isset($accountList) && is_array($accountList) && count($accountList))
+                                    @foreach ($accountList as $key => $item)
+                                        <tr role="row">
+                                            <td rowspan="{{ count($item['data']) }}">
+                                                {{ $item['fullname'] }}
+                                            </td>
+                                            @if (isset($item['data']) && is_array($item['data']) && count($item['data']))
+                                                @php
+                                                    $count = 0;
+                                                @endphp
+                                                @foreach ($item['data'] as $itemChild)
+                                                    @if ($count == 0)
+                                                        <td>
+                                                            {{ $itemChild->card_number }}
+                                                        </td>
+                                                        <td>{{ $itemChild->full_name }}</td>
+                                                        <td>{{ $itemChild->gender }}</td>
+                                                        <td>{{ $itemChild->birth_year }}</td>
+                                                        <td class="text-center">
+                                                            {{ number_format($itemChild->moneyStartPeriod) }}
+                                                        </td>
+                                                        <td class="text-center">
+                                                            {{ number_format($itemChild->totalAmountSpent) }}
+                                                        </td>
+                                                        <td class="text-center">
+                                                            {{ number_format($itemChild->theRemainingAmount) }}
+                                                        </td>
+                                                        <td>
+                                                            <h6 class="fs-4 fw-semibold mb-0">
+                                                                <div class="btn-group justify-content-center d-flex">
+                                                                    <button class="btn btn-success me-1"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#detailclient1">
+                                                                        <span class="icon-item-icon">
+                                                                            <img
+                                                                                src="{{ asset('/img-system/system/edit_white.svg') }}" />
+                                                                        </span>
+                                                                    </button>
+                                                                </div>
+                                                            </h6>
+                                                        </td>
+                                                        @php
+                                                            $count++;
+                                                        @endphp
+                                                    @endif
+                                                @endforeach
+                                            @endif
+                                        </tr>
+                                        @if (isset($item['data']) && is_array($item['data']) && count($item['data']))
+                                            @php
+                                                $countChild = 0;
+                                            @endphp
+                                            @foreach ($item['data'] as $itemChild)
+                                                @if ($countChild != 0)
+                                                    <td>
+                                                        {{ $itemChild->card_number }}
+                                                    </td>
+                                                    <td>{{ $itemChild->full_name }}</td>
+                                                    <td>{{ $itemChild->gender }}</td>
+                                                    <td>{{ $itemChild->birth_year }}</td>
+                                                    <td class="text-center">
+                                                        {{ 0 }}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{ number_format($itemChild->totalAmountSpent) }}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{ 0 }}
+                                                    </td>
+                                                    <td>
+                                                        <h6 class="fs-4 fw-semibold mb-0">
+                                                            <div class="btn-group justify-content-center d-flex">
+                                                                <button class="btn btn-success me-1"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#detailclient1">
+                                                                    <span class="icon-item-icon">
+                                                                        <img
+                                                                            src="{{ asset('/img-system/system/edit_white.svg') }}" />
+                                                                    </span>
+                                                                </button>
+                                                            </div>
+                                                        </h6>
+                                                    </td>
+                                                @endif
+                                                @php
+                                                    $countChild++;
+                                                @endphp
+                                            @endforeach
+                                        @endif
+                                    @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>

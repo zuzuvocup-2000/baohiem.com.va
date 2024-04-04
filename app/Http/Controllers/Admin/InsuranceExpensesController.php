@@ -51,8 +51,7 @@ class InsuranceExpensesController extends Controller
             $params['contract'] = $contractList->first() ? $contractList->first()->id : 0;
         }
         $contractDetail = $this->contractService->getContractDetail($params['contract']);
-        $accountList = (isset($params['keyword']) && !empty($params['keyword']) ? $this->customerService->getCustomerByKeyword($params) : null);
-        // dd($accountList);
+        $accountList = (isset($params['keyword']) && !empty($params['keyword']) ? $this->customerService->getCustomerByKeyword($params) : []);
         return view('admin.insurance-expenses.index', compact(['customerGroupList', 'companyList', 'periodList', 'contractList', 'accountList', 'contractDetail']));
     }
 }
