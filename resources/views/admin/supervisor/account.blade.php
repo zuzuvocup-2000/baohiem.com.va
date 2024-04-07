@@ -61,65 +61,49 @@
                         <div class="tab-content" id="pills-tabContent">
                             <div class="tab-pane fade active show" id="pills-profile" role="tabpanel"
                                 aria-labelledby="pills-profile-tab" tabindex="0">
-                                <form action="/" method="get">
-                                    @csrf
+                                <form action="">
                                     <div class="row mb-3">
-                                        <div class="col-xs-12 col-md-3">
-                                            <div class="form-group d-flex align-items-center">
-                                                <label class="d-inline-block" style="width: 100px" for="companySelect">Tên
-                                                    công ty</label>
-                                                <select class="form-select company-search mr-sm-2" id="companySelect"
-                                                    name="companySelect" style="width: calc(100% - 100px)">
-                                                    @foreach ($companyList as $company)
-                                                        <option value="{{ $company->id }}"
-                                                            {{ old('companySelect', $companyList[0]->id) == $company->id ? 'selected' : '' }}>
-                                                            {{ $company->company_name }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
+                                        <div class="col-8">
+                                            <div class="row ">
+                                                <div class="col-sm-12 col-md-6 col-xl-3">
+                                                    @include('common/select-company', [
+                                                        'companyId' => isset($_GET['company']) ? $_GET['company'] : 0,
+                                                        'companyList' => $companyList,
+                                                    ])
+                                                </div>
+                                                <div class="col-sm-12 col-md-6 col-xl-3">
+                                                    @include('common/select-period', [
+                                                        'periodId' => isset($_GET['period']) ? $_GET['period'] : 0,
+                                                        'periodList' => $periodList,
+                                                        'attr' => [
+                                                            'data-time-start' => isset($periodDetail->from_year)
+                                                                ? date('01/01/' . $periodDetail->from_year)
+                                                                : date('01/01/Y'),
+                                                        ],
+                                                    ])
+                                                </div>
+                                                <div class="col-sm-12 col-md-6 col-xl-3">
+                                                    @include('common/select-contract', [
+                                                        'contractId' => isset($_GET['contract']) ? $_GET['contract'] : 0,
+                                                        'contractList' => $contractList,
+                                                    ])
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-xs-12 col-md-3">
-                                            <div class="form-group d-flex align-items-center">
-                                                <label class="d-inline-block" style="width: 100px" for="periodSelect">Niên
-                                                    hạn</label>
-                                                <select class="form-select period-search mr-sm-2" id="periodSelect"
-                                                    name="periodSelect" style="width: calc(100% - 100px)">
-                                                    @foreach ($periodList as $period)
-                                                        <option value="{{ $period->id }}"
-                                                            {{ old('periodSelect', $periodList[0]->id) == $period->id ? 'selected' : '' }}>
-                                                            {{ $period->period_name }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
+                                        <div class="col-2 d-flex flex-column-reverse">
+                                            <button class="btn btn-primary w-100" type="submit">Tìm kiếm</button>
                                         </div>
-                                        <div class="col-xs-12 col-md-3">
-                                            <div class="form-group d-flex align-items-center">
-                                                <label class="d-inline-block" style="width: 100px" for="companySelect">Hợp
-                                                    đồng</label>
-                                                <select class="form-select contract-search mr-sm-2" id="contractSelect"
-                                                    name="contractSelect" style="width: calc(100% - 100px)">
-                                                    @foreach ($contractList as $contract)
-                                                        <option value="{{ $contract->id }}"
-                                                            {{ old('contractSelect', $contractList[0]->id) == $contract->id ? 'selected' : '' }}>
-                                                            {{ $contract->contract_name }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-md-1">
-                                            <button type="button" class="btn btn-primary">Tìm kiếm</button>
-                                        </div>
-                                        <div class="col-xs-12 col-md-2">
+                               
+                                        <div class="col-2 d-flex  flex-column-reverse">
                                             <div class="text-end">
                                                 <button type="button" class="btn btn-success">Phục hồi dữ liệu</button>
                                             </div>
                                         </div>
                                     </div>
                                 </form>
+
                                 <div class="table-responsive">
+
                                     <table id="simpletable"
                                         class="table system-table border text-nowrap customize-table mb-0 align-middle mb-3">
                                         <thead class="text-dark fs-4">
@@ -155,36 +139,47 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr role="row" data-id="1">
+                                            @foreach ($accountList as $key => $account)
+                                            @php
+                                                $nameParts = explode(" ", $account->full_name); 
+                                                if(count($nameParts) > 1) {
+                                                    $lastName = $nameParts[count($nameParts) - 1];
+                                                    $encryptedLastName = str_repeat("X", mb_strlen($lastName));
+                                                    $nameParts[count($nameParts) - 1] = $encryptedLastName;
+                                                }
+                                                $displayName = implode(" ", $nameParts);
+                                            @endphp
+                                            <tr role="row" data-id="{{ $account->id }}">
                                                 <td>
                                                     <input type="checkbox" class="toggleCheckbox custom-control-input"
                                                         id="packageDetail-1" name="id[]" value="1" />
                                                 </td>
                                                 <td>
-                                                    <p class="mb-0 fw-normal fs-4 text-center">1</p>
+                                                    <p class="mb-0 fw-normal fs-4 text-center">{{ ++$key }}</p>
                                                 </td>
                                                 <td>
-                                                    1900/HN102
+                                                    {{ $account->card_number }}
                                                 </td>
                                                 <td>
-                                                    Trần Xuân XXX
+                                                    {{ $displayName }}
+                                                </td>
+                                                <td class="text-center"><input type="checkbox" disabled=""
+                                                    {{ $account->account_holder ? 'checked' : '' }} />
                                                 </td>
                                                 <td class="text-center">
-                                                    <input class="form-checbox" type="checkbox" disabled="" checked />
+                                                    {{ number_format(($account->package_price),0,',','.').' VNĐ' }}
                                                 </td>
                                                 <td class="text-center">
-                                                    150.000.000
+                                                    {{ $account->group_name }}
                                                 </td>
                                                 <td class="text-center">
-                                                    Khách offshore
-                                                </td>
-                                                <td class="text-center">
-                                                    admin
+                                                    {{ $account->account_id }}
                                                 </td>
                                                 <td class="text-center">
                                                     20/03/2024
                                                 </td>
                                             </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>

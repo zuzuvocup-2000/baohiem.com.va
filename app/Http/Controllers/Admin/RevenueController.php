@@ -45,7 +45,7 @@ class RevenueController extends Controller
         $this->idc10ChronicDiseaseService = $idc10ChronicDiseaseService;
     }
 
-    public function generalInsurance(Request $request)
+    public function generalInsurance()
     {
         $params = $request->query();
         $companyList = $this->companyService->getCompanyByContract();

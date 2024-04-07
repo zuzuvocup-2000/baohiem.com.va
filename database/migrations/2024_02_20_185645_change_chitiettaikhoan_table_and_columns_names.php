@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::rename('TBL_CHITIETTAIKHOAN', 'tbl_account_detail');
 
         Schema::table('tbl_account_detail', function (Blueprint $table) {
-            $table->renameColumn('MACHITIETTAIKHOAN', 'mid');
+            $table->renameColumn('MACHITIETTAIKHOAN', 'id');
             $table->renameColumn('MATAIKHOAN', 'account_id');
             $table->renameColumn('MAUSER', 'user_id');
             $table->renameColumn('MAKHACHHANG', 'customer_id');

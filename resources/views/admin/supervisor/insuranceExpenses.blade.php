@@ -95,7 +95,7 @@
                                     <table id="simpletable"
                                         class="table system-table border text-nowrap customize-table mb-0 align-middle mb-3">
                                         <thead class="text-dark fs-4">
-                                            <tr role="row">
+                                            <tr role="row" >
                                                 <th>
                                                     <input type="checkbox" class="toggleAll custom-control-input"
                                                         id="customCheck1" />
@@ -112,11 +112,17 @@
                                                 <th>
                                                     <h6 class="fs-4 fw-semibold mb-0 text-center">TK chính</h6>
                                                 </th>
+                                                <th style="width: 200px;">
+                                                    <h6 class="fs-4 fw-semibold mb-0 text-center">Lý do chi</h6>
+                                                </th>
                                                 <th>
                                                     <h6 class="fs-4 fw-semibold mb-0 text-center">Số tiền chi</h6>
                                                 </th>
                                                 <th>
                                                     <h6 class="fs-4 fw-semibold mb-0 text-center">Ngày chi</h6>
+                                                </th>
+                                                <th>
+                                                    <h6 class="fs-4 fw-semibold mb-0 text-center">Mã khách hàng</h6>
                                                 </th>
                                                 <th>
                                                     <h6 class="fs-4 fw-semibold mb-0 text-center">Tên user</h6>
@@ -127,39 +133,56 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr role="row" data-id="1">
+                                            @foreach ($supervisorList as $key => $supervisor)
+                                            @php
+                                                $nameParts = explode(" ", $supervisor->full_name); 
+                                                if(count($nameParts) > 1) {
+                                                    $lastName = $nameParts[count($nameParts) - 1];
+                                                    $encryptedLastName = str_repeat("X", mb_strlen($lastName));
+                                                    $nameParts[count($nameParts) - 1] = $encryptedLastName;
+                                                }
+                                                $displayName = implode(" ", $nameParts);
+                                            @endphp
+                                            <tr role="row" data-id="{{ $supervisor->id }}">
                                                 <td>
                                                     <input type="checkbox" class="toggleCheckbox custom-control-input"
                                                         id="packageDetail-1" name="id[]" value="1" />
                                                 </td>
                                                 <td>
-                                                    <p class="mb-0 fw-normal fs-4 text-center">1</p>
+                                                    <p class="mb-0 fw-normal fs-4 text-center">{{ ++$key }}</p>
                                                 </td>
                                                 <td>
-                                                    1900/HN102
+                                                    {{ $supervisor->card_number }}
                                                 </td>
                                                 <td>
-                                                    Trần Xuân XXX
+                                                    {{ $displayName }}
+                                                </td>
+                                                <td class="text-center"><input type="checkbox" disabled=""
+                                                    {{ $supervisor->account_holder ? 'checked' : '' }} />
+                                                </td>
+                                                <td class="text-center" style="text-wrap: wrap">
+                                                    {{ $supervisor->note }}
                                                 </td>
                                                 <td class="text-center">
-                                                    <input class="form-checbox" type="checkbox" disabled="" checked />
+                                                    {{ number_format(($supervisor->amount_paid),0,',','.').' VNĐ' }}
                                                 </td>
                                                 <td class="text-center">
-                                                    150.000.000
+                                                    {{ $supervisor->payment_date }}
                                                 </td>
                                                 <td class="text-center">
-                                                    20/03/2024
+                                                    {{ $supervisor->payment_id }}
                                                 </td>
                                                 <td class="text-center">
-                                                    admin
                                                 </td>
                                                 <td class="text-center">
-                                                    20/03/2024
+                                                    {{ $supervisor->examination_date }}
                                                 </td>
                                             </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
+                                {!! $supervisorList->onEachSide(1)->render('pagination::bootstrap-5') !!}
                             </div>
                         </div>
                     </div>

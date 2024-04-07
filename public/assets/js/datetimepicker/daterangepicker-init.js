@@ -33,7 +33,7 @@ $(".timeseconds").daterangepicker({
 $(".singledate").daterangepicker({
     singleDatePicker: true,
     showDropdowns: true,
-    drops: 'up',
+    drops: 'down',
 });
 
 /*******************************************/
@@ -118,7 +118,7 @@ $(".shawCalRanges").daterangepicker({
 // Top of the form-control open alignment
 /*******************************************/
 $(".drops").daterangepicker({
-    drops: "up", // up/down
+    drops: "down", // up/down
 });
 
 /*******************************************/
