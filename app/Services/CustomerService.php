@@ -20,6 +20,170 @@ class CustomerService
         $this->accountService = $accountService;
     }
 
+    // KhachhangTKBaohiem_LoadtheomaKH
+    public function getCustomerByCustomerId($customerId, $periodId)
+    {
+        $result = DB::select(
+            "
+            SELECT DISTINCT
+                tbl_contract.id
+            FROM
+                tbl_customer
+                INNER JOIN tbl_account_detail ON tbl_customer.id = tbl_account_detail.customer_id
+                INNER JOIN tbl_account ON tbl_account_detail.account_id = tbl_account.id
+                INNER JOIN tbl_package_detail
+                INNER JOIN tbl_company ON tbl_package_detail.company_id = tbl_company.id
+                INNER JOIN tbl_account_detail_detail ON tbl_package_detail.id = tbl_account_detail_detail.package_detail_id
+                INNER JOIN tbl_period_detail ON tbl_company.id = tbl_period_detail.company_id
+                INNER JOIN tbl_contract ON tbl_period_detail.id = tbl_contract.period_id ON tbl_account.id = tbl_account_detail_detail.account_id
+            WHERE
+                tbl_account_detail.customer_id = :customerId AND tbl_period_detail.period_id = :periodId AND tbl_contract.active= 1
+            ",
+            [$customerId, $periodId],
+        );
+        $contractId = isset($result[0]->id) ? $result[0]->id : 0;
+        $detail = DB::select(
+            "
+            SELECT DISTINCT
+                tbl_customer.id,
+                tbl_customer.full_name,
+                tbl_customer.birth_year,
+                tbl_customer.address,
+                tbl_customer.images,
+                tbl_account.note,
+                tbl_customer.folder,
+                tbl_customer.identity_card_number,
+                tbl_customer.issue_date,
+                tbl_customer.issue_place,
+                tbl_customer.contact_phone,
+                tbl_customer.email,
+                tbl_customer.gender,
+                tbl_information_insurance.card_number,
+                tbl_contract.effective_time,
+                tbl_contract.end_time,
+                tbl_account_package.package_price,
+                tbl_account_package.id as account_package_id,
+                tbl_account_package.package_name,
+                tbl_customer_group.id as customer_group_id,
+                tbl_customer_group.group_name,
+                tbl_contract.id as contract_id,
+                tbl_account_detail.account_holder,
+                tbl_contract.contract_name,
+                tbl_contract.contract_supplement_number,
+                tbl_period.period_name,
+                tbl_company.company_name,
+                tbl_account.active,
+                tbl_province.id as province_id,
+                tbl_province.province_name,
+                tbl_customer_type.id as customer_type_id,
+                tbl_account.staff_code,
+                tbl_account.id as account_id,
+                tbl_account_detail_detail.prepayment,
+                tbl_customer_type.type_name,
+                tbl_customer.locked,
+                tbl_information_insurance.old_card_number,
+                tbl_account_detail.first_visit_date
+            FROM
+                tbl_period_detail
+                INNER JOIN tbl_company ON tbl_period_detail.company_id = tbl_company.id
+                INNER JOIN tbl_contract ON tbl_period_detail.id = tbl_contract.period_id
+                INNER JOIN tbl_period ON tbl_period_detail.period_id = tbl_period.id
+                INNER JOIN tbl_account_detail_detail
+                INNER JOIN tbl_package_detail ON tbl_account_detail_detail.package_detail_id = tbl_package_detail.id
+                INNER JOIN tbl_account ON tbl_account_detail_detail.account_id = tbl_account.id
+                INNER JOIN tbl_account_detail ON tbl_account.id = tbl_account_detail.account_id
+                INNER JOIN tbl_customer ON tbl_account_detail.customer_id = tbl_customer.id
+                INNER JOIN tbl_account_package ON tbl_package_detail.account_package_id = tbl_account_package.id
+                INNER JOIN tbl_information_insurance ON tbl_customer.id = tbl_information_insurance.customer_id
+                INNER JOIN tbl_customer_group ON tbl_customer.customer_group_id = tbl_customer_group.id
+                INNER JOIN tbl_province ON tbl_customer.province_id = tbl_province.id ON tbl_period.id = tbl_package_detail.period_id
+                INNER JOIN tbl_customer_type ON tbl_customer.customer_type_id = tbl_customer_type.id
+            WHERE
+                ( tbl_customer.id = :accountId )
+                AND ( tbl_contract.active = 1 )
+                AND ( tbl_period.id = :periodId )
+                AND ( tbl_account_detail.active = 1 )
+                AND ( tbl_contract.id = :contractId )
+            ",
+            [$customerId, $periodId, $contractId],
+        );
+
+        $customer = isset($detail[0]) ? $detail[0] : (object) [];
+
+        $totalMoney = $this->accountService->calculationMoneyPayment($customer);
+        $totalMoneyObject = (object) $totalMoney;
+        return (object) array_merge((array) $customer, (array) $totalMoneyObject);
+    }
+
+    // KhachhangChiBH_ListtheomaKH
+    public function getListCustomersPayForInsuranceByCustomerId($customerId)
+    {
+        return DB::table('tbl_account_detail')
+            ->select('tbl_customer.id', 'tbl_customer.full_name', 'tbl_payment_detail.payment_date', 'tbl_payment_detail.examination_date', 'tbl_payment_detail.amount_paid', 'tbl_payment_detail.id as payment_detail_id', 'tbl_payment_detail.note', 'tbl_payment_detail.approved', 'tbl_hospital.hospital_name', 'tbl_account_detail.account_holder', 'tbl_period.period_name')
+            ->join('tbl_payment_detail', 'tbl_account_detail.id', '=', 'tbl_payment_detail.account_detail_id')
+            ->join('tbl_account_detail_detail', 'tbl_account_detail.account_id', '=', 'tbl_account_detail_detail.account_id')
+            ->join('tbl_package_detail', 'tbl_package_detail.id', '=', 'tbl_account_detail_detail.package_detail_id')
+            ->join('tbl_period', 'tbl_package_detail.period_id', '=', 'tbl_period.id')
+            ->join('tbl_period_detail', 'tbl_period_detail.period_id', '=', 'tbl_period.id')
+            ->join('tbl_contract', function ($join) {
+                $join->on('tbl_period_detail.id', '=', 'tbl_contract.period_id')->whereRaw('tbl_payment_detail.payment_date > tbl_contract.effective_time')->whereRaw('tbl_payment_detail.payment_date <= tbl_contract.end_time');
+            })
+            ->join('tbl_customer', 'tbl_account_detail.customer_id', '=', 'tbl_customer.id')
+            ->join('tbl_information_insurance', 'tbl_information_insurance.customer_id', '=', 'tbl_customer.id')
+            ->join('tbl_hospital', 'tbl_hospital.id', '=', 'tbl_payment_detail.hospital_id')
+            ->where('tbl_customer.id', '=', $customerId)
+            ->where('tbl_payment_detail.active', '=', 1)
+            ->orderBy('tbl_payment_detail.id', 'desc')
+            ->get();
+    }
+
+    // KhachhangChiBH_loadchiTK
+    public function getMoneyAmountSpent($customerId, $periodId)
+    {
+        $accountId = DB::select(
+            "select distinct max(tbl_account.id) as id
+                    from tbl_account
+                    inner join tbl_account_detail on tbl_account.id=tbl_account_detail.account_id
+                    where tbl_account.active=1
+                    and tbl_account_detail.active=1
+                    and customer_id=:customerId",
+            [$customerId]
+        );
+        $totalPayment = DB::select(
+            "select sum(amount_paid) as total
+                    FROM tbl_period_detail
+                    INNER JOIN tbl_period ON tbl_period_detail.period_id = tbl_period.id
+                    INNER JOIN tbl_contract ON tbl_period_detail.id = tbl_contract.period_id
+                    INNER JOIN tbl_payment_detail
+                    INNER JOIN tbl_account_detail ON tbl_payment_detail.account_detail_id = tbl_account_detail.id
+                    INNER JOIN tbl_account ON tbl_account_detail.account_id = tbl_account.id
+                    ON tbl_contract.id = tbl_account.contract_id
+                    and tbl_account.id = :accountId
+                    and tbl_period.id = :periodId", [$accountId[0]->id, $periodId]);
+
+        $totalPayment = $totalPayment[0]->total ? (int)$totalPayment[0]->total : 0;
+
+        $paymentAmount = DB::select(
+            DB::raw("select sum(amount_paid) as total
+                    FROM tbl_period_detail
+                    INNER JOIN tbl_period ON tbl_period_detail.period_id = tbl_period.id
+                    INNER JOIN tbl_contract ON tbl_period_detail.id = tbl_contract.period_id
+                    INNER JOIN tbl_payment_detail
+                    INNER JOIN tbl_account_detail ON tbl_payment_detail.account_detail_id = tbl_account_detail.id
+                    INNER JOIN tbl_account ON tbl_account_detail.account_id = tbl_account.id
+                    ON tbl_contract.id = tbl_account.contract_id
+                    where tbl_account_detail.customer_id=:customerId
+                    and tbl_payment_detail.active=1
+                    and tbl_period.id=:periodId"),
+            [$customerId, $periodId],
+        );
+
+        $paymentAmount = $paymentAmount[0]->total ? (int)$paymentAmount[0]->total : 0;
+
+        $amountSpent = $totalPayment - $paymentAmount;
+        return $amountSpent ? $amountSpent : 0;
+    }
+
     public function getCustomerByKeyword($params)
     {
         $customerList = DB::table('tbl_customer')

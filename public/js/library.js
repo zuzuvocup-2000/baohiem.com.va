@@ -145,3 +145,12 @@ function enabledButtonLoading(_this) {
     _this.find('.default').removeClass('d-none')
     _this.find('.loading-dot').addClass('d-none')
 }
+
+function formatDate(inputDate) {
+    var date = new Date(inputDate);
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+    var formattedDate = (day < 10 ? '0' : '') + day + '/' + (month < 10 ? '0' : '') + month + '/' + year;
+    return formattedDate;
+}

@@ -113,6 +113,7 @@ class AccountService
         return $accountList;
     }
 
+    // KhachhangTKBaohiem_TinhgiatritienBH
     public function calculationMoneyPayment($customer)
     {
         $moneyStartPeriod = 0;
