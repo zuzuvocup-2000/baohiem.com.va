@@ -46,6 +46,11 @@ class InsuranceExpensesController extends Controller
         return view('admin.insurance-expenses.index', array_merge($data, compact(['accountList', 'hospitalList', 'paymentTypeList'])));
     }
 
+    public function create(Request $request){
+        $params = $request->query();
+        dd($params);
+    }
+
     public function insuranceDay(Request $request)
     {
         $data = $this->prepareData($request);

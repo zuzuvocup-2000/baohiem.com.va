@@ -150,6 +150,7 @@ Route::middleware(['is_user_admin', 'permission'])->group(function () {
     Route::get('/insurance-expenses/hospital', [InsuranceExpensesController::class, 'insuranceHospital'])->name('insuranceExpenses.hospital');
     Route::get('/insurance-expenses/diary', [InsuranceExpensesController::class, 'insuranceDiary'])->name('insuranceExpenses.diary');
     Route::get('/insurance-expenses/detail', [InsuranceExpensesController::class, 'getDetailAccount'])->name('insuranceExpenses.detail');
+    Route::post('/insurance-expenses/create', [InsuranceExpensesController::class, 'create'])->name('insuranceExpenses.create');
 
     // Routes for Supervisor
     Route::get('/supervisor/insurance-expenses', [SupervisorController::class, 'insuranceExpenses'])->name('supervisor.insuranceExpenses');

@@ -8,8 +8,6 @@ $(document).ready(function () {
     $(document).on('click', '.btn-get-detail', function () {
         var id = $(this).data('id');
         var periodId = $('#periodSelectGeneral').val()
-        console.log(id);
-        console.log(periodId);
 
         $.ajax({
             url: '/insurance-expenses/detail',
@@ -19,6 +17,8 @@ $(document).ready(function () {
                 periodId: periodId
             },
             success: function (response) {
+                $('.contract_id_hidden').val(response.customer.contract_id)
+                $('.customer_id_hidden').val(response.customer.id)
                 $('.company_name_customer').text(response.customer.company_name)
                 $('.period_name_customer').text(response.customer.company_name)
                 $('.contract_name_customer').text(response.customer.contract_name)
@@ -43,6 +43,52 @@ $(document).ready(function () {
             }
         });
     });
+
+    $('.btn-add-content-pay').click(function () {
+        var currentRow = $(this).closest('tr');
+        var paymentTypeId = currentRow.find('.create-insurance-payment_type').val();
+        var money = currentRow.find('.create-insurance-money').val();
+        var moneyWish = currentRow.find('.create-insurance-money_wish').val();
+        var moneyDenided = currentRow.find('.create-insurance-money_denided').val();
+        var note = currentRow.find('.create-insurance-note').val();
+
+        var newRow = `
+            <tr class="clone-content-pay">
+                <td>
+                    <div class="btn-group d-flex justify-content-center">
+                        <button class="btn btn-danger delete-content-pay"><span class="icon-item-icon"><img src="/img-system/system/trash_white.svg" alt=""></span></button>
+                    </div>
+                </td>
+                <td>
+                    <input type="hidden" name="payment_type_id[]" value="${paymentTypeId}">
+                    ${currentRow.find('.create-insurance-payment_type option:selected').text()}
+                </td>
+                <td class="text-center">
+                    <input type="hidden" name="money[]" value="${money}">
+                    ${money}
+                </td>
+                <td class="text-center">
+                    <input type="hidden" name="money_wish[]" value="${moneyWish}">
+                    ${moneyWish}
+                </td>
+                <td class="text-center">
+                    <input type="hidden" name="money_denided[]" value="${moneyDenided}">
+                    ${moneyDenided}
+                </td>
+                <td>
+                    <input type="hidden" name="note[]" value="${note}">
+                    ${note}
+                </td>
+            </tr>`;
+
+        $('.table-content-pay tbody').prepend(newRow);
+        return false;
+    });
+
+    $(document).on('click', '.delete-content-pay' , function(){
+        $(this).closest('tr').remove()
+        return false;
+    })
 });
 
 function render_customer_payment(customerList) {
@@ -90,7 +136,9 @@ function render_customer_payment(customerList) {
         html += "</tr>";
     });
     $('.table-customer-pay tbody').html(html)
-    var table = $(".table-customer-pay").DataTable({
-        "bLengthChange" : false
-    });
+    if ($(".table-customer-pay.dataTable").length == 0) {
+        $(".table-customer-pay").DataTable({
+            "bLengthChange": false
+        });
+    }
 }
