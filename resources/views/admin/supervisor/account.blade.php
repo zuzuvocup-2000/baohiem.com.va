@@ -96,7 +96,7 @@
                                
                                         <div class="col-2 d-flex  flex-column-reverse">
                                             <div class="text-end">
-                                                <button type="button" class="btn btn-success">Phục hồi dữ liệu</button>
+                                                <button type="button" class="btn btn-success btn-recover-account">Phục hồi dữ liệu</button>
                                             </div>
                                         </div>
                                     </div>
@@ -152,7 +152,7 @@
                                             <tr role="row" data-id="{{ $account->id }}">
                                                 <td>
                                                     <input type="checkbox" class="toggleCheckbox custom-control-input"
-                                                        id="packageDetail-1" name="id[]" value="1" />
+                                                        id="packageDetail-1" name="id[]" value="{{ $account->account_id }}" />
                                                 </td>
                                                 <td>
                                                     <p class="mb-0 fw-normal fs-4 text-center">{{ ++$key }}</p>
@@ -198,4 +198,5 @@
     <script src="/assets/js/datetimepicker/daterangepicker-init.js"></script>
     <script src="/assets/js/datetimepicker/bootstrap-datepicker.min.js"></script>
     <script src="/assets/js/datetimepicker/datepicker-init.js"></script>
+    <script src="/js/pages/supervisor.js"></script>
 @endsection
