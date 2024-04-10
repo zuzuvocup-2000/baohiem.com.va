@@ -61,26 +61,26 @@
                         <div class="tab-content" id="pills-tabContent">
                             <div class="tab-pane fade active show" id="pills-profile" role="tabpanel"
                                 aria-labelledby="pills-profile-tab" tabindex="0">
-                                <form action="">
+                                <form action="" method="get">
                                     <div class="row mb-3">
                                         <div class="col-xs-12 col-md-3">
                                             <div class="form-group d-flex align-items-center">
                                                 <label class="d-inline-block" style="width: 100px" for="startDate">Từ
                                                     ngày</label>
-                                                <input type="text" class="form-control singledate"
-                                                    style="width: calc(100% - 100px)" id="startDate" name="startDate">
+                                                <input type="text" class="form-control singledate"  value="{{ request()->time_start }}"
+                                                    style="width: calc(100% - 100px)" id="startDate" name="time_start">
                                             </div>
                                         </div>
                                         <div class="col-xs-12 col-md-3">
                                             <div class="form-group d-flex align-items-center">
                                                 <label class="d-inline-block" style="width: 100px" for="endDate">Đến
                                                     ngày</label>
-                                                <input type="text" class="form-control singledate"
-                                                    style="width: calc(100% - 100px)" id="endDate" name="endDate">
+                                                <input type="text" class="form-control singledate" value="{{ request()->time_end }}"
+                                                    style="width: calc(100% - 100px)" id="endDate" name="time_end">
                                             </div>
                                         </div>
                                         <div class="col-xs-12 col-md-1">
-                                            <button type="button" class="btn btn-primary">Tìm kiếm</button>
+                                            <button type="submit" class="btn btn-primary">Tìm kiếm</button>
                                         </div>
                                         <div class="col-xs-12 col-md-2"></div>
                                         <div class="col-xs-12 col-md-3">

@@ -15,12 +15,8 @@ use Illuminate\Support\Facades\DB;
 class SupervisorService
 {
     public function getDeletedInsuranceExpenseList($params = []){
-        [$from, $to] = explode('-', $params['time_range']);
-
-        $time = [
-            'from' => Carbon::createFromFormat('d/m/Y', trim($from))->format('Y-m-d'),
-            'to' => Carbon::createFromFormat('d/m/Y', trim($to))->format('Y-m-d'),
-        ];
+        $timeStart = isset($params['time_start']) ? Carbon::createFromFormat('d/m/Y', $params['time_start'])->format('Y-m-d') : null;
+        $timeEnd = isset($params['time_end']) ? Carbon::createFromFormat('d/m/Y', $params['time_end'])->format('Y-m-d') : null;
         return Customer::select([
             'tbl_customer.id',
             'tbl_customer.full_name',
@@ -61,7 +57,7 @@ class SupervisorService
         ->join('tbl_contract', 'tbl_account.contract_id', '=', 'tbl_contract.id')
         ->join('tbl_payment_detail', 'tbl_payment_detail.account_detail_id', '=', 'tbl_account_detail.id')
         ->join('tbl_customer_group', 'tbl_customer_group.id', '=', 'tbl_customer.customer_group_id')
-        ->whereBetween('tbl_payment_detail.payment_date', [$time['from'], $time['to']])
+        ->whereBetween('tbl_payment_detail.payment_date', [$timeStart, $timeEnd])
         ->where('tbl_payment_detail.active', 0)
         ->orderBy('tbl_payment_detail.payment_date', 'desc')
         ->paginate(PER_PAGE_SMALL);
