@@ -14,6 +14,7 @@ use App\Http\Controllers\Ajax\CustomerTypeController;
 use App\Http\Controllers\Ajax\HospitalController as HospitalAjax;
 use App\Http\Controllers\Ajax\UserHospitalController;
 use App\Http\Controllers\Ajax\DepartmentController as DepartmentAjax;
+use App\Http\Controllers\Ajax\SupervisorController as SupervisorAjax;
 use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
@@ -109,6 +110,11 @@ Route::middleware(['is_user_admin', 'permission'])->group(function () {
         //Tài khoản
         Route::put('/account/locked', [AccountAjax::class, 'locked'])->name('ajax.account.locked');
         Route::put('/account/unlocked', [AccountAjax::class, 'unlocked'])->name('ajax.account.unlocked');
+
+        //Supervisor
+        Route::put('/supervisor/recover', [SupervisorAjax::class, 'recover'])->name('ajax.supervisor.recover');
+        Route::put('/supervisor/recover-account', [SupervisorAjax::class, 'recoverAccount'])->name('ajax.supervisor.recover-account');
+
     });
 
     // Routes for free design before

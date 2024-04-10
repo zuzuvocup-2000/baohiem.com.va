@@ -61,32 +61,31 @@
                         <div class="tab-content" id="pills-tabContent">
                             <div class="tab-pane fade active show" id="pills-profile" role="tabpanel"
                                 aria-labelledby="pills-profile-tab" tabindex="0">
-                                <form action="/" method="get">
-                                    @csrf
+                                <form action="" method="get">
                                     <div class="row mb-3">
                                         <div class="col-xs-12 col-md-3">
                                             <div class="form-group d-flex align-items-center">
                                                 <label class="d-inline-block" style="width: 100px" for="startDate">Từ
                                                     ngày</label>
-                                                <input type="text" class="form-control singledate"
-                                                    style="width: calc(100% - 100px)" id="startDate" name="startDate">
+                                                <input type="text" class="form-control singledate"  value="{{ request()->time_start }}"
+                                                    style="width: calc(100% - 100px)" id="startDate" name="time_start">
                                             </div>
                                         </div>
                                         <div class="col-xs-12 col-md-3">
                                             <div class="form-group d-flex align-items-center">
                                                 <label class="d-inline-block" style="width: 100px" for="endDate">Đến
                                                     ngày</label>
-                                                <input type="text" class="form-control singledate"
-                                                    style="width: calc(100% - 100px)" id="endDate" name="endDate">
+                                                <input type="text" class="form-control singledate" value="{{ request()->time_end }}"
+                                                    style="width: calc(100% - 100px)" id="endDate" name="time_end">
                                             </div>
                                         </div>
                                         <div class="col-xs-12 col-md-1">
-                                            <button type="button" class="btn btn-primary">Tìm kiếm</button>
+                                            <button type="submit" class="btn btn-primary">Tìm kiếm</button>
                                         </div>
                                         <div class="col-xs-12 col-md-2"></div>
                                         <div class="col-xs-12 col-md-3">
                                             <div class="text-end">
-                                                <button type="button" class="btn btn-success">Phục hồi dữ liệu</button>
+                                                <button type="button" class="btn btn-success btn-recover">Phục hồi dữ liệu</button>
                                             </div>
                                         </div>
                                     </div>
@@ -146,7 +145,7 @@
                                             <tr role="row" data-id="{{ $supervisor->id }}">
                                                 <td>
                                                     <input type="checkbox" class="toggleCheckbox custom-control-input"
-                                                        id="packageDetail-1" name="id[]" value="1" />
+                                                        id="packageDetail-1" name="id[]" value="{{ $supervisor->payment_id }}" />
                                                 </td>
                                                 <td>
                                                     <p class="mb-0 fw-normal fs-4 text-center">{{ ++$key }}</p>
@@ -194,8 +193,10 @@
 @endsection
 @section('script')
     <script src="/assets/js/datetimepicker/moment.min.js"></script>
+    <script src="/assets/js/datetimepicker/moment.min.js"></script>
     <script src="/assets/js/datetimepicker/daterangepicker.js"></script>
     <script src="/assets/js/datetimepicker/daterangepicker-init.js"></script>
     <script src="/assets/js/datetimepicker/bootstrap-datepicker.min.js"></script>
     <script src="/assets/js/datetimepicker/datepicker-init.js"></script>
+    <script src="/js/pages/supervisor.js"></script>
 @endsection
