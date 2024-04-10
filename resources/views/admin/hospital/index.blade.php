@@ -19,8 +19,14 @@
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6" id="hospital-use-tab" data-bs-toggle="pill" data-bs-target="#hospital-user" type="button" role="tab" aria-controls="hospital-user" aria-selected="false" tabindex="-1">
-                                <span class="icon-item-icon me-2"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-nurse" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 6c2.941 0 5.685 .847 8 2.31l-2 9.69h-12l-2 -9.691a14.93 14.93 0 0 1 8 -2.309z"></path><path d="M10 12h4"></path><path d="M12 10v4"></path></svg></span>
+                                <span class="icon-item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-clipboard-data"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"></path><path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path><path d="M9 17v-4"></path><path d="M12 17v-1"></path><path d="M15 17v-2"></path><path d="M12 17v-1"></path></svg></span>
                                 <span class="d-none d-md-block">Cập nhật thông tin tài khoản bệnh viện</span>
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6" id="hospital-contract-tab" data-bs-toggle="pill" data-bs-target="#hospital-contract" type="button" role="tab" aria-controls="hospital-contract" aria-selected="false" tabindex="-1">
+                                <span class="icon-item-icon me-2"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-nurse" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 6c2.941 0 5.685 .847 8 2.31l-2 9.69h-12l-2 -9.691a14.93 14.93 0 0 1 8 -2.309z"></path><path d="M10 12h4"></path><path d="M12 10v4"></path></svg></span>
+                                <span class="d-none d-md-block">Cập nhật danh sách hợp đồng bệnh viện</span>
                             </button>
                         </li>
                     </ul>
@@ -232,6 +238,136 @@
                                                         </option>
                                                     @endforeach
                                                 </select>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="hospital-contract" role="tabpanel" aria-labelledby="hospital-contract-tab" tabindex="0">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-xl-3 mb-3">
+                                    @include('common/select-company', [
+                                        'companyId' => (isset($_GET['company']) ? $_GET['company'] : 0),
+                                        'companyList' => $companyList
+                                    ])
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-xl-3 mb-3">
+                                    @include('common/select-period', [
+                                        'periodId' => (isset($_GET['period']) ? $_GET['period'] : 0),
+                                        'periodList' => $periodList
+                                    ])
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-xl-3 mb-3">
+                                    @include('common/select-contract', [
+                                        'contractId' => (isset($_GET['contract']) ? $_GET['contract'] : 0),
+                                        'contractList' => $contractList
+                                    ])
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-xl-3 mb-3">
+                                    <label for="" class="mb-1">Tên loại bệnh viện</label>
+                                    <select class="form-select mr-sm-2 " id="contractSelectGeneral" name="contract"><option value="10161">Toàn bộ</option></select>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-xl-3 mb-3">
+                                    <label for="" class="mb-1">Tên bệnh viện</label>
+                                    <select class="form-select mr-sm-2 " id="contractSelectGeneral" name="contract"><option value="10161">Bệnh viện An Sinh</option></select>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-xl-3 mb-3">
+                                    <label for="" class="mb-1">Tên nhân viên</label>
+                                    <select class="form-select mr-sm-2 " id="contractSelectGeneral" name="contract"><option value="10161">An Sinh</option></select>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table id="simpletable" class="table system-table border text-nowrap customize-table mb-0 align-middle mb-3">
+                                    {{ $hospitalContractList }}
+                                    <thead class="text-dark fs-4">
+                                        <tr role="row">
+                                            <th style="width: 200px;">
+                                                <h6 class="fs-4 fw-semibold text-center mb-0">Thao tác</h6>
+                                            </th>
+                                            <th>
+                                                <h6 class="fs-4 fw-semibold mb-0">Tên bệnh viện</h6>
+                                            </th>
+                                            <th>
+                                                <h6 class="fs-4 fw-semibold mb-0">Tên nhân viên</h6>
+                                            </th>
+                                            <th>
+                                                <h6 class="fs-4 fw-semibold mb-0">Tên hợp đồng</h6>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($userHospitalList as $key => $userhospital)
+                                        <tr role="row" data-id="{{ $userhospital->id }}">
+                                            <td>
+                                                <h6 class="fs-4 fw-semibold mb-0">
+                                                    <div class="btn-group d-flex justify-content-center">
+                                                        <button class="btn btn-success me-1 editButton">
+                                                            <span class="icon-item-icon">
+                                                                <img src="{{ asset('/img-system/system/edit_white.svg') }}" />
+                                                            </span>
+                                                        </button>
+                                                        <button class="btn btn-danger tabledit-delete-button delete-button-user-hospital">
+                                                            <span class="icon-item-icon">
+                                                                <img src="{{ asset('/img-system/system/trash_white.svg') }}" alt="" />
+                                                            </span>
+                                                        </button>
+                                                        <button class="btn btn-info me-1 saveButton btn-update-user-hospital" style="display: none;">
+                                                            <span class="icon-item-icon">
+                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                    class="icon icon-tabler icon-tabler-discount-check-filled" width="24"
+                                                                    height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                                    <path
+                                                                        d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944zm3.697 7.282a1 1 0 0 0 -1.414 0l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.32 1.497l2 2l.094 .083a1 1 0 0 0 1.32 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
+                                                                        stroke-width="0" fill="currentColor"></path>
+                                                                </svg>
+                                                            </span>
+                                                        </button>
+                                                        <button class="btn btn-warning cancelButton" style="display: none;">
+                                                            <span class="icon-item-icon">
+                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                    class="icon icon-tabler icon-tabler-circle-x-filled" width="24"
+                                                                    height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                                    <path
+                                                                        d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-6.489 5.8a1 1 0 0 0 -1.218 1.567l1.292 1.293l-1.292 1.293l-.083 .094a1 1 0 0 0 1.497 1.32l1.293 -1.292l1.293 1.292l.094 .083a1 1 0 0 0 1.32 -1.497l-1.292 -1.293l1.292 -1.293l.083 -.094a1 1 0 0 0 -1.497 -1.32l-1.293 1.292l-1.293 -1.292l-.094 -.083z"
+                                                                        stroke-width="0" fill="currentColor">
+                                                                    </path>
+                                                                </svg>
+                                                            </span>
+                                                        </button>
+                                                    </div>
+                                                </h6>
+                                            </td>
+                                            <td>
+                                                <input class="inputField form-control" type="text" name="update_employee_name" value="{{ $userhospital->employee_name }}" data-original-value="{{ $userhospital->employee_name }}" disabled="">
+                                            </td>
+                                            <td>
+                                                <input class="inputField form-control" type="text" name="update_username" value="{{ $userhospital->username }}" data-original-value="{{ $userhospital->username }}" disabled="">
+                                            </td>
+                                            <td>
+                                                <input class="inputField form-control" type="text" name="update_username" value="{{ $userhospital->username }}" data-original-value="{{ $userhospital->username }}" disabled="">
+                                            </td>
+                                            
+                                        </tr>
+                                        @endforeach
+                                        <tr role="row">
+                                            <td class="justify-content-center d-flex">
+                                                @include('common/button-loading', ['class' => 'btn-create-user-hospital'])
+                                            </td>
+                                            <td>
+                                                <input class="inputField form-control" type="text" name="create_employee_name" value="" data-original-value="">
+                                            </td>
+                                            <td>
+                                                <input class="inputField form-control" type="text" name="create_username" value="" data-original-value="">
+                                            </td>
+                                            <td>
+                                                <input class="inputField form-control" type="text" name="create_password" value="" data-original-value="">
                                             </td>
                                         </tr>
                                     </tbody>

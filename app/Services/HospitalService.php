@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Customer;
 use App\Models\Hospital;
+use App\Models\DanhsachHopdongBenhvien;
 
 /**
  * Class HospitalService
@@ -25,6 +26,16 @@ class HospitalService
         }
         return $hospitalList;
     }
+    public function getHospitalContract(){
+        return TBL_DANHSACHHOPDONG_BENHVIEN::join('tbl_contract', 'TBL_DANHSACHHOPDONG_BENHVIEN.MAHOPDONG', '=', 'tbl_contract.id')
+            ->join('tbl_user_hospital', 'TBL_DANHSACHHOPDONG_BENHVIEN.MAUSER_BENHVIEN', '=', 'tbl_user_hospital.id')
+            ->join('tbl_hospital', 'tbl_user_hospital.hospital_id', '=', 'tbl_hospital.id')
+            ->select('TBL_DANHSACHHOPDONG_BENHVIEN.MADSHOPDONG', 'TBL_DANHSACHHOPDONG_BENHVIEN.MAHOPDONG', 'TBL_DANHSACHHOPDONG_BENHVIEN.MAUSER_BENHVIEN', 'tbl_user_hospital.employee_name', 'tbl_user_hospital.username', 'tbl_contract.contract_name', 'tbl_hospital.hospital_name')
+            ->where('tbl_contract.active', 1)
+            ->where('tbl_user_hospital.active', 1)
+            ->where('TBL_DANHSACHHOPDONG_BENHVIEN.ACTIVE', 1)
+            ->get();
+    }
 
     private function getReportHospital($id, $time){
         return Customer::join('tbl_health_account', 'tbl_customer.id', '=', 'tbl_health_account.customer_id')
@@ -43,4 +54,5 @@ class HospitalService
         ->whereBetween('tbl_health_checkup_information.checkup_date', [$time['from'], $time['to']])
         ->first();
     }
+    
 }
