@@ -89,6 +89,13 @@ $(document).ready(function () {
         $(this).closest('tr').remove()
         return false;
     })
+
+    $(document).on('click', '.btn-save-payment-insurance' , function(){
+        if($('.clone-content-pay').length == 0){
+            toastr.error("Chưa thêm thông tin chi bảo hiểm đươc.Vui lòng kiểm tra lại thông tin!");
+            return false;
+        }
+    })
 });
 
 function render_customer_payment(customerList) {

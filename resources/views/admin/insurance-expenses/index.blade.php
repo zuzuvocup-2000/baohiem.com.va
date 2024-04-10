@@ -144,7 +144,7 @@
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="{{ route("insuranceExpenses.create") }}" method="post">
+                                    <form action="{{ route('insuranceExpenses.create') }}" method="post">
                                         @csrf
                                         <input type="hidden" name="contract_id" class="contract_id_hidden">
                                         <input type="hidden" name="customer_id" class="customer_id_hidden">
@@ -277,8 +277,7 @@
                                                             ])
                                                         </td>
                                                         <td>
-                                                            <select class="form-select create-insurance-payment_type"
-                                                                name="payment_type_id">
+                                                            <select class="form-select create-insurance-payment_type">
                                                                 @foreach ($paymentTypeList as $paymentType)
                                                                     <option value="{{ $paymentType['id'] }}">
                                                                         {{ $paymentType['payment_type_name'] }}
@@ -289,21 +288,21 @@
                                                         <td>
                                                             <input
                                                                 class="inputField form-control int create-insurance-money"
-                                                                type="text" name="money" value="">
+                                                                type="text" value="">
                                                         </td>
                                                         <td>
                                                             <input
                                                                 class="inputField form-control int create-insurance-money_wish"
-                                                                type="text" name="money_wish" value="">
+                                                                type="text" value="">
                                                         </td>
                                                         <td>
                                                             <input
                                                                 class="inputField form-control int create-insurance-money_denided"
-                                                                type="text" name="money_denided" value="">
+                                                                type="text" value="">
                                                         </td>
                                                         <td>
                                                             <input class="inputField form-control create-insurance-note"
-                                                                type="text" name="note" value="">
+                                                                type="text" value="">
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -321,7 +320,8 @@
                                             </div>
                                             <div class="col-sm-12 col-md-6">
                                                 <div class="text-right">
-                                                    <button type="submit" class="btn btn-success">Lưu</button>
+                                                    <button type="submit"
+                                                        class="btn btn-success btn-save-payment-insurance">Lưu</button>
                                                 </div>
                                             </div>
                                         </div>

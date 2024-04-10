@@ -10,6 +10,7 @@ use App\Services\CustomerService;
 use App\Services\PeriodService;
 use App\Services\AccountService;
 use App\Services\HospitalService;
+use App\Services\InsuranceExpensesService;
 use App\Services\PaymentTypeService;
 use Illuminate\Http\Request;
 
@@ -23,8 +24,9 @@ class InsuranceExpensesController extends Controller
     protected $customerService;
     protected $hospitalService;
     protected $paymentTypeService;
+    protected $insuranceExpensesService;
 
-    public function __construct(CompanyService $companyService, PeriodService $periodService, ContractService $contractService, CustomerGroupService $customerGroupService, CustomerService $customerService, AccountService $accountService, HospitalService $hospitalService, PaymentTypeService $paymentTypeService)
+    public function __construct(CompanyService $companyService, PeriodService $periodService, ContractService $contractService, CustomerGroupService $customerGroupService, CustomerService $customerService, AccountService $accountService, HospitalService $hospitalService, PaymentTypeService $paymentTypeService, InsuranceExpensesService $insuranceExpensesService)
     {
         $this->customerGroupService = $customerGroupService;
         $this->companyService = $companyService;
@@ -34,6 +36,7 @@ class InsuranceExpensesController extends Controller
         $this->accountService = $accountService;
         $this->hospitalService = $hospitalService;
         $this->paymentTypeService = $paymentTypeService;
+        $this->insuranceExpensesService = $insuranceExpensesService;
     }
 
     public function index(Request $request)
@@ -47,7 +50,8 @@ class InsuranceExpensesController extends Controller
     }
 
     public function create(Request $request){
-        $params = $request->query();
+        $params = $request->post();
+        $this->insuranceExpensesService->InsuranceExpensesInsert();
         dd($params);
     }
 
