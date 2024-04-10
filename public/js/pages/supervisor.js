@@ -17,6 +17,9 @@ $(document).ready(function() {
                 success: function(response) {
                     if (response.status === 'success') {
                         toastr.success(response.message);
+                        $('.toggleCheckbox:checked').each(function() {
+                            $(this).closest('tr').remove();
+                        });
                     } else {
                         toastr.error(response.message);
                     }
