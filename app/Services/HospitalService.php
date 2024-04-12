@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Models\Customer;
 use App\Models\Hospital;
-use App\Models\DanhsachHopdongBenhvien;
+use App\Models\ContractHospital;
 
 /**
  * Class HospitalService
@@ -27,13 +27,13 @@ class HospitalService
         return $hospitalList;
     }
     public function getHospitalContract(){
-        return TBL_DANHSACHHOPDONG_BENHVIEN::join('tbl_contract', 'TBL_DANHSACHHOPDONG_BENHVIEN.MAHOPDONG', '=', 'tbl_contract.id')
-            ->join('tbl_user_hospital', 'TBL_DANHSACHHOPDONG_BENHVIEN.MAUSER_BENHVIEN', '=', 'tbl_user_hospital.id')
+        return ContractHospital::join('tbl_contract', 'tbl_contract_hospital.contract_id', '=', 'tbl_contract.id')
+            ->join('tbl_user_hospital', 'tbl_contract_hospital.user_hospital_id', '=', 'tbl_user_hospital.id')
             ->join('tbl_hospital', 'tbl_user_hospital.hospital_id', '=', 'tbl_hospital.id')
-            ->select('TBL_DANHSACHHOPDONG_BENHVIEN.MADSHOPDONG', 'TBL_DANHSACHHOPDONG_BENHVIEN.MAHOPDONG', 'TBL_DANHSACHHOPDONG_BENHVIEN.MAUSER_BENHVIEN', 'tbl_user_hospital.employee_name', 'tbl_user_hospital.username', 'tbl_contract.contract_name', 'tbl_hospital.hospital_name')
-            ->where('tbl_contract.active', 1)
-            ->where('tbl_user_hospital.active', 1)
-            ->where('TBL_DANHSACHHOPDONG_BENHVIEN.ACTIVE', 1)
+            ->select('tbl_contract_hospital.id', 'tbl_contract_hospital.contract_id', 'tbl_contract_hospital.user_hospital_id', 'tbl_user_hospital.employee_name', 'tbl_user_hospital.username', 'tbl_contract.contract_name', 'tbl_hospital.hospital_name')
+            ->where('tbl_contract.active', STATUS_ACTIVE)
+            ->where('tbl_user_hospital.active', STATUS_ACTIVE)
+            ->where('tbl_contract_hospital.active', STATUS_ACTIVE)
             ->get();
     }
 

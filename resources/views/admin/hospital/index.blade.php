@@ -281,7 +281,6 @@
                             </div>
                             <div class="table-responsive">
                                 <table id="simpletable" class="table system-table border text-nowrap customize-table mb-0 align-middle mb-3">
-                                    {{ $hospitalContractList }}
                                     <thead class="text-dark fs-4">
                                         <tr role="row">
                                             <th style="width: 200px;">
@@ -299,8 +298,8 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($userHospitalList as $key => $userhospital)
-                                        <tr role="row" data-id="{{ $userhospital->id }}">
+                                        @foreach ($hospitalContractList as $key => $contractList)
+                                        <tr role="row" data-id="{{ $contractList->id }}">
                                             <td>
                                                 <h6 class="fs-4 fw-semibold mb-0">
                                                     <div class="btn-group d-flex justify-content-center">
@@ -309,12 +308,12 @@
                                                                 <img src="{{ asset('/img-system/system/edit_white.svg') }}" />
                                                             </span>
                                                         </button>
-                                                        <button class="btn btn-danger tabledit-delete-button delete-button-user-hospital">
+                                                        <button class="btn btn-danger tabledit-delete-button delete-button-contract-hospital">
                                                             <span class="icon-item-icon">
                                                                 <img src="{{ asset('/img-system/system/trash_white.svg') }}" alt="" />
                                                             </span>
                                                         </button>
-                                                        <button class="btn btn-info me-1 saveButton btn-update-user-hospital" style="display: none;">
+                                                        <button class="btn btn-info me-1 saveButton btn-update-contract-hospital" style="display: none;">
                                                             <span class="icon-item-icon">
                                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                                     class="icon icon-tabler icon-tabler-discount-check-filled" width="24"
@@ -345,29 +344,29 @@
                                                 </h6>
                                             </td>
                                             <td>
-                                                <input class="inputField form-control" type="text" name="update_employee_name" value="{{ $userhospital->employee_name }}" data-original-value="{{ $userhospital->employee_name }}" disabled="">
+                                                <input class="inputField form-control" type="text" name="update_hospital_name" value="{{ $contractList->hospital_name }}" data-original-value="{{ $contractList->hospital_name }}" disabled="">
                                             </td>
                                             <td>
-                                                <input class="inputField form-control" type="text" name="update_username" value="{{ $userhospital->username }}" data-original-value="{{ $userhospital->username }}" disabled="">
+                                                <input class="inputField form-control" type="text" name="update_employee_name" value="{{ $contractList->employee_name }}" data-original-value="{{ $contractList->employee_name }}" disabled="">
                                             </td>
                                             <td>
-                                                <input class="inputField form-control" type="text" name="update_username" value="{{ $userhospital->username }}" data-original-value="{{ $userhospital->username }}" disabled="">
+                                                <input class="inputField form-control" type="text" name="update_contract_name" value="{{ $contractList->contract_name }}" data-original-value="{{ $contractList->contract_name }}" disabled="">
                                             </td>
                                             
                                         </tr>
                                         @endforeach
                                         <tr role="row">
                                             <td class="justify-content-center d-flex">
-                                                @include('common/button-loading', ['class' => 'btn-create-user-hospital'])
+                                                @include('common/button-loading', ['class' => 'btn-create-contract-hospital'])
+                                            </td>
+                                            <td>
+                                                <input class="inputField form-control" type="text" name="create_hospital_name" value="" data-original-value="">
                                             </td>
                                             <td>
                                                 <input class="inputField form-control" type="text" name="create_employee_name" value="" data-original-value="">
                                             </td>
                                             <td>
-                                                <input class="inputField form-control" type="text" name="create_username" value="" data-original-value="">
-                                            </td>
-                                            <td>
-                                                <input class="inputField form-control" type="text" name="create_password" value="" data-original-value="">
+                                                <input class="inputField form-control" type="text" name="create_contract_name" value="" data-original-value="">
                                             </td>
                                         </tr>
                                     </tbody>
