@@ -3244,7 +3244,7 @@ progress {
 }
 
 .table>thead {
-    vertical-align: bottom;
+    /* vertical-align: bottom; */
 }
 
 .table-group-divider {
@@ -19687,7 +19687,7 @@ html[data-layout=horizontal] .left-part.fixed-left-part, html[data-layout=horizo
         position: absolute;
         left: 0;
         top: calc(65px - 15px);
-        width: 240px;
+        width: 280px;
         padding-bottom: 0;
         display: none;
         z-index: 100;
