@@ -189,6 +189,7 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    {!! $customerDiaryList->onEachSide(1)->render('pagination::bootstrap-5') !!}
                                 </div>
                             </div>
                             <div class="btn-export text-center"><button class="btn btn-primary" type="button">Xuất báo cáo</button></div>
