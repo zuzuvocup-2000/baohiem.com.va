@@ -114,7 +114,6 @@ Route::middleware(['is_user_admin', 'permission'])->group(function () {
         //Supervisor
         Route::put('/supervisor/recover', [SupervisorAjax::class, 'recover'])->name('ajax.supervisor.recover');
         Route::put('/supervisor/recover-account', [SupervisorAjax::class, 'recoverAccount'])->name('ajax.supervisor.recover-account');
-
     });
 
     // Routes for free design before
@@ -193,6 +192,11 @@ Route::middleware(['is_user_admin', 'permission'])->group(function () {
 
     // Routes Export
     Route::get('/export/account', [ExportController::class, 'exportAccountList'])->name('export.accountList');
+});
+
+Route::middleware(['is_user_admin'])->group(function () {
+    // Routes for Insurance
+    Route::get('/insurance-expenses/check-period', [InsuranceExpensesController::class, 'checkPeriod'])->name('insuranceExpenses.checkPeriod');
 });
 
 // Route for login page

@@ -17,8 +17,10 @@ $(document).ready(function () {
                 periodId: periodId
             },
             success: function (response) {
+                console.log(response);
                 $('.contract_id_hidden').val(response.customer.contract_id)
                 $('.customer_id_hidden').val(response.customer.id)
+                $('.period_id_hidden').val(response.customer.period_id)
                 $('.company_name_customer').text(response.customer.company_name)
                 $('.period_name_customer').text(response.customer.company_name)
                 $('.contract_name_customer').text(response.customer.contract_name)
@@ -47,11 +49,10 @@ $(document).ready(function () {
     $('.btn-add-content-pay').click(function () {
         var currentRow = $(this).closest('tr');
         var paymentTypeId = currentRow.find('.create-insurance-payment_type').val();
-        var money = currentRow.find('.create-insurance-money').val();
-        var moneyWish = currentRow.find('.create-insurance-money_wish').val();
-        var moneyDenided = currentRow.find('.create-insurance-money_denided').val();
+        var amount_paid = currentRow.find('.create-insurance-amount_paid').val();
+        var expected_payment = currentRow.find('.create-insurance-expected_payment').val();
+        var rejected_amount = currentRow.find('.create-insurance-rejected_amount').val();
         var note = currentRow.find('.create-insurance-note').val();
-
         var newRow = `
             <tr class="clone-content-pay">
                 <td>
@@ -60,28 +61,32 @@ $(document).ready(function () {
                     </div>
                 </td>
                 <td>
-                    <input type="hidden" name="payment_type_id[]" value="${paymentTypeId}">
-                    ${currentRow.find('.create-insurance-payment_type option:selected').text()}
+                    <select class="form-select" name="payment_type_id[]">`;
+                        paymentTypeList.forEach(element => {
+                            newRow+=`<option value="${element.id}" ${paymentTypeId == element.id ? "selected" : ""}>${element.payment_type_name}</option>`;
+                        });
+            newRow+=`</select>
                 </td>
                 <td class="text-center">
-                    <input type="hidden" name="money[]" value="${money}">
-                    ${money}
+                    <input type="text" class="form-control int" name="amount_paid[]" value="${amount_paid}">
                 </td>
                 <td class="text-center">
-                    <input type="hidden" name="money_wish[]" value="${moneyWish}">
-                    ${moneyWish}
+                    <input type="text" class="form-control int" name="expected_payment[]" value="${expected_payment}">
                 </td>
                 <td class="text-center">
-                    <input type="hidden" name="money_denided[]" value="${moneyDenided}">
-                    ${moneyDenided}
+                    <input type="text" class="form-control int" name="rejected_amount[]" value="${rejected_amount}">
                 </td>
                 <td>
-                    <input type="hidden" name="note[]" value="${note}">
-                    ${note}
+                    <input type="text" class="form-control" name="note[]" value="${note}">
                 </td>
             </tr>`;
 
         $('.table-content-pay tbody').prepend(newRow);
+        $('.create-insurance-payment_type').val(2);
+        $('.create-insurance-amount_paid').val(0);
+        $('.create-insurance-expected_payment').val(0);
+        $('.create-insurance-rejected_amount').val(0);
+        $('.create-insurance-note').val('');
         return false;
     });
 
@@ -90,11 +95,30 @@ $(document).ready(function () {
         return false;
     })
 
-    $(document).on('click', '.btn-save-payment-insurance' , function(){
+    $(document).on('click', '.btn-save-payment-insurance' , function(e){
         if($('.clone-content-pay').length == 0){
-            toastr.error("Chưa thêm thông tin chi bảo hiểm đươc.Vui lòng kiểm tra lại thông tin!");
+            toastr.error("Chưa thêm thông tin chi bảo hiểm được. Vui lòng kiểm tra lại thông tin!");
             return false;
         }
+
+        $.ajax({
+            url: '/insurance-expenses/check-period',
+            type: 'GET',
+            data: {
+                'payment_date' : $('.create-contract-payment_date').val(),
+                'period_id': $('.period_id_hidden').val(),
+                'contract_id': $('.contract_id_hidden').val(),
+                'customer_id': $('.customer_id_hidden').val()
+            },
+            success: function(response) {
+                if(!response.status){
+                    toastr.error(response.message);
+                }else{
+                    $('#formCreatePaymentInsurance').submit()
+                }
+            }
+        });
+        return false;
     })
 });
 
@@ -135,7 +159,7 @@ function render_customer_payment(customerList) {
         html += "<input class='inputField form-control update-note' value='" + valueOfElement.note + "' type='text' name='note' disabled=''/>";
         html += "</td>";
         html += "<td class='text-center'>";
-        html += "<input class='form-check-input inputField update-approved' " + (valueOfElement.approved ? "checked" : "") + " type='checkbox' value='1' disabled='' name='approved' />";
+        html += "<input class='form-check-input inputField update-approved' " + (valueOfElement.approved == 1 ? "checked" : "") + " type='checkbox' value='1' disabled='' name='approved' />";
         html += "</td>";
         html += "<td>";
         html += "<input class='inputField form-control update-hospital_name' value='" + valueOfElement.hospital_name + "' type='text' name='hospital_name' disabled=''/>";

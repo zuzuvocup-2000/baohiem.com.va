@@ -71,6 +71,7 @@ class CustomerService
                 tbl_contract.contract_name,
                 tbl_contract.contract_supplement_number,
                 tbl_period.period_name,
+                tbl_period.id as period_id,
                 tbl_company.company_name,
                 tbl_account.active,
                 tbl_province.id as province_id,

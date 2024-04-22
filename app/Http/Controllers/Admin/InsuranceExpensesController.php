@@ -13,6 +13,8 @@ use App\Services\HospitalService;
 use App\Services\InsuranceExpensesService;
 use App\Services\PaymentTypeService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class InsuranceExpensesController extends Controller
 {
@@ -49,10 +51,17 @@ class InsuranceExpensesController extends Controller
         return view('admin.insurance-expenses.index', array_merge($data, compact(['accountList', 'hospitalList', 'paymentTypeList'])));
     }
 
-    public function create(Request $request){
+    public function create(Request $request)
+    {
         $params = $request->post();
-        $this->insuranceExpensesService->InsuranceExpensesInsert();
-        dd($params);
+        $check = $this->insuranceExpensesService->InsuranceExpensesInsert($params);
+        if($check){
+            $this->saveLog(Auth::user()->id, 'Thêm chi trả thành công.');
+            return redirect()->back()->with('success', 'Thêm chi trả thành công.');
+        }else{
+            $this->saveLog(Auth::user()->id, 'Thêm chi trả thất bại.');
+            return redirect()->back()->with('error', 'Thêm chi trả thất bại.');
+        }
     }
 
     public function insuranceDay(Request $request)
@@ -84,6 +93,21 @@ class InsuranceExpensesController extends Controller
             'customerPay' => $customerPay,
             'amountSpent' => $amountSpent,
         ];
+    }
+
+    public function checkPeriod(Request $request)
+    {
+        $params = $request->query();
+        $account_detail_id = DB::table('tbl_account_detail')
+            ->where('active', 1)
+            ->where('customer_id', $params['customer_id'])
+            ->max('id');
+        $time_end = $this->insuranceExpensesService->getTimeEnd($params, $account_detail_id);
+        if (strtotime($params['payment_date']) > strtotime($time_end)) {
+            return ['message' => 'Ngày chi không đúng. Vui lòng kiểm tra lại thông tin!', 'status' => 0];
+        } else {
+            return ['status' => 1];
+        }
     }
 
     private function prepareData(Request $request)

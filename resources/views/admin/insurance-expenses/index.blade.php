@@ -144,10 +144,11 @@
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="{{ route('insuranceExpenses.create') }}" method="post">
+                                    <form action="{{ route('insuranceExpenses.create') }}" method="post" id="formCreatePaymentInsurance">
                                         @csrf
                                         <input type="hidden" name="contract_id" class="contract_id_hidden">
                                         <input type="hidden" name="customer_id" class="customer_id_hidden">
+                                        <input type="hidden" name="period_id" class="period_id_hidden">
                                         <div class="row mb-3">
                                             <div class="col-sm-12 col-md-6 mb-3">
                                                 <h5>Tên công ty: <span class="company_name_customer"></span></h5>
@@ -217,25 +218,25 @@
                                             </div>
                                             <div class="col-sm-12 col-md-6 mb-3">
                                                 <div class="form-group">
-                                                    <label class="d-inline-block" for="companySelect">
+                                                    <label class="d-inline-block">
                                                         <h5>Ngày nhập:</h5>
                                                     </label>
                                                     <div class="col-sm">
                                                         <input
-                                                            class="inputField form-control create-contract-effective_time singledate"
-                                                            type="text" name="effective_time" value="">
+                                                            class="inputField form-control create-contract-payment_date singledate"
+                                                            type="text" name="payment_date" value="">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12 col-md-6 mb-3">
                                                 <div class="form-group">
-                                                    <label class="d-inline-block" for="companySelect">
+                                                    <label class="d-inline-block">
                                                         <h5>Ngày khám:</h5>
                                                     </label>
                                                     <div class="col-sm">
                                                         <input
-                                                            class="inputField form-control create-contract-effective_time singledate"
-                                                            type="text" name="effective_time" value="">
+                                                            class="inputField form-control create-contract-checkup_date singledate"
+                                                            type="text" name="checkup_date" value="">
                                                     </div>
                                                 </div>
                                             </div>
@@ -287,17 +288,17 @@
                                                         </td>
                                                         <td>
                                                             <input
-                                                                class="inputField form-control int create-insurance-money"
+                                                                class="inputField form-control int create-insurance-amount_paid"
                                                                 type="text" value="">
                                                         </td>
                                                         <td>
                                                             <input
-                                                                class="inputField form-control int create-insurance-money_wish"
+                                                                class="inputField form-control int create-insurance-expected_payment"
                                                                 type="text" value="">
                                                         </td>
                                                         <td>
                                                             <input
-                                                                class="inputField form-control int create-insurance-money_denided"
+                                                                class="inputField form-control int create-insurance-rejected_amount"
                                                                 type="text" value="">
                                                         </td>
                                                         <td>
@@ -396,6 +397,10 @@
             </div>
         </div>
     </div>
+
+    <script>
+        var paymentTypeList = JSON.parse('<?php echo json_encode($paymentTypeList) ?>')
+    </script>
 @endsection
 @section('script')
     <script src="/assets/js/datetimepicker/moment.min.js"></script>
