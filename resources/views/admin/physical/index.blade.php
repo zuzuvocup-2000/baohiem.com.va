@@ -17,8 +17,7 @@
                                 Các thắc mắc yêu cầu hệ thống quản lý thông tin tài khoản bảo hiểm và sức khỏe xin vui lòng gửi cho quản trị viên hệ thống.
                             </p>
                         </div>
-                        <form action="" class="form-contact" method="POST" enctype="multipart/form-data>">
-                            @csrf
+                        <form action="" class="form-contact" >
                             <div class="row mb-3">
                                 <div class="col-xs-12 col-md-4">
                                     <div class="form-group d-flex align-items-center">
@@ -66,15 +65,9 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-md-4">
-                                    <div class="form-group ">
-                                        <label class="col-form-label">Thời gian hiệu lực từ:</label>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control daterange">
-                                            <span class="input-group-text">
-                                                <i class="ti ti-calendar fs-5"></i>
-                                            </span>
-                                        </div>
-                                    </div>
+                                    @include('common/input-time-range', [
+                                        'time_range' => (isset($periodDetail->from_year) ? date('01/01/' . $periodDetail->from_year) : date('01/01/Y')) . ' - ' . date('d/m/Y')
+                                    ])
                                 </div>
                                 <div class="col-xs-12 col-md-1">
                                     <div class="form-group form-checkbox">
@@ -86,7 +79,7 @@
                                 </div>
                                 <div class="col-xs-12 col-md-7">
                                     <div class="form-group form-button">
-                                        <button class="btn btn-primary" type="button">Tìm kiếm</button>
+                                        <button class="btn btn-primary" type="submit">Tìm kiếm</button>
                                     </div>
                                 </div>
                             </div>
@@ -130,33 +123,34 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr data-id="39">
+                                    @foreach ($physicalList as $key => $physical)
+                                    <tr data-id="{{ $physical->id }}">
                                         <td class="text-center">
                                             <input type="checkbox" class="toggleCheckbox custom-control-input" id="user-" name="id[]" value="39" />
                                         </td>
                                         <td>
-                                            <p class="mb-0 text-center fw-normal fs-4">1</p>
+                                            <p class="mb-0 text-center fw-normal fs-4">{{ ++$key }}</p>
                                         </td>
                                         <td>
-                                            <p class="mb-0 fw-normal fs-4 text-center">GS_ĐN/KSK_2022/560</p>
+                                            <p class="mb-0 fw-normal fs-4 text-center">{{ $physical->card_number }}</p>
                                         </td>
                                         <td>
-                                            <p class="mb-0 fw-normal fs-4 text-center">Hoàng Lê Minh</p>
+                                            <p class="mb-0 fw-normal fs-4 text-center">{{ $physical->full_name }}</p>
                                         </td>
                                         <td>
-                                            <p class="mb-0 fw-normal fs-4 text-center">Nam</p>
+                                            <p class="mb-0 fw-normal fs-4 text-center">{{ $physical->gender }}</p>
                                         </td>
                                         <td>
-                                            <p class="mb-0 fw-normal fs-4 text-center">2000</p>
+                                            <p class="mb-0 fw-normal fs-4 text-center">{{ $physical->birth_year }}</p>
                                         </td>
                                         <td>
-                                            <p class="mb-0 fw-normal fs-4 text-center">1/12/2022</p>
+                                            <p class="mb-0 fw-normal fs-4 text-center">{{ $physical->checkup_date }}</p>
                                         </td>
                                         <td>
-                                            <p class="mb-0 fw-normal fs-4 text-center">Nhân viên - Ga South</p>
+                                            <p class="mb-0 fw-normal fs-4 text-center">{{ $physical->package_name }}</p>
                                         </td>
                                         <td>
-                                            <p class="mb-0 fw-normal fs-4 text-center">Bệnh viện Hoàn Mỹ Sài Gòn</p>
+                                            <p class="mb-0 fw-normal fs-4 text-center">{{ $physical->hospital_name }}</p>
                                         </td>
                                         <td>
                                             <h6 class="fs-4 fw-semibold mb-0">
@@ -168,9 +162,11 @@
                                             </h6>
                                         </td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
+                        {!! $physicalList->onEachSide(1)->render('pagination::bootstrap-5') !!}
                     </div>
                 </div>
             </div>
