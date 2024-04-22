@@ -193,8 +193,9 @@ Route::middleware(['is_user_admin', 'permission'])->group(function () {
     Route::get('/revenue/health', [RevenueController::class, 'reportByHealth'])->name('revenue.reportByHealth');
     Route::get('/revenue/account', [RevenueController::class, 'reportByAccount'])->name('revenue.reportByAccount');
     // Routes Diary
-    Route::get('/diary', [DiaryController::class, 'index'])->name('diary.index');
-
+    Route::get('/diary/employee', [DiaryController::class, 'employeeDiary'])->name('diary.employee');
+    Route::get('/diary/hospital', [DiaryController::class, 'hospitalDiary'])->name('diary.hospital');
+    Route::get('/diary/customer', [DiaryController::class, 'customerDiary'])->name('diary.customer');
     // Routes Export
     Route::get('/export/account', [ExportController::class, 'exportAccountList'])->name('export.accountList');
 });
