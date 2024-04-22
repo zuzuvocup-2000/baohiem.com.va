@@ -76,7 +76,21 @@ return [
             ],
             [
                 'name' => 'Nhật ký thao tác chứng từ',
-                'url' => route('diary.index')
+                'url' => route('diary.employee'),
+                'items' => [
+                    [
+                        'name' => 'Nhật ký thao tác chứng từ nhân viên',
+                        'url' => route('diary.employee'),
+                    ],
+                    [
+                        'name' => 'Nhật ký thao tác chứng từ bệnh viện',
+                        'url' => route('diary.hospital'),
+                    ],
+                    [
+                        'name' => 'Nhật ký thao tác chứng từ khách hàng',
+                        'url' => route('diary.customer'),
+                    ],
+                ]
             ],
             [
                 'name' => 'Supervisor',
