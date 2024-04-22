@@ -12,6 +12,7 @@ use App\Http\Controllers\Ajax\PeriodController;
 use App\Http\Controllers\Ajax\CustomerGroupController;
 use App\Http\Controllers\Ajax\CustomerTypeController;
 use App\Http\Controllers\Ajax\HospitalController as HospitalAjax;
+use App\Http\Controllers\Ajax\HospitalContractController;
 use App\Http\Controllers\Ajax\UserHospitalController;
 use App\Http\Controllers\Ajax\DepartmentController as DepartmentAjax;
 use App\Http\Controllers\Ajax\SupervisorController as SupervisorAjax;
@@ -101,7 +102,10 @@ Route::middleware(['is_user_admin', 'permission'])->group(function () {
         Route::post('/hospital-user/create', [UserHospitalController::class, 'create'])->name('ajax.hospital-user.create');
         Route::post('/hospital-user/delete', [UserHospitalController::class, 'delete'])->name('ajax.hospital-user.delete');
         Route::put('/hospital-user/update', [UserHospitalController::class, 'update'])->name('ajax.hospital-user.update');
-
+ 
+        Route::post('/hospital-contract/create', [HospitalContractController::class, 'create'])->name('ajax.hospital-contract.create');
+        Route::post('/hospital-contract/delete', [HospitalContractController::class, 'delete'])->name('ajax.hospital-contract.delete');
+        Route::put('/hospital-contract/update', [HospitalContractController::class, 'update'])->name('ajax.hospital-contract.update');
         //Phòng ban
         Route::post('/department/create', [DepartmentAjax::class, 'create'])->name('ajax.department.create');
         Route::post('/department/delete', [DepartmentAjax::class, 'delete'])->name('ajax.department.delete');
@@ -188,8 +192,9 @@ Route::middleware(['is_user_admin', 'permission'])->group(function () {
     Route::get('/revenue/health', [RevenueController::class, 'reportByHealth'])->name('revenue.reportByHealth');
     Route::get('/revenue/account', [RevenueController::class, 'reportByAccount'])->name('revenue.reportByAccount');
     // Routes Diary
-    Route::get('/diary', [DiaryController::class, 'index'])->name('diary.index');
-
+    Route::get('/diary/employee', [DiaryController::class, 'employeeDiary'])->name('diary.employee');
+    Route::get('/diary/hospital', [DiaryController::class, 'hospitalDiary'])->name('diary.hospital');
+    Route::get('/diary/customer', [DiaryController::class, 'customerDiary'])->name('diary.customer');
     // Routes Export
     Route::get('/export/account', [ExportController::class, 'exportAccountList'])->name('export.accountList');
 });

@@ -3,7 +3,7 @@
     <div class="input-group">
         <input type="text" class="form-control daterange" id="dateInput"
             name="time_range"
-            value="{{ $time_range }}">
+            value="{{ request()->time_range }}">
         <span class="input-group-text">
             <i class="ti ti-calendar fs-5"></i>
         </span>

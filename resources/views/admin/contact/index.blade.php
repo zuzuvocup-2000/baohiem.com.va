@@ -81,7 +81,7 @@
                                     </div>
                                 </div>
                                <div class="p-6 @error('ckeditor_contact') is-invalid @enderror">
-                                    <textarea name="ckeditor_contact" id="ckeditor-contact" cols="50" rows="15" class="form-control ckeditor " value="{{ old('ckeditor_contact') }}"></textarea>
+                                    <textarea name="ckeditor_contact" id="ckeditor-contact" cols="50" rows="15" class="form-control" value="{{ old('ckeditor_contact') }}"></textarea>
                                     @error('ckeditor_contact')
                                         <div class="text-danger w-100">{{ $message }}</div>
                                     @enderror
