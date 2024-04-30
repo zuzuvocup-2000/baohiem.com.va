@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Middleware;
-
 use Closure;
+use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Http\Request;
 
 class IsUserHospital
@@ -14,8 +15,12 @@ class IsUserHospital
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next)
+    public function handle($request, Closure $next)
     {
-        return $next($request);
+        if (Auth::guard('hospital')->check()) {
+            return $next($request);
+        }
+        return redirect('/')->with('error', "Bạn không có quyền truy cập vào chức năng này.");
+     
     }
 }
