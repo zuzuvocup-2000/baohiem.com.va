@@ -1,0 +1,3 @@
+$(".daterange").daterangepicker({
+    drops: 'down',
+});
