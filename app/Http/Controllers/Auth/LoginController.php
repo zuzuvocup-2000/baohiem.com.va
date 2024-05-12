@@ -38,7 +38,6 @@ class LoginController extends Controller
                 }
             }
         }
-
         return redirect('/login')->with('error', 'Tên đăng nhập hoặc mật khẩu không chính xác.')->withInput();
     }
 
