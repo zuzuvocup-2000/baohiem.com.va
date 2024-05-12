@@ -26,15 +26,21 @@ class LoginController extends Controller
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->attempt($credentials, $remember)) {
-                if (Auth::guard('web')->check()) {
-                    $this->saveLog(Auth::user()->id, 'Đăng nhập thành công');
-                    return redirect('/dashboard')->with('success', 'Đăng nhập thành công!');
-                } else {
-                    return redirect('/');
+                $this->saveLog(Auth::guard($guard)->user()->id, 'Đăng nhập thành công');
+                switch ($guard) {
+                    case 'web':
+                        return redirect('/dashboard')->with('success', 'Đăng nhập thành công!');
+                    case 'staff':
+                        return redirect('/dashboard')->with('success', 'Đăng nhập thành công!');
+                    case 'hospital':
+                        return redirect('/dashboard')->with('success', 'Đăng nhập thành công!');
+                    case 'customer':
+                        return redirect('/dashboard')->with('success', 'Đăng nhập thành công!');
+                    default:
+                        break;
                 }
             }
         }
-
         return redirect('/login')->with('error', 'Tên đăng nhập hoặc mật khẩu không chính xác.')->withInput();
     }
 
