@@ -13,7 +13,7 @@ class CustomerTypeController extends Controller
     public function create(Request $request)
     {
         try {
-            if (Auth::guard('web')->check()) {
+            if (Auth::guard('isUserAdmin')->check()) {
                 DB::beginTransaction();
                 $data = $request->all();
                 $customerType = CustomerType::create([
@@ -39,7 +39,7 @@ class CustomerTypeController extends Controller
     public function delete(Request $request)
     {
         try {
-            if (Auth::guard('web')->check()) {
+            if (Auth::guard('isUserAdmin')->check()) {
                 DB::beginTransaction();
 
                 $customerTypeId = $request->input('customerTypeId');
@@ -63,7 +63,7 @@ class CustomerTypeController extends Controller
     public function update(Request $request)
     {
         try {
-            if (Auth::guard('web')->check()) {
+            if (Auth::guard('isUserAdmin')->check()) {
                 DB::beginTransaction();
 
                 $data = $request->all();

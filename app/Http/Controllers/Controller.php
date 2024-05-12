@@ -20,7 +20,7 @@ class Controller extends BaseController
 
     public function saveLog($userId, $action = '', $old_value = 0, $payment_detail_id = 0)
     {
-        if (Auth::guard('web')->check()) {
+        if (Auth::guard('isUserAdmin')->check()) {
             $insert = [
                 'action' => $action,
                 'old_value' => $old_value,

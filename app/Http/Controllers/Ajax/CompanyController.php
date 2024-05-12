@@ -11,7 +11,7 @@ class CompanyController extends Controller
 {
     public function create(Request $request)
     {
-        if (Auth::guard('web')->check()) {
+        if (Auth::guard('isUserAdmin')->check()) {
             $data = $request->all();
             $company = Company::create([
                 'province_id' => (int)$data['province_id'],
@@ -34,7 +34,7 @@ class CompanyController extends Controller
 
     public function delete(Request $request)
     {
-        if (Auth::guard('web')->check()) {
+        if (Auth::guard('isUserAdmin')->check()) {
             $companyId = $request->input('companyId');
             $company = Company::find($companyId);
 
@@ -49,7 +49,7 @@ class CompanyController extends Controller
 
     public function update(Request $request)
     {
-        if (Auth::guard('web')->check()) {
+        if (Auth::guard('isUserAdmin')->check()) {
             $data = $request->all();
             $company = Company::find($data['companyId']);
 

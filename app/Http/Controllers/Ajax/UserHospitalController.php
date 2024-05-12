@@ -13,7 +13,7 @@ class UserHospitalController extends Controller
     public function create(Request $request)
     {
         try {
-            if (Auth::guard('web')->check()) {
+            if (Auth::guard('isUserAdmin')->check()) {
                 DB::beginTransaction();
                 $data = $request->all();
                 $userhospital = UserHospital::create([
@@ -41,7 +41,7 @@ class UserHospitalController extends Controller
     public function delete(Request $request)
     {
         try {
-            if (Auth::guard('web')->check()) {
+            if (Auth::guard('isUserAdmin')->check()) {
                 DB::beginTransaction();
 
                 $userhospitalId = $request->input('userHospitalId');
@@ -65,7 +65,7 @@ class UserHospitalController extends Controller
     public function update(Request $request)
     {
         try {
-            if (Auth::guard('web')->check()) {
+            if (Auth::guard('isUserAdmin')->check()) {
                 DB::beginTransaction();
 
                 $data = $request->all();

@@ -33,7 +33,7 @@ class ContractController extends Controller
     public function create(Request $request)
     {
         try {
-            if (Auth::guard('web')->check()) {
+            if (Auth::guard('isUserAdmin')->check()) {
                 DB::beginTransaction();
 
                 $data = $request->all();
@@ -72,7 +72,7 @@ class ContractController extends Controller
     public function delete(Request $request)
     {
         try {
-            if (Auth::guard('web')->check()) {
+            if (Auth::guard('isUserAdmin')->check()) {
                 DB::beginTransaction();
 
                 $contractId = $request->input('contractId');
@@ -97,7 +97,7 @@ class ContractController extends Controller
     public function update(Request $request)
     {
         try {
-            if (Auth::guard('web')->check()) {
+            if (Auth::guard('isUserAdmin')->check()) {
                 DB::beginTransaction();
 
                 $data = $request->all();

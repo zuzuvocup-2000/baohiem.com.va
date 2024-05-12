@@ -26,7 +26,7 @@ class PeriodController extends Controller
 
     public function create(Request $request)
     {
-        if (Auth::guard('web')->check()) {
+        if (Auth::guard('isUserAdmin')->check()) {
             $data = $request->all();
             $period = Period::create([
                 'period_name' => (string)$data['period_name'],
@@ -46,7 +46,7 @@ class PeriodController extends Controller
 
     public function delete(Request $request)
     {
-        if (Auth::guard('web')->check()) {
+        if (Auth::guard('isUserAdmin')->check()) {
             $periodId = $request->input('periodId');
             $period = Period::find($periodId);
 
@@ -61,7 +61,7 @@ class PeriodController extends Controller
 
     public function update(Request $request)
     {
-        if (Auth::guard('web')->check()) {
+        if (Auth::guard('isUserAdmin')->check()) {
             $data = $request->all();
             $period = Period::find($data['periodId']);
 

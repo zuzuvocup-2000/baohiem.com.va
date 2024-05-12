@@ -13,7 +13,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'isUserAdmin',
         'passwords' => 'users',
     ],
 
@@ -35,19 +35,19 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'isUserAdmin' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'hospital' => [
+        'isUserHospital' => [
             'driver' => 'session',
             'provider' => 'hospitals',
         ],
-        'customer' => [
+        'isUserCustomer' => [
             'driver' => 'session',
             'provider' => 'customers',
         ],
-        'staff' => [
+        'isUserStaff' => [
             'driver' => 'session',
             'provider' => 'staffs',
         ],
@@ -111,7 +111,7 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
-        'web' => [
+        'isUserAdmin' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],

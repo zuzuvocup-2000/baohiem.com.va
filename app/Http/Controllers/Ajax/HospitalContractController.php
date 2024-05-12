@@ -16,7 +16,7 @@ class HospitalContractController extends Controller
     public function create(Request $request)
     {
         try {
-            if (Auth::guard('web')->check()) {
+            if (Auth::guard('isUserAdmin')->check()) {
                 DB::beginTransaction();
                 $data = $request->all();
                 $hospitalName = Hospital::create([
@@ -47,7 +47,7 @@ class HospitalContractController extends Controller
     public function delete(Request $request)
     {
         try {
-            if (Auth::guard('web')->check()) {
+            if (Auth::guard('isUserAdmin')->check()) {
                 DB::beginTransaction();
 
                 $hospitalContractId = $request->input('hospitalContractId');
@@ -72,7 +72,7 @@ class HospitalContractController extends Controller
     public function update(Request $request)
     {
         try {
-            if (Auth::guard('web')->check()) {
+            if (Auth::guard('isUserAdmin')->check()) {
             DB::beginTransaction();
 
                 $data = $request->all();
