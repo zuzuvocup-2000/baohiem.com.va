@@ -38,7 +38,6 @@ class HospitalController extends Controller
     public function delete(Request $request)
     {
         try {
-            if (Auth::guard('isUserAdmin')->check()) {
                 DB::beginTransaction();
 
                 $hospitalId = $request->input('hospitalId');
@@ -53,7 +52,6 @@ class HospitalController extends Controller
                 }
 
             throw new \Exception('Không tìm thấy bệnh viện.');
-            }
         } catch (\Exception $e) {
             DB::rollback();
             return response()->json(['status' => STATUS_ERROR, 'message' => 'Xóa bệnh viện thất bại.']);

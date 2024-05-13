@@ -13,7 +13,6 @@ class UserHospitalController extends Controller
     public function create(Request $request)
     {
         try {
-            if (Auth::guard('isUserAdmin')->check()) {
                 DB::beginTransaction();
                 $data = $request->all();
                 $userhospital = UserHospital::create([
@@ -31,7 +30,6 @@ class UserHospitalController extends Controller
 
                 DB::commit();
                 return response()->json(['status' => STATUS_SUCCESS, 'message' => 'Thông tin tài khoản bệnh viện được tạo thành công.']);
-            }
         } catch (\Exception $e) {
             DB::rollback();
             return response()->json(['status' => STATUS_ERROR, 'message' => 'Thêm mới tài khoản thất bại.']);
@@ -65,7 +63,6 @@ class UserHospitalController extends Controller
     public function update(Request $request)
     {
         try {
-            if (Auth::guard('isUserAdmin')->check()) {
                 DB::beginTransaction();
 
                 $data = $request->all();
@@ -83,7 +80,6 @@ class UserHospitalController extends Controller
 
                     return response()->json(['status' => STATUS_SUCCESS, 'message' => 'Cập nhật thông tin tài khoản bệnh viện thành công.']);
                 }
-            }
             throw new \Exception('Không tìm thông tin tài khoản bệnh viện.');
         } catch (\Exception $e) {
             DB::rollback();

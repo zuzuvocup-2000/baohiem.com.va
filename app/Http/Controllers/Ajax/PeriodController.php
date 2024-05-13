@@ -26,7 +26,6 @@ class PeriodController extends Controller
 
     public function create(Request $request)
     {
-        if (Auth::guard('isUserAdmin')->check()) {
             $data = $request->all();
             $period = Period::create([
                 'period_name' => (string)$data['period_name'],
@@ -40,13 +39,11 @@ class PeriodController extends Controller
                 $this->saveLog(Auth::user()->id, 'Thông tin niên hạn được tạo thành công.');
                 return response()->json(['status' => STATUS_SUCCESS, 'message' => 'Thông tin niên hạn được tạo thành công.', 'period' => $period]);
             }
-        }
         return response()->json(['status' => STATUS_ERROR, 'message' => 'Thêm mới thất bại.', 'period' => []]);
     }
 
     public function delete(Request $request)
     {
-        if (Auth::guard('isUserAdmin')->check()) {
             $periodId = $request->input('periodId');
             $period = Period::find($periodId);
 
@@ -55,13 +52,11 @@ class PeriodController extends Controller
                 $this->saveLog(Auth::user()->id, 'Xóa niên hạn thành công.');
                 return response()->json(['status' => STATUS_SUCCESS, 'message' => 'Xóa niên hạn thành công.']);
             }
-        }
         return response()->json(['status' => STATUS_ERROR, 'message' => 'Không tìm thấy niên hạn.']);
     }
 
     public function update(Request $request)
     {
-        if (Auth::guard('isUserAdmin')->check()) {
             $data = $request->all();
             $period = Period::find($data['periodId']);
 
@@ -70,7 +65,6 @@ class PeriodController extends Controller
                 $this->saveLog(Auth::user()->id, 'Cập nhật niên hạn thành công.');
                 return response()->json(['status' => STATUS_SUCCESS, 'message' => 'Cập nhật niên hạn thành công.']);
             }
-        }
         return response()->json(['status' => STATUS_ERROR, 'message' => 'Không tìm thấy niên hạn.']);
     }
 }
