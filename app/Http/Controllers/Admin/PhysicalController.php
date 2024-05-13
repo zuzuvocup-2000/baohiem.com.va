@@ -33,9 +33,22 @@ class PhysicalController extends Controller
         if (!isset($params['time_range'])) {
             $params['time_range'] = date('01/01/Y') . ' - ' . date('d/m/Y');
         }
-        $companyList = $this->companyService->getCompanyActiveSortByOrder();
-        $periodList = $this->periodService->getPeriodActiveByCompany($companyList->first()->id);
-        $contractList = $this->contractService->getContractByPeriod($periodList->first()->id);
+        $companyList = $this->companyService->getCompanyByContract();
+
+        // Lấy danh sách niên hạn
+        if (!isset($params['company'])) {
+            $params['company'] = $companyList->first()->id;
+        }
+        $periodList = $this->periodService->getPeriodActiveByCompany($params['company']);
+
+        // Lấy danh sách hợp đồng
+        if (!isset($params['period'])) {
+            $params['period'] = $periodList->first() ? $periodList->first()->id : 0;
+        }
+        $contractList = $this->contractService->getContractByPeriod($params['period']);
+        if (!isset($params['contract'])) {
+            $params['contract'] = $contractList->first() ? $contractList->first()->id : 0;
+        }
 
         $physicalList = $this->physicalService->getPhysical($companyList->first()->id,$params['time_range'],$params);
         return view('admin.physical.index', compact(['companyList', 'periodList', 'contractList','physicalList']));

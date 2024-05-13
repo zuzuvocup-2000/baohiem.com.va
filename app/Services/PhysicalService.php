@@ -13,7 +13,6 @@ class PhysicalService
     // Danhsachkhamsuckhoe.aspx gv_khachhang ketquakham_Danhsachkham_ngaynhap
     public function getPhysical($companyId, $time_range, $params = [])
     {
-        $whereConditions = $this->conditionWhere($params);
         [$from, $to] = explode('-', $time_range);
         $time = [
             'from' => Carbon::createFromFormat('d/m/Y', trim($from))->format('Y-m-d'),
@@ -37,31 +36,9 @@ class PhysicalService
         ->where('tbl_customer.active', STATUS_ACTIVE)
         ->whereBetween('dbo.tbl_health_checkup_information.log_date',  [$time['from'], $time['to']])
         ->where('dbo.tbl_customer_type.active', STATUS_ACTIVE)
-        ->where($whereConditions)
         ->orderByDesc('checkup_date')
         ->orderBy('full_name')
         ->paginate(PER_PAGE_SMALL)->setPath(route('physical.index', $params));
     }
-    private function conditionWhere($params = [])
-    {
-        $where = [
-            'tbl_information_insurance.active' => STATUS_ACTIVE,
-            'tbl_health_checkup_information.active' => STATUS_ACTIVE,
-            'tbl_health_account.active' => STATUS_ACTIVE,
-            'tbl_customer.active' => STATUS_ACTIVE,
-            'tbl_customer_type.active' => STATUS_ACTIVE,
-        ];
-
-        if (isset($params['company'])) {
-            $where['tbl_company.id'] = $params['company'];
-        }
-        if (isset($params['period'])) {
-            $where['tbl_period_detail.period_id'] = $params['period'];
-        }
-
-        if (isset($params['contract'])) {
-            $where['tbl_contract.id'] = $params['contract'];
-        }
-        return $where;
-    }
+ 
 }

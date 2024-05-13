@@ -13,7 +13,6 @@ class HealthReportService
 {
 // tìm các function có sẵn ko tồn tại, thấy function này phù hợp nhất nên là lấy ở trong db  ketquakham_Danhsachkham_chitiet
     public function getHealthReportList($companyId, $time_range, $params = []){
-        $whereConditions = $this->conditionWhere($params);
         [$from, $to] = explode('-', $time_range);
         $time = [
             'from' => Carbon::createFromFormat('d/m/Y', trim($from))->format('Y-m-d'),
@@ -55,33 +54,11 @@ class HealthReportService
         ->where('tbl_company.id', '=', $companyId)
         ->whereBetween('tbl_health_checkup_information.checkup_date', [$time['from'], $time['to']])
         ->where('tbl_customer_type.active', STATUS_ACTIVE)
-        ->where($whereConditions)
         ->orderBy('full_name', 'asc')
         ->orderBy('checkup_date', 'asc')
         ->distinct()
         ->paginate(PER_PAGE_SMALL)->setPath(route('healthReport.index', $params));
     }
-    private function conditionWhere($params = [])
-    {
-        $where = [
-            'tbl_information_insurance.active' => STATUS_ACTIVE,
-            'tbl_health_checkup_information.active' => STATUS_ACTIVE,
-            'tbl_health_account.active' => STATUS_ACTIVE,
-            'tbl_customer.active' => STATUS_ACTIVE,
-            'tbl_customer_type.active' => STATUS_ACTIVE,
-        ];
 
-        if (isset($params['company'])) {
-            $where['tbl_company.id'] = $params['company'];
-        }
-        if (isset($params['period'])) {
-            $where['tbl_period_detail.period_id'] = $params['period'];
-        }
-
-        if (isset($params['contract'])) {
-            $where['tbl_contract.id'] = $params['contract'];
-        }
-        return $where;
-    }
     
 }
