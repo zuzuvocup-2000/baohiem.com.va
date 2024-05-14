@@ -8,7 +8,7 @@ class UserHospital extends Authenticatable
 {
     use HasRoles;
     protected $table = 'tbl_user_hospital';
-    protected $guard = 'hospital';
+    protected $guard = 'isUserHospital';
     protected $primaryKey = 'id';
     public $timestamps = false;
 

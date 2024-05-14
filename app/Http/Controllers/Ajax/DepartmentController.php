@@ -13,7 +13,7 @@ class DepartmentController extends Controller
     public function create(Request $request)
     {
         try {
-            if (Auth::guard('web')->check()) {
+            if (Auth::guard('isUserAdmin')->check()) {
                 DB::beginTransaction();
     
                 $data = $request->all();
@@ -40,21 +40,19 @@ class DepartmentController extends Controller
     public function delete(Request $request)
     {
         try {
-            if (Auth::guard('web')->check()) {
-                DB::beginTransaction();
+            DB::beginTransaction();
 
-                $departmentId = $request->input('departmentId');
-                $department = Department::find($departmentId);
+            $departmentId = $request->input('departmentId');
+            $department = Department::find($departmentId);
 
-                if ($department) {
-                    $department->update(['active' => STATUS_INACTIVE]);
-                    $this->saveLog(Auth::user()->id, 'Xóa phòng ban thành công.');
-                    DB::commit();
+            if ($department) {
+                $department->update(['active' => STATUS_INACTIVE]);
+                $this->saveLog(Auth::user()->id, 'Xóa phòng ban thành công.');
+                DB::commit();
 
-                    return response()->json(['status' => STATUS_SUCCESS, 'message' => 'Xóa phòng ban thành công.']);
-                }
-
+                return response()->json(['status' => STATUS_SUCCESS, 'message' => 'Xóa phòng ban thành công.']);
             }
+
             
             throw new \Exception('Không tìm thấy phòng ban  .');
         } catch (\Exception $e) {
@@ -66,21 +64,19 @@ class DepartmentController extends Controller
     public function update(Request $request)
     {
         try {
-            if (Auth::guard('web')->check()) {
-                DB::beginTransaction();
+            DB::beginTransaction();
 
-                $data = $request->all();
-                $department = Department::find($data['departmentId']);
+            $data = $request->all();
+            $department = Department::find($data['departmentId']);
 
-                if ($department) {
-                    $department->update([
-                        'department_name' => (string)$data['department_name'],
-                    ]);
-                    $this->saveLog(Auth::user()->id, 'Cập nhật phòng ban thành công.');
-                    DB::commit();
+            if ($department) {
+                $department->update([
+                    'department_name' => (string)$data['department_name'],
+                ]);
+                $this->saveLog(Auth::user()->id, 'Cập nhật phòng ban thành công.');
+                DB::commit();
 
-                    return response()->json(['status' => STATUS_SUCCESS, 'message' => 'Cập nhật phòng ban thành công.']);
-                }
+                return response()->json(['status' => STATUS_SUCCESS, 'message' => 'Cập nhật phòng ban thành công.']);
             }
             
 

@@ -1,12 +1,11 @@
 <?php
-
 namespace App\Http\Middleware;
-
 use Closure;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class IsUserAdmin
+use Illuminate\Http\Request;
+
+class CheckAnyGuard
 {
     /**
      * Handle an incoming request.
@@ -15,11 +14,14 @@ class IsUserAdmin
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next, ...$guards)
     {
-        if (Auth::guard('web')->check()) {
-            return $next($request);
+        foreach ($guards as $guard) {
+            if (Auth::guard($guard)->check()) {
+                return $next($request);
+            }
         }
-        return redirect('/')->with('error', "Bạn không có quyền truy cập vào chức năng này.");
+
+        return redirect()->back()->with('error', "Bạn không có quyền truy cập vào chức năng này.");
     }
 }

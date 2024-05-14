@@ -16,28 +16,26 @@ class HospitalContractController extends Controller
     public function create(Request $request)
     {
         try {
-            if (Auth::guard('web')->check()) {
-                DB::beginTransaction();
-                $data = $request->all();
-                $hospitalName = Hospital::create([
-                    'hospital_name' => (string)$data['hospital_name'],
-                    'active' => STATUS_ACTIVE
-                ]);
-                $employeeName = UserHospital::create([
-                    'employee_name' => (string)$data['employee_name'],
-                    'active' => STATUS_ACTIVE
-                ]);
-                $contractName = Contract::create([
-                    'employee_name' => (string)$data['contract_name'],
-                    'active' => STATUS_ACTIVE
-                ]);
-                if (!$hospitalName || !$employeeName || !$contractName) {  
-                    throw new \Exception('Error creating Hospital Contract');
-                }
-                $this->saveLog(Auth::user()->id, 'Thêm mới hợp đồng bệnh viện thành công.');
-                DB::commit();
-                return response()->json(['status' => STATUS_SUCCESS, 'message' => 'Hợp đồng bệnh viện được tạo thành công.']);
+            DB::beginTransaction();
+            $data = $request->all();
+            $hospitalName = Hospital::create([
+                'hospital_name' => (string)$data['hospital_name'],
+                'active' => STATUS_ACTIVE
+            ]);
+            $employeeName = UserHospital::create([
+                'employee_name' => (string)$data['employee_name'],
+                'active' => STATUS_ACTIVE
+            ]);
+            $contractName = Contract::create([
+                'employee_name' => (string)$data['contract_name'],
+                'active' => STATUS_ACTIVE
+            ]);
+            if (!$hospitalName || !$employeeName || !$contractName) {  
+                throw new \Exception('Error creating Hospital Contract');
             }
+            $this->saveLog(Auth::user()->id, 'Thêm mới hợp đồng bệnh viện thành công.');
+            DB::commit();
+            return response()->json(['status' => STATUS_SUCCESS, 'message' => 'Hợp đồng bệnh viện được tạo thành công.']);
         } catch (\Exception $e) {
             DB::rollback();
             return response()->json(['status' => STATUS_ERROR, 'message' => 'Thêm mới thất bại.']);
@@ -47,22 +45,20 @@ class HospitalContractController extends Controller
     public function delete(Request $request)
     {
         try {
-            if (Auth::guard('web')->check()) {
-                DB::beginTransaction();
+            DB::beginTransaction();
 
-                $hospitalContractId = $request->input('hospitalContractId');
-                $hospitalContract = ContractHospital::find($hospitalContractId);
+            $hospitalContractId = $request->input('hospitalContractId');
+            $hospitalContract = ContractHospital::find($hospitalContractId);
 
-                if ($hospitalContract) {
-                    $hospitalContract->update(['active' => STATUS_INACTIVE]);
-                    $this->saveLog(Auth::user()->id, 'Xóa hợp đồng bệnh viện thành công.');
-                    DB::commit();
+            if ($hospitalContract) {
+                $hospitalContract->update(['active' => STATUS_INACTIVE]);
+                $this->saveLog(Auth::user()->id, 'Xóa hợp đồng bệnh viện thành công.');
+                DB::commit();
 
-                    return response()->json(['status' => STATUS_SUCCESS, 'message' => 'Xóa bệnh viện thành công.']);
-                }
-
-            throw new \Exception('Không tìm thấy bệnh viện.');
+                return response()->json(['status' => STATUS_SUCCESS, 'message' => 'Xóa bệnh viện thành công.']);
             }
+
+        throw new \Exception('Không tìm thấy bệnh viện.');
         } catch (\Exception $e) {
             DB::rollback();
             return response()->json(['status' => STATUS_ERROR, 'message' => 'Xóa hợp đồng bệnh viện thất bại.']);
@@ -72,7 +68,6 @@ class HospitalContractController extends Controller
     public function update(Request $request)
     {
         try {
-            if (Auth::guard('web')->check()) {
             DB::beginTransaction();
 
                 $data = $request->all();
@@ -93,7 +88,6 @@ class HospitalContractController extends Controller
                     }
                 }
                
-            }
             throw new \Exception('Không tìm thấy bệnh viện.');
         } catch (\Exception $e) {
             DB::rollback();

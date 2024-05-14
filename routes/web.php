@@ -54,12 +54,12 @@ Route::put('/profile', [ProfileController::class, 'update'])->name('profile.upda
 Route::get('/change-password', [ProfileController::class, 'changePasswordIndex'])->name('profile.changePassword');
 Route::post('/change-password', [ProfileController::class, 'changePassword'])->name('change.password');
 // });
-Route::get('/management', [UserController::class, 'management'])->name('user.management');
-
-Route::middleware(['is_user_admin', 'permission'])->group(function () {
+// dùng chung 4 tài khoản
+Route::group(['middleware' => ['check.any.guard:isUserAdmin,isUserStaff,isUserCustomer,isUserHospital']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
-
-    // Routes for free design before
+});
+// chỉ tài khoản admin
+Route::group(['middleware' => ['check.any.guard:isUserAdmin']], function () {
     Route::group(['prefix' => 'ajax'], function () {
         // Hợp đồng
         Route::get('/contract/list', [ContractController::class, 'index'])->name('ajax.contract.index');
@@ -119,7 +119,6 @@ Route::middleware(['is_user_admin', 'permission'])->group(function () {
         Route::put('/supervisor/recover', [SupervisorAjax::class, 'recover'])->name('ajax.supervisor.recover');
         Route::put('/supervisor/recover-account', [SupervisorAjax::class, 'recoverAccount'])->name('ajax.supervisor.recover-account');
     });
-
     // Routes for free design before
     Route::group(['prefix' => 'user'], function () {
         Route::get('/', [UserController::class, 'index'])->name('user.index');
@@ -134,8 +133,7 @@ Route::middleware(['is_user_admin', 'permission'])->group(function () {
     // Routes for system
     Route::get('/system', [SystemController::class, 'index'])->name('system.index');
     // Routes for contact
-    Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
-    Route::post('/contact', [ContactController::class, 'sendEmail'])->name('contact.form');
+    
     // Routes Account
     Route::get('/account', [AccountController::class, 'index'])->name('account.index');
     Route::get('/account/insurance', [AccountController::class, 'insurance'])->name('account.insurance');
@@ -197,12 +195,27 @@ Route::middleware(['is_user_admin', 'permission'])->group(function () {
     Route::get('/diary/customer', [DiaryController::class, 'customerDiary'])->name('diary.customer');
     // Routes Export
     Route::get('/export/account', [ExportController::class, 'exportAccountList'])->name('export.accountList');
-});
 
-Route::middleware(['is_user_admin'])->group(function () {
     // Routes for Insurance
     Route::get('/insurance-expenses/check-period', [InsuranceExpensesController::class, 'checkPeriod'])->name('insuranceExpenses.checkPeriod');
 });
+// chỉ tài khoản nhân viên
+Route::group(['middleware' => ['check.any.guard:isUserStaff']], function () {
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+    Route::post('/contact', [ContactController::class, 'sendEmail'])->name('contact.form');
+});
+// chỉ tài khoản khách hàng
+Route::group(['middleware' => ['check.any.guard:isUserCustomer']], function () {
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+    Route::post('/contact', [ContactController::class, 'sendEmail'])->name('contact.form');
+});
+// chỉ tài khoản bệnh viện
+Route::group(['middleware' => ['check.any.guard:isUserHospital']], function () {
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+    Route::post('/contact', [ContactController::class, 'sendEmail'])->name('contact.form');
+});
+Route::get('/management', [UserController::class, 'management'])->name('user.management');
+
 
 // Route for login page
 Route::get('/', [LoginController::class, 'showLoginForm']);
