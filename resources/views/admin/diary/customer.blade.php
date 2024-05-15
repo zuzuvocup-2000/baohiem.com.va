@@ -154,7 +154,11 @@
                                     </div>
                                     <div class="col-sm-12 col-md-4" style="display: flex; flex-direction: column-reverse; width: 125px;">
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-danger">Xóa dữ liệu</button>
+                                            <button type="button" class="btn btn-danger"> 
+                                                <span class="icon-item-icon">
+                                                    <img src="{{ asset('/img-system/system/trash_white.svg') }}" alt="" />
+                                                </span>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>

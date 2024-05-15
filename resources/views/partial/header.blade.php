@@ -342,7 +342,7 @@ $menu = __('menu');
                                             </p>
                                         </div>
                                     </div>
-                                    <div class="message-body">
+                                    {{-- <div class="message-body">
                                         <a href="{{ route('profile.user') }}"
                                             class="py-8 px-7 mt-8 d-flex align-items-center">
                                             <span
@@ -355,7 +355,7 @@ $menu = __('menu');
                                                 <span class="fs-3 d-block text-secondary">Cài đặt tài khoản</span>
                                             </div>
                                         </a>
-                                    </div>
+                                    </div> --}}
                                     <div class="d-grid py-4 px-7 pt-8">
                                         <a href="{{ route('logout') }}" class="btn btn-primary">Đăng xuất</a>
                                     </div>
@@ -638,7 +638,7 @@ $menu = __('menu');
                                             @endif
                                         </div>
                                         <div class="message-body">
-                                            <a href="{{ route('profile.user') }}"
+                                            {{-- <a href="{{ route('profile.user') }}"
                                                 class="py-8 px-7 mt-8 d-flex align-items-center">
                                                 <span
                                                     class="d-flex align-items-center justify-content-center bg-warning-subtle rounded-circle round p-6 fs-6 text-primary">
@@ -649,7 +649,7 @@ $menu = __('menu');
                                                     <h6 class="mb-1 fs-3  lh-base">Thông tin cá nhân</h6>
                                                     <span class="fs-3 d-block text-secondary">Cài đặt tài khoản</span>
                                                 </div>
-                                            </a>
+                                            </a> --}}
                                             <a href="{{ route('profile.changePassword') }}"
                                                 class="py-8 px-7 mt-8 d-flex align-items-center">
                                                 <span

@@ -67,14 +67,6 @@ return [
                 'url' => route('user.index'),
             ],
             [
-                'name' => 'Quản lý quyền',
-                'url' => route('permission.index')
-            ],
-            [
-                'name' => 'Quản lý vị trí chức vụ',
-                'url' => route('role.index')
-            ],
-            [
                 'name' => 'Nhật ký thao tác chứng từ',
                 'url' => route('diary.employee'),
                 'items' => [
