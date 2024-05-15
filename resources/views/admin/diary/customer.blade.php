@@ -40,100 +40,44 @@
                                 <div class="row mb-3">
                                     <div class="col-xs-12 col-md-4">
                                         <div class="form-group">
-                                            <label class="col-form-label d-inline-block" style="width: 100px;" for="companySelect">Tên công ty</label>
-                                            <select class="form-select company-search mr-sm-2" id="companySelect" name="companySelect" style="width: calc(100% - 100px);">
-                                                <option value="20067" selected="">
-                                                    CỬU LONG JOC 2
-                                                </option>
-                                                <option value="20058">
-                                                    PVFCCO
-                                                </option>
-                                                <option value="20059">
-                                                    TRƯỜNG SƠN JOC
-                                                </option>
-                                                <option value="49">
-                                                    CỬU LONG JOC (O)
-                                                </option>
-                                                <option value="20066">
-                                                    TALISMAN
-                                                </option>
-                                                <option value="20068">
-                                                    GAS SOUTH (KMN)
-                                                </option>
+                                            <label for="" class="mb-1">Tên công ty</label>
+                                            <select class="form-select company-search mr-sm-2" id="companySelect"
+                                                name="companySelect" style="width: calc(100% - 100px)">
+                                                @foreach ($companyList as $company)
+                                                    <option value="{{ $company->id }}"
+                                                        {{ old('companySelect', $companyList[0]->id) == $company->id ? 'selected' : '' }}>
+                                                        {{ $company->company_name }}
+                                                    </option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-md-4">
                                         <div class="form-group">
-                                            <label class="col-form-label d-inline-block" style="width: 100px;" for="periodSelect">Niên hạn</label>
-                                            <select class="form-select period-search mr-sm-2" id="periodSelect" name="periodSelect" style="width: calc(100% - 100px);">
-                                                <option value="10079" selected="">
-                                                    CL2023
+                                            <label for="" class="mb-1">Niên hạn</label>
+                                        <select class="form-select period-search mr-sm-2" id="periodSelect"
+                                            name="periodSelect" style="width: calc(100% - 100px)">
+                                            @foreach ($periodList as $period)
+                                                <option value="{{ $period->id }}"
+                                                    {{ old('periodSelect', $periodList[0]->id) == $period->id ? 'selected' : '' }}>
+                                                    {{ $period->period_name }}
                                                 </option>
-                                                <option value="10077">
-                                                    CL2022
-                                                </option>
-                                                <option value="10078">
-                                                    Gas2022
-                                                </option>
-                                                <option value="10075">
-                                                    CL2021
-                                                </option>
-                                                <option value="10076">
-                                                    Gas2021
-                                                </option>
-                                                <option value="10074">
-                                                    Gas2020
-                                                </option>
-                                                <option value="10073">
-                                                    2020-2020
-                                                </option>
-                                                <option value="10072">
-                                                    2019-2020
-                                                </option>
-                                                <option value="10071">
-                                                    2018-2019
-                                                </option>
-                                                <option value="10070">
-                                                    2017-2018
-                                                </option>
-                                                <option value="10069">
-                                                    2016-2017
-                                                </option>
-                                                <option value="10068">
-                                                    2015-2016
-                                                </option>
-                                                <option value="10067">
-                                                    2014-2015
-                                                </option>
-                                                <option value="10066">
-                                                    2013-2014
-                                                </option>
-                                                <option value="10065">
-                                                    2012-2013
-                                                </option>
-                                                <option value="10064">
-                                                    2011-2012
-                                                </option>
-                                                <option value="64">
-                                                    2010-2011
-                                                </option>
-                                                <option value="63">
-                                                    2007-2008
-                                                </option>
-                                                <option value="62">
-                                                    2006-2007
-                                                </option>
-                                                <option value="61">
-                                                    2005-2006
-                                                </option>
-                                            </select>
+                                            @endforeach
+                                        </select>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-md-4">
                                         <div class="form-group">
-                                            <label class="col-form-label d-inline-block" style="width: 100px;" for="companySelect">Hợpđồng</label>
-                                            <select class="form-select contract-search mr-sm-2" id="contractSelect" name="contractSelect" style="width: calc(100% - 100px);"> </select>
+                                            <label for="" class="mb-1">Tên hợp đồng</label>
+                                            <select class="form-select contract-search mr-sm-2" id="contractSelect"
+                                                name="contractSelect" style="width: calc(100% - 100px)">
+                                                @foreach ($contractList as $contract)
+                                                    <option value="{{ $contract->id }}"
+                                                        {{ old('contractSelect', $contractList[0]->id) == $contract->id ? 'selected' : '' }}>
+                                                        {{ $contract->contract_name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-md-4">

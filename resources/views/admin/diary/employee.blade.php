@@ -40,11 +40,14 @@
                                 <div class="row mb-2">
                                     <div class="col-sm-12 col-md-6 col-xl-3">
                                         <div class="form-field">
-                                            <label for="">Tên bệnh viện</label>
-                                            <select name="company" class="form-select" id="companySelect">
-                                                <option value="20067" selected="selected">BV VN Cu Ba</option>
-                                                <option value="20058">BV Hồng Ngọc</option>
-                                                <option value="20059">BV Đức Giang</option>
+                                            <label for="" class="mb-1">Tên bệnh viện</label>
+                                            <select class="form-select mr-sm-2 {{ isset($class) ? $class : '' }}"
+                                                id="{{ isset($id) ? $id : 'hospitalSelectGeneral' }}" name="{{ isset($name) ? $name : 'hospital' }}">
+                                                @foreach ($hospitalList as $hospital)
+                                                    <option value="{{ $hospital->id }}" >
+                                                        {{ $hospital->hospital_name }}
+                                                    </option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
