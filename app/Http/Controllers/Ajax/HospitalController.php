@@ -13,7 +13,7 @@ class HospitalController extends Controller
     public function create(Request $request)
     {
         try {
-            if (Auth::guard('web')->check()) {
+            if (Auth::guard('isUserAdmin')->check()) {
                 DB::beginTransaction();
                 $data = $request->all();
                 $hospital = Hospital::create([
@@ -38,7 +38,6 @@ class HospitalController extends Controller
     public function delete(Request $request)
     {
         try {
-            if (Auth::guard('web')->check()) {
                 DB::beginTransaction();
 
                 $hospitalId = $request->input('hospitalId');
@@ -53,7 +52,6 @@ class HospitalController extends Controller
                 }
 
             throw new \Exception('Không tìm thấy bệnh viện.');
-            }
         } catch (\Exception $e) {
             DB::rollback();
             return response()->json(['status' => STATUS_ERROR, 'message' => 'Xóa bệnh viện thất bại.']);
@@ -63,7 +61,7 @@ class HospitalController extends Controller
     public function update(Request $request)
     {
         try {
-            if (Auth::guard('web')->check()) {
+            if (Auth::guard('isUserAdmin')->check()) {
             DB::beginTransaction();
 
                 $data = $request->all();

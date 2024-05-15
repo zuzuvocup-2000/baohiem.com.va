@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class UserStaff extends Authenticatable
 {
     protected $table = 'tbl_user_staff';
-    protected $guard = 'staff';
+    protected $guard = 'isUserStaff';
     protected $primaryKey = 'id';
     public $timestamps = false;
 

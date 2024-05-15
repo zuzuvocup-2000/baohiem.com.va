@@ -30,6 +30,15 @@
                                         <span class="text-danger text-left">{{ $errors->first('description') }}</span>
                                     @endif
                                 </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="guard_name" class="form-label">Vị trí</label>
+                                    <input value="{{ old('guard_name') }}" type="text" class="form-control"
+                                        name="guard_name" placeholder="Vị trí">
+
+                                    @if ($errors->has('guard_name'))
+                                        <span class="text-danger text-left">{{ $errors->first('guard_name') }}</span>
+                                    @endif
+                                </div>
                             </div>
 
                             <div style="text-align: right;">

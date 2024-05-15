@@ -9,6 +9,8 @@ use App\Services\UserHospitalService;
 use App\Services\CompanyService;
 use App\Services\ContractService;
 use App\Services\PeriodService;
+use App\Services\HealthReportService;
+use App\Services\PeriodDetailService;
 
 use Illuminate\Http\Request;
 
@@ -17,10 +19,11 @@ class HospitalController extends Controller
     protected $hospitalService;
     protected $hospitalTypeService;
     protected $userHospitalService;
-
+    protected $healthReportService;
     protected $companyService;
     protected $periodService;
     protected $contractService;
+    protected $periodDetailService;
 
     
     public function __construct(
@@ -29,13 +32,15 @@ class HospitalController extends Controller
         UserHospitalService $userHospitalService,
         CompanyService $companyService, 
         PeriodService $periodService, 
-        ContractService $contractService
+        ContractService $contractService,
+        HealthReportService $healthReportService,
+        PeriodDetailService $periodDetailService
     ) {
         $this->hospitalService = $hospitalService;
         $this->hospitalTypeService = $hospitalTypeService;
         $this->userHospitalService = $userHospitalService;
-
         $this->companyService = $companyService;
+        $this->healthReportService = $healthReportService;
         $this->periodService = $periodService;
         $this->contractService = $contractService;
 
@@ -66,8 +71,16 @@ class HospitalController extends Controller
         $hospitalContractList = $this->hospitalService->getHospitalContract();
         return view('admin.hospital.index', compact(['hospitalList' , 'hospitalTypeList', 'userHospitalList', 'companyList', 'periodList', 'contractList','hospitalContractList']));
     }
-    public function healthReport()
+    public function healthReport(Request $request)
     {
-        return view('admin.hospital.health_report');
+        $params = $request->query();
+        if (!isset($params['time_range'])) {
+            $params['time_range'] = date('01/01/Y') . ' - ' . date('d/m/Y');
+        }
+        $companyList = $this->companyService->getCompanyActiveSortByOrder();
+        $periodList = $this->periodService->getPeriodActiveByCompany($companyList->first()->id);
+        $contractList = $this->contractService->getContractByPeriod($periodList->first()->id);
+        $healthReportList = $this->healthReportService->getHealthReportList($companyList->first()->id,$params['time_range'],$params);
+        return view('admin.hospital.health_report', compact(['healthReportList' , 'companyList', 'periodList', 'contractList']));
     }
 }

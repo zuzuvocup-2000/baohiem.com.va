@@ -10,7 +10,7 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasRoles;
     protected $table = 'tbl_user';
-    protected $guard = 'web';
+    protected $guard = 'isUserAdmin';
     public $timestamps = false;
     protected $hidden = ['password', 'role_name', 'role_id'];
 

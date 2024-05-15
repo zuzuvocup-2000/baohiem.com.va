@@ -44,7 +44,7 @@ class PermissionsController extends Controller
             'name' => 'required|unique:users,name'
         ]);
 
-        Permission::create($request->only(['name', 'description']));
+        Permission::create($request->only(['name', 'description', 'guard_name']));
 
         return redirect()->route('permission.index')
             ->withSuccess(__('Tạo quyền thành công.'));
@@ -74,7 +74,7 @@ class PermissionsController extends Controller
             'name' => 'required|unique:permissions,name,' . $permission->id
         ]);
 
-        $permission->update($request->only(['name', 'description']));
+        $permission->update($request->only(['name', 'description', 'guard_name']));
 
         return redirect()->route('permission.index')
             ->withSuccess(__('Cập nhật quyền thành công.'));

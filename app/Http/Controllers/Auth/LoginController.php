@@ -21,20 +21,23 @@ class LoginController extends Controller
     public function login(LoginRequest $request)
     {
         $credentials = $request->only('username', 'password');
-        $guards = ['web', 'staff', 'hospital', 'customer'];
+        $guards = ['isUserAdmin', 'isUserStaff', 'isUserHospital', 'isUserCustomer'];
         $remember = $request->filled('remember');
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->attempt($credentials, $remember)) {
-                if (Auth::guard('web')->check()) {
-                    $this->saveLog(Auth::user()->id, 'Đăng nhập thành công');
-                    return redirect('/dashboard')->with('success', 'Đăng nhập thành công!');
-                } else {
-                    return redirect('/');
+                switch ($guard) {
+                    case 'isUserAdmin':
+                        return redirect('/dashboard')->with('success', 'Đăng nhập thành công!');
+                    case 'isUserStaff':
+                        return redirect('/dashboard')->with('success', 'Đăng nhập thành công!');
+                    case 'isUserHospital':
+                        return redirect('/dashboard')->with('success', 'Đăng nhập thành công!');
+                    case 'isUserCustomer':
+                        return redirect('/dashboard')->with('success', 'Đăng nhập thành công!');
                 }
             }
         }
-
         return redirect('/login')->with('error', 'Tên đăng nhập hoặc mật khẩu không chính xác.')->withInput();
     }
 
@@ -44,13 +47,13 @@ class LoginController extends Controller
     }
 
     public function logout(HttpRequest $request) : RedirectResponse
-    {
-        if (Auth::check()) {
-            $this->saveLog(Auth::user()->id, 'Đăng xuất thành công');
-            Auth::logout();
-            $request->session()->invalidate();
-            $request->session()->regenerateToken();
-        }
-        return redirect('/login');
+{
+    if (Auth::check()) {
+        $this->saveLog(Auth::user()->id, 'Đăng xuất thành công');
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
     }
+    return redirect('/login');
+}
 }

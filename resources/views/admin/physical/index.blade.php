@@ -69,15 +69,8 @@
                                         'time_range' => (isset($periodDetail->from_year) ? date('01/01/' . $periodDetail->from_year) : date('01/01/Y')) . ' - ' . date('d/m/Y')
                                     ])
                                 </div>
-                                <div class="col-xs-12 col-md-1">
-                                    <div class="form-group form-checkbox">
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input success" type="checkbox" id="success2-check" value="option1" checked="">
-                                            <label class="form-check-label" for="success2-check">Ngày nhập</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-md-7">
+                               
+                                <div class="col-xs-12 col-md-8">
                                     <div class="form-group form-button">
                                         <button class="btn btn-primary" type="submit">Tìm kiếm</button>
                                     </div>
