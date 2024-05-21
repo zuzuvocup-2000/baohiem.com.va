@@ -32,6 +32,7 @@ use App\Http\Controllers\Admin\HospitalController;
 use App\Http\Controllers\Admin\DiaryController;
 use App\Http\Controllers\Admin\InsuranceExpensesController;
 use App\Http\Controllers\Admin\RenewalController;
+use App\Http\Controllers\Ajax\InsuranceExpensesController as AjaxInsuranceExpensesController;
 use App\Http\Controllers\ExportController;
 /*
 |--------------------------------------------------------------------------
@@ -73,6 +74,9 @@ Route::group(['middleware' => ['check.any.guard:isUserAdmin']], function () {
         Route::post('/company/delete', [CompanyController::class, 'delete'])->name('ajax.company.delete');
         Route::put('/company/update', [CompanyController::class, 'update'])->name('ajax.company.update');
 
+        // Chi bảo hiểm
+        Route::get('/insurance-expenses/detail/{id}', [AjaxInsuranceExpensesController::class, 'detail'])->name('ajax.insurance-expenses.detail');
+
         // Niên hạn
         Route::get('/period/list', [PeriodController::class, 'index'])->name('ajax.period.index');
         Route::post('/period/create', [PeriodController::class, 'create'])->name('ajax.period.create');
@@ -102,7 +106,7 @@ Route::group(['middleware' => ['check.any.guard:isUserAdmin']], function () {
         Route::post('/hospital-user/create', [UserHospitalController::class, 'create'])->name('ajax.hospital-user.create');
         Route::post('/hospital-user/delete', [UserHospitalController::class, 'delete'])->name('ajax.hospital-user.delete');
         Route::put('/hospital-user/update', [UserHospitalController::class, 'update'])->name('ajax.hospital-user.update');
- 
+
         Route::post('/hospital-contract/create', [HospitalContractController::class, 'create'])->name('ajax.hospital-contract.create');
         Route::post('/hospital-contract/delete', [HospitalContractController::class, 'delete'])->name('ajax.hospital-contract.delete');
         Route::put('/hospital-contract/update', [HospitalContractController::class, 'update'])->name('ajax.hospital-contract.update');
@@ -133,7 +137,7 @@ Route::group(['middleware' => ['check.any.guard:isUserAdmin']], function () {
     // Routes for system
     Route::get('/system', [SystemController::class, 'index'])->name('system.index');
     // Routes for contact
-    
+
     // Routes Account
     Route::get('/account', [AccountController::class, 'index'])->name('account.index');
     Route::get('/account/insurance', [AccountController::class, 'insurance'])->name('account.insurance');
