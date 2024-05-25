@@ -23,13 +23,23 @@ class DiaryService
         ->orderBy('tbl_log_user.date_log', 'desc')
         ->paginate(20);
     }
-    public function getHospitalDiary($MAUSER_BENHVIEN = 0){
-        return LogUserBenhVien::select('MALOGUSER_BENHVIEN', 'tbl_loguser_benhvien.MAUSER_BENHVIEN', 'logdate', 'hanhdong', 'localIP', 'Computername', 'tennhanvien', 'tbl_loguser_benhvien.maloguser_benhvien')
-        ->join('tbl_user_hospital', 'tbl_loguser_benhvien.MAUSER_BENHVIEN', '=', 'tbl_user_hospital.id')
-        ->where('tbl_loguser_benhvien.active', STATUS_ACTIVE)
-        ->where('tbl_loguser_benhvien.MAUSER_BENHVIEN', $MAUSER_BENHVIEN)
-        ->orderBy('logdate')
-        ->paginate(20);
+    public function getHospitalDiary()
+    {
+        return LogUserBenhVien::select(
+                'tbl_loguser_benhvien.maloguser_benhvien as maloguser_benhvien',
+                'tbl_loguser_benhvien.MAUSER_BENHVIEN as MAUSER_BENHVIEN',
+                'logdate',
+                'hanhdong',
+                'localIP',
+                'Computername',
+                'employee_name',
+                'username',
+                'tbl_loguser_benhvien.maloguser_benhvien as maloguser_benhvien_alias'
+            )
+            ->join('tbl_user_hospital', 'tbl_loguser_benhvien.MAUSER_BENHVIEN', '=', 'tbl_user_hospital.id')
+            ->where('tbl_loguser_benhvien.active', STATUS_ACTIVE)
+            ->orderBy('logdate' , 'desc')
+            ->paginate(20);
     }
     public function getCustomerDiary()
     {

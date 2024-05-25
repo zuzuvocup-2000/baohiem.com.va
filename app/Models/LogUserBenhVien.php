@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class LogUserBenhVien extends Model
 {
     protected $table = 'tbl_loguser_benhvien';
+    protected $primaryKey = 'MALOGUSER_BENHVIEN';
     public $timestamps = false;
 
     protected $fillable = [
@@ -26,6 +27,6 @@ class LogUserBenhVien extends Model
 
     public function userBenhVien()
     {
-        return $this->belongsTo(UserBenhVien::class, 'MAUSER_BENHVIEN', 'MAUSER_BENHVIEN');
+        return $this->belongsTo(UserBenhVien::class, 'MAUSER_BENHVIEN', 'id');
     }
 }

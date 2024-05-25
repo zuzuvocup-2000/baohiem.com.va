@@ -36,26 +36,24 @@
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade active show" id="diary-tab1" role="tabpanel" aria-labelledby="diary-tab1" tabindex="0">
+                           
                             <form action="">
                                 <div class="row mb-2">
                                     <div class="col-sm-12 col-md-6 col-xl-3">
                                         <div class="form-field">
-                                            <label for="" class="mb-1">Tên bệnh viện</label>
-                                            <select class="form-select mr-sm-2 {{ isset($class) ? $class : '' }}"
-                                                id="{{ isset($id) ? $id : 'hospitalSelectGeneral' }}" name="{{ isset($name) ? $name : 'hospital' }}">
-                                                @foreach ($hospitalList as $hospital)
-                                                    <option value="{{ $hospital->id }}" >
-                                                        {{ $hospital->hospital_name }}
-                                                    </option>
-                                                @endforeach
+                                            <label for="">Phòng ban</label>
+                                            <select name="company" class="form-select" id="companySelect">
+                                                <option value="20067" selected="selected">Phòng bảo vệ</option>
+                                                <option value="20058">Phòng IT</option>
+                                                <option value="20059">Phòng kế toán</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-xl-3">
-                                        <div class="form-group ">
+                                        <div class="form-group">
                                             <label for="">Ngày:</label>
                                             <div class="input-group">
-                                                <input type="date" class="form-control" value="2018-05-13">
+                                                <input type="date" class="form-control" value="2018-05-13" />
                                             </div>
                                         </div>
                                     </div>
@@ -67,7 +65,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-sm-12 col-md-6 col-xl-3" style="display: flex; flex-direction: column-reverse;width: 125px;">
+                                    <div class="col-sm-12 col-md-6 col-xl-3" style="display: flex; flex-direction: column-reverse; width: 125px;">
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-danger"> 
                                                 <span class="icon-item-icon">
@@ -78,7 +76,6 @@
                                     </div>
                                 </div>
                             </form>
-                            
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="system-table table-responsive">

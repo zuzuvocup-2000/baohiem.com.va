@@ -40,19 +40,22 @@
                                 <div class="row mb-2">
                                     <div class="col-sm-12 col-md-6 col-xl-3">
                                         <div class="form-field">
-                                            <label for="">Phòng ban</label>
-                                            <select name="company" class="form-select" id="companySelect">
-                                                <option value="20067" selected="selected">Phòng bảo vệ</option>
-                                                <option value="20058">Phòng IT</option>
-                                                <option value="20059">Phòng kế toán</option>
+                                            <label for="">Tên bệnh viện</label>
+                                            <select class="form-select mr-sm-2 {{ isset($class) ? $class : '' }}"
+                                                id="{{ isset($id) ? $id : 'hospitalSelectGeneral' }}" name="{{ isset($name) ? $name : 'hospital' }}">
+                                                @foreach ($hospitalList as $hospital)
+                                                    <option value="{{ $hospital->id }}" >
+                                                        {{ $hospital->hospital_name }}
+                                                    </option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-xl-3">
-                                        <div class="form-group">
+                                        <div class="form-group ">
                                             <label for="">Ngày:</label>
                                             <div class="input-group">
-                                                <input type="date" class="form-control" value="2018-05-13" />
+                                                <input type="date" class="form-control" value="2018-05-13">
                                             </div>
                                         </div>
                                     </div>
@@ -64,7 +67,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-sm-12 col-md-6 col-xl-3" style="display: flex; flex-direction: column-reverse; width: 125px;">
+                                    <div class="col-sm-12 col-md-6 col-xl-3" style="display: flex; flex-direction: column-reverse;width: 125px;">
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-danger"> 
                                                 <span class="icon-item-icon">
@@ -85,7 +88,7 @@
                                                         <input type="checkbox" class="toggleAll custom-control-input" id="customCheck1" />
                                                     </th>
                                                     <th style="width: 1%;" class="text-center">STT</th>
-                                                    <th>Tên nhân viên</th>
+                                                    <th class="text-center">Tên nhân viên</th>
                                                     <th class="text-center">Tên user</th>
                                                     <th class="text-center">Thời gian thực hiện</th>
                                                     <th class="text-center">Thao tác</th>
@@ -98,16 +101,18 @@
                                                         <input type="checkbox" class="toggleCheckbox custom-control-input" id="user-" name="id[]" value="42" />
                                                     </td>
                                                     <td class="text-center">{{ ++$key }}</td>
-                                                    <td class="text-center">{{ $employeeDiary->tennhanvien }}</td>
-                                                    <td class="text-center">{{ $employeeDiary->logdate }}</td>
+                                                    <td class="text-center">{{ $hospitalDiary->employee_name }}</td>
+                                                    <td class="text-center">{{ $hospitalDiary->username }}</td>
+                                                    <td class="text-center">{{ $hospitalDiary->logdate }}</td>
                                                     <td class="text-center">
-                                                        {{ $employeeDiary->hanhdong }}
+                                                        {{ $hospitalDiary->hanhdong }}
                                                     </td>
                                                 </tr>
                                                 @endforeach
                                             </tbody>
                                         </table>
                                     </div>
+                                    {!! $hospitalDiaryList->onEachSide(1)->render('pagination::bootstrap-5') !!}
                                 </div>
                             </div>
                         </div>
