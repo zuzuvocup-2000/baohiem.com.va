@@ -44,8 +44,16 @@ class PhysicalController extends Controller
     {
         return view('admin.physical.detail');
     }
-    public function periodic()
+    public function periodic(Request $request)
     {
-        return view('admin.physical.periodic');
+        $params = $request->query();
+        if (!isset($params['time_range'])) {
+            $params['time_range'] = date('01/01/Y') . ' - ' . date('d/m/Y');
+        }
+        $companyList = $this->companyService->getCompanyActiveSortByOrder();
+        $periodList = $this->periodService->getPeriodActiveByCompany($companyList->first()->id);
+        $contractList = $this->contractService->getContractByPeriod($periodList->first()->id);
+        $physicalList = $this->physicalService->getPhysical($companyList->first()->id,$params['time_range'],$params);
+        return view('admin.physical.periodic', compact(['companyList', 'periodList', 'contractList','physicalList']));
     }
 }
