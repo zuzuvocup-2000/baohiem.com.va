@@ -202,7 +202,7 @@
                                             <div class="form-group bhpvi">
                                                 <label class="col-form-label">Giới hạn đầu kỳ Bảo Hiểm:</label>
                                                 <div class="col-sm">
-                                                    <input type="text" class="form-control input-modal-account" name="GIOIHANGOI" value="{{ number_format($detailAccount->package_price, 0, '.', ' '); }}" disabled/>
+                                                    <input type="text" class="form-control input-modal-account" name="GIOIHANGOI" value="{{ number_format($detailAccount->package_price, 0, '.', ' ') }}" disabled/>
                                                 </div>
                                                 <span class="vnd" style="font-size: 14px;">đồng</span>
                                             </div>
