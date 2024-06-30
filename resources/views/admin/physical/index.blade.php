@@ -38,15 +38,19 @@
                                         'contractList' => $contractList,
                                     ])
                                 </div>
-                                <div class="col-xs-12 col-md-4">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-xl-3 mb-3">
                                     @include('common/input-time-range', [
                                         'time_range' => date('01/01/Y') . ' - ' . date('d/m/Y'),
                                     ])
                                 </div>
-
-                                <div class="col-xs-12 col-md-8">
-                                    <div class="form-group form-button">
-                                        <button class="btn btn-primary" type="submit">Tìm kiếm</button>
+                                <div class="col-xs-12 col-sm-12 col-12 mb-3">
+                                    <div class="d-sm-flex justify-content-between">
+                                        @include('common/input-date-added', [
+                                            'date_added' => isset($_GET['date_added']) ? $_GET['date_added'] : 0,
+                                        ])
+                                        <div class="form-group form-button">
+                                            <button class="btn btn-primary" type="submit">Tìm kiếm</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
