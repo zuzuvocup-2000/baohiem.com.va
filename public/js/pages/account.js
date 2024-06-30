@@ -20,7 +20,7 @@ $('#companySelect').on('change', function () {
             $('#periodSelect').empty();
 
             $.each(data, function (key, value) {
-                $('#periodSelect').append('<option value="' + value.id + '">' + value.period_name + '</option>');
+                $('#periodSelectGeneral').append('<option value="' + value.id + '"' + 'data-time-start="01/01/' + value.from_year + '">' + value.period_name + '</option > ');
             });
 
             $('#periodSelect').trigger('change');
