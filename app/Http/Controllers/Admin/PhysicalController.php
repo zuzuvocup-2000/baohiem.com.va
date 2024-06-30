@@ -52,7 +52,11 @@ class PhysicalController extends Controller
         if (!isset($params['time_range'])) {
             $params['time_range'] = date('01/01/Y') . ' - ' . date('d/m/Y');
         }
-        $physicalList = $this->physicalService->getPhysical($companyList->first()->id, $params['time_range'], $params);
+        if (!isset($params['checkup_date'])) {
+            $physicalList = $this->physicalService->getPhysicalDateAdded($companyList->first()->id, $params['time_range'], $params);
+        } else {
+            $physicalList = $this->physicalService->getPhysical($companyList->first()->id, $params['time_range'], $params);
+        }
 
         return view('admin.physical.index', compact(['companyList', 'periodList', 'contractList', 'physicalList']));
     }
