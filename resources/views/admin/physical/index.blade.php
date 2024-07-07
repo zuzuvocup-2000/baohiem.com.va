@@ -99,10 +99,12 @@
                                         <tr data-id="{{ $physical->id }}">
                                             <td class="text-center">
                                                 <input type="checkbox" class="toggleCheckbox custom-control-input"
-                                                    id="user-" name="id[]" value="39" />
+                                                    id="user-" name="id[]" />
                                             </td>
                                             <td>
-                                                <p class="mb-0 text-center fw-normal fs-4">{{ ++$key }}</p>
+                                                <p class="mb-0 text-center fw-normal fs-4">
+                                                    {{ ($physicalList->currentPage() - 1) * $physicalList->perPage() + $key + 1 }}
+                                                </p>
                                             </td>
                                             <td>
                                                 <p class="mb-0 fw-normal fs-4 text-center">{{ $physical->card_number }}</p>
@@ -157,7 +159,6 @@
             </div>
         </div>
     </div>
-
 
 @endsection
 @section('script')
