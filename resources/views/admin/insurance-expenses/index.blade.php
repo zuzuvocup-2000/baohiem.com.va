@@ -36,7 +36,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-
                                 @if (isset($accountList) && is_array($accountList) && count($accountList))
                                     @foreach ($accountList as $key => $item)
                                         <tr role="row">
@@ -322,7 +321,7 @@
                                             <div class="col-sm-12 col-md-6">
                                                 <div class="text-right">
                                                     <button type="submit"
-                                                        class="btn btn-success btn-save-payment-insurance">Lưu</button>
+                                                        class="btn btn-success btn-save-payment-insurance" data-action="create">Lưu</button>
                                                 </div>
                                             </div>
                                         </div>

@@ -13,6 +13,69 @@ use Illuminate\Support\Facades\DB;
  */
 class InsuranceExpensesService
 {
+    // KhachhangChiBH_loadtheomachitiet
+    public function getInsuranceDetail($detailId)
+    {
+        $results = DB::table('tbl_customer')
+            ->select(
+                'tbl_customer.id',
+                'tbl_customer.full_name',
+                'tbl_customer.images',
+                'tbl_customer.folder',
+                'tbl_customer.birth_year',
+                'tbl_customer.address',
+                'tbl_customer.identity_card_number',
+                'tbl_customer.issue_date',
+                'tbl_customer.issue_place',
+                'tbl_customer.contact_phone',
+                'tbl_customer.email',
+                'tbl_customer.gender',
+                'tbl_customer.images',
+                'tbl_information_insurance.card_number',
+                'tbl_contract.effective_time',
+                'tbl_contract.end_time',
+                'tbl_account_package.package_price',
+                'tbl_account_package.package_name',
+                'tbl_customer_group.group_name',
+                'tbl_contract.id as contract_id',
+                'tbl_account_detail.account_holder',
+                'tbl_contract.contract_name',
+                'tbl_period.period_name',
+                'tbl_company.company_name',
+                'tbl_account.active',
+                'tbl_payment_detail.amount_paid',
+                DB::raw("convert(nvarchar, tbl_payment_detail.payment_date, 103) as payment_date"),
+                DB::raw("convert(nvarchar, tbl_payment_detail.examination_date, 103) as examination_date"),
+                'tbl_payment_detail.id as payment_detail_id',
+                'tbl_customer.locked',
+                'tbl_payment_detail.note',
+                'tbl_payment_detail.approved',
+                'tbl_payment_detail.hospital_id',
+                'tbl_hospital.hospital_name',
+                'tbl_payment_detail.payment_type_id',
+                'tbl_payment_type.payment_type_name',
+                'tbl_payment_detail.expected_payment',
+                'tbl_payment_detail.rejected_amount'
+            )
+            ->distinct()
+            ->join('tbl_information_insurance', 'tbl_customer.id', '=', 'tbl_information_insurance.customer_id')
+            ->join('tbl_account_detail', 'tbl_customer.id', '=', 'tbl_account_detail.customer_id')
+            ->join('tbl_account', 'tbl_account_detail.account_id', '=', 'tbl_account.id')
+            ->join('tbl_account_package', 'tbl_account.account_package_id', '=', 'tbl_account_package.id')
+            ->join('tbl_contract', 'tbl_account.contract_id', '=', 'tbl_contract.id')
+            ->join('tbl_payment_detail', 'tbl_payment_detail.account_detail_id', '=', 'tbl_account_detail.id')
+            ->join('tbl_customer_group', 'tbl_customer_group.id', '=', 'tbl_customer.customer_group_id')
+            ->join('tbl_hospital', 'tbl_payment_detail.hospital_id', '=', 'tbl_hospital.id')
+            ->join('tbl_period_detail', 'tbl_contract.period_id', '=', 'tbl_period_detail.id')
+            ->join('tbl_company', 'tbl_period_detail.company_id', '=', 'tbl_company.id')
+            ->join('tbl_period', 'tbl_period_detail.period_id', '=', 'tbl_period.id')
+            ->join('tbl_payment_type', 'tbl_payment_detail.payment_type_id', '=', 'tbl_payment_type.id')
+            ->where('tbl_payment_detail.id', '=', $detailId)
+            ->first();
+
+        return $results;
+    }
+
     // KhachhangChiBH_Insert
     // Chibaohiem_insert
     public function InsuranceExpensesInsert($params)

@@ -8,6 +8,8 @@ $(document).ready(function () {
     $(document).on('click', '.btn-get-detail', function () {
         var id = $(this).data('id');
         var periodId = $('#periodSelectGeneral').val()
+        document.getElementById('formCreatePaymentInsurance').reset();
+        $('#formCreatePaymentInsurance').attr('action', '/insurance-expenses/create');
 
         $.ajax({
             url: '/insurance-expenses/detail',
@@ -17,7 +19,6 @@ $(document).ready(function () {
                 periodId: periodId
             },
             success: function (response) {
-                console.log(response);
                 $('.contract_id_hidden').val(response.customer.contract_id)
                 $('.customer_id_hidden').val(response.customer.id)
                 $('.period_id_hidden').val(response.customer.period_id)
@@ -95,6 +96,29 @@ $(document).ready(function () {
         return false;
     })
 
+    $(document).on('click', '.btn-update-insurance' , function(){
+        var id = $(this).closest('tr').data('id');
+        $.ajax({
+            url: '/ajax/insurance-expenses/detail/'+id,
+            type: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                $('#hospitalSelectGeneral').val(response.hospital_id)
+                $('.create-contract-payment_date').val(response.payment_date)
+                $('.create-contract-checkup_date').val(response.examination_date)
+                $('.create-insurance-payment_type').val(response.payment_type_id)
+                $('.create-insurance-amount_paid').val(response.amount_paid).trigger('change')
+                $('.create-insurance-expected_payment').val(response.expected_payment).trigger('change')
+                $('.create-insurance-rejected_amount').val(response.rejected_amount).trigger('change')
+                $('.create-insurance-paymennote_type').val(response.note)
+                $('#formCreatePaymentInsurance').attr('action', '/insurance-expenses/update/'+response.payment_detail_id);
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
+        });
+    });
+
     $(document).on('click', '.btn-save-payment-insurance' , function(e){
         if($('.clone-content-pay').length == 0){
             toastr.error("Chưa thêm thông tin chi bảo hiểm được. Vui lòng kiểm tra lại thông tin!");
@@ -126,11 +150,11 @@ function render_customer_payment(customerList) {
     let html = "";
     $('.table-customer-pay tbody').html("")
     $.each(customerList, function (indexInArray, valueOfElement) {
-        html += "<tr role='row' data-id='" + valueOfElement.id + "'>";
+        html += "<tr role='row' data-id='" + valueOfElement.payment_detail_id + "'>";
         html += "<td>";
         html += "<h6 class='fs-4 fw-semibold mb-0'>";
-        html += "<div class='btn-group d-flex justify-content-center'>";
-        html += "<button class='btn btn-success me-1'>";
+        html += "<div class='btn-group d-flex justify-content-center '>";
+        html += "<button class='btn btn-success me-1 btn-update-insurance'>";
         html += "<span class='icon-item-icon'>";
         html += "<img src='/img-system/system/edit_white.svg' />";
         html += "</span>";
