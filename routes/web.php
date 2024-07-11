@@ -1,39 +1,40 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\Auth\VerificationController;
-use App\Http\Controllers\Ajax\CompanyController;
-use App\Http\Controllers\Ajax\ContractController;
-use App\Http\Controllers\Ajax\AccountPackageController;
-use App\Http\Controllers\Ajax\AccountController as AccountAjax;
-use App\Http\Controllers\Ajax\PeriodController;
-use App\Http\Controllers\Ajax\CustomerGroupController;
-use App\Http\Controllers\Ajax\CustomerTypeController;
-use App\Http\Controllers\Ajax\HospitalController as HospitalAjax;
-use App\Http\Controllers\Ajax\HospitalContractController;
-use App\Http\Controllers\Ajax\UserHospitalController;
-use App\Http\Controllers\Ajax\DepartmentController as DepartmentAjax;
-use App\Http\Controllers\Ajax\SupervisorController as SupervisorAjax;
 use App\Http\Controllers\Admin\AccountController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\SystemController;
 use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DepartmentController;
-use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\DiaryController;
+use App\Http\Controllers\Admin\HospitalController;
+use App\Http\Controllers\Admin\InsuranceExpensesController;
 use App\Http\Controllers\Admin\PermissionsController;
+use App\Http\Controllers\Admin\PhysicalController;
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\RenewalController;
+use App\Http\Controllers\Admin\RevenueController;
 use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Admin\SupervisorController;
-use App\Http\Controllers\Admin\RevenueController;
-use App\Http\Controllers\Admin\PhysicalController;
-use App\Http\Controllers\Admin\HospitalController;
-use App\Http\Controllers\Admin\DiaryController;
-use App\Http\Controllers\Admin\InsuranceExpensesController;
-use App\Http\Controllers\Admin\RenewalController;
+use App\Http\Controllers\Admin\SystemController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Ajax\AccountController as AccountAjax;
+use App\Http\Controllers\Ajax\AccountPackageController;
+use App\Http\Controllers\Ajax\CompanyController;
+use App\Http\Controllers\Ajax\ContractController;
+use App\Http\Controllers\Ajax\CustomerGroupController;
+use App\Http\Controllers\Ajax\CustomerTypeController;
+use App\Http\Controllers\Ajax\DepartmentController as DepartmentAjax;
+use App\Http\Controllers\Ajax\HospitalContractController;
+use App\Http\Controllers\Ajax\HospitalController as HospitalAjax;
 use App\Http\Controllers\Ajax\InsuranceExpensesController as AjaxInsuranceExpensesController;
+use App\Http\Controllers\Ajax\PeriodController;
+use App\Http\Controllers\Ajax\SupervisorController as SupervisorAjax;
+use App\Http\Controllers\Ajax\UserHospitalController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\ExportController;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,7 +44,7 @@ use App\Http\Controllers\ExportController;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 // Route::group(['middleware' => ['is_user_admin', 'is_user_customer', 'is_user_employee', 'is_user_hospital']], function () {
 // Routes Logout
@@ -175,6 +176,8 @@ Route::group(['middleware' => ['check.any.guard:isUserAdmin']], function () {
     Route::get('/physical', [PhysicalController::class, 'index'])->name('physical.index');
     Route::get('/physical-detail', [PhysicalController::class, 'detail'])->name('physical.detail');
     Route::get('/physical-periodic', [PhysicalController::class, 'periodic'])->name('physical.periodic');
+    Route::get('/health-report',
+        [PhysicalController::class, 'healthReport'])->name('healthReport.index');
 
     // Routes Department
     Route::get('/department', [DepartmentController::class, 'index'])->name('department.index');
@@ -184,7 +187,6 @@ Route::group(['middleware' => ['check.any.guard:isUserAdmin']], function () {
 
     // Routes Hospital
     Route::get('/hospital', [HospitalController::class, 'index'])->name('hospital.index');
-    Route::get('/health-report', [HospitalController::class, 'healthReport'])->name('healthReport.index');
 
     // Routes Revenue
     Route::get('/revenue/general-insurance', [RevenueController::class, 'generalInsurance'])->name('revenue.generalInsurance');
@@ -219,7 +221,6 @@ Route::group(['middleware' => ['check.any.guard:isUserHospital']], function () {
     Route::post('/contact', [ContactController::class, 'sendEmail'])->name('contact.form');
 });
 Route::get('/management', [UserController::class, 'management'])->name('user.management');
-
 
 // Route for login page
 Route::get('/', [LoginController::class, 'showLoginForm']);
