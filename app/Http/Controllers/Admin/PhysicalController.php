@@ -34,14 +34,30 @@ class PhysicalController extends Controller
     public function index(Request $request)
     {
         $params = $request->query();
+        // Lấy danh sách công ty
+        $companyList = $this->companyService->getCompanyActiveSortByOrder();
+
+        // Lấy danh sách niên hạn
+        if (!isset($params['company'])) {
+            $params['company'] = $companyList->first()->id;
+        }
+        $periodList = $this->periodService->getPeriodActiveByCompany($params['company']);
+        // Lấy danh sách hợp đồng
+        if (!isset($params['period'])) {
+            $params['period'] = $periodList->first()->id;
+        }
+        $contractList = $this->contractService->getContractByPeriod($params['period']);
+
+        //Khoảng thời gian kiểm tra
         if (!isset($params['time_range'])) {
             $params['time_range'] = date('01/01/Y') . ' - ' . date('d/m/Y');
         }
-        $companyList = $this->companyService->getCompanyActiveSortByOrder();
-        $periodList = $this->periodService->getPeriodActiveByCompany($companyList->first()->id);
-        $contractList = $this->contractService->getContractByPeriod($periodList->first()->id);
+        if (!isset($params['date_added'])) {
+            $physicalList = $this->physicalService->getPhysical($companyList->first()->id, $params['time_range'], $params);
+        } else {
+            $physicalList = $this->physicalService->getPhysicalDateAdded($companyList->first()->id, $params['time_range'], $params);
+        }
 
-        $physicalList = $this->physicalService->getPhysical($companyList->first()->id, $params['time_range'], $params);
         return view('admin.physical.index', compact(['companyList', 'periodList', 'contractList', 'physicalList']));
     }
     public function detail()
