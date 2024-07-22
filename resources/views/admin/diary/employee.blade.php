@@ -36,18 +36,13 @@
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade active show" id="diary-tab1" role="tabpanel" aria-labelledby="diary-tab1" tabindex="0">
-                           
                             <form action="">
                                 <div class="row mb-2">
                                     <div class="col-sm-12 col-md-6 col-xl-3">
-                                        <div class="form-field">
-                                            <label for="">Phòng ban</label>
-                                            <select name="company" class="form-select" id="companySelect">
-                                                <option value="20067" selected="selected">Phòng bảo vệ</option>
-                                                <option value="20058">Phòng IT</option>
-                                                <option value="20059">Phòng kế toán</option>
-                                            </select>
-                                        </div>
+                                        @include('common/select-department', [
+                                            'departmentId' => (isset($_GET['department']) ? $_GET['department'] : 0),
+                                            'departmentList' => $departmentList
+                                        ])
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-xl-3">
                                         <div class="form-group">
@@ -58,12 +53,10 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-xl-3">
-                                        <div class="form-field">
-                                            <label for="">Tên tài khoản</label>
-                                            <select name="contract" class="form-select" id="contractSelect">
-                                                <option value="10161" selected="selected">hviet</option>
-                                            </select>
-                                        </div>
+                                        @include('common/select-user', [
+                                            'userId' => (isset($_GET['user']) ? $_GET['user'] : 0),
+                                            'userList' => $userListByDepartment
+                                        ])
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-xl-3" style="display: flex; flex-direction: column-reverse; width: 125px;">
                                         <div class="btn-group">

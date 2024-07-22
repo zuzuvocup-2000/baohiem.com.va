@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Department;
 use App\Services\DiaryService;
 use App\Services\HospitalService;
 use App\Services\UserHospitalService;
@@ -10,6 +11,7 @@ use App\Services\CustomerService;
 use App\Services\CompanyService;
 use App\Services\ContractService;
 use App\Services\PeriodService;
+use App\Services\DepartmentService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -22,6 +24,7 @@ class DiaryController extends Controller
     protected $companyService;
     protected $periodService;
     protected $contractService;
+    protected $departmentService;
 
     public function __construct(
         HospitalService $hospitalService,
@@ -30,7 +33,7 @@ class DiaryController extends Controller
         CompanyService $companyService, 
         PeriodService $periodService, 
         ContractService $contractService,
-        
+        DepartmentService $departmentService,
     ) {
         $this->hospitalService = $hospitalService;
         $this->diaryService = $diaryService;
@@ -38,12 +41,15 @@ class DiaryController extends Controller
         $this->periodService = $periodService;
         $this->contractService = $contractService;
         $this->companyService = $companyService;
+        $this->departmentService = $departmentService;
     }
   
     public function employeeDiary(){
         $employeeDiaryList = $this->diaryService->getEmployeeDiary();
+        $departmentList = $this->departmentService->getActiveDepartments();
+        $userListByDepartment = $this->departmentService->getUserByDepartments($departmentList->first()->id);
         
-        return view('admin.diary.employee', compact(['employeeDiaryList']));
+        return view('admin.diary.employee', compact(['employeeDiaryList', 'departmentList', 'userListByDepartment']));
     }
   
     public function hospitalDiary(){
