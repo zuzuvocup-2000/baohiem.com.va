@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request as HttpRequest;
-
 class LoginController extends Controller
 {
     protected $redirectTo = '/home';
@@ -28,10 +27,17 @@ class LoginController extends Controller
             if (Auth::guard($guard)->attempt($credentials, $remember)) {
                 switch ($guard) {
                     case 'isUserAdmin':
+                        if (Auth::guard('isUserAdmin')->check()) {
+                            $this->saveLog(Auth::user()->id, 'Đăng nhập thành công');
+                        }
                         return redirect('/dashboard')->with('success', 'Đăng nhập thành công!');
                     case 'isUserStaff':
                         return redirect('/dashboard')->with('success', 'Đăng nhập thành công!');
                     case 'isUserHospital':
+                        if (Auth::guard('isUserHospital')->check()) {
+                            $userHospital = Auth::guard('isUserHospital')->user();
+                            $this->saveLogHospital($userHospital->id, 'Đăng nhập thành công');
+                        }
                         return redirect('/dashboard')->with('success', 'Đăng nhập thành công!');
                     case 'isUserCustomer':
                         return redirect('/dashboard')->with('success', 'Đăng nhập thành công!');
@@ -47,13 +53,17 @@ class LoginController extends Controller
     }
 
     public function logout(HttpRequest $request) : RedirectResponse
-{
-    if (Auth::check()) {
-        $this->saveLog(Auth::user()->id, 'Đăng xuất thành công');
+    {
+        if (Auth::guard('isUserHospital')->check()) {
+            $userHospital = Auth::guard('isUserHospital')->user();
+            $this->saveLogHospital($userHospital->id, 'Đăng xuất thành công');
+        }
+        if (Auth::guard('isUserAdmin')->check()) {
+            $this->saveLog(Auth::user()->id, 'Đăng xuất thành công');
+        }
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+        return redirect('/login');
     }
-    return redirect('/login');
-}
 }

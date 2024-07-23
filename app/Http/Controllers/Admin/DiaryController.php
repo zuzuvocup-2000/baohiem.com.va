@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Department;
 use App\Services\DiaryService;
 use App\Services\HospitalService;
 use App\Services\UserHospitalService;
@@ -10,6 +11,7 @@ use App\Services\CustomerService;
 use App\Services\CompanyService;
 use App\Services\ContractService;
 use App\Services\PeriodService;
+use App\Services\DepartmentService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -22,6 +24,7 @@ class DiaryController extends Controller
     protected $companyService;
     protected $periodService;
     protected $contractService;
+    protected $departmentService;
 
     public function __construct(
         HospitalService $hospitalService,
@@ -30,7 +33,7 @@ class DiaryController extends Controller
         CompanyService $companyService, 
         PeriodService $periodService, 
         ContractService $contractService,
-        
+        DepartmentService $departmentService,
     ) {
         $this->hospitalService = $hospitalService;
         $this->diaryService = $diaryService;
@@ -38,30 +41,22 @@ class DiaryController extends Controller
         $this->periodService = $periodService;
         $this->contractService = $contractService;
         $this->companyService = $companyService;
-    }
-  
-    public function index()
-    {
-        $activities = DB::table('tbl_user')
-        ->select('tbl_log_user.action', 'tbl_log_user.date_log', 'tbl_user.role_id', 'tbl_user.username', 'tbl_employee.employee_name', 'tbl_user.employee_id', 'tbl_log_user.id')
-        ->join('tbl_employee', 'tbl_user.employee_id', '=', 'tbl_employee.id')
-        ->join('tbl_log_user', 'tbl_user.id', '=', 'tbl_log_user.user_id')
-        ->where('tbl_user.active', '=', STATUS_ACTIVE)
-        ->orderBy('tbl_log_user.date_log', 'desc')
-        ->paginate(20);
-        return view('admin.diary.index', compact(['activities']));
+        $this->departmentService = $departmentService;
     }
   
     public function employeeDiary(){
-        $hospitalList = $this->hospitalService->getHospital();
         $employeeDiaryList = $this->diaryService->getEmployeeDiary();
+        $departmentList = $this->departmentService->getActiveDepartments();
+        $userListByDepartment = $this->departmentService->getUserByDepartments($departmentList->first()->id);
         
-        return view('admin.diary.employee', compact(['employeeDiaryList', 'hospitalList']));
+        return view('admin.diary.employee', compact(['employeeDiaryList', 'departmentList', 'userListByDepartment']));
     }
   
     public function hospitalDiary(){
+        $hospitalList = $this->hospitalService->getHospital();
+
         $hospitalDiaryList = $this->diaryService->getHospitalDiary();
-        return view('admin.diary.hospital', compact(['hospitalDiaryList']));
+        return view('admin.diary.hospital', compact(['hospitalDiaryList', 'hospitalList']));
     }
   
     public function customerDiary(Request $request){

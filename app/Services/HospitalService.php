@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Customer;
 use App\Models\Hospital;
+use App\Models\UserHospital;
 use App\Models\ContractHospital;
 
 /**
@@ -54,5 +55,11 @@ class HospitalService
         ->whereBetween('tbl_health_checkup_information.checkup_date', [$time['from'], $time['to']])
         ->first();
     }
-    
+    public function getUserHospitalByHospital($id)
+{
+    return UserHospital::select('tbl_user_hospital.id', 'tbl_user_hospital.employee_name', 'tbl_user_hospital.username', 'tbl_user_hospital.password', 'tbl_hospital.id')
+        ->join('tbl_hospital', 'tbl_user_hospital.hospital_id', '=', 'tbl_hospital.id')
+        ->where(['tbl_user_hospital.active' => STATUS_ACTIVE, 'tbl_hospital.id' => $id])
+        ->get();
+}
 }

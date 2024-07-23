@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\LogUser;
+use App\Models\LogUserBenhVien;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -35,6 +36,20 @@ class Controller extends BaseController
                 $insert['payment_detail_id'] = $payment_detail_id;
             }
             return LogUser::create($insert);
+        }
+    }
+    public function saveLogHospital($MAUSER_BENHVIEN, $hanhdong = '')
+    {
+        if (Auth::guard('isUserHospital')->check()) {
+            $insert = [
+                'hanhdong' => $hanhdong,
+                'MAUSER_BENHVIEN' => $MAUSER_BENHVIEN,
+                'active' => STATUS_ACTIVE,
+                'logdate' => now(),
+                'localIP' => Request::ip(),
+                'Computername' => gethostname(),
+            ];
+            return LogUserBenhVien::create($insert);
         }
     }
 }

@@ -39,35 +39,26 @@
                             <form action="">
                                 <div class="row mb-2">
                                     <div class="col-sm-12 col-md-6 col-xl-3">
-                                        <div class="form-field">
-                                            <label for="" class="mb-1">Tên bệnh viện</label>
-                                            <select class="form-select mr-sm-2 {{ isset($class) ? $class : '' }}"
-                                                id="{{ isset($id) ? $id : 'hospitalSelectGeneral' }}" name="{{ isset($name) ? $name : 'hospital' }}">
-                                                @foreach ($hospitalList as $hospital)
-                                                    <option value="{{ $hospital->id }}" >
-                                                        {{ $hospital->hospital_name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                        @include('common/select-department', [
+                                            'departmentId' => (isset($_GET['department']) ? $_GET['department'] : 0),
+                                            'departmentList' => $departmentList
+                                        ])
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-xl-3">
-                                        <div class="form-group ">
+                                        <div class="form-group">
                                             <label for="">Ngày:</label>
                                             <div class="input-group">
-                                                <input type="date" class="form-control" value="2018-05-13">
+                                                <input type="date" class="form-control" value="2018-05-13" />
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-xl-3">
-                                        <div class="form-field">
-                                            <label for="">Tên tài khoản</label>
-                                            <select name="contract" class="form-select" id="contractSelect">
-                                                <option value="10161" selected="selected">hviet</option>
-                                            </select>
-                                        </div>
+                                        @include('common/select-user', [
+                                            'userId' => (isset($_GET['user']) ? $_GET['user'] : 0),
+                                            'userList' => $userListByDepartment
+                                        ])
                                     </div>
-                                    <div class="col-sm-12 col-md-6 col-xl-3" style="display: flex; flex-direction: column-reverse;width: 125px;">
+                                    <div class="col-sm-12 col-md-6 col-xl-3" style="display: flex; flex-direction: column-reverse; width: 125px;">
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-danger"> 
                                                 <span class="icon-item-icon">
@@ -78,7 +69,6 @@
                                     </div>
                                 </div>
                             </form>
-                            
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="system-table table-responsive">
