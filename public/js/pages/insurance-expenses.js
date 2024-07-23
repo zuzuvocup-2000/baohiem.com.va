@@ -49,11 +49,16 @@ $(document).ready(function () {
 
     $('.btn-add-content-pay').click(function () {
         var currentRow = $(this).closest('tr');
-        var paymentTypeId = currentRow.find('.create-insurance-payment_type').val();
-        var amount_paid = currentRow.find('.create-insurance-amount_paid').val();
-        var expected_payment = currentRow.find('.create-insurance-expected_payment').val();
-        var rejected_amount = currentRow.find('.create-insurance-rejected_amount').val();
-        var note = currentRow.find('.create-insurance-note').val();
+        // var paymentTypeId = currentRow.find('.create-insurance-payment_type').val();
+        // var amount_paid = currentRow.find('.create-insurance-amount_paid').val();
+        // var expected_payment = currentRow.find('.create-insurance-expected_payment').val();
+        // var rejected_amount = currentRow.find('.create-insurance-rejected_amount').val();
+        // var note = currentRow.find('.create-insurance-note').val();
+        var paymentTypeId = 0;
+        var amount_paid = 0;
+        var expected_payment = 0;
+        var rejected_amount = 0;
+        var note = '';
         var newRow = `
             <tr class="clone-content-pay">
                 <td>
@@ -63,10 +68,10 @@ $(document).ready(function () {
                 </td>
                 <td>
                     <select class="form-select" name="payment_type_id[]">`;
-                        paymentTypeList.forEach(element => {
-                            newRow+=`<option value="${element.id}" ${paymentTypeId == element.id ? "selected" : ""}>${element.payment_type_name}</option>`;
-                        });
-            newRow+=`</select>
+        paymentTypeList.forEach(element => {
+            newRow += `<option value="${element.id}" ${paymentTypeId == element.id ? "selected" : ""}>${element.payment_type_name}</option>`;
+        });
+        newRow += `</select>
                 </td>
                 <td class="text-center">
                     <input type="text" class="form-control int" name="amount_paid[]" value="${amount_paid}">
@@ -91,36 +96,37 @@ $(document).ready(function () {
         return false;
     });
 
-    $(document).on('click', '.delete-content-pay' , function(){
+    $(document).on('click', '.delete-content-pay', function () {
         $(this).closest('tr').remove()
         return false;
     })
 
-    $(document).on('click', '.btn-update-insurance' , function(){
+    $(document).on('click', '.btn-update-insurance', function () {
         var id = $(this).closest('tr').data('id');
         $.ajax({
-            url: '/ajax/insurance-expenses/detail/'+id,
+            url: '/ajax/insurance-expenses/detail/' + id,
             type: 'GET',
             dataType: 'json',
-            success: function(response) {
+            success: function (response) {
                 $('#hospitalSelectGeneral').val(response.hospital_id)
                 $('.create-contract-payment_date').val(response.payment_date)
                 $('.create-contract-checkup_date').val(response.examination_date)
                 $('.create-insurance-payment_type').val(response.payment_type_id)
+                $('.create-insurance-note').val(response.note)
                 $('.create-insurance-amount_paid').val(response.amount_paid).trigger('change')
                 $('.create-insurance-expected_payment').val(response.expected_payment).trigger('change')
                 $('.create-insurance-rejected_amount').val(response.rejected_amount).trigger('change')
                 $('.create-insurance-paymennote_type').val(response.note)
-                $('#formCreatePaymentInsurance').attr('action', '/insurance-expenses/update/'+response.payment_detail_id);
+                $('#formCreatePaymentInsurance').attr('action', '/insurance-expenses/update/' + response.payment_detail_id);
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 console.error(error);
             }
         });
     });
 
-    $(document).on('click', '.btn-save-payment-insurance' , function(e){
-        if($('.clone-content-pay').length == 0){
+    $(document).on('click', '.btn-save-payment-insurance', function (e) {
+        if ($('.clone-content-pay').length == 0) {
             toastr.error("Chưa thêm thông tin chi bảo hiểm được. Vui lòng kiểm tra lại thông tin!");
             return false;
         }
@@ -129,15 +135,15 @@ $(document).ready(function () {
             url: '/insurance-expenses/check-period',
             type: 'GET',
             data: {
-                'payment_date' : $('.create-contract-payment_date').val(),
+                'payment_date': $('.create-contract-payment_date').val(),
                 'period_id': $('.period_id_hidden').val(),
                 'contract_id': $('.contract_id_hidden').val(),
                 'customer_id': $('.customer_id_hidden').val()
             },
-            success: function(response) {
-                if(!response.status){
+            success: function (response) {
+                if (!response.status) {
                     toastr.error(response.message);
-                }else{
+                } else {
                     $('#formCreatePaymentInsurance').submit()
                 }
             }
