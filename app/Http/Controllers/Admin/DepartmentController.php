@@ -20,7 +20,7 @@ class DepartmentController extends Controller
     public function index()
     {
         $departmentList = $this->departmentService->getActiveDepartments();
-        return view('admin.department.index' , compact(['departmentList', 'userListByDepartment']));
+        return view('admin.department.index' , compact(['departmentList']));
     }
 
     public function store(Request $request)

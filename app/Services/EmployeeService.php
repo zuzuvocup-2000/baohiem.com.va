@@ -16,4 +16,8 @@ class EmployeeService
         $formattedEmployeeList = $employeeList->pluck('employee_name', 'id')->toArray();
         return $formattedEmployeeList;
     }
+
+    public function getEmployeeList($departmentId = 0, $request){
+
+    }
 }
