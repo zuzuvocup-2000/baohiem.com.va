@@ -7,66 +7,41 @@
     <div class="widget-content searchable-container list periodic">
         <div class="card card-body">
             <h5>Cập nhật tài khoản khách hàng</h5>
-            <form action="">
+            <form action="" class="form-contact">
                 <div class="row mb-3">
-                    <div class="col-xs-12 col-sm-12 col-md-5 col-xl-4">
-                        <div class="form-group d-flex align-items-center">
-                            <label class="d-inline-block" style="width: 100px;" for="companySelect">Tên công ty</label>
-                            <select class="form-select company-search mr-sm-2" id="companySelect" name="companySelect"
-                                style="width: calc(100% - 100px);">
-                                @foreach ($companyList as $company)
-                                    <option value="{{ $company->id }}"
-                                        {{ old('companySelect', $companyList[0]->id) == $company->id ? 'selected' : '' }}>
-                                        {{ $company->company_name }}
-                                    </option>
-                                @endforeach
-                            </select>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-xl-3 mb-3">
+                        @include('common/select-company', [
+                            'companyId' => isset($_GET['company']) ? $_GET['company'] : 0,
+                            'companyList' => $companyList,
+                        ])
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-xl-3 mb-3">
+                        @include('common/select-period', [
+                            'periodId' => isset($_GET['period']) ? $_GET['period'] : 0,
+                            'periodList' => $periodList,
+                        ])
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-xl-3 mb-3">
+                        @include('common/select-contract', [
+                            'contractId' => isset($_GET['contract']) ? $_GET['contract'] : 0,
+                            'contractList' => $contractList,
+                        ])
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-xl-3 mb-3">
+                        <div class="form-field">
+                            <label for="" class="mb-1">Tìm kiếm</label>
+                            <input type="search" name="keyword" class="form-control form-search w-100" value=""
+                                placeholder="Tìm kiếm...">
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-5 col-xl-4">
-                        <div class="form-group d-flex align-items-center">
-                            <label class="d-inline-block" style="width: 100px;" for="companySelect">Hợp đồng</label>
-                            <select class="form-select contract-search mr-sm-2" id="contractSelect" name="contractSelect"
-                                style="width: calc(100% - 100px);">
-                                @foreach ($contractList as $contract)
-                                    <option value="{{ $contract->id }}"
-                                        {{ old('contractSelect', $contractList[0]->id) == $contract->id ? 'selected' : '' }}>
-                                        {{ $contract->contract_name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-md-2">
-                        <button type="button" class="btn btn-primary w-100">Tìm kiếm</button>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-xs-12 col-sm-12 col-md-5 col-xl-4">
-                        <div class="form-group d-flex align-items-center">
-                            <label class="d-inline-block" style="width: 100px;" for="periodSelect">Niên hạn</label>
-                            <select class="form-select period-search mr-sm-2" id="periodSelect" name="periodSelect"
-                                style="width: calc(100% - 100px);">
-                                @foreach ($periodList as $period)
-                                    <option value="{{ $period->id }}"
-                                        {{ old('periodSelect', $periodList[0]->id) == $period->id ? 'selected' : '' }}>
-                                        {{ $period->period_name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-5 col-xl-4">
-                        <div class="form-group d-flex align-items-center form-search-absolute">
-                            <label class="d-inline-block" style="width: 100px;" for="periodSelect">Niên hạn</label>
-                            <input type="search" name="keyword" class="form-control form-search" value=""
-                                placeholder="Tìm kiếm..." style="width: calc(100% - 100px);">
-                            <button class="btn-primary btn btn-search">Tìm kiếm</button>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-2 col-xl-4">
+                    <div class="col-xs-12 col-md-2 col-md-6 col-xl-3 mb-3">
                         <div class="btn-input" style="text-align: right;">
-                            <button type="button" class="btn btn-warning w-100">Load danh sách</button>
+                            <button type="submit" class="btn btn-primary w-100" name="submit" value="search">Tìm kiếm</button>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-xl-3 mb-3">
+                        <div class="btn-input" style="text-align: right;">
+                            <button type="submit" class="btn btn-warning w-100" name="submit" value="load">Load danh sách</button>
                         </div>
                     </div>
                 </div>
@@ -157,8 +132,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="physical-container">
-                            <form action="" class="form-physical-detail" method="POST"
-                                enctype="multipart/form-data>">
+                            <form action="" class="form-physical-detail" method="POST" enctype="multipart/form-data>">
                                 @csrf
                                 <div class="card card-body note-has-grid">
                                     <div class="single-note-item mb-3">
