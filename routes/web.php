@@ -225,10 +225,10 @@ Route::group(['middleware' => ['check.any.guard:isUserAdmin']], function () {
 Route::group(['middleware' => ['check.any.guard:isUserAdmin']], function () {
     Route::get('/employee/list', [EmployeeController::class, 'index'])->name('employee.index');
     Route::get('/employee/create', [EmployeeController::class, 'create'])->name('employee.create');
-    Route::get('/employee/update', [EmployeeController::class, 'delete'])->name('employee.delete');
-    Route::post('/employee/create', [EmployeeController::class, 'create'])->name('employee.create');
-    Route::put('/employee/update', [EmployeeController::class, 'update'])->name('employee.update');
-    Route::delete('/employee/delete', [EmployeeController::class, 'delete'])->name('employee.delete');
+    Route::post('/employee/create', [EmployeeController::class, 'store'])->name('employee.store');
+    Route::get('/employee/edit/{id}', [EmployeeController::class, 'edit'])->name('employee.edit');
+    Route::post('/employee/edit/{id}', [EmployeeController::class, 'update'])->name('employee.update');  
+    Route::delete('/employee/delete/{id}', [EmployeeController::class, 'delete'])->name('employee.delete');
 });
 // chỉ tài khoản khách hàng
 Route::group(['middleware' => ['check.any.guard:isUserCustomer']], function () {

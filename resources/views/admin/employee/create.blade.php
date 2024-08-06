@@ -1,130 +1,143 @@
 @extends('layouts.master')
 
-@section('title', __('accounts.add_account'))
+@section('title', __('employee.add_account'))
 
 @section('style')
     <link rel="stylesheet" href="{{ asset('/assets/libs/select2/dist/css/select2.min.css') }}">
 @endsection
 
 @section('content')
-    @include('partial.breadcrumb', ['breadcrumbTitle' => __('accounts.add_account')])
+    @include('partial.breadcrumb', ['breadcrumbTitle' => __('employee.add_account')])
     <div class="card">
         <div class="row">
             <div class="col-12">
                 <div class="card w-100 position-relative overflow-hidden mb-0">
                     <div class="card-body p-4">
-                        <h5 class="card-title fw-semibold">{{ __('accounts.add_account') }}</h5>
-                        <p class="card-subtitle mb-4">{{ __('accounts.change_info') }}</p>
-                        <form action="{{ route('user.store') }}" method="post">
+                        <h5 class="card-title fw-semibold">{{ __('employee.add_account') }}</h5>
+                        <p class="card-subtitle mb-4">{{ __('employee.change_info') }}</p>
+                        <form action="{{ route('employee.store') }}" method="post">
                             @csrf
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="mb-3">
-                                        <label class="form-label">
-                                            {{ __('accounts.employee') }}
+                                        <label for="departmentInput" class="form-label">
+                                            {{ __('employee.account') }}
                                             <span class="text-danger"> *</span>
                                         </label>
-                                        <div class="{{ $errors->has('employee_id') ? 'is-invalid' : '' }}">
-                                            <select class="select2" name="employee_id">
-                                                <option selected="" value="">{{ __('accounts.employee_select') }}
-                                                </option>
-                                                @foreach ($employeeList as $employeeCode => $tennhanvien)
-                                                    <option value="{{ $employeeCode }}"
-                                                        {{ old('employee_id') == $employeeCode ? 'selected' : '' }}>
-                                                        {{ $tennhanvien }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            @if ($errors->has('employee_id'))
-                                                <div class="invalid-feedback">
-                                                    {{ $errors->first('employee_id') }}
-                                                </div>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">
-                                            {{ __('accounts.role') }}
-                                            <span class="text-danger"> *</span>
-                                        </label>
-                                        <div class="{{ $errors->has('role_id') ? 'is-invalid' : '' }}">
-                                            <select class="select2" name="role_id">
-                                                <option value="">-- Chọn quyền --</option>
-                                                @foreach ($roles as $role)
-                                                    <option {{ old('role_id') == $role->id ? 'selected' : '' }}
-                                                        value="{{ $role->id }}">
-                                                        {{ $role->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            @if ($errors->has('role_id'))
-                                                <div class="invalid-feedback">
-                                                    {{ $errors->first('role_id') }}
-                                                </div>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="mb-3">
-                                        <label for="ussernameInput" class="form-label">
-                                            {{ __('accounts.account') }}
-                                            <span class="text-danger"> *</span>
-                                        </label>
-                                        <input type="text" id="ussernameInput" name="username"
-                                            class="form-control  username-user {{ $errors->has('username') ? 'is-invalid' : '' }}"
-                                            value="{{ old('username') }}" maxlength="255"
-                                            placeholder="{{ __('login.username') }}" />
-                                        @if ($errors->has('username'))
+                                        <input type="text" id="departmentInput" name="employee_name"
+                                            class="form-control  employee_name-user {{ $errors->has('employee_name') ? 'is-invalid' : '' }}"
+                                            value="{{ old('employee_name') }}" maxlength="255"
+                                            placeholder="{{ __('employee.account') }}" />
+                                        @if ($errors->has('employee_name'))
                                             <div class="invalid-feedback">
-                                                {{ $errors->first('username') }}
+                                                {{ $errors->first('employee_name') }}
                                             </div>
                                         @endif
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="mb-3">
-                                        <label for="passwordInput" class="form-label">
-                                            {{ __('accounts.password') }}
+                                        <label class="form-label">
+                                            {{ __('employee.department') }}
                                             <span class="text-danger"> *</span>
                                         </label>
-                                        <input type="password" maxlength="255" name="password" id="passwordInput"
+                                        <div class="{{ $errors->has('department_id') ? 'is-invalid' : '' }}">
+                                            <select class="select2" name="department_id">
+                                                <option value="">{{ __('employee.department_select') }}</option>
+                                                @foreach ($departmentList as $department)
+                                                    <option
+                                                        value="{{ $department->id }}">
+                                                        {{ $department->department_name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @if ($errors->has('department_id'))
+                                                <div class="invalid-feedback">
+                                                    {{ $errors->first('department_id') }}
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label for="addressInput" class="form-label">
+                                            {{ __('employee.address') }}
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <input type="text" id="addressInput" name="address"
+                                            class="form-control  address-user {{ $errors->has('address') ? 'is-invalid' : '' }}"
+                                            value="{{ old('address') }}" maxlength="255"
+                                            placeholder="{{ __('employee.address') }}" />
+                                        @if ($errors->has('address'))
+                                            <div class="invalid-feedback">
+                                                {{ $errors->first('address') }}
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label for="emailInput" class="form-label">
+                                            {{ __('employee.email') }}
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <input type="email" name="email" id="emailInput"
                                             autocomplete="off"
-                                            class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }} password-user"
-                                            placeholder="{{ __('login.password') }}" />
-                                        @if ($errors->has('password'))
+                                            class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }} email-user"
+                                            placeholder="{{ __('employee.email') }}" />
+                                        @if ($errors->has('email'))
                                             <div class="invalid-feedback">
-                                                {{ $errors->first('password') }}
+                                                {{ $errors->first('email') }}
                                             </div>
                                         @endif
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label for="phoneInput" class="form-label">
+                                            {{ __('employee.phone') }}
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <input type="text" id="phoneInput" name="phone_number"
+                                            class="form-control  phone-user {{ $errors->has('phone_number') ? 'is-invalid' : '' }}"
+                                            value="{{ old('phone_number') }}"
+                                            placeholder="{{ __('employee.phone') }}" />
+                                        @if ($errors->has('phone_number'))
+                                            <div class="invalid-feedback">
+                                                {{ $errors->first('phone_number') }}
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">
+                                            {{ __('employee.position') }}
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="{{ $errors->has('position_id') ? 'is-invalid' : '' }}">
+                                            <select class="select2" name="position_id">
+                                                <option value="">{{ __('employee.employee_select') }}</option>
+                                                @foreach ($positionList as $position)
+                                                    <option
+                                                        value="{{ $position->id }}">
+                                                        {{ $position->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @if ($errors->has('position_id'))
+                                                <div class="invalid-feedback">
+                                                    {{ $errors->first('position_id') }}
+                                                </div>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
-                                    <div class="d-none">
-                                        <div class="form-check-inline">
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" class="custom-control-input" id="activeUser"
-                                                    name="active" value="{{ STATUS_ACTIVE }}"
-                                                    {{ old('active', STATUS_ACTIVE) == STATUS_ACTIVE ? 'checked' : '' }}>
-                                                <label class="custom-control-label"
-                                                    for="activeUser">{{ __('accounts.active') }}</label>
-                                            </div>
-                                        </div>
-                                        <div class="form-check-inline">
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" class="custom-control-input" id="inactiveUser"
-                                                    name="active" value="{{ STATUS_INACTIVE }}"
-                                                    {{ old('active', STATUS_ACTIVE) == STATUS_INACTIVE ? 'checked' : '' }}>
-                                                <label class="custom-control-label"
-                                                    for="inactiveUser">{{ __('accounts.inactive') }}</label>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div class="text-end mt-2">
                                         <button class="btn btn-primary"
-                                            type="submit">{{ __('accounts.add_new') }}</button>
+                                            type="submit">{{ __('employee.add_new') }}</button>
                                     </div>
                                 </div>
                             </div>
