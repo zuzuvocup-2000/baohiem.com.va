@@ -21,6 +21,18 @@ return [
             'password_max' => 'Mật khẩu không được vượt quá :max ký tự.',
             'password_min' => 'Mật khẩu phải chứa ít nhất :min ký tự.',
         ],
+        'employee' => [
+            'department_id_required' => 'Vui lòng chọn phòng ban.',
+            'employee_name_required' => 'Vui lòng nhập tên nhân viên.',
+            'address_required' => 'Vui lòng nhập địa chỉ',
+            'phone_number_required' => 'Vui lòng nhập số điện thoại',
+            'email_required' => 'Vui lòng nhập địa chỉ email.',
+            'email_regex' => 'Email không đúng định dạng',
+            'email_string' => 'Email phải là một chuỗi.',
+            'email_max' => 'Email chỉ được tối đa :max kí tự.',
+            'email_not_regex' => 'Định dạng email không hợp lệ',
+            'position_id_required' => 'Vui lòng chọn vị trí chức vụ.',
+        ],
         'email' => [
             'required' => 'Trường email là bắt buộc.',
             'string' => 'Email phải là một chuỗi.',
