@@ -153,12 +153,18 @@ $(document).ready(function () {
 
     $('.create-insurance-payment_type').on('change', function () {
         var selectedValue = $(this).val();
-        if (selectedValue == 3) { 
+        if (selectedValue == 3) {
             $('.vaccination-container').show();
         } else {
             $('.vaccination-container').hide();
         }
     });
+
+    if ($(".table-customer-pay.dataTable").length == 0) {
+        $(".table-customer-pay").DataTable({
+            "bLengthChange": false
+        });
+    }
 });
 
 function render_customer_payment(customerList) {

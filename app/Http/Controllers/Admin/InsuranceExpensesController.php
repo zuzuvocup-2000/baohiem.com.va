@@ -51,14 +51,25 @@ class InsuranceExpensesController extends Controller
         return view('admin.insurance-expenses.index', array_merge($data, compact(['accountList', 'hospitalList', 'paymentTypeList'])));
     }
 
+    public function detail(Request $request)
+    {
+        $params = $request->query();
+        $customer = $this->customerService->getCustomerByCustomerId($params['id'], $params['periodId']);
+        $customerPay = $this->customerService->getListCustomersPayForInsuranceByCustomerId($params['id']);
+        $amountSpent = $this->customerService->getMoneyAmountSpent($params['id'], $params['periodId']);
+        $paymentTypeList = $this->paymentTypeService->getPaymentTypeList();
+        $hospitalList = $this->hospitalService->getHospital();
+        return view('admin.insurance-expenses.detail', compact(['customer', 'customerPay', 'amountSpent', 'hospitalList', 'paymentTypeList']));
+    }
+
     public function create(Request $request)
     {
         $params = $request->post();
         $check = $this->insuranceExpensesService->InsuranceExpensesInsert($params);
-        if($check){
+        if ($check) {
             $this->saveLog(Auth::user()->id, 'Thêm chi trả thành công.');
             return redirect()->back()->with('success', 'Thêm chi trả thành công.');
-        }else{
+        } else {
             $this->saveLog(Auth::user()->id, 'Thêm chi trả thất bại.');
             return redirect()->back()->with('error', 'Thêm chi trả thất bại.');
         }
