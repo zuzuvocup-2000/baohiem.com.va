@@ -127,7 +127,7 @@ class PhysicalService
         return $results;
     }
 
-    // Khamsuckhoedinhky.aspx  btn_timkiem_Click - KhachhangTKBaohiem_FindTheosothe_list - KhachhangTKBaohiem_FindKH_TheotenKH
+    // Khamsuckhoedinhky.aspx btn_timkiem_Click - KhachhangTKBaohiem_FindTheosothe_list - KhachhangTKBaohiem_FindKH_TheotenKH
     // load_taikhoanKHtheosothe
     public function loadCustomerAccountByCardNumber($company_id, $period_id)
     {
@@ -149,7 +149,7 @@ class PhysicalService
                     ->orWhereRaw('LTRIM(RTRIM(tbl_information_insurance.old_card_number)) LIKE LTRIM(RTRIM(?))', [$period_id]);
             })
             ->where('tbl_period_detail.period_id', $company_id)
-            ->where('tbl_account_detail.locked', 0)
+            ->where('tbl_customer.locked', 0)
             ->distinct()
             ->pluck('tbl_account_detail.account_id')
             ->first();
@@ -180,14 +180,14 @@ class PhysicalService
             ->where('tbl_information_insurance.active', 1)
             ->where('tbl_customer.active', 1)
             ->where('tbl_period.id', $company_id)
-            ->where('tbl_account_detail.locked', 0)
+            ->where('tbl_customer.locked', 0)
             ->where('tbl_contract.active', 1)
             ->select(
                 'tbl_customer.id as customer_id',
                 'tbl_customer.full_name',
                 'tbl_customer.images',
                 'tbl_customer.folder',
-                DB::raw("CONVERT(nvarchar, tbl_customer.birth_year, 103) as namsinh"),
+                DB::raw("CONVERT(nvarchar, tbl_customer.birth_year, 103)"),
                 'tbl_customer.address',
                 'tbl_customer.issue_date',
                 'tbl_customer.issue_place',
@@ -201,16 +201,16 @@ class PhysicalService
                 'tbl_account_package.package_price',
                 'tbl_account_package.id as package_id',
                 'tbl_account_package.package_name',
-                DB::raw("CONVERT(nvarchar, tbl_account_package.start_date, 103) as thoigianhieuluc"),
+                DB::raw("CONVERT(nvarchar, tbl_account_package.start_date, 103)"),
                 'tbl_account.contract_id',
                 'tbl_account_detail.account_holder',
-                DB::raw("CONVERT(nvarchar, tbl_contract.effective_time, 103) as thoigianketthuc"),
+                DB::raw("CONVERT(nvarchar, tbl_contract.effective_time, 103)"),
                 'tbl_account.note',
                 'tbl_province.province_name',
                 'tbl_province.id as province_id',
                 'tbl_account_detail_detail.prepayment',
                 'tbl_account.id as account_id',
-                'tbl_account_detail.locked',
+                'tbl_customer.locked',
                 'tbl_customer_type.type_name'
             )
             ->distinct()
@@ -218,12 +218,110 @@ class PhysicalService
 
         return $results;
     }
-    // load_taikhoanKHtheotenKH
+    // Khamsuckhoedinhky.aspx btn_timkiem_Click - load_taikhoanKHtheotenKH
     public function loadCustomerAccountByName()
     {
         return [];
     }
-    public function getPeriodicPhysical($companyId, $params = [])
+    // KhachhangTKBaohiem_listTheomahopdong_goikhamGAS
+    public function getCustomersByContractAndPackage($contractId, $user_id)
+    {
+        // Step 1: Get GAS permission for the user
+        // $gasPermission = DB::table('tbl_user_staff')
+        //     ->where('mauser_nhansu', $user_id)
+        //     ->where('active', 1)
+        //     ->value('Gaspermission');
+
+        // Step 2: Get customer ID associated with the user
+        $customer_id_user = DB::table('tbl_user_staff')
+            ->where('tbl_user_staff.id', $user_id)
+            ->where('active', 1)
+            ->value('customer_id');
+
+        // Step 3: Get branch ID associated with the customer
+        $branch_id = DB::table('tbl_gas_branch_detail')
+            ->where('customer_id', $customer_id_user)
+            ->distinct()
+            ->value('gas_branch_id');
+
+        // Step 4: Retrieve customer details based on the contract ID and branch ID
+        $results = DB::table('tbl_contract')
+            ->join('tbl_period_detail', 'tbl_contract.period_id', '=', 'tbl_period_detail.id')
+            ->join('tbl_company', 'tbl_period_detail.company_id', '=', 'tbl_company.id')
+            ->join('tbl_period', 'tbl_period_detail.period_id', '=', 'tbl_period.id')
+            ->join('tbl_package_detail', 'tbl_period.id', '=', 'tbl_package_detail.period_id')
+            ->join('tbl_account_package', 'tbl_package_detail.account_package_id', '=', 'tbl_account_package.id')
+            ->join('tbl_account_detail_detail', 'tbl_account_detail_detail.package_detail_id', '=', 'tbl_package_detail.id')
+            ->join('tbl_account', 'tbl_account_detail_detail.account_id', '=', 'tbl_account.id')
+            ->join('tbl_account_detail', 'tbl_account.id', '=', 'tbl_account_detail.account_id')
+            ->join('tbl_customer', 'tbl_account_detail.customer_id', '=', 'tbl_customer.id')
+            ->join('tbl_information_insurance', 'tbl_customer.id', '=', 'tbl_information_insurance.customer_id')
+            ->join('tbl_customer_group', 'tbl_customer.customer_group_id', '=', 'tbl_customer_group.id')
+            ->join('tbl_province', 'tbl_customer.province_id', '=', 'tbl_province.id')
+            ->join('tbl_customer_type', 'tbl_customer.customer_type_id', '=', 'tbl_customer_type.id')
+            ->join('tbl_health_account', 'tbl_health_account.customer_id', '=', 'tbl_customer.id')
+            ->join('tbl_gas_branch_detail', 'tbl_customer.id', '=', 'tbl_gas_branch_detail.customer_id')
+            ->where('tbl_contract.id', $contractId)
+            ->where('tbl_account.active', 1)
+            ->where('tbl_account_detail.active', 1)
+            ->where('tbl_information_insurance.active', 1)
+            ->where('tbl_customer.active', 1)
+            ->where('tbl_health_account.active', 1)
+            ->where('tbl_gas_branch_detail.gas_branch_id', $branch_id)
+            ->select(
+                'tbl_customer.id as customer_id',
+                'tbl_customer.full_name',
+                'tbl_customer.images',
+                'tbl_customer.folder',
+                DB::raw("CONVERT(nvarchar, tbl_customer.birth_year, 103) as birth_year"),
+                'tbl_customer.address',
+                'tbl_customer.issue_date',
+                'tbl_customer.issue_place',
+                'tbl_customer.identity_card_number',
+                'tbl_customer.email',
+                'tbl_customer.gender',
+                'tbl_customer.contact_phone',
+                'tbl_information_insurance.card_number',
+                'tbl_customer_group.group_name',
+                'tbl_customer_group.id as group_id',
+                'tbl_account_package.package_name',
+                DB::raw("CONVERT(nvarchar, tbl_contract.effective_time, 103) as effective_time"),
+                'tbl_contract.id as contract_id',
+                'tbl_account_detail.account_holder',
+                DB::raw("CONVERT(nvarchar, tbl_contract.end_time, 103) as end_time"),
+                'tbl_account.note',
+                'tbl_province.province_name',
+                'tbl_province.id as province_id',
+                'tbl_information_insurance.card_number as card_number_expr1',
+                'tbl_customer_type.type_name',
+                'tbl_account_detail.account_id',
+                'tbl_customer.locked'
+            )
+            ->distinct()
+            ->orderBy('tbl_account_detail.account_id')
+            ->orderByDesc('tbl_account_detail.account_holder')
+            ->orderBy('tbl_customer.full_name')
+            ->get();
+
+        return $results;
+    }
+
+    // KhachhangTKBaohiem_listTheomahopdong_goikham
+    public function customerInsuranceAccount_listByContractCode_medicalPackage()
+    {
+        return [];
+
+    }
+    // Khamsuckhoedinhky.aspx  btn_loadds_Click (show_khachhang) - KhachhangTKBaohiem_listTheomahopdong_goikhamGAS - KhachhangTKBaohiem_listTheomahopdong_goikham
+    public function show_customer($params = [])
+    {
+        $contract_id = $params["company"];
+        $user_id = $params["keyword"];
+        $results = $this->getCustomersByContractAndPackage($contract_id, $user_id);
+        return $results;
+
+    }
+    public function getPeriodicPhysical($params = [])
     {
         $n = 0;
         $keyword = trim($params['keyword']);
@@ -242,17 +340,7 @@ class PhysicalService
             echo "<script>alert('Please enter search information!');</script>";
         }
 
-        $query = "";
         $results = $customer_data;
         return $results;
-    }
-    // Khamsuckhoedinhky.aspx  btn_loadds_Click (show_khachhang) - KhachhangTKBaohiem_listTheomahopdong_goikhamGAS - KhachhangTKBaohiem_listTheomahopdong_goikham
-    public function show_client($companyId, $params = [])
-    {
-        $query = "";
-        $results = $query;
-        $results = [];
-        return $results;
-
     }
 }

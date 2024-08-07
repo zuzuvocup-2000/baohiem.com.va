@@ -61,6 +61,7 @@ class PhysicalController extends Controller
 
         return view('admin.physical.index', compact(['companyList', 'periodList', 'contractList', 'physicalList']));
     }
+    // TODO
     public function periodic(Request $request)
     {
         $params = $request->query();
@@ -78,9 +79,9 @@ class PhysicalController extends Controller
             $params['keyword'] = "";
         }
         // Kiểm tra thực hiện search hay load
-        $physicalList = (isset($params['submit']) and $params['submit'] == "load")
-        ? $this->physicalService->show_client($params['company'], $params)
-        : $this->physicalService->getPeriodicPhysical($params['company'], $params);
+        $physicalList = (isset($params['submit']) and $params['submit'] == "search")
+        ? $this->physicalService->getPeriodicPhysical($params)
+        : $this->physicalService->show_customer($params);
 
         return view('admin.physical.periodic', compact(['companyList', 'periodList', 'contractList', 'physicalList']));
     }
