@@ -150,6 +150,15 @@ $(document).ready(function () {
         });
         return false;
     })
+
+    $('.create-insurance-payment_type').on('change', function () {
+        var selectedValue = $(this).val();
+        if (selectedValue == 3) { 
+            $('.vaccination-container').show();
+        } else {
+            $('.vaccination-container').hide();
+        }
+    });
 });
 
 function render_customer_payment(customerList) {

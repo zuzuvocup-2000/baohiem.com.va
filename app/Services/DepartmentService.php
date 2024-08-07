@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Department;
 use App\Models\User;
+
 /**
  * Class DepartmentService
  * @package App\Services
@@ -19,6 +20,7 @@ class DepartmentService
     {
         return Department::where('active', STATUS_ACTIVE)->get();
     }
+
     public function getUserByDepartments($id)
     {
         return User::select('tbl_user.id', 'tbl_user.username', 'tbl_department.id', 'tbl_department.active')

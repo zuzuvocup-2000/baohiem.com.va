@@ -63,6 +63,10 @@ return [
                 'url' => route('department.index'),
             ],
             [
+                'name' => 'Quản lý vị trí chức vụ',
+                'url' => route('position.index'),
+            ],
+            [
                 'name' => 'Quản lý tài khoản',
                 'url' => route('user.index'),
             ],
