@@ -53,8 +53,8 @@
                     <thead>
                         <tr>
                             <th class="text-center" style="width: 1%;">STT</th>
-                            <th>Số thẻ Bảo hiểm</th>
-                            <th>Tên khách hàng</th>
+                            <th class="text-center">Số thẻ Bảo hiểm</th>
+                            <th class="text-center">Tên khách hàng</th>
                             <th class="text-center">Giới tính</th>
                             <th class="text-center">Ngày sinh</th>
                             <th>Tên gói khám</th>
@@ -62,27 +62,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr data-id="">
-                            <td>
-                                <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#newPeriodic">
-                                    <span class="icon-item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                            class="icon icon-tabler icons-tabler-outline icon-tabler-circle-plus">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
-                                            <path d="M9 12h6"></path>
-                                            <path d="M12 9v6"></path>
-                                        </svg></span>
-                                </button>
-                            </td>
-                        </tr>
                         @foreach ($physicalList as $key => $physical)
                             <tr data-id="{{ $physical->id }}">
-                                <td class="text-center">
-                                    <input type="checkbox" class="toggleCheckbox custom-control-input" id="user-"
-                                        name="id[]" value="39" />
-                                </td>
                                 <td>
                                     <p class="mb-0 text-center fw-normal fs-4">{{ ++$key }}</p>
                                 </td>
@@ -99,13 +80,7 @@
                                     <p class="mb-0 fw-normal fs-4 text-center">{{ $physical->birth_year }}</p>
                                 </td>
                                 <td>
-                                    <p class="mb-0 fw-normal fs-4 text-center">{{ $physical->checkup_date }}</p>
-                                </td>
-                                <td>
-                                    <p class="mb-0 fw-normal fs-4 text-center">{{ $physical->package_name }}</p>
-                                </td>
-                                <td>
-                                    <p class="mb-0 fw-normal fs-4 text-center">{{ $physical->hospital_name }}</p>
+                                    <p class="mb-0 fw-normal fs-4 text-center">{{ $physical->type_name}}</p>
                                 </td>
                                 <td>
                                     <h6 class="fs-4 fw-semibold mb-0">
