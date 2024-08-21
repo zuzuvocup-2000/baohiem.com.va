@@ -148,7 +148,7 @@ Route::group(['middleware' => ['check.any.guard:isUserAdmin']], function () {
     // Routes for contact
 
     // Routes Account
-    Route::get('/account', [AccountController::class, 'index'])->name('account.index');
+   
     Route::get('/account/insurance', [AccountController::class, 'insurance'])->name('account.insurance');
     Route::get('/account/create', [AccountController::class, 'create'])->name('account.create');
     Route::post('/account/create', [AccountController::class, 'store'])->name('account.store');
@@ -164,13 +164,7 @@ Route::group(['middleware' => ['check.any.guard:isUserAdmin']], function () {
     Route::resource('role', RolesController::class);
     Route::resource('permission', PermissionsController::class);
 
-    // Routes for Insurance
-    Route::get('/insurance-expenses/index', [InsuranceExpensesController::class, 'index'])->name('insuranceExpenses.index');
-    Route::get('/insurance-expenses/day', [InsuranceExpensesController::class, 'insuranceDay'])->name('insuranceExpenses.day');
-    Route::get('/insurance-expenses/hospital', [InsuranceExpensesController::class, 'insuranceHospital'])->name('insuranceExpenses.hospital');
-    Route::get('/insurance-expenses/diary', [InsuranceExpensesController::class, 'insuranceDiary'])->name('insuranceExpenses.diary');
-    Route::get('/insurance-expenses/detail', [InsuranceExpensesController::class, 'getDetailAccount'])->name('insuranceExpenses.detail');
-    Route::post('/insurance-expenses/create', [InsuranceExpensesController::class, 'create'])->name('insuranceExpenses.create');
+    
 
     // Routes for Supervisor
     Route::get('/supervisor/insurance-expenses', [SupervisorController::class, 'insuranceExpenses'])->name('supervisor.insuranceExpenses');
@@ -221,24 +215,36 @@ Route::group(['middleware' => ['check.any.guard:isUserAdmin']], function () {
     // Routes for Insurance
     Route::get('/insurance-expenses/check-period', [InsuranceExpensesController::class, 'checkPeriod'])->name('insuranceExpenses.checkPeriod');
 });
-// chỉ tài khoản nhân viên
-Route::group(['middleware' => ['check.any.guard:isUserAdmin']], function () {
+
+// chỉ tài khoản khách hàng
+Route::group(['middleware' => ['check.any.guard:isUserCustomer']], function () {
+    // Routes for Insurance
+    Route::get('/insurance-expenses/index', [InsuranceExpensesController::class, 'index'])->name('insuranceExpenses.index');
+
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+    Route::post('/contact', [ContactController::class, 'sendEmail'])->name('contact.form');
+});
+// chỉ tài khoản admin & bệnh viện
+Route::group(['middleware' => ['check.any.guard:isUserHospital,isUserAdmin']], function () {
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+    Route::post('/contact', [ContactController::class, 'sendEmail'])->name('contact.form');
+
+    // Routes for Insurance
+    Route::get('/insurance-expenses/day', [InsuranceExpensesController::class, 'insuranceDay'])->name('insuranceExpenses.day');
+    Route::get('/insurance-expenses/hospital', [InsuranceExpensesController::class, 'insuranceHospital'])->name('insuranceExpenses.hospital');
+    Route::get('/insurance-expenses/diary', [InsuranceExpensesController::class, 'insuranceDiary'])->name('insuranceExpenses.diary');
+    Route::get('/insurance-expenses/detail', [InsuranceExpensesController::class, 'getDetailAccount'])->name('insuranceExpenses.detail');
+    Route::post('/insurance-expenses/create', [InsuranceExpensesController::class, 'create'])->name('insuranceExpenses.create');
+});
+// chỉ tài khoản admin & nhân sự
+Route::group(['middleware' => ['check.any.guard:isUserStaff,isUserAdmin']], function () {
     Route::get('/employee/list', [EmployeeController::class, 'index'])->name('employee.index');
     Route::get('/employee/create', [EmployeeController::class, 'create'])->name('employee.create');
     Route::post('/employee/create', [EmployeeController::class, 'store'])->name('employee.store');
     Route::get('/employee/edit/{id}', [EmployeeController::class, 'edit'])->name('employee.edit');
     Route::post('/employee/edit/{id}', [EmployeeController::class, 'update'])->name('employee.update');  
     Route::delete('/employee/delete/{id}', [EmployeeController::class, 'delete'])->name('employee.delete');
-});
-// chỉ tài khoản khách hàng
-Route::group(['middleware' => ['check.any.guard:isUserCustomer']], function () {
-    Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
-    Route::post('/contact', [ContactController::class, 'sendEmail'])->name('contact.form');
-});
-// chỉ tài khoản bệnh viện
-Route::group(['middleware' => ['check.any.guard:isUserHospital']], function () {
-    Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
-    Route::post('/contact', [ContactController::class, 'sendEmail'])->name('contact.form');
+    Route::get('/account', [AccountController::class, 'index'])->name('account.index');
 });
 Route::get('/management', [UserController::class, 'management'])->name('user.management');
 

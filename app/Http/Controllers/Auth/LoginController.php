@@ -22,29 +22,51 @@ class LoginController extends Controller
         $credentials = $request->only('username', 'password');
         $guards = ['isUserAdmin', 'isUserStaff', 'isUserHospital', 'isUserCustomer'];
         $remember = $request->filled('remember');
-
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->attempt($credentials, $remember)) {
                 switch ($guard) {
                     case 'isUserAdmin':
                         if (Auth::guard('isUserAdmin')->check()) {
-                            $this->saveLog(Auth::user()->id, 'Đăng nhập thành công');
+                            $user = Auth::guard('isUserAdmin')->user();
+                            if ($user->role_id == 'A') {
+                                Auth::guard('isUserAdmin')->logout();
+                                return redirect('/login')->with('error', __('login.error_01'))->withInput();
+                            }
+                            $this->saveLog(Auth::user()->id, __('login.login_success'));
                         }
-                        return redirect('/dashboard')->with('success', 'Đăng nhập thành công!');
+                       return redirect('/account')->with('success', __('login.login_success'));
                     case 'isUserStaff':
-                        return redirect('/dashboard')->with('success', 'Đăng nhập thành công!');
+                        if (Auth::guard('isUserStaff')->check()) {
+                            $userStaff = Auth::guard('isUserStaff')->user();
+                            if ($userStaff->active == STATUS_INACTIVE) {
+                                Auth::guard('isUserStaff')->logout();
+                                return redirect('/login')->with('error', __('login.error_01'))->withInput();
+                            }
+                        }
+                       return redirect('/dashboard')->with('success', __('login.login_success'));
                     case 'isUserHospital':
                         if (Auth::guard('isUserHospital')->check()) {
                             $userHospital = Auth::guard('isUserHospital')->user();
-                            $this->saveLogHospital($userHospital->id, 'Đăng nhập thành công');
+                            if ($userHospital->active == STATUS_INACTIVE) {
+                                Auth::guard('isUserHospital')->logout();
+                                return redirect('/login')->with('error', __('login.error_01'))->withInput();
+                            }
+                            $this->saveLogHospital($userHospital->id, __('login.login_success'));
                         }
-                        return redirect('/dashboard')->with('success', 'Đăng nhập thành công!');
+                       return redirect('/insurance-expenses/hospital')->with('success', __('login.login_success'));
                     case 'isUserCustomer':
-                        return redirect('/dashboard')->with('success', 'Đăng nhập thành công!');
+                        if (Auth::guard('isUserCustomer')->check()) {
+                            $userCustomer = Auth::guard('isUserCustomer')->user();
+                            if ($userCustomer->active == STATUS_INACTIVE) {
+                                Auth::guard('isUserCustomer')->logout();
+                                return redirect('/login')->with('error', __('login.error_01'))->withInput();
+                            }
+                        }
+                       return redirect('/insurance-expenses/index')->with('success', __('login.login_success'));
                 }
             }
         }
-        return redirect('/login')->with('error', 'Tên đăng nhập hoặc mật khẩu không chính xác.')->withInput();
+        return redirect('/login')->with('error', __('login.error_02'))->withInput();
     }
 
     protected function authenticated(Request $request, $user)
@@ -56,10 +78,10 @@ class LoginController extends Controller
     {
         if (Auth::guard('isUserHospital')->check()) {
             $userHospital = Auth::guard('isUserHospital')->user();
-            $this->saveLogHospital($userHospital->id, 'Đăng xuất thành công');
+            $this->saveLogHospital($userHospital->id, __('login.logout_success'));
         }
         if (Auth::guard('isUserAdmin')->check()) {
-            $this->saveLog(Auth::user()->id, 'Đăng xuất thành công');
+            $this->saveLog(Auth::user()->id, __('login.logout_success'));
         }
         Auth::logout();
         $request->session()->invalidate();
