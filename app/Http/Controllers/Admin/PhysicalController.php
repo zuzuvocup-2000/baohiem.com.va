@@ -86,12 +86,13 @@ class PhysicalController extends Controller
         if (!isset($params['keyword'])) {
             $params['keyword'] = "";
         }
+        $physicalList = [];
         // Kiểm tra thực hiện search hay load
         if (isset($params['submit']) and $params['submit'] == "search") {
             $keyword = trim($params['keyword']);
             if ($keyword != "") {
                 if (strlen($keyword) > 5) {
-                    $physicalList = $this->physicalService->getPeriodicPhysical($keyword, $params);
+                    $physicalList = $this->physicalService->getPeriodicPhysical($keyword, $params) ?? [];
                 } else {
                     echo "<script>alert('Thông tin tìm kiếm có ít nhất 6 ký tự!');</script>";
                 }
@@ -99,7 +100,7 @@ class PhysicalController extends Controller
                 echo "<script>alert('Vui lòng nhập thông tin tìm kiếm!');</script>";
             }
         } else {
-            $physicalList = $this->physicalService->show_customer($params['contract']);
+            $physicalList = $this->physicalService->show_customer($params['contract']) ?? [];
         }
         // Cưu long joc 2 -20067
         // Cưu long joc 2 (o) -20058
