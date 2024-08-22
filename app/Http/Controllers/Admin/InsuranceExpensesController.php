@@ -9,6 +9,8 @@ use App\Services\ContractService;
 use App\Services\CustomerService;
 use App\Services\PeriodService;
 use App\Services\AccountService;
+use App\Services\HorseClassificationService;
+use App\Services\HorseService;
 use App\Services\HospitalService;
 use App\Services\InsuranceExpensesService;
 use App\Services\PaymentTypeService;
@@ -27,8 +29,10 @@ class InsuranceExpensesController extends Controller
     protected $hospitalService;
     protected $paymentTypeService;
     protected $insuranceExpensesService;
+    protected $horseClassificationService;
+    protected $horseService;
 
-    public function __construct(CompanyService $companyService, PeriodService $periodService, ContractService $contractService, CustomerGroupService $customerGroupService, CustomerService $customerService, AccountService $accountService, HospitalService $hospitalService, PaymentTypeService $paymentTypeService, InsuranceExpensesService $insuranceExpensesService)
+    public function __construct(CompanyService $companyService, PeriodService $periodService, ContractService $contractService, CustomerGroupService $customerGroupService, CustomerService $customerService, AccountService $accountService, HospitalService $hospitalService, PaymentTypeService $paymentTypeService, InsuranceExpensesService $insuranceExpensesService, HorseClassificationService $horseClassificationService, HorseService $horseService)
     {
         $this->customerGroupService = $customerGroupService;
         $this->companyService = $companyService;
@@ -39,6 +43,8 @@ class InsuranceExpensesController extends Controller
         $this->hospitalService = $hospitalService;
         $this->paymentTypeService = $paymentTypeService;
         $this->insuranceExpensesService = $insuranceExpensesService;
+        $this->horseClassificationService = $horseClassificationService;
+        $this->horseService = $horseService;
     }
 
     public function index(Request $request)
@@ -57,22 +63,42 @@ class InsuranceExpensesController extends Controller
         $customer = $this->customerService->getCustomerByCustomerId($params['id'], $params['periodId']);
         $customerPay = $this->customerService->getListCustomersPayForInsuranceByCustomerId($params['id']);
         $amountSpent = $this->customerService->getMoneyAmountSpent($params['id'], $params['periodId']);
-        $paymentTypeList = $this->paymentTypeService->getPaymentTypeList();
-        $hospitalList = $this->hospitalService->getHospital();
-        return view('admin.insurance-expenses.detail', compact(['customer', 'customerPay', 'amountSpent', 'hospitalList', 'paymentTypeList']));
+        return view('admin.insurance-expenses.detail', compact(['customer', 'customerPay', 'amountSpent']));
     }
 
     public function create(Request $request)
     {
-        $params = $request->post();
-        $check = $this->insuranceExpensesService->InsuranceExpensesInsert($params);
-        if ($check) {
-            $this->saveLog(Auth::user()->id, 'Thêm chi trả thành công.');
-            return redirect()->back()->with('success', 'Thêm chi trả thành công.');
-        } else {
-            $this->saveLog(Auth::user()->id, 'Thêm chi trả thất bại.');
-            return redirect()->back()->with('error', 'Thêm chi trả thất bại.');
+        $params = $request->query();
+        $customer = $this->customerService->getCustomerByCustomerId($params['id'], $params['periodId']);
+        $customerPay = $this->customerService->getListCustomersPayForInsuranceByCustomerId($params['id']);
+        $amountSpent = $this->customerService->getMoneyAmountSpent($params['id'], $params['periodId']);
+        $paymentTypeList = $this->paymentTypeService->getPaymentTypeList();
+        $horseClassificationList = $this->horseClassificationService->getActiveClassifications();
+        $horseList = $this->horseService->getHorsesByClassification($horseClassificationList->first() ? $horseClassificationList->first()->id : 0);
+        $hospitalList = $this->hospitalService->getHospital();
+        if ($request->isMethod('post')) {
+            $params = $request->post();
+            $check = $this->insuranceExpensesService->InsuranceExpensesInsert($params);
+            if ($check) {
+                $this->saveLog(Auth::user()->id, 'Thêm chi trả thành công.');
+                return redirect()->back()->with('success', 'Thêm chi trả thành công.');
+            } else {
+                $this->saveLog(Auth::user()->id, 'Thêm chi trả thất bại.');
+                return redirect()->back()->with('error', 'Thêm chi trả thất bại.');
+            }
         }
+        return view('admin.insurance-expenses.create', compact(['customer', 'customerPay', 'amountSpent', 'hospitalList', 'paymentTypeList', 'horseClassificationList', 'horseList']));
+    }
+
+    public function update(Request $request)
+    {
+        $params = $request->query();
+        $customer = $this->customerService->getCustomerByCustomerId($params['id'], $params['periodId']);
+        $customerPay = $this->customerService->getListCustomersPayForInsuranceByCustomerId($params['id']);
+        $amountSpent = $this->customerService->getMoneyAmountSpent($params['id'], $params['periodId']);
+        $paymentTypeList = $this->paymentTypeService->getPaymentTypeList();
+        $hospitalList = $this->hospitalService->getHospital();
+        return view('admin.insurance-expenses.detail', compact(['customer', 'customerPay', 'amountSpent', 'hospitalList', 'paymentTypeList']));
     }
 
     public function insuranceDay(Request $request)

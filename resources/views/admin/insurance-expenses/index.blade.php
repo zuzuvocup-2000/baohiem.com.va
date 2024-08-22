@@ -72,7 +72,8 @@
                                                 </span>
                                             </button>
                                             <a class="btn btn-success me-1 btn-get-detail"
-                                                href="{{ '/insurance-expenses/detail?id='. $itemChild->id .'&periodId='.(isset($_GET['period']) ? $_GET['period'] : 0) }}">
+                                                href="{{ route('insuranceExpenses.detail', ['id' => $itemChild->id, 'periodId' => request()->get('period', 0)]) }}
+                                                ">
                                                 <span class="icon-item-icon">
                                                     <img src="{{ asset('/img-system/system/edit_white.svg') }}" />
                                                 </span>

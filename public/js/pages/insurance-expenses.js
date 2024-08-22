@@ -88,11 +88,11 @@ $(document).ready(function () {
             </tr>`;
 
         $('.table-content-pay tbody').prepend(newRow);
-        $('.create-insurance-payment_type').val(2);
-        $('.create-insurance-amount_paid').val(0);
-        $('.create-insurance-expected_payment').val(0);
-        $('.create-insurance-rejected_amount').val(0);
-        $('.create-insurance-note').val('');
+        // $('.create-insurance-payment_type').val(2);
+        // $('.create-insurance-amount_paid').val(0);
+        // $('.create-insurance-expected_payment').val(0);
+        // $('.create-insurance-rejected_amount').val(0);
+        // $('.create-insurance-note').val('');
         return false;
     });
 
