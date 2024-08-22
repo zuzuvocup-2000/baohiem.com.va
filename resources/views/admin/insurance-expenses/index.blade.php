@@ -71,6 +71,13 @@
                                                     <img src="{{ asset('/img-system/system/edit_white.svg') }}" />
                                                 </span>
                                             </button>
+                                            <a class="btn btn-success me-1 btn-get-detail"
+                                                href="{{ route('insuranceExpenses.detail', ['id' => $itemChild->id, 'periodId' => request()->get('period', 0)]) }}
+                                                ">
+                                                <span class="icon-item-icon">
+                                                    <img src="{{ asset('/img-system/system/edit_white.svg') }}" />
+                                                </span>
+                                            </a>
                                         </div>
                                     </h6>
                                 </td>
@@ -284,8 +291,7 @@
                                                         </select>
                                                     </td>
                                                     <td>
-                                                        <input
-                                                            class="form-control int create-insurance-amount_paid"
+                                                        <input class="form-control int create-insurance-amount_paid"
                                                             type="text" value="">
                                                     </td>
                                                     <td>
@@ -294,13 +300,12 @@
                                                             type="text" value="">
                                                     </td>
                                                     <td>
-                                                        <input
-                                                            class="form-control int create-insurance-rejected_amount"
+                                                        <input class="form-control int create-insurance-rejected_amount"
                                                             type="text" value="">
                                                     </td>
                                                     <td>
-                                                        <input class="form-control create-insurance-note"
-                                                            type="text" value="">
+                                                        <input class="form-control create-insurance-note" type="text"
+                                                            value="">
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -357,11 +362,13 @@
                                                             </h6>
                                                         </th>
                                                         <th>
-                                                            <h6 class="fs-4 fw-semibold text-center mb-0">Số tháng cách lần đầu tiên
+                                                            <h6 class="fs-4 fw-semibold text-center mb-0">Số tháng cách
+                                                                lần đầu tiên
                                                             </h6>
                                                         </th>
                                                         <th>
-                                                            <h6 class="fs-4 fw-semibold text-center mb-0">Số tháng nhắc lại
+                                                            <h6 class="fs-4 fw-semibold text-center mb-0">Số tháng nhắc
+                                                                lại
                                                             </h6>
                                                         </th>
                                                         <th>
@@ -371,24 +378,28 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr role="row">
-                                                        <td colspan="2" >
-                                                            @include('common/button-loading', ['class' => 'btn-create-company'])
+                                                        <td colspan="2">
+                                                            @include('common/button-loading', ['class' =>
+                                                            'btn-create-company'])
                                                         </td>
                                                         <td>
-                                                            <input class="inputField form-control create-company-address" type="text" name="address"
-                                                                value="" />
+                                                            <input
+                                                                class="inputField form-control create-company-address"
+                                                                type="text" name="address" value="" />
                                                         </td>
                                                         <td>
-                                                            <input class="inputField form-control create-company-phone_number" type="text" name="phone_number"
-                                                                value="" />
+                                                            <input
+                                                                class="inputField form-control create-company-phone_number"
+                                                                type="text" name="phone_number" value="" />
                                                         </td>
                                                         <td>
-                                                            <input class="inputField form-control create-company-email" type="text" name="email"
-                                                                value="" />
+                                                            <input class="inputField form-control create-company-email"
+                                                                type="text" name="email" value="" />
                                                         </td>
                                                         <td>
-                                                            <input class="inputField form-control create-company-ceo_name" type="text" name="ceo_name"
-                                                                value="" />
+                                                            <input
+                                                                class="inputField form-control create-company-ceo_name"
+                                                                type="text" name="ceo_name" value="" />
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -397,21 +408,25 @@
                                     </div>
                                     <div class="row mb-3 align-items-center">
                                         <div class="col-sm-12 col-md-3">
-                                            <h5 class="mb-0">Giới hạn còn lại: <span class="main-color theRemainingAmount"></span>
+                                            <h5 class="mb-0">Giới hạn còn lại: <span
+                                                    class="main-color theRemainingAmount"></span>
                                                 đồng
                                             </h5>
                                         </div>
                                         <div class="col-sm-12 col-md-3">
-                                            <h5 class="mb-0">Tài khoản chi khác: <span class="main-color amountSpent"></span> đồng
+                                            <h5 class="mb-0">Tài khoản chi khác: <span
+                                                    class="main-color amountSpent"></span> đồng
                                             </h5>
                                         </div>
                                         <div class="col-sm-12 col-md-6">
                                             <div class="text-right ">
                                                 <div class="d-flex align-items-center justify-content-end">
-                                                    <button type="submit" class="btn btn-primary btn-add-content-pay me-2"
+                                                    <button type="submit"
+                                                        class="btn btn-primary btn-add-content-pay me-2"
                                                         data-action="create">Thêm mới</button>
-                                                    <button type="submit" class="btn btn-success btn-save-payment-insurance"
-                                                    data-action="create">Lưu</button>
+                                                    <button type="submit"
+                                                        class="btn btn-success btn-save-payment-insurance"
+                                                        data-action="create">Lưu</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -452,32 +467,6 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="detailclient2" class="modal fade" tabindex="-1" aria-labelledby="primary-header-modalLabel"
-                    style="display: none;" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-scrollable modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header modal-colored-header bg-primary text-white">
-                                <h4 class="modal-title text-white" id="primary-header-modalLabel">
-                                    Chi tiền bảo hiểm
-                                </h4>
-                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">
-                                    Close
-                                </button>
-                                <button type="button" class="btn bg-primary-subtle text-primary">
-                                    Save changes
-                                </button>
                             </div>
                         </div>
                     </div>

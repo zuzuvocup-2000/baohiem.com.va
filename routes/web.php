@@ -25,6 +25,7 @@ use App\Http\Controllers\Ajax\ContractController;
 use App\Http\Controllers\Ajax\CustomerGroupController;
 use App\Http\Controllers\Ajax\CustomerTypeController;
 use App\Http\Controllers\Ajax\DepartmentController as DepartmentAjax;
+use App\Http\Controllers\Ajax\HorseController;
 use App\Http\Controllers\Ajax\PositionController as PositionAjax;
 use App\Http\Controllers\Ajax\HospitalContractController;
 use App\Http\Controllers\Ajax\HospitalController as HospitalAjax;
@@ -131,6 +132,9 @@ Route::group(['middleware' => ['check.any.guard:isUserAdmin']], function () {
         //Supervisor
         Route::put('/supervisor/recover', [SupervisorAjax::class, 'recover'])->name('ajax.supervisor.recover');
         Route::put('/supervisor/recover-account', [SupervisorAjax::class, 'recoverAccount'])->name('ajax.supervisor.recover-account');
+
+        // Horse
+        Route::get('/horse/list', [HorseController::class, 'list'])->name('ajax.horse.list');
     });
     // Routes for free design before
     Route::group(['prefix' => 'user'], function () {
@@ -165,12 +169,17 @@ Route::group(['middleware' => ['check.any.guard:isUserAdmin']], function () {
     Route::resource('permission', PermissionsController::class);
 
     // Routes for Insurance
-    Route::get('/insurance-expenses/index', [InsuranceExpensesController::class, 'index'])->name('insuranceExpenses.index');
-    Route::get('/insurance-expenses/day', [InsuranceExpensesController::class, 'insuranceDay'])->name('insuranceExpenses.day');
-    Route::get('/insurance-expenses/hospital', [InsuranceExpensesController::class, 'insuranceHospital'])->name('insuranceExpenses.hospital');
-    Route::get('/insurance-expenses/diary', [InsuranceExpensesController::class, 'insuranceDiary'])->name('insuranceExpenses.diary');
-    Route::get('/insurance-expenses/detail', [InsuranceExpensesController::class, 'getDetailAccount'])->name('insuranceExpenses.detail');
-    Route::post('/insurance-expenses/create', [InsuranceExpensesController::class, 'create'])->name('insuranceExpenses.create');
+    Route::controller(InsuranceExpensesController::class)->group(function () {
+        Route::get('/insurance-expenses/index', 'index')->name('insuranceExpenses.index');
+        Route::get('/insurance-expenses/detail', 'detail')->name('insuranceExpenses.detail');
+        Route::get('/insurance-expenses/create', 'create')->name('insuranceExpenses.create');
+        Route::get('/insurance-expenses/update', 'update')->name('insuranceExpenses.update');
+        Route::get('/insurance-expenses/day', 'insuranceDay')->name('insuranceExpenses.day');
+        Route::get('/insurance-expenses/hospital', 'insuranceHospital')->name('insuranceExpenses.hospital');
+        Route::get('/insurance-expenses/diary', 'insuranceDiary')->name('insuranceExpenses.diary');
+        Route::post('/insurance-expenses/create', 'create')->name('insuranceExpenses.create');
+        Route::put('/insurance-expenses/update', 'update')->name('insuranceExpenses.update');
+    });
 
     // Routes for Supervisor
     Route::get('/supervisor/insurance-expenses', [SupervisorController::class, 'insuranceExpenses'])->name('supervisor.insuranceExpenses');
