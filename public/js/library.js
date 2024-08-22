@@ -1,4 +1,25 @@
 $(document).ready(function () {
+    $('#horseClassificationSelectGeneral').on('change', function () {
+        var horseClassificationId = $(this).val();
+
+        $.ajax({
+            type: 'GET',
+            url: '/ajax/horse/list',
+            data: {
+                'horse_classification': horseClassificationId
+            },
+            success: function (response) {
+                $('#horseSelectGeneral').empty();
+
+                $.each(response.data, function (key, value) {
+                    $('#horseSelectGeneral').append('<option value="' + value.id + '">' + value.horse_name + '</option > ');
+                });
+
+                $('#horseSelectGeneral').trigger('change');
+            }
+        });
+    });
+
     $('#companySelectGeneral').on('change', function () {
         var companyId = $(this).val();
 
