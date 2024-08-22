@@ -4,17 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Vitrichucvu extends Model
+class Position extends Model
 {
-    protected $table = 'TBL_VITRICHUCVU';
+    protected $table = 'tbl_position';
+    protected $primaryKey = 'id';
     public $timestamps = false;
 
     protected $fillable = [
-        'TENVITRICHUCVU',
-        'ACTIVE',
+        'name',
+        'active',
     ];
 
     protected $casts = [
-        'ACTIVE' => 'boolean',
+        'active' => 'boolean',
     ];
 }

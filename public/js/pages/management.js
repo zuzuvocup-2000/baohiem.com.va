@@ -25,3 +25,7 @@ $(document).ready(function() {
         }
     });
 });
+$('#departmentSelect').on('change', function () {
+    var department = $(this).val();
+    window.location.href = window.location.pathname + '?department=' + department;
+})

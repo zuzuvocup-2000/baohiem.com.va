@@ -13,6 +13,8 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\RenewalController;
 use App\Http\Controllers\Admin\RevenueController;
 use App\Http\Controllers\Admin\RolesController;
+use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\Admin\PositionController;
 use App\Http\Controllers\Admin\SupervisorController;
 use App\Http\Controllers\Admin\SystemController;
 use App\Http\Controllers\Admin\UserController;
@@ -24,6 +26,7 @@ use App\Http\Controllers\Ajax\CustomerGroupController;
 use App\Http\Controllers\Ajax\CustomerTypeController;
 use App\Http\Controllers\Ajax\DepartmentController as DepartmentAjax;
 use App\Http\Controllers\Ajax\HorseController;
+use App\Http\Controllers\Ajax\PositionController as PositionAjax;
 use App\Http\Controllers\Ajax\HospitalContractController;
 use App\Http\Controllers\Ajax\HospitalController as HospitalAjax;
 use App\Http\Controllers\Ajax\InsuranceExpensesController as AjaxInsuranceExpensesController;
@@ -117,6 +120,11 @@ Route::group(['middleware' => ['check.any.guard:isUserAdmin']], function () {
         Route::post('/department/delete', [DepartmentAjax::class, 'delete'])->name('ajax.department.delete');
         Route::put('/department/update', [DepartmentAjax::class, 'update'])->name('ajax.department.update');
 
+        // Vị trí chức vụ
+        Route::post('/position/create', [PositionAjax::class, 'create'])->name('ajax.position.create');
+        Route::post('/position/delete', [PositionAjax::class, 'delete'])->name('ajax.position.delete');
+        Route::put('/position/update', [PositionAjax::class, 'update'])->name('ajax.position.update');
+
         //Tài khoản
         Route::put('/account/locked', [AccountAjax::class, 'locked'])->name('ajax.account.locked');
         Route::put('/account/unlocked', [AccountAjax::class, 'unlocked'])->name('ajax.account.unlocked');
@@ -185,14 +193,22 @@ Route::group(['middleware' => ['check.any.guard:isUserAdmin']], function () {
     Route::get('/physical', [PhysicalController::class, 'index'])->name('physical.index');
     Route::get('/physical-detail', [PhysicalController::class, 'detail'])->name('physical.detail');
     Route::get('/physical-periodic', [PhysicalController::class, 'periodic'])->name('physical.periodic');
-    Route::get('/health-report',
-        [PhysicalController::class, 'healthReport'])->name('healthReport.index');
+    Route::get(
+        '/health-report',
+        [PhysicalController::class, 'healthReport']
+    )->name('healthReport.index');
 
     // Routes Department
     Route::get('/department', [DepartmentController::class, 'index'])->name('department.index');
     Route::post('/department/store', 'DepartmentController@store')->name('department.store');
     Route::put('/department/update/{id}', 'DepartmentController@update')->name('department.update');
     Route::delete('/department/delete/{id}', 'DepartmentController@destroy')->name('department.delete');
+
+    // Routes Position
+    Route::get('/position', [PositionController::class, 'index'])->name('position.index');
+    Route::post('/position/store', 'PositionController@store')->name('position.store');
+    Route::put('/position/update/{id}', 'PositionController@update')->name('position.update');
+    Route::delete('/position/delete/{id}', 'PositionController@destroy')->name('position.delete');
 
     // Routes Hospital
     Route::get('/hospital', [HospitalController::class, 'index'])->name('hospital.index');
@@ -215,9 +231,13 @@ Route::group(['middleware' => ['check.any.guard:isUserAdmin']], function () {
     Route::get('/insurance-expenses/check-period', [InsuranceExpensesController::class, 'checkPeriod'])->name('insuranceExpenses.checkPeriod');
 });
 // chỉ tài khoản nhân viên
-Route::group(['middleware' => ['check.any.guard:isUserStaff']], function () {
-    Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
-    Route::post('/contact', [ContactController::class, 'sendEmail'])->name('contact.form');
+Route::group(['middleware' => ['check.any.guard:isUserAdmin']], function () {
+    Route::get('/employee/list', [EmployeeController::class, 'index'])->name('employee.index');
+    Route::get('/employee/create', [EmployeeController::class, 'create'])->name('employee.create');
+    Route::post('/employee/create', [EmployeeController::class, 'store'])->name('employee.store');
+    Route::get('/employee/edit/{id}', [EmployeeController::class, 'edit'])->name('employee.edit');
+    Route::post('/employee/edit/{id}', [EmployeeController::class, 'update'])->name('employee.update');  
+    Route::delete('/employee/delete/{id}', [EmployeeController::class, 'delete'])->name('employee.delete');
 });
 // chỉ tài khoản khách hàng
 Route::group(['middleware' => ['check.any.guard:isUserCustomer']], function () {
