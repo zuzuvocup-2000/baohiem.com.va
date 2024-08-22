@@ -61,6 +61,7 @@ class LoginController extends Controller
                                 Auth::guard('isUserCustomer')->logout();
                                 return redirect('/login')->with('error', __('login.error_01'))->withInput();
                             }
+                            $this->saveLogCustomer($userCustomer->id, __('login.login_success'));
                         }
                        return redirect('/insurance-expenses/index')->with('success', __('login.login_success'));
                 }
