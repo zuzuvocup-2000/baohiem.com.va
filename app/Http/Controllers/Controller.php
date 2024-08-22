@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\LogUser;
 use App\Models\LogUserBenhVien;
+use App\Models\LogKhachHang;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -50,6 +51,20 @@ class Controller extends BaseController
                 'Computername' => gethostname(),
             ];
             return LogUserBenhVien::create($insert);
+        }
+    }
+    public function saveLogCustomer($Mauserkhachhang, $hanhdong = '')
+    {
+        if (Auth::guard('isUserCustomer')->check()) {
+            $insert = [
+                'hanhdong' => $hanhdong,
+                'Mauserkhachhang' => $Mauserkhachhang,
+                'active' => STATUS_ACTIVE,
+                'logdate' => now(),
+                'localIP' => Request::ip(),
+                'Computername' => gethostname(),
+            ];
+            return LogKhachHang::create($insert);
         }
     }
 }
