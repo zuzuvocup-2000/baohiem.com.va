@@ -31,6 +31,8 @@ class PhysicalController extends Controller
         $this->physicalService = $physicalService;
         $this->healthReportService = $healthReportService;
     }
+    // Xong view thống kê
+    // TODO: Model xem từng người
     public function index(Request $request)
     {
         $params = $request->query();
@@ -47,34 +49,70 @@ class PhysicalController extends Controller
             $params['period'] = $periodList->first()->id;
         }
         $contractList = $this->contractService->getContractByPeriod($params['period']);
+        if (!isset($params['contract'])) {
+            $params['contract'] = $contractList->first()->id;
+        }
 
         //Khoảng thời gian kiểm tra
         if (!isset($params['time_range'])) {
             $params['time_range'] = date('01/01/Y') . ' - ' . date('d/m/Y');
         }
-        if (!isset($params['date_added'])) {
-            $physicalList = $this->physicalService->getPhysical($companyList->first()->id, $params['time_range'], $params);
-        } else {
-            $physicalList = $this->physicalService->getPhysicalDateAdded($companyList->first()->id, $params['time_range'], $params);
-        }
+
+        $physicalList = !isset($params['date_added'])
+        ? $this->physicalService->getPhysical($companyList->first()->id, $params['time_range'], $params)
+        : $this->physicalService->getPhysicalDateAdded($companyList->first()->id, $params['time_range'], $params);
 
         return view('admin.physical.index', compact(['companyList', 'periodList', 'contractList', 'physicalList']));
+    }
+
+    // TODO
+    // Khamsuckhoedinhky.aspx
+    public function periodic(Request $request)
+    {
+        $params = $request->query();
+        $companyList = $this->companyService->getCompanyActiveSortByOrder();
+        if (!isset($params['company'])) {
+            $params['company'] = $companyList->first()->id;
+        }
+        $periodList = $this->periodService->getPeriodActiveByCompany($params['company']);
+        if (!isset($params['period'])) {
+            $params['period'] = $periodList->first()->id;
+        }
+        $contractList = $this->contractService->getContractByPeriod($params['period']);
+        if (!isset($params['contract'])) {
+            $params['contract'] = $contractList->first()->id;
+        }
+
+        if (!isset($params['keyword'])) {
+            $params['keyword'] = "";
+        }
+        $physicalList = [];
+        // Kiểm tra thực hiện search hay load
+        if (isset($params['submit']) and $params['submit'] == "search") {
+            $keyword = trim($params['keyword']);
+            if ($keyword != "") {
+                if (strlen($keyword) > 5) {
+                    $physicalList = $this->physicalService->getPeriodicPhysical($keyword, $params) ?? [];
+                } else {
+                    echo "<script>alert('Thông tin tìm kiếm có ít nhất 6 ký tự!');</script>";
+                }
+            } else {
+                echo "<script>alert('Vui lòng nhập thông tin tìm kiếm!');</script>";
+            }
+        } else {
+            $physicalList = $this->physicalService->show_customer($params['contract']) ?? [];
+        }
+        // Cưu long joc 2 -20067
+        // Cưu long joc 2 (o) -20058
+        // truong son - 20059
+        // pvfcco - 49
+        // talisman -20066
+        // gas south - 20068
+        return view('admin.physical.periodic', compact(['companyList', 'periodList', 'contractList', 'physicalList']));
     }
     public function detail()
     {
         return view('admin.physical.detail');
-    }
-    public function periodic(Request $request)
-    {
-        $params = $request->query();
-        if (!isset($params['time_range'])) {
-            $params['time_range'] = date('01/01/Y') . ' - ' . date('d/m/Y');
-        }
-        $companyList = $this->companyService->getCompanyActiveSortByOrder();
-        $periodList = $this->periodService->getPeriodActiveByCompany($companyList->first()->id);
-        $contractList = $this->contractService->getContractByPeriod($periodList->first()->id);
-        $physicalList = $this->physicalService->getPhysical($companyList->first()->id, $params['time_range'], $params);
-        return view('admin.physical.periodic', compact(['companyList', 'periodList', 'contractList', 'physicalList']));
     }
     public function healthReport(Request $request)
     {
@@ -83,8 +121,17 @@ class PhysicalController extends Controller
             $params['time_range'] = date('01/01/Y') . ' - ' . date('d/m/Y');
         }
         $companyList = $this->companyService->getCompanyActiveSortByOrder();
-        $periodList = $this->periodService->getPeriodActiveByCompany($companyList->first()->id);
-        $contractList = $this->contractService->getContractByPeriod($periodList->first()->id);
+        if (!isset($params['company'])) {
+            $params['company'] = $companyList->first()->id;
+        }
+        $periodList = $this->periodService->getPeriodActiveByCompany($params['company']);
+        if (!isset($params['period'])) {
+            $params['period'] = $periodList->first()->id;
+        }
+        $contractList = $this->contractService->getContractByPeriod($params['period']);
+        if (!isset($params['time_range'])) {
+            $params['time_range'] = date('01/01/Y') . ' - ' . date('d/m/Y');
+        }
         $healthReportList = $this->healthReportService->getHealthReportList($companyList->first()->id, $params['time_range'], $params);
         return view('admin.physical.health_report', compact(['healthReportList', 'companyList', 'periodList', 'contractList']));
     }
