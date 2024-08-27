@@ -19,10 +19,10 @@ return new class extends Migration
             $table->renameColumn('MATIEUSUBANTHAN', 'id');
             $table->renameColumn('TENBENH', 'disease');
             $table->renameColumn('PHATHIENNAM_BENH', 'detection_year');
-            $table->renameColumn('BENHNGHENGHIEP', 'content');
-            $table->renameColumn('PHATHIENNAM_BENHNGHENGHIEP', 'source');
-            $table->renameColumn('ACTIVE', 'active');
-            $table->renameColumn('MADOTKHAM', 'examination_code');
+            $table->renameColumn('BENHNGHENGHIEP', 'occupational_disease');
+            $table->renameColumn('PHATHIENNAM_BENHNGHENGHIEP', 'year_of_disease');
+            $table->renameColumn('active', 'active');
+            $table->renameColumn('MADOTKHAM', 'health_checkup_information_id');
         });
     }
 

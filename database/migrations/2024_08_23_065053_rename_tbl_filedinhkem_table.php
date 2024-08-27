@@ -21,7 +21,7 @@ return new class extends Migration
             $table->renameColumn('FOLDER', 'folder');
             $table->renameColumn('GHICHU', 'note');
             $table->renameColumn('ACTIVE', 'active');
-            $table->renameColumn('MADOTKHAM', 'examination_code');
+            $table->renameColumn('MADOTKHAM', 'health_checkup_information_id');
             $table->renameColumn('LOGDATE', 'log_date');
         });
     }
