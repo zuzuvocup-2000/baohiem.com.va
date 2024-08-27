@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::rename('TBL_CHUNGNGUA_DANHSACHPHANLOAICHUNGNGUA', 'tbl_vaccination_classification');
+        Schema::rename('TBL_pagetest', 'tbl_page_test');
 
-        Schema::table('tbl_vaccination_classification', function (Blueprint $table) {
-            $table->renameColumn('MAPHANLOAICHUNGNGUA', 'id');
-            $table->renameColumn('TENPHANLOAI', 'classification_name');
-            $table->renameColumn('GHICHU', 'note');
+        Schema::table('tbl_page_test', function (Blueprint $table) {
+            $table->renameColumn('matrang', 'id');
+            $table->renameColumn('tentrang', 'page_name');
             $table->renameColumn('ACTIVE', 'active');
         });
     }
@@ -30,7 +29,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('TBL_CHUNGNGUA_DANHSACHPHANLOAICHUNGNGUA', function (Blueprint $table) {
+        Schema::table('TBL_pagetest', function (Blueprint $table) {
             //
         });
     }

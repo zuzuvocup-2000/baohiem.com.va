@@ -4,18 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class DanhsachChungngua extends Model
+class ExaminationPackageDetails extends Model
 {
-    protected $table = 'tbl_vaccination_list';
+    protected $table = 'tbl_examination_package_details';
     public $timestamps = false;
 
     protected $fillable = [
         'list_of_test_id',
-        'vaccination',
+        'customer_type_id',
         'active',
-        'note',
-        'amount_vaccination',
+        'specialty_list',
+        'list_cdha_id',
     ];
-
 
 }

@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Horse extends Model
+class Vaccination extends Model
 {
-    protected $table = 'tbl_horse';
+    protected $table = 'tbl_vaccination';
     protected $primaryKey = 'id';
     public $timestamps = false;
 
     protected $fillable = [
-        'horse_name',
+        'vaccination',
         'vaccine_name',
         'active',
         'dosage',
@@ -20,9 +20,4 @@ class Horse extends Model
         'classification_id',
     ];
 
-    // If you have relationships, define them here
-    public function horseClassification()
-    {
-        return $this->belongsTo(HorseClassification::class, 'classification_id', 'id');
-    }
 }

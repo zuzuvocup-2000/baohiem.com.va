@@ -2,17 +2,17 @@
 
 namespace App\Services;
 
-use App\Models\HorseClassification;
+use App\Models\VaccinationClassification;
 
 /**
- * Class HorseClassificationService
+ * Class VaccinationClassificationService
  * @package App\Services
  */
-class HorseClassificationService
+class VaccinationClassificationService
 {
     public function getActiveClassifications()
     {
-        return HorseClassification::where('active', STATUS_ACTIVE)
+        return VaccinationClassification::where('active', STATUS_ACTIVE)
             ->orderBy('classification_name', 'asc')
             ->get();
     }
