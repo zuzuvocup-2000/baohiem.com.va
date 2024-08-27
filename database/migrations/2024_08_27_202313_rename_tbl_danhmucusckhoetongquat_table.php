@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::rename('TBL_TIENCANCHUNGNGUA', 'tbl_vaccination_history');
-        Schema::table('tbl_vaccination_history', function (Blueprint $table) {
-            $table->renameColumn('MATIENCANTIEMCHUNG', 'id');
-            $table->renameColumn('MATAIKHOANSUCKHOE', 'health_account_id');
-            $table->renameColumn('MACHUNGNGUA', 'vaccination_id');
-            $table->renameColumn('SOLAN', 'amount');
+        Schema::rename('TBL_DANHMUCSKTONGQUAT', 'tbl_general_health_category');
+
+        Schema::table('tbl_general_health_category', function (Blueprint $table) {
+            $table->renameColumn('MAPHANLOAISKTONGQUAT', 'id');
+            $table->renameColumn('MADANHMUCSKTONGQUAT', 'general_health_id');
+            $table->renameColumn('TENSKTONGQUAT', 'general_health_name');
             $table->renameColumn('ACTIVE', 'active');
         });
     }
@@ -30,7 +30,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('TBL_TIENCANCHUNGNGUA', function (Blueprint $table) {
+        Schema::table('TBL_DANHMUCSKTONGQUAT', function (Blueprint $table) {
             //
         });
     }
