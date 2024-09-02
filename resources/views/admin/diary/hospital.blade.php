@@ -103,9 +103,9 @@
                                                     <td class="text-center">{{ ++$key }}</td>
                                                     <td class="text-center">{{ $hospitalDiary->employee_name }}</td>
                                                     <td class="text-center">{{ $hospitalDiary->username }}</td>
-                                                    <td class="text-center">{{ $hospitalDiary->log_date }}</td>
+                                                    <td class="text-center">{{ $hospitalDiary->logdate }}</td>
                                                     <td class="text-center">
-                                                        {{ $hospitalDiary->action }}
+                                                        {{ $hospitalDiary->hanhdong }}
                                                     </td>
                                                 </tr>
                                                 @endforeach

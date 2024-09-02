@@ -124,14 +124,14 @@
                                             </thead>
                                             <tbody>
                                                 @foreach ($customerDiaryList as $key => $customerDiary)
-                                                <tr data-id="{{ $customerDiary->id }}">
+                                                <tr data-id="{{ $customerDiary->malogkhachhang }}">
                                                     <td>
-                                                        <input type="checkbox" class="toggleCheckbox custom-control-input" id="user-" name="id[]" value="{{ $customerDiary->id }}" />
+                                                        <input type="checkbox" class="toggleCheckbox custom-control-input" id="user-" name="id[]" value="{{ $customerDiary->malogkhachhang }}" />
                                                     </td>
                                                     <td class="text-center">{{ ++$key }}</td>
                                                     <td>{{ $customerDiary->full_name }}</td>
-                                                    <td>{{ $customerDiary->log_date }}</td>
-                                                    <td class="text-center">{{ $customerDiary->action }}</td>
+                                                    <td>{{ $customerDiary->logdate }}</td>
+                                                    <td class="text-center">{{ $customerDiary->hanhdong }}</td>
                                                 </tr>
                                                 @endforeach
                                             </tbody>
