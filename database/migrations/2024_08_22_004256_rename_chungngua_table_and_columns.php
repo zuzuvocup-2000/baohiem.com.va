@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::rename('tbl_chungngua_danhsachCHUNGNGUA', 'tbl_horse');
+        Schema::rename('tbl_chungngua_danhsachCHUNGNGUA', 'tbl_vaccination');
 
         // Đổi tên các cột
-        Schema::table('tbl_horse', function (Blueprint $table) {
+        Schema::table('tbl_vaccination', function (Blueprint $table) {
             $table->renameColumn('MACHUNGNGUA', 'id');
-            $table->renameColumn('TENCHUNGNGUA', 'horse_name');
+            $table->renameColumn('TENCHUNGNGUA', 'vaccination');
             $table->renameColumn('tenvaxcin', 'vaccine_name');
             $table->renameColumn('ACTIVE', 'active');
             $table->renameColumn('LIEULUONG', 'dosage');
