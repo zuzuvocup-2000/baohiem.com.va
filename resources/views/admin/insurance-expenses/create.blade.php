@@ -126,10 +126,10 @@
                                             <h5>Loại chủng ngừa:</h5>
                                         </label>
                                         <div class="col-sm">
-                                            <select class="form-select" id="vaccinationClassificationSelectGeneral" name="vaccination_classification">
-                                                @foreach ($vaccinationClassificationList as $vaccinationClassification)
-                                                <option value="{{ $vaccinationClassification->id }}">
-                                                    {{ $vaccinationClassification->classification_name }}
+                                            <select class="form-select" id="horseClassificationSelectGeneral" name="horse_classification">
+                                                @foreach ($horseClassificationList as $horseClassification)
+                                                <option value="{{ $horseClassification->id }}">
+                                                    {{ $horseClassification->classification_name }}
                                                 </option>
                                                 @endforeach
                                             </select>
@@ -142,10 +142,10 @@
                                             <h5>Tên chủng ngừa:</h5>
                                         </label>
                                         <div class="col-sm">
-                                            <select class="form-select" id="vaccinationSelectGeneral" name="vaccination">
-                                                @foreach ($vaccinationList as $vaccination)
-                                                <option value="{{ $vaccination->id }}">
-                                                    {{ $vaccination->vaccination_name }}
+                                            <select class="form-select" id="horseSelectGeneral" name="horse">
+                                                @foreach ($horseList as $horse)
+                                                <option value="{{ $horse->id }}">
+                                                    {{ $horse->horse_name }}
                                                 </option>
                                                 @endforeach
                                             </select>

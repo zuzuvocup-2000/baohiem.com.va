@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\LogUser;
-use App\Models\LogCustomer;
-use App\Models\LogUserHospital;
+use App\Models\LogUserBenhVien;
+use App\Models\LogKhachHang;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -39,32 +39,32 @@ class Controller extends BaseController
             return LogUser::create($insert);
         }
     }
-    public function saveLogHospital($hospital_user_id, $action = '')
+    public function saveLogHospital($MAUSER_BENHVIEN, $hanhdong = '')
     {
         if (Auth::guard('isUserHospital')->check()) {
             $insert = [
-                'action' => $action,
-                'hospital_user_id' => $hospital_user_id,
+                'hanhdong' => $hanhdong,
+                'MAUSER_BENHVIEN' => $MAUSER_BENHVIEN,
                 'active' => STATUS_ACTIVE,
-                'log_date' => now(),
-                'local_ip' => Request::ip(),
-                'computer_name' => gethostname(),
+                'logdate' => now(),
+                'localIP' => Request::ip(),
+                'Computername' => gethostname(),
             ];
-            return LogUserHospital::create($insert);
+            return LogUserBenhVien::create($insert);
         }
     }
-    public function saveLogCustomer($customer_id, $action = '')
+    public function saveLogCustomer($Mauserkhachhang, $hanhdong = '')
     {
         if (Auth::guard('isUserCustomer')->check()) {
             $insert = [
-                'action' => $action,
-                'customer_id' => $customer_id,
+                'hanhdong' => $hanhdong,
+                'Mauserkhachhang' => $Mauserkhachhang,
                 'active' => STATUS_ACTIVE,
-                'log_date' => now(),
-                'local_ip' => Request::ip(),
-                'computer_name' => gethostname(),
+                'logdate' => now(),
+                'localIP' => Request::ip(),
+                'Computername' => gethostname(),
             ];
-            return LogCustomer::create($insert);
+            return LogKhachHang::create($insert);
         }
     }
 }
