@@ -9,7 +9,7 @@ use App\Http\Controllers\Ajax\ContractController;
 use App\Http\Controllers\Ajax\CustomerGroupController;
 use App\Http\Controllers\Ajax\CustomerTypeController;
 use App\Http\Controllers\Ajax\DepartmentController as DepartmentAjax;
-use App\Http\Controllers\Ajax\HorseController;
+use App\Http\Controllers\Ajax\VaccinationController;
 use App\Http\Controllers\Ajax\PositionController as PositionAjax;
 use App\Http\Controllers\Ajax\HospitalContractController;
 use App\Http\Controllers\Ajax\HospitalController as HospitalAjax;
@@ -92,8 +92,8 @@ Route::group(['middleware' => ['check.any.guard:isUserAdmin']], function () {
     Route::put('/supervisor/recover', [SupervisorAjax::class, 'recover'])->name('ajax.supervisor.recover');
     Route::put('/supervisor/recover-account', [SupervisorAjax::class, 'recoverAccount'])->name('ajax.supervisor.recover-account');
 
-    // Horse
-    Route::get('/horse/list', [HorseController::class, 'list'])->name('ajax.horse.list');
+    // Vaccination
+    Route::get('/vaccination/list', [VaccinationController::class, 'list'])->name('ajax.vaccination.list');
 });
 
 // Chỉ tài khoản nhân sự

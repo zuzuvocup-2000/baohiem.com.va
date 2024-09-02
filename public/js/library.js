@@ -1,21 +1,21 @@
 $(document).ready(function () {
-    $('#horseClassificationSelectGeneral').on('change', function () {
-        var horseClassificationId = $(this).val();
+    $('#vaccinationClassificationSelectGeneral').on('change', function () {
+        var vaccinationClassificationId = $(this).val();
 
         $.ajax({
             type: 'GET',
-            url: '/ajax/horse/list',
+            url: '/ajax/vaccination/list',
             data: {
-                'horse_classification': horseClassificationId
+                'vaccination_classification': vaccinationClassificationId
             },
             success: function (response) {
-                $('#horseSelectGeneral').empty();
+                $('#vaccinationSelectGeneral').empty();
 
                 $.each(response.data, function (key, value) {
-                    $('#horseSelectGeneral').append('<option value="' + value.id + '">' + value.horse_name + '</option > ');
+                    $('#vaccinationSelectGeneral').append('<option value="' + value.id + '">' + value.vaccination_name + '</option > ');
                 });
 
-                $('#horseSelectGeneral').trigger('change');
+                $('#vaccinationSelectGeneral').trigger('change');
             }
         });
     });

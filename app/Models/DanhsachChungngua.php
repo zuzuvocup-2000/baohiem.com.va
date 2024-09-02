@@ -6,20 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class DanhsachChungngua extends Model
 {
-    protected $table = 'TBL_DANHSACHCHUNGNGUA';
+    protected $table = 'tbl_vaccination_list';
     public $timestamps = false;
 
     protected $fillable = [
-        'MAPHANLOAICHUNGNGUA',
-        'TENCHUNGNGUA',
-        'ACTIVE',
-        'GHICHU',
-        'solanchungngua',
+        'list_of_test_id',
+        'vaccination',
+        'active',
+        'note',
+        'amount_vaccination',
     ];
 
 
-    public function phanloaichungngua()
-    {
-        return $this->belongsTo('App\Phanloaichungngua', 'MAPHANLOAICHUNGNGUA');
-    }
 }
