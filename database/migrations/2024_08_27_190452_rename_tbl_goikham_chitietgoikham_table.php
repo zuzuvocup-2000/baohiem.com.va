@@ -20,8 +20,8 @@ return new class extends Migration
             $table->renameColumn('MADANHMUCHIDINHXETNGHIEM', 'list_of_test_id');
             $table->renameColumn('active', 'active');
             $table->renameColumn('maphanloaiKH_BV', 'customer_type_id');
-            $table->renameColumn('madanhmucchuyenkhoa', 'specialty_list');
-            $table->renameColumn('madanhmuccdha', 'list_cdha_id');
+            $table->renameColumn('madanhmucchuyenkhoa', 'specialty_catalogue_id');
+            $table->renameColumn('madanhmuccdha', 'cdha_category_id');
         });
     }
 

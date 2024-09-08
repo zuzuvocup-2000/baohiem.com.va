@@ -11,7 +11,7 @@ class ExaminationPackageContent extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'content_id',
+        'content_code',
         'active',
         'note',
         'content',

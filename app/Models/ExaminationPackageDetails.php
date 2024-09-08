@@ -13,7 +13,7 @@ class ExaminationPackageDetails extends Model
         'list_of_test_id',
         'customer_type_id',
         'active',
-        'specialty_list',
+        'specialty_catalogue_id',
         'list_cdha_id',
     ];
 

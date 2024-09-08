@@ -18,8 +18,8 @@ return new class extends Migration
         Schema::table('tbl_general_health_details', function (Blueprint $table) {
             $table->renameColumn('MATAIKHOANSUCKHOE', 'id');
             $table->renameColumn('MAUSER', 'user_id');
-            $table->renameColumn('MAPHANLOAISKTONGQUAT', 'general_health_type_id');
-            $table->renameColumn('MACHITIETSKTONGQUAT', 'general_health_detail_id');
+            $table->renameColumn('MAPHANLOAISKTONGQUAT', 'classify_general_health_id');
+            $table->renameColumn('MACHITIETSKTONGQUAT', 'general_health_details_id');
             $table->renameColumn('ACTIVE', 'active');
             $table->renameColumn('KETQUA', 'result');
         });

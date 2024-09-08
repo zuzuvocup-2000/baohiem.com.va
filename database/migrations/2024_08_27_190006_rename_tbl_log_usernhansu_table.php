@@ -17,7 +17,7 @@ return new class extends Migration
 
         Schema::table('tbl_log_user_staff', function (Blueprint $table) {
             $table->renameColumn('malogusernhansu', 'id');
-            $table->renameColumn('mauser_nhansu', 'staff_id');
+            $table->renameColumn('mauser_nhansu', 'user_staff_id');
             $table->renameColumn('active', 'active');
             $table->renameColumn('hanhdong', 'action');
             $table->renameColumn('logdate', 'log_date');

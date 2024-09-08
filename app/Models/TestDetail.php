@@ -10,8 +10,8 @@ class TestDetail extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'list_of_test_id',
-        'test_detail_name',
+        'id',
+        'test_catalogue_id',
         'active',
         'max',
         'min',

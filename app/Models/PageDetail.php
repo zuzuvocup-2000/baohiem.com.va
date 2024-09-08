@@ -10,7 +10,7 @@ class PageDetail extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'authority_id',
+        'page_authority_id',
         'page_id',
         'active',
     ];

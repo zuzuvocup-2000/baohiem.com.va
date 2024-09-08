@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::rename('TBL_DANHMUCSKTONGQUAT', 'tbl_general_health_category');
 
         Schema::table('tbl_general_health_category', function (Blueprint $table) {
-            $table->renameColumn('MAPHANLOAISKTONGQUAT', 'id');
-            $table->renameColumn('MADANHMUCSKTONGQUAT', 'general_health_id');
+            $table->renameColumn('MAPHANLOAISKTONGQUAT', 'classify_general_health_id');
+            $table->renameColumn('MADANHMUCSKTONGQUAT', 'id');
             $table->renameColumn('TENSKTONGQUAT', 'general_health_name');
             $table->renameColumn('ACTIVE', 'active');
         });

@@ -17,7 +17,7 @@ return new class extends Migration
 
         Schema::table('tbl_classify_cdha', function (Blueprint $table) {
             $table->renameColumn('MAPHANLOAICDHA', 'id');
-            $table->renameColumn('TENPHANLOAICDHA', 'name_cdha');
+            $table->renameColumn('TENPHANLOAICDHA', 'cdha_name');
             $table->renameColumn('ACTIVE', 'active');
             $table->renameColumn('maphongkham', 'clinic_id');
         });

@@ -17,7 +17,7 @@ return new class extends Migration
 
         Schema::table('tbl_page_detail', function (Blueprint $table) {
             $table->renameColumn('machitiettrang', 'id');
-            $table->renameColumn('Maquyen', 'authority_id');
+            $table->renameColumn('Maquyen', 'page_authority_id');
             $table->renameColumn('matrang', 'page_id');
             $table->renameColumn('active', 'active');
         });

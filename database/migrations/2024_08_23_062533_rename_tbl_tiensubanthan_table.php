@@ -18,7 +18,7 @@ return new class extends Migration
         Schema::table('tbl_personal_achievements', function (Blueprint $table) {
             $table->renameColumn('MATIENCANBANTHAN', 'id');
             $table->renameColumn('TIENCANBANTHAN', 'disease_name');
-            $table->renameColumn('MATAIKHOANSUCKHOE', 'account_id');
+            $table->renameColumn('MATAIKHOANSUCKHOE', 'health_account_id');
             $table->renameColumn('ACTIVE', 'active');
         });
     }

@@ -17,7 +17,7 @@ return new class extends Migration
 
         Schema::table('tbl_examination_package_content', function (Blueprint $table) {
             $table->renameColumn('manoidungkham', 'id');
-            $table->renameColumn('codenoidung', 'content_id');
+            $table->renameColumn('codenoidung', 'content_code');
             $table->renameColumn('active', 'active');
             $table->renameColumn('Ghichu', 'note');
             $table->renameColumn('noidung', 'content');

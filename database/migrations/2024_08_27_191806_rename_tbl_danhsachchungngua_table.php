@@ -17,9 +17,9 @@ return new class extends Migration
 
         Schema::table('tbl_vaccination_list', function (Blueprint $table) {
             $table->renameColumn('MACHUNGNGUA', 'id');
-            $table->renameColumn('MAPHANLOAICHUNGNGUA', 'list_of_test_id');
+            $table->renameColumn('MAPHANLOAICHUNGNGUA', 'vaccination_classification_id');
             $table->renameColumn('active', 'active');
-            $table->renameColumn('TENCHUNGNGUA', 'vaccination');
+            $table->renameColumn('TENCHUNGNGUA', 'vaccination_name');
             $table->renameColumn('GHICHU', 'note');
             $table->renameColumn('solanchungngua', 'amount_vaccination');
         });

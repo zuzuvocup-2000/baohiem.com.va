@@ -11,7 +11,7 @@ class GasUserStaffDetail extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'staff_id',
+        'user_staff_id',
         'gas_branch_id',
         'active',
     ];

@@ -17,8 +17,8 @@ return new class extends Migration
 
         Schema::table('tbl_examination_package_exclusion_detail', function (Blueprint $table) {
             $table->renameColumn('machitietloaitru', 'id');
-            $table->renameColumn('machitietgoikham', 'package_detail_id');
-            $table->renameColumn('machitietnoidungkham', 'examination_content_id');
+            $table->renameColumn('machitietgoikham', 'examination_package_details_id');
+            $table->renameColumn('machitietnoidungkham', 'detailed_examination_content_id');
             $table->renameColumn('active', 'active');
         });
     }

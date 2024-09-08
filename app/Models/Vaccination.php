@@ -11,7 +11,7 @@ class Vaccination extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'vaccination',
+        'vaccination_name',
         'vaccine_name',
         'active',
         'dosage',

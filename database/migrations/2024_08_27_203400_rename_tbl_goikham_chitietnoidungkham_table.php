@@ -17,11 +17,11 @@ return new class extends Migration
 
         Schema::table('tbl_detailed_examination_content', function (Blueprint $table) {
             $table->renameColumn('machitietnoidungkham', 'id');
-            $table->renameColumn('manoidungkham', 'examination_content_id');
+            $table->renameColumn('manoidungkham', 'examination_package_content_id');
             $table->renameColumn('madanhmuckhamchuyenkhoa', 'category_specialist_examination_id');
             $table->renameColumn('madanhmucchidinhxetnghiem', 'category_test_indications_id');
             $table->renameColumn('madanhmucchidinhcdha', 'category_cdha_id');
-            $table->renameColumn('madieukienthuchien', 'condition_id');
+            $table->renameColumn('madieukienthuchien', 'examination_package_condition_id');
             $table->renameColumn('active', 'active');
         });
     }

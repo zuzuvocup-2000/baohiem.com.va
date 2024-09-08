@@ -13,7 +13,7 @@ class ResultDetailCDHA extends Model
     protected $fillable = [
         'result_cdha',
         'active',
-        'category_cdha_id',
+        'cdha_category_id',
         'health_checkup_information_id',
     ];
 }

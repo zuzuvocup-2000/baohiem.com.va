@@ -11,12 +11,12 @@ class DetailExaminationContent extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'examination_content_id',
+        'examination_package_content_id',
         'active',
         'category_specialist_examination_id',
         'category_test_indications_id',
         'category_cdha_id',
-        'condition_id',
+        'examination_package_condition_id',
     ];
 
    

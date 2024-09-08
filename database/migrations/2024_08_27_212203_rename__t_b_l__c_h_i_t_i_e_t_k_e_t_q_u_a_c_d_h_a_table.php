@@ -19,7 +19,7 @@ return new class extends Migration
             $table->renameColumn('MACHITIETKETQUACDHA', 'id');
             $table->renameColumn('KETQUACDHA', 'result_cdha');
             $table->renameColumn('ACTIVE', 'active');
-            $table->renameColumn('MADANHMUCCDHA', 'category_cdha_id');
+            $table->renameColumn('MADANHMUCCDHA', 'cdha_category_id');
             $table->renameColumn('MADOTKHAM', 'health_checkup_information_id');
         });
     }

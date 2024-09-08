@@ -11,8 +11,8 @@ class ExaminationPackageExclusionDetail extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'package_detail_id',
-        'examination_content_id',
+        'examination_package_details_id',
+        'detailed_examination_content_id',
         'active',
     ];
 

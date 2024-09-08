@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::rename('tbl_$goikham_chitietphanloaiKH_BV', 'tbl_examination_package_typecustome_detail');
+        Schema::rename('tbl_$goikham_chitietphanloaiKH_BV', 'tbl_examination_package_type_customer_detail');
 
-        Schema::table('tbl_examination_package_typecustome_detail', function (Blueprint $table) {
+        Schema::table('tbl_examination_package_type_customer_detail', function (Blueprint $table) {
             $table->renameColumn('machitietgoikham_phanloai', 'id');
             $table->renameColumn('maphanloaiKH_BV', 'customer_type_id');
             $table->renameColumn('magoikham', 'examination_package_id');

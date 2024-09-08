@@ -10,8 +10,8 @@ class DanhsachChungngua extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'list_of_test_id',
-        'vaccination',
+        'vaccination_classification_id',
+        'vaccination_name',
         'active',
         'note',
         'amount_vaccination',

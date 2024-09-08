@@ -10,7 +10,7 @@ class ClassifyCDHA extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'name_cdha',
+        'cdha_name',
         'active',
         'clinic_id',
     ];

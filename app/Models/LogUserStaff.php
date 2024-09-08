@@ -10,7 +10,7 @@ class LogUserStaff extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'staff_id',
+        'user_staff_id',
         'action',
         'local_ip',
         'computer_name',

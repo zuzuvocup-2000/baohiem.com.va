@@ -12,7 +12,7 @@ class VaccinationDetail extends Model
 
     protected $fillable = [
         'health_account_id',
-        'calendar_id',
+        'vaccination_schedule_detail_id',
         'user_id',
         'vaccination_date',
         'active',

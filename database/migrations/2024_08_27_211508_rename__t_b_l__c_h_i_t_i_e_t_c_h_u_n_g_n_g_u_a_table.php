@@ -18,7 +18,7 @@ return new class extends Migration
         Schema::table('tbl_vaccination_detail', function (Blueprint $table) {
             $table->renameColumn('MACHITIETCHUNGNUA', 'id');
             $table->renameColumn('MATAIKHOANSUCKHOE', 'health_account_id');
-            $table->renameColumn('MACHITIETLICH', 'calendar_id');
+            $table->renameColumn('MACHITIETLICH', 'vaccination_schedule_detail_id');
             $table->renameColumn('MAUSER', 'user_id');
             $table->renameColumn('NGAYCHUNG', 'vaccination_date');
             $table->renameColumn('ACTIVE', 'active');

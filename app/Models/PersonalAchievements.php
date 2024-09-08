@@ -12,7 +12,7 @@ class PersonalAchievements extends Model
     protected $fillable = [
         'id',
         'disease_name',
-        'account_id',
+        'health_account_id',
         'active',
     ];
 

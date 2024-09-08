@@ -12,7 +12,7 @@ class CDHACategory extends Model
     protected $fillable = [
         'cdha_name',
         'active',
-        'cdha_id',
+        'classify_cdha_id',
         'clinic_id',
     ];
 

@@ -18,7 +18,7 @@ return new class extends Migration
         // Đổi tên các cột
         Schema::table('tbl_vaccination', function (Blueprint $table) {
             $table->renameColumn('MACHUNGNGUA', 'id');
-            $table->renameColumn('TENCHUNGNGUA', 'vaccination');
+            $table->renameColumn('TENCHUNGNGUA', 'vaccination_name');
             $table->renameColumn('tenvaxcin', 'vaccine_name');
             $table->renameColumn('ACTIVE', 'active');
             $table->renameColumn('LIEULUONG', 'dosage');

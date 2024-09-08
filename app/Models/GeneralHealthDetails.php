@@ -12,8 +12,8 @@ class GeneralHealthDetails extends Model
     protected $fillable = [
         'id',
         'user_id',
-        'general_health_type_id',
-        'general_health_detail_id',
+        'classify_general_health_id',
+        'general_health_details_id',
         'active',
         'result',
     ];

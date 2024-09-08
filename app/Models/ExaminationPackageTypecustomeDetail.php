@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ExaminationPackageTypecustomeDetail extends Model
 {
-    protected $table = 'tbl_examination_package_typecustome_detail';
+    protected $table = 'tbl_examination_package_type_customer_detail';
     protected $primaryKey = 'id';
     public $timestamps = false;
 

@@ -17,7 +17,7 @@ return new class extends Migration
 
         Schema::table('tbl_gas_user_staff_detail', function (Blueprint $table) {
             $table->renameColumn('ChitietUserNhansuID', 'id');
-            $table->renameColumn('mauser_nhansu', 'staff_id');
+            $table->renameColumn('mauser_nhansu', 'user_staff_id');
             $table->renameColumn('Active', 'active');
             $table->renameColumn('ChinhanhGASID', 'gas_branch_id');
         });
