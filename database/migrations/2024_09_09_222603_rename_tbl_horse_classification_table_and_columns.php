@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::rename('TBL_CHUNGNGUA_DANHSACHPHANLOAICHUNGNGUA', 'tbl_horse_classification');
+        Schema::rename('tbl_horse_classification', 'tbl_vaccination_classification');
 
-        Schema::table('tbl_horse_classification', function (Blueprint $table) {
+        Schema::table('tbl_vaccination_classification', function (Blueprint $table) {
             $table->renameColumn('MAPHANLOAICHUNGNGUA', 'id');
             $table->renameColumn('TENPHANLOAI', 'classification_name');
             $table->renameColumn('GHICHU', 'note');
