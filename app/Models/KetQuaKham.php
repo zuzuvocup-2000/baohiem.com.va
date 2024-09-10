@@ -18,13 +18,5 @@ class KetQuaKham extends Model
         'ACTIVE',
     ];
 
-    public function danhMucChuyenKhoa()
-    {
-        return $this->belongsTo(DanhMucChuyenKhoa::class, 'MADANHMUCCHUYENKHOA');
-    }
 
-    public function thongTinDotKham()
-    {
-        return $this->belongsTo(ThongTinDotKham::class, 'MADOTKHAM');
-    }
 }

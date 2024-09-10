@@ -3,10 +3,8 @@
 namespace App\Services;
 
 use App\Models\User;
-use App\Models\Hospital;
 use App\Models\Customer;
-use App\Models\UserBenhVien;
-use App\Models\LogUserBenhVien;
+use App\Models\LogUserHospital;
 /**
  * Class DiaryService
  * @package App\Services
@@ -25,31 +23,31 @@ class DiaryService
     }
     public function getHospitalDiary()
     {
-        return LogUserBenhVien::select(
-                'tbl_loguser_benhvien.maloguser_benhvien as maloguser_benhvien',
-                'tbl_loguser_benhvien.MAUSER_BENHVIEN as MAUSER_BENHVIEN',
-                'logdate',
-                'hanhdong',
-                'localIP',
-                'Computername',
+        return LogUserHospital::select(
+                'tbl_loguser_hospital.id as id',
+                'tbl_loguser_hospital.hospital_user_id as hospital_user_id',
+                'log_date',
+                'action',
+                'local_ip',
+                'computer_name',
                 'employee_name',
                 'username',
-                'tbl_loguser_benhvien.maloguser_benhvien as maloguser_benhvien_alias'
+                'tbl_loguser_hospital.id as id'
             )
-            ->join('tbl_user_hospital', 'tbl_loguser_benhvien.MAUSER_BENHVIEN', '=', 'tbl_user_hospital.id')
-            ->where('tbl_loguser_benhvien.active', STATUS_ACTIVE)
-            ->orderBy('logdate' , 'desc')
+            ->join('tbl_user_hospital', 'tbl_loguser_hospital.hospital_user_id', '=', 'tbl_user_hospital.id')
+            ->where('tbl_loguser_hospital.active', STATUS_ACTIVE)
+            ->orderBy('log_date' , 'desc')
             ->paginate(20);
     }
     public function getCustomerDiary()
     {
-        return Customer::select('tbl_user_customer.username', 'TBL_LOGKHACHHANG.malogkhachhang', 'TBL_LOGKHACHHANG.logdate', 'TBL_LOGKHACHHANG.hanhdong', 'tbl_customer.full_name')
+        return Customer::select('tbl_user_customer.username', 'tbl_log_customer.id', 'tbl_log_customer.log_date', 'tbl_log_customer.action', 'tbl_customer.full_name')
         ->join('tbl_user_customer', 'tbl_customer.id', '=', 'tbl_user_customer.customer_id')
-        ->join('TBL_LOGKHACHHANG', 'tbl_user_customer.id', '=', 'TBL_LOGKHACHHANG.Mauserkhachhang')
-        ->where('TBL_LOGKHACHHANG.active', STATUS_ACTIVE)
+        ->join('tbl_log_customer', 'tbl_user_customer.id', '=', 'tbl_log_customer.customer_id')
+        ->where('tbl_log_customer.active', STATUS_ACTIVE)
         ->where('tbl_user_customer.active', STATUS_ACTIVE)
         // ->where('tbl_customer.id', $id)
-        ->orderBy('TBL_LOGKHACHHANG.logdate', 'desc')
+        ->orderBy('tbl_log_customer.log_date', 'desc')
         ->paginate(20);
         
     }
