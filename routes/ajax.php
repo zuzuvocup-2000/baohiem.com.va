@@ -14,6 +14,7 @@ use App\Http\Controllers\Ajax\PositionController as PositionAjax;
 use App\Http\Controllers\Ajax\HospitalContractController;
 use App\Http\Controllers\Ajax\HospitalController as HospitalAjax;
 use App\Http\Controllers\Ajax\InsuranceExpensesController as AjaxInsuranceExpensesController;
+use App\Http\Controllers\Ajax\PaymentTypeController;
 use App\Http\Controllers\Ajax\PeriodController;
 use App\Http\Controllers\Ajax\SupervisorController as SupervisorAjax;
 use App\Http\Controllers\Ajax\UserHospitalController;
@@ -94,6 +95,11 @@ Route::group(['middleware' => ['check.any.guard:isUserAdmin']], function () {
 
     // Vaccination
     Route::get('/vaccination/list', [VaccinationController::class, 'list'])->name('ajax.vaccination.list');
+
+    // Payment Type
+    Route::post('/payment-type/add', [PaymentTypeController::class, 'add'])->name('paymentType.add');
+    Route::post('/payment-type/edit', [PaymentTypeController::class, 'edit'])->name('paymentType.edit');
+    Route::post('/payment-type/delete', [PaymentTypeController::class, 'delete'])->name('paymentType.delete');
 });
 
 // Chỉ tài khoản nhân sự

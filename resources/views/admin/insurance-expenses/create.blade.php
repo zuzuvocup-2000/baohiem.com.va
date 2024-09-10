@@ -126,7 +126,8 @@
                                             <h5>Loại chủng ngừa:</h5>
                                         </label>
                                         <div class="col-sm">
-                                            <select class="form-select" id="vaccinationClassificationSelectGeneral" name="vaccination_classification">
+                                            <select class="form-select" id="vaccinationClassificationSelectGeneral"
+                                                name="vaccination_classification">
                                                 @foreach ($vaccinationClassificationList as $vaccinationClassification)
                                                 <option value="{{ $vaccinationClassification->id }}">
                                                     {{ $vaccinationClassification->classification_name }}
@@ -142,7 +143,8 @@
                                             <h5>Tên chủng ngừa:</h5>
                                         </label>
                                         <div class="col-sm">
-                                            <select class="form-select" id="vaccinationSelectGeneral" name="vaccination">
+                                            <select class="form-select" id="vaccinationSelectGeneral"
+                                                name="vaccination">
                                                 @foreach ($vaccinationList as $vaccination)
                                                 <option value="{{ $vaccination->id }}">
                                                     {{ $vaccination->vaccination_name }}
@@ -223,10 +225,14 @@
                             <div class="col-sm-12 col-md-6">
                                 <div class="text-right ">
                                     <div class="d-flex align-items-center justify-content-end">
+                                        <button type="submit" class="btn btn-success btn-save-payment-insurance me-2"
+                                            data-action="create">Lưu</button>
                                         <button type="submit" class="btn btn-primary btn-add-content-pay me-2"
                                             data-action="create">Thêm mới</button>
-                                        <button type="submit" class="btn btn-success btn-save-payment-insurance"
-                                            data-action="create">Lưu</button>
+                                        <button onclick="return false"
+                                            class="btn btn-primary btn-action-content-payment" data-bs-toggle="modal"
+                                            data-bs-target="#contentPaymentModal">Thêm nội dung
+                                            chi</button>
                                     </div>
                                 </div>
                             </div>
@@ -237,6 +243,7 @@
         </div>
     </div>
 </form>
+@include('common.modal-content-payment', ['paymentTypeList'=> $paymentTypeList])
 <script>
     var paymentTypeList = JSON.parse('<?php echo json_encode($paymentTypeList) ?>')
 </script>
