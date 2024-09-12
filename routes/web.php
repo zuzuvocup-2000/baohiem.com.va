@@ -204,7 +204,7 @@ Route::get('/management', [UserController::class, 'management'])->name('user.man
 // Route for login page
 Route::get('/', [LoginController::class, 'showLoginForm']);
 
-Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::get('login', [LoginController::class, 'showLoginForm'])->middleware('guest')->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.post');
 
 // Route for forgot password page

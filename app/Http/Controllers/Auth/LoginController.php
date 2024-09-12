@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
+
 use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
@@ -8,13 +9,22 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request as HttpRequest;
+
 class LoginController extends Controller
 {
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/dashboard';
 
     public function showLoginForm()
     {
-        return view('auth.login');
+        if (Auth::check()) {
+            return redirect('/dashboard');
+        }
+
+        return response()
+            ->view('auth.login')
+            ->header('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
+            ->header('Pragma', 'no-cache')
+            ->header('Expires', '0');
     }
 
     public function login(LoginRequest $request)
@@ -34,7 +44,7 @@ class LoginController extends Controller
                             }
                             $this->saveLog(Auth::user()->id, __('login.login_success'));
                         }
-                       return redirect('/account')->with('success', __('login.login_success'));
+                        return redirect('/account')->with('success', __('login.login_success'));
                     case 'isUserStaff':
                         if (Auth::guard('isUserStaff')->check()) {
                             $userStaff = Auth::guard('isUserStaff')->user();
@@ -43,7 +53,7 @@ class LoginController extends Controller
                                 return redirect('/login')->with('error', __('login.error_01'))->withInput();
                             }
                         }
-                       return redirect('/dashboard')->with('success', __('login.login_success'));
+                        return redirect('/dashboard')->with('success', __('login.login_success'));
                     case 'isUserHospital':
                         if (Auth::guard('isUserHospital')->check()) {
                             $userHospital = Auth::guard('isUserHospital')->user();
@@ -53,7 +63,7 @@ class LoginController extends Controller
                             }
                             $this->saveLogHospital($userHospital->id, __('login.login_success'));
                         }
-                       return redirect('/insurance-expenses/hospital')->with('success', __('login.login_success'));
+                        return redirect('/insurance-expenses/hospital')->with('success', __('login.login_success'));
                     case 'isUserCustomer':
                         if (Auth::guard('isUserCustomer')->check()) {
                             $userCustomer = Auth::guard('isUserCustomer')->user();
@@ -63,7 +73,7 @@ class LoginController extends Controller
                             }
                             $this->saveLogCustomer($userCustomer->id, __('login.login_success'));
                         }
-                       return redirect('/insurance-expenses/index')->with('success', __('login.login_success'));
+                        return redirect('/insurance-expenses/index')->with('success', __('login.login_success'));
                 }
             }
         }
@@ -75,7 +85,7 @@ class LoginController extends Controller
         // Custom logic after successful login
     }
 
-    public function logout(HttpRequest $request) : RedirectResponse
+    public function logout(HttpRequest $request): RedirectResponse
     {
         if (Auth::guard('isUserHospital')->check()) {
             $userHospital = Auth::guard('isUserHospital')->user();
