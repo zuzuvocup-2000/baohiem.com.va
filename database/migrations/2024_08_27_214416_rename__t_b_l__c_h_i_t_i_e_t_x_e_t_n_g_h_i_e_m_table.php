@@ -17,13 +17,13 @@ return new class extends Migration
 
         Schema::table('tbl_test_detail', function (Blueprint $table) {
             $table->renameColumn('MACHITIETXETNGHIEM', 'id');
-            $table->renameColumn('MADANHMUCHIDINHXETNGHIEM', 'list_of_test_id');
+            $table->renameColumn('MADANHMUCHIDINHXETNGHIEM', 'test_catalogue_id');
             $table->renameColumn('TENCHITIETXETNGHIEM', 'test_detail_name');
-            $table->renameColumn('GIATRIMAX', 'max');
             $table->renameColumn('ACTIVE', 'active');
-            $table->renameColumn('GIATRIMIN', 'min');
+            $table->renameColumn('GIATRIMAX', 'max_value');
+            $table->renameColumn('GIATRIMIN', 'min_value');
             $table->renameColumn('DONVITINH', 'unit');
-            $table->renameColumn('Chisobinhthuong', 'normal_index');
+            $table->renameColumn('Chisobinhthuong', 'normal_value');
             $table->renameColumn('maphongkham', 'clinic_id');
         });
     }
