@@ -14,7 +14,7 @@ class TestOrder extends Model
         'active',
         'datelog',
         'health_checkup_information_id',
-        'test_catalogue_id',
+        'test_category_id',
     ];
 
     public function healthCheckupInformation()
@@ -22,9 +22,9 @@ class TestOrder extends Model
         return $this->belongsTo(HealthCheckupInformation::class, 'health_checkup_information_id', 'id');
     }
 
-    public function testCatalogue()
+    public function TestCategory()
     {
-        return $this->belongsTo(TestCatalogue::class, 'test_catalogue_id', 'id');
+        return $this->belongsTo(TestCategory::class, 'test_category_id', 'id');
     }
 }
 

@@ -13,8 +13,8 @@ class ExaminationPackageDetails extends Model
         'list_of_test_id',
         'customer_type_id',
         'active',
-        'specialty_catalogue_id',
-        'list_cdha_id',
+        'specialty_category_id',
+        'list_diag_imaging_id',
     ];
 
 }

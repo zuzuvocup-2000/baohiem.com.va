@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::rename('tbl_classify_cdha', 'tbl_diag_imaging_class');
 
         Schema::table('tbl_diag_imaging_class', function (Blueprint $table) {
-            $table->renameColumn('TENPHANLOAICDHA', 'diag_imaging_name');
+            $table->renameColumn('cdha_name', 'diag_imaging_name');
         });
     }
 
