@@ -30,7 +30,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('TBL_PHANLOAICDHA', function (Blueprint $table) {
+        Schema::table('TBL_PHANLOAICHUNGNGUA', function (Blueprint $table) {
             //
         });
     }
