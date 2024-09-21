@@ -16,9 +16,6 @@ return new class extends Migration
         Schema::table('tbl_examination_package_details', function (Blueprint $table) {
             $table->renameColumn('cdha_category_id', 'diag_imaging_class_id');
         });
-        Schema::table('tbl_diag_imaging_result_detail', function (Blueprint $table) {
-            $table->renameColumn('cdha_category_id', 'diag_imaging_class_id');
-        });
         Schema::table('tbl_detailed_examination_content', function (Blueprint $table) {
             $table->renameColumn('category_cdha_id', 'diag_imaging_class_id');
         });
