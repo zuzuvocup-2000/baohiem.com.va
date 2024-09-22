@@ -94,6 +94,7 @@ Route::group(['middleware' => ['check.any.guard:isUserAdmin']], function () {
 
     // Vaccination
     Route::get('/vaccination/list', [VaccinationController::class, 'list'])->name('ajax.vaccination.list');
+    Route::post('/vaccination/create', [VaccinationController::class, 'create'])->name('ajax.vaccination.create');
 });
 
 // Chỉ tài khoản nhân sự

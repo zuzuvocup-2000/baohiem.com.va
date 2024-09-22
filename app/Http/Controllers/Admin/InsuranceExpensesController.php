@@ -11,6 +11,7 @@ use App\Services\PeriodService;
 use App\Services\AccountService;
 use App\Services\VaccinationClassificationService;
 use App\Services\VaccinationService;
+use App\Services\VaccinationScheduleService;
 use App\Services\HospitalService;
 use App\Services\InsuranceExpensesService;
 use App\Services\PaymentTypeService;
@@ -31,8 +32,9 @@ class InsuranceExpensesController extends Controller
     protected $insuranceExpensesService;
     protected $vaccinationClassificationService;
     protected $vaccinationService;
+    protected $vaccinationScheduleService;
 
-    public function __construct(CompanyService $companyService, PeriodService $periodService, ContractService $contractService, CustomerGroupService $customerGroupService, CustomerService $customerService, AccountService $accountService, HospitalService $hospitalService, PaymentTypeService $paymentTypeService, InsuranceExpensesService $insuranceExpensesService, VaccinationClassificationService $vaccinationClassificationService, VaccinationService $vaccinationService)
+    public function __construct(CompanyService $companyService, PeriodService $periodService, ContractService $contractService, CustomerGroupService $customerGroupService, CustomerService $customerService, AccountService $accountService, HospitalService $hospitalService, PaymentTypeService $paymentTypeService, InsuranceExpensesService $insuranceExpensesService, VaccinationClassificationService $vaccinationClassificationService, VaccinationService $vaccinationService, VaccinationScheduleService $vaccinationScheduleService)
     {
         $this->customerGroupService = $customerGroupService;
         $this->companyService = $companyService;
@@ -45,6 +47,7 @@ class InsuranceExpensesController extends Controller
         $this->insuranceExpensesService = $insuranceExpensesService;
         $this->vaccinationClassificationService = $vaccinationClassificationService;
         $this->vaccinationService = $vaccinationService;
+        $this->vaccinationScheduleService = $vaccinationScheduleService;
     }
 
     public function index(Request $request)
@@ -75,6 +78,7 @@ class InsuranceExpensesController extends Controller
         $paymentTypeList = $this->paymentTypeService->getPaymentTypeList();
         $vaccinationClassificationList = $this->vaccinationClassificationService->getActiveClassifications();
         $vaccinationList = $this->vaccinationService->getVaccinationByClassification($vaccinationClassificationList->first() ? $vaccinationClassificationList->first()->id : 0);
+        $vaccinationScheduleList = $this->vaccinationScheduleService->getVaccinationScheduleByVaccinationIdAndCustomerId($vaccinationClassificationList->first() ? $vaccinationClassificationList->first()->id : 0, $params['id']);
         $hospitalList = $this->hospitalService->getHospital();
         if ($request->isMethod('post')) {
             $params = $request->post();
@@ -87,7 +91,7 @@ class InsuranceExpensesController extends Controller
                 return redirect()->back()->with('error', 'Thêm chi trả thất bại.');
             }
         }
-        return view('admin.insurance-expenses.create', compact(['customer', 'customerPay', 'amountSpent', 'hospitalList', 'paymentTypeList', 'vaccinationClassificationList', 'vaccinationList']));
+        return view('admin.insurance-expenses.create', compact(['customer', 'customerPay', 'amountSpent', 'hospitalList', 'paymentTypeList', 'vaccinationClassificationList', 'vaccinationList', 'vaccinationScheduleList']));
     }
 
     public function update(Request $request)
