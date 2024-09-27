@@ -4,15 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CDHACategory extends Model
+class DiagImagingCategory extends Model
 {
-    protected $table = 'tbl_cdha_category';
+    protected $table = 'tbl_diag_imaging_category';
     public $timestamps = false;
 
     protected $fillable = [
-        'cdha_name',
+        'diag_imaging_name',
         'active',
-        'classify_cdha_id',
+        'diag_imaging_class_id',
         'clinic_id',
     ];
 

@@ -4,16 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ResultDetailCDHA extends Model
+class DiagImagingResultDetail extends Model
 {
-    protected $table = 'tbl_result_detail_cdha';
+    protected $table = 'tbl_diag_imaging_result_detail';
     protected $primaryKey = 'id';
     public $timestamps = false;
 
     protected $fillable = [
-        'result_cdha',
+        'diag_imaging_result',
         'active',
-        'cdha_category_id',
+        'diag_imaging_category_id',
         'health_checkup_information_id',
     ];
 }

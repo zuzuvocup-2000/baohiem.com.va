@@ -11,7 +11,7 @@ class TestDetail extends Model
 
     protected $fillable = [
         'id',
-        'test_catalogue_id',
+        'test_category_id',
         'active',
         'max',
         'min',

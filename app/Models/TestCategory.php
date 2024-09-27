@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TestCatalogue extends Model
+class TestCategory extends Model
 {
-    protected $table = 'tbl_test_catalogue';
+    protected $table = 'tbl_test_category';
     protected $primaryKey = 'id';
     public $timestamps = false;
 
     protected $fillable = [
-        'test_catalogue_name',
+        'test_category_name',
         'active',
         'test_classification_id',
         'clinic_id',
