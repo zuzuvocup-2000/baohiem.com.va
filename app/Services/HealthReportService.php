@@ -23,10 +23,22 @@ class HealthReportService
             'from' => Carbon::createFromFormat('d/m/Y', trim($from))->format('Y-m-d'),
             'to' => Carbon::createFromFormat('d/m/Y', trim($to))->format('Y-m-d'),
         ];
-        // $time['from'] = "2022-01-01";
 
         // B2: Lấy tất cả các cột/ Danh sách Dịch vụ
         $services_list = $this->getHealthServicesList($company_id, $time['from'], $time['to']);
+        $services_array = []; // Initialize an empty array
+
+        foreach ($services_list as $service_item) {
+            $service_type = $service_item["service_type"];
+
+            // Check if the service_type already exists in the array
+            if (!isset($services_array[$service_type])) {
+                $services_array[$service_type] = []; // Initialize a new array for this service_type
+            }
+
+            // Add the service_code to the appropriate service_type array
+            $services_array[$service_type][] = $service_item["service_code"];
+        }
 
         // B3: Lấy chi tiết kết quả xét nghiệm cơ bản
         // ketquakham_Danhsachdakham_chitiet
@@ -38,34 +50,37 @@ class HealthReportService
         // B4: Lấy chi tiết kết quả xét nghiệm của từng người khám
         foreach ($detailed_examination_list as $key => $detailed_examination_item) {
             $health_checkup_id = $detailed_examination_item['id'];
-            foreach ($services_list as $key => $service_item) {
-                $service_code = $service_item["service_code"];
-                // switch ($service_item["loaidv"]) {
-                //     case "1":
-                //         $get_health_checkup_details = $this->getHealthCheckupDetails($health_checkup_id, $service_code);
-                //         if (!empty($get_health_checkup_details) && isset($get_health_checkup_details[0])) {
-                //             $detailed_examination_item[$service_item["loaidv"] . "_" . $service_item["service_code"]] = $get_health_checkup_details[0]->examination_results;
-                //         }
-                //         break;
-                //     case "2":
-                //         $get_test_details = $this->getTestDetails($health_checkup_id, $service_code);
-                //         if (!empty($get_test_details) && isset($get_test_details[0])) {
-                //             $detailed_examination_item[$service_item["loaidv"] . "_" . $service_item["service_code"]] = $get_test_details[0]->results . "_" . $get_test_details[0]->unit;
-                //         }
-                //         break;
-                //     case "3":
-                //         $get_imaging_results = $this->getImagingResults($health_checkup_id, $service_code);
-                //         if (!empty($get_imaging_results) && isset($get_imaging_results[0])) {
-                //             $detailed_examination_item[$service_item["loaidv"] . "_" . $service_item["service_code"]] = $get_imaging_results[0]->diag_imaging_result;
-                //         }
-                //         break;
-                //     default:
-                //         break;
-                // }
+            foreach ($services_array as $key => $service_item) {
+                switch ($key) {
+                    case "1":
+                        $get_health_checkup_details = $this->getHealthCheckupDetails($health_checkup_id, $service_item);
+                        if (!empty($get_health_checkup_details)) {
+                            foreach ($get_health_checkup_details as $key => $service_result) {
+                                $detailed_examination_item[$key . "_" . $service_result->service_code] = $service_result->examination_results;
+                            }
+                        }
+                        break;
+                    case "2":
+                        $get_test_details = $this->getTestDetails($health_checkup_id, $service_item);
+                        if (!empty($get_test_details)) {
+                            foreach ($get_test_details as $key => $service_result) {
+                                $detailed_examination_item[$key . "_" . $service_result->service_code] = $service_result->results . " " . $service_result->unit;
+                            }
+                        }
+                        break;
+                    case "3":
+                        $get_imaging_results = $this->getImagingResults($health_checkup_id, $service_item);
+                        if (!empty($get_imaging_results)) {
+                            foreach ($get_imaging_results as $key => $service_result) {
+                                $detailed_examination_item[$key . "_" . $service_result->service_code] = $service_result->diag_imaging_result;
+                            }
+                        }
+                        break;
+                    default:
+                        break;
+                }
             }
-            print("--------------");
         }
-        dd();
         return ["services_list" => $services_list, "detailed_examination_list" => $detailed_examination_list];
     }
 
@@ -84,10 +99,10 @@ class HealthReportService
         return $services_list ?? [];
     }
 
-    private function addDatasetTable($ds, $list, $loaiDV)
+    private function addDatasetTable($ds, $list, $service_type)
     {
         foreach ($list as $row) {
-            $row->loaidv = $loaiDV;
+            $row->service_type = $service_type;
             $ds[] = (array) $row;
         }
         return $ds;
@@ -262,44 +277,44 @@ class HealthReportService
         return $results;
     }
 
-    function getHealthCheckupDetails($health_checkup_information_id, $service_code)
+    function getHealthCheckupDetails($health_checkup_information_id, $service_codes)
     {
         $results = DB::table('tbl_health_checkup_information')
             ->distinct()
-            ->select('tbl_health_reports.examination_conclusion', 'tbl_health_reports.examination_results')
+            ->select('tbl_health_reports.specialty_id as service_code', 'tbl_health_reports.examination_conclusion', 'tbl_health_reports.examination_results')
             ->join('tbl_health_reports', 'tbl_health_checkup_information.id', '=', 'tbl_health_reports.health_checkup_information_id')
             ->where('tbl_health_checkup_information.id', $health_checkup_information_id)
-            ->where('tbl_health_reports.specialty_id', $service_code)
+            ->whereIn('tbl_health_reports.specialty_id', $service_codes) // Using whereIn for an array of service codes
             ->where('tbl_health_reports.active', 1)
             ->get();
 
         return $results;
     }
 
-    function getTestDetails($health_checkup_information_id, $service_code)
+    function getTestDetails($health_checkup_information_id, $service_codes)
     {
         $results = DB::table('tbl_health_checkup_information')
             ->distinct()
-            ->select('tbl_health_checkup_information.id', 'tbl_test_detail.unit', 'tbl_test_results_detail.results')
+            ->select('tbl_test_results_detail.test_detail_id as service_code', 'tbl_health_checkup_information.id', 'tbl_test_detail.unit', 'tbl_test_results_detail.results')
             ->join('tbl_test_results_detail', 'tbl_health_checkup_information.id', '=', 'tbl_test_results_detail.health_checkup_information_id')
             ->join('tbl_test_detail', 'tbl_test_results_detail.test_detail_id', '=', 'tbl_test_detail.id')
             ->where('tbl_health_checkup_information.id', $health_checkup_information_id)
-            ->where('tbl_test_results_detail.test_detail_id', $service_code)
+            ->whereIn('tbl_test_results_detail.test_detail_id', $service_codes) // Using whereIn for an array of service codes
             ->where('tbl_test_results_detail.active', 1)
             ->get();
 
         return $results;
     }
 
-    function getImagingResults($health_checkup_information_id, $service_code)
+    function getImagingResults($health_checkup_information_id, $service_codes)
     {
         $results = DB::table('tbl_health_checkup_information')
             ->distinct()
-            ->select('tbl_health_checkup_information.id', 'tbl_diag_imaging_result_detail.diag_imaging_result')
+            ->select('tbl_diag_imaging_result_detail.diag_imaging_category_id as service_code', 'tbl_health_checkup_information.id', 'tbl_diag_imaging_result_detail.diag_imaging_result')
             ->join('tbl_diag_imaging_result_detail', 'tbl_health_checkup_information.id', '=', 'tbl_diag_imaging_result_detail.health_checkup_information_id')
             ->join('tbl_diag_imaging_category', 'tbl_diag_imaging_result_detail.diag_imaging_category_id', '=', 'tbl_diag_imaging_category.id')
             ->where('tbl_health_checkup_information.id', $health_checkup_information_id)
-            ->where('tbl_diag_imaging_result_detail.diag_imaging_category_id', $service_code)
+            ->whereIn('tbl_diag_imaging_result_detail.diag_imaging_category_id', $service_codes) // Using whereIn for an array of service codes
             ->where('tbl_diag_imaging_result_detail.active', 1)
             ->get();
 

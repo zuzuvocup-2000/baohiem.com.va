@@ -50,9 +50,9 @@
                 </div>
                 <div class="card card-body">
                     <div class="table-responsive">
-                        <table class="table system-table border text-nowrap customize-table mb-0 align-middle mb-3">
+                        <table class="table system-table table-bordered customize-table mb-0 align-middle mb-3">
                             <thead class="header-item">
-                                <tr>
+                                <tr class="text-nowrap">
                                     <th style="width: 50px;" class="text-center">
                                         <input type="checkbox" class="toggleAll custom-control-input" id="customCheck1" />
                                     </th>
@@ -71,8 +71,8 @@
                                     <th style="width: 100px;" class="text-center">Vòng ngực</th>
                                     <th style="width: 100px;" class="text-center">BMI</th>
                                     <th style="width: 100px;" class="text-center">Mắc bệnh</th>
-                                    <th style="width: 400px;" class="text-center">Tên bệnh</th>
-                                    <th style="width: 400px;" class="text-center">Hướng giải quyết</th>
+                                    <th style="width: 300px;" class="text-center">Tên bệnh</th>
+                                    <th style="width: 300px;" class="text-center">Hướng giải quyết</th>
                                     <th style="width: 120px;" class="text-center">Loại sức khỏe</th>
                                     @foreach ($healthReportList['services_list'] as $service_item)
                                         <th class="text-center">{{ $service_item['service_name'] }}</th>
@@ -132,10 +132,10 @@
                                                     {{ $detailed_examination_item->disease_code == 1 ? 'checked' : '' }}
                                                     disabled>
                                             </td>
-                                            <td class="text-center" style="text-wrap: wrap">
+                                            <td class="text-center">
                                                 {{ $detailed_examination_item->disease_name }}
                                             </td>
-                                            <td class="text-center" style="text-wrap: wrap">
+                                            <td class="text-center">
                                                 {{ $detailed_examination_item->solution_direction }}
                                             </td>
                                             <td class="text-center">
@@ -143,7 +143,7 @@
                                             </td>
                                             @foreach ($healthReportList['services_list'] as $service_item)
                                                 <td class="text-center">
-                                                    {{ $detailed_examination_item[$service_item['loaidv'] . '_' . $service_item['service_code']] }}
+                                                    {{ $detailed_examination_item[$service_item['service_type'] . '_' . $service_item['service_code']] }}
                                                 </td>
                                             @endforeach
                                         </tr>
