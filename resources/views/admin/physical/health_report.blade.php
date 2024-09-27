@@ -41,7 +41,7 @@
                                         <button class="btn btn-primary" type="submit">Tìm kiếm</button>
                                     </div>
                                     <div class="form-group form-button">
-                                        <button class="btn btn-primary" type="button">Xuất báo cáo</button>
+                                        <button class="btn btn-primary" type="button" disabled>Xuất báo cáo</button>
                                     </div>
                                 </div>
                             </div>
