@@ -32,7 +32,6 @@ class PhysicalController extends Controller
         $this->healthReportService = $healthReportService;
     }
     // Xong view thống kê
-    // TODO: Model xem từng người
     public function index(Request $request)
     {
         $params = $request->query();
@@ -65,7 +64,6 @@ class PhysicalController extends Controller
         return view('admin.physical.index', compact(['companyList', 'periodList', 'contractList', 'physicalList']));
     }
 
-    // TODO
     // Khamsuckhoedinhky.aspx
     public function periodic(Request $request)
     {
@@ -114,12 +112,10 @@ class PhysicalController extends Controller
     {
         return view('admin.physical.detail');
     }
+    // baocaokhamsuckhoe.aspx
     public function healthReport(Request $request)
     {
         $params = $request->query();
-        if (!isset($params['time_range'])) {
-            $params['time_range'] = date('01/01/Y') . ' - ' . date('d/m/Y');
-        }
         $companyList = $this->companyService->getCompanyActiveSortByOrder();
         if (!isset($params['company'])) {
             $params['company'] = $companyList->first()->id;
@@ -129,10 +125,13 @@ class PhysicalController extends Controller
             $params['period'] = $periodList->first()->id;
         }
         $contractList = $this->contractService->getContractByPeriod($params['period']);
+        if (!isset($params['contract'])) {
+            $params['contract'] = $contractList->first()->id;
+        }
         if (!isset($params['time_range'])) {
             $params['time_range'] = date('01/01/Y') . ' - ' . date('d/m/Y');
         }
-        $healthReportList = $this->healthReportService->getHealthReportList($companyList->first()->id, $params['time_range'], $params);
+        $healthReportList = $this->healthReportService->generateHealthReport($companyList->first()->id, $params['time_range'], $params);
         return view('admin.physical.health_report', compact(['healthReportList', 'companyList', 'periodList', 'contractList']));
     }
 }

@@ -64,7 +64,6 @@ class PhysicalService
 
         $results = $query->orderBy('full_name')
             ->orderBy('checkup_date')
-            ->orderBy('full_name')
             ->paginate(PER_PAGE_SMALL)
             ->setPath(route('physical.index', $params));
 
