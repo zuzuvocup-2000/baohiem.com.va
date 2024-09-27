@@ -16,7 +16,6 @@
     <div class="wrap-insurance-detail">
         <div class="row">
             @include('admin.insurance-expenses.common.info', compact(['customer']))
-
             <div class="col-12">
                 <div class="card w-100 position-relative overflow-hidden mb-0">
                     <div class="card-body p-4">
@@ -144,7 +143,7 @@
                                         <div class="col-sm">
                                             <select class="form-select" id="vaccinationSelectGeneral" name="vaccination">
                                                 @foreach ($vaccinationList as $vaccination)
-                                                <option value="{{ $vaccination->id }}">
+                                                <option value="{{ $vaccination->id }}" data-vaccine-name="{{ $vaccination->vaccine_name }}">
                                                     {{ $vaccination->vaccination_name }}
                                                 </option>
                                                 @endforeach
@@ -153,7 +152,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
-                                    <h5>Tên Vacxin: <span class="font-normal">IMOVAX POLIO</span></h5>
+                                    <h5>Tên Vacxin: <span class="font-normal vaccine_name"></span></h5>
                                 </div>
                             </div>
                             <div class="table-responsive">
@@ -193,23 +192,21 @@
                                         <tr role="row">
                                             <td colspan="2">
                                                 @include('common/button-loading', ['class' =>
-                                                'btn-create-company'])
+                                                'btn-create-vaccination'])
                                             </td>
                                             <td>
-                                                <input class="inputField form-control create-company-address"
-                                                    type="text" name="address" value="" />
+                                                <input class="inputField form-control create-vaccination-injection_name"
+                                                    type="text" name="injection_name" value="" />
                                             </td>
                                             <td>
-                                                <input class="inputField form-control create-company-phone_number"
-                                                    type="text" name="phone_number" value="" />
+                                                <input class="inputField form-control create-vaccination-months_to_first"
+                                                    type="text" name="months_to_first" value="" />
                                             </td>
                                             <td>
-                                                <input class="inputField form-control create-company-email" type="text"
-                                                    name="email" value="" />
+                                                <input class="inputField form-control create-vaccination-months_to_repeat" type="text" name="months_to_repeat" value="" />
                                             </td>
                                             <td>
-                                                <input class="inputField form-control create-company-ceo_name"
-                                                    type="text" name="ceo_name" value="" />
+                                                <input class="inputField form-control create-vaccination-injection_date singledate" type="text" name="injection_date" value="" />
                                             </td>
                                         </tr>
                                     </tbody>
