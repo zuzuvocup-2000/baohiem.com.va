@@ -67,7 +67,7 @@ $(document).ready(function () {
                     </div>
                 </td>
                 <td>
-                    <select class="form-select" name="payment_type_id[]">`;
+                    <select class="form-select create-insurance-payment_type" name="payment_type_id[]">`;
         paymentTypeList.forEach(element => {
             newRow += `<option value="${element.id}" ${paymentTypeId == element.id ? "selected" : ""}>${element.payment_type_name}</option>`;
         });
@@ -151,9 +151,16 @@ $(document).ready(function () {
         return false;
     })
 
-    $('.create-insurance-payment_type').on('change', function () {
-        var selectedValue = $(this).val();
-        if (selectedValue == 3) {
+    $(document).on('change', '.create-insurance-payment_type', function () {
+        var showVaccinationContainer = false;
+        $('.create-insurance-payment_type').each(function () {
+            if ($(this).val() == 3) {
+                showVaccinationContainer = true;
+            }
+        });
+
+        if (showVaccinationContainer) {
+            toastr.info('Vui lòng nhập tên chủng ngừa vào bảng trên !')
             $('.vaccination-container').show();
         } else {
             $('.vaccination-container').hide();
