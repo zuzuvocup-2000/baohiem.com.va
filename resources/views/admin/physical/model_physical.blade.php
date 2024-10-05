@@ -1353,7 +1353,7 @@
                                                     <th></th>
                                                     <th>
                                                         <h6 class="fs-4 fw-semibold mb-0 text-center">Phân loại
-                                                            CDHA</h6>
+                                                            chuẩn đoán hình ảnh</h6>
                                                     </th>
                                                     <th>
                                                         <h6 class="fs-4 fw-semibold text-center mb-0">Chỉ định

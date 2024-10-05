@@ -15,9 +15,8 @@ class DetailExaminationContent extends Model
         'active',
         'category_specialist_examination_id',
         'category_test_indications_id',
-        'category_cdha_id',
+        'diag_imaging_category_id',
         'examination_package_condition_id',
     ];
 
-   
 }

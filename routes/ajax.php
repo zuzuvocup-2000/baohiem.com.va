@@ -95,6 +95,7 @@ Route::group(['middleware' => ['check.any.guard:isUserAdmin']], function () {
 
     // Vaccination
     Route::get('/vaccination/list', [VaccinationController::class, 'list'])->name('ajax.vaccination.list');
+    Route::post('/vaccination/create', [VaccinationController::class, 'create'])->name('ajax.vaccination.create');
 
     // Payment Type
     Route::post('/payment-type/add', [PaymentTypeController::class, 'add'])->name('paymentType.add');
