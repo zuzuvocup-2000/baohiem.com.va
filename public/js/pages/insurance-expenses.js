@@ -225,43 +225,6 @@ function render_customer_payment(customerList) {
         });
     }
 }
-$(document).ready(function () {
-    updateVaccinationList();
-
-    $('#vaccinationClassificationSelectGeneral').on('change', function () {
-        updateVaccinationList();
-    });
-
-    $('#vaccinationSelectGeneral').on('change', function () {
-        updateVaccineNameDisplay();
-    });
-});
-
-function updateVaccinationList() {
-    var classificationId = $('#vaccinationClassificationSelectGeneral').val();
-
-    $.ajax({
-        type: 'GET',
-        url: '/ajax/vaccination/list',
-        data: {
-            'classification_id': classificationId
-        },
-        success: function (data) {
-            $('#vaccinationSelectGeneral').empty();
-
-            $.each(data.data, function (key, value) {
-                $('#vaccinationSelectGeneral').append('<option value="' + value.id + '" data-vaccine-name="' + value.vaccine_name.trim() + '">' + value.vaccination_name.trim() + '</option>');
-            });
-
-            updateVaccineNameDisplay();
-        }
-    });
-}
-
-function updateVaccineNameDisplay() {
-    var selectedVaccineName = $('#vaccinationSelectGeneral').find('option:selected').data('vaccine-name');
-    $('h5 span.font-normal').text(selectedVaccineName);
-}
 
 $(document).on('click', '.btn-create-vaccination', function () {
     let _this = $(this);

@@ -6,14 +6,17 @@ $(document).ready(function () {
             type: 'GET',
             url: '/ajax/vaccination/list',
             data: {
-                'vaccination_classification': vaccinationClassificationId
+                'classification_id': vaccinationClassificationId
             },
-            success: function (response) {
+            success: function (data) {
                 $('#vaccinationSelectGeneral').empty();
 
-                $.each(response.data, function (key, value) {
-                    $('#vaccinationSelectGeneral').append('<option value="' + value.id + '">' + value.vaccination_name + '</option > ');
+                $.each(data.data, function (key, value) {
+                    $('#vaccinationSelectGeneral').append('<option value="' + value.id + '" data-vaccine-name="' + value.vaccine_name.trim() + '">' + value.vaccination_name.trim() + '</option>');
                 });
+
+                var selectedVaccineName = $('#vaccinationSelectGeneral').find('option:selected').data('vaccine-name');
+                $('h5 span.font-normal').text(selectedVaccineName);
 
                 $('#vaccinationSelectGeneral').trigger('change');
             }
