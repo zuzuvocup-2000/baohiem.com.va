@@ -1,7 +1,6 @@
 $(document).ready(function () {
     $('#vaccinationClassificationSelectGeneral').on('change', function () {
         var vaccinationClassificationId = $(this).val();
-
         $.ajax({
             type: 'GET',
             url: '/ajax/vaccination/list',
@@ -15,12 +14,14 @@ $(document).ready(function () {
                     $('#vaccinationSelectGeneral').append('<option value="' + value.id + '" data-vaccine-name="' + value.vaccine_name.trim() + '">' + value.vaccination_name.trim() + '</option>');
                 });
 
-                var selectedVaccineName = $('#vaccinationSelectGeneral').find('option:selected').data('vaccine-name');
-                $('h5 span.font-normal').text(selectedVaccineName);
-
                 $('#vaccinationSelectGeneral').trigger('change');
             }
         });
+    });
+
+    $('#vaccinationSelectGeneral').on('change', function () {
+        var selectedVaccineName = $('#vaccinationSelectGeneral').find('option:selected').data('vaccine-name');
+        $('h5 span.font-normal').text(selectedVaccineName);
     });
 
     $('#companySelectGeneral').on('change', function () {

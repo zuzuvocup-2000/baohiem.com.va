@@ -167,11 +167,6 @@ $(document).ready(function () {
         }
     });
 
-    if ($(".table-customer-pay.dataTable").length == 0) {
-        $(".table-customer-pay").DataTable({
-            "bLengthChange": false
-        });
-    }
 });
 
 function render_customer_payment(customerList) {
