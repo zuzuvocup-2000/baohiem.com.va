@@ -1,28 +1,4 @@
 $(document).ready(function () {
-    $('#vaccinationClassificationSelectGeneral').on('change', function () {
-        var vaccinationClassificationId = $(this).val();
-        $.ajax({
-            type: 'GET',
-            url: '/ajax/vaccination/list',
-            data: {
-                'classification_id': vaccinationClassificationId
-            },
-            success: function (data) {
-                $('#vaccinationSelectGeneral').empty();
-
-                $.each(data.data, function (key, value) {
-                    $('#vaccinationSelectGeneral').append('<option value="' + value.id + '" data-vaccine-name="' + value.vaccine_name.trim() + '">' + value.vaccination_name.trim() + '</option>');
-                });
-
-                $('#vaccinationSelectGeneral').trigger('change');
-            }
-        });
-    });
-
-    $('#vaccinationSelectGeneral').on('change', function () {
-        var selectedVaccineName = $('#vaccinationSelectGeneral').find('option:selected').data('vaccine-name');
-        $('h5 span.font-normal').text(selectedVaccineName);
-    });
 
     $('#companySelectGeneral').on('change', function () {
         var companyId = $(this).val();
@@ -145,6 +121,7 @@ $(document).ready(function () {
             return false;
         }
     });
+    
 });
 
 function addCommas(nStr) {
@@ -179,3 +156,4 @@ function formatDate(inputDate) {
     var formattedDate = (day < 10 ? '0' : '') + day + '/' + (month < 10 ? '0' : '') + month + '/' + year;
     return formattedDate;
 }
+

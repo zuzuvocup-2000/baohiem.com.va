@@ -69,8 +69,11 @@ class InsuranceExpensesController extends Controller
         $paymentTypeList = $this->paymentTypeService->getPaymentTypeList();
         $vaccinationClassificationList = $this->vaccinationClassificationService->getActiveClassifications();
         $vaccinationList = $this->vaccinationService->getVaccinationByClassification($vaccinationClassificationList->first() ? $vaccinationClassificationList->first()->id : 0);
-        $vaccinationScheduleList = $this->vaccinationScheduleService->getVaccinationScheduleByVaccinationIdAndCustomerId($vaccinationClassificationList->first() ? $vaccinationClassificationList->first()->id : 0, $params['id']);
+
+        $vaccinationScheduleList = $this->vaccinationScheduleService->getVaccinationScheduleByVaccinationIdAndCustomerId($vaccinationList->first() ? $vaccinationList->first()->id : 0, $params['id']);
+
         $hospitalList = $this->hospitalService->getHospital();
+
         if ($request->isMethod('post')) {
             $params = $request->post();
             $check = $this->insuranceExpensesService->InsuranceExpensesInsert($params);
@@ -94,7 +97,7 @@ class InsuranceExpensesController extends Controller
         $paymentTypeList = $this->paymentTypeService->getPaymentTypeList();
         $vaccinationClassificationList = $this->vaccinationClassificationService->getActiveClassifications();
         $vaccinationList = $this->vaccinationService->getVaccinationByClassification($vaccinationClassificationList->first() ? $vaccinationClassificationList->first()->id : 0);
-        $vaccinationScheduleList = $this->vaccinationScheduleService->getVaccinationScheduleByVaccinationIdAndCustomerId($vaccinationClassificationList->first() ? $vaccinationClassificationList->first()->id : 0, $params['id']);
+        $vaccinationScheduleList = $this->vaccinationScheduleService->getVaccinationScheduleByVaccinationIdAndCustomerId($vaccinationList->first() ? $vaccinationList->first()->id : 0, $params['id']);
         $hospitalList = $this->hospitalService->getHospital();
         if ($request->isMethod('post')) {
             $params = $request->post();
