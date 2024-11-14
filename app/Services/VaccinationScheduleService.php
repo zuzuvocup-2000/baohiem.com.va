@@ -17,17 +17,17 @@ class VaccinationScheduleService
             ->where('vaccination_id', $vaccinationID)
             ->get();
     }
-    public function getVaccinationScheduleByVaccinationIdAndCustomerId($customerId, $vaccinationId)
+    public function getVaccinationScheduleByVaccinationIdAndCustomerId($vaccinationId, $customerId)
     {
         return  VaccinationResult::select([
-                'tbl_vaccination_schedule.injection_name',
-                'tbl_vaccination_result.vaccination_schedule_id',
-                'tbl_vaccination_schedule.months_to_first',
-                'tbl_vaccination_schedule.months_to_repeat',
-                VaccinationResult::raw("CONVERT(nvarchar, injection_date, 103) as injection_date"),
-                'tbl_vaccination_result.note',
-                'tbl_vaccination_result.id'
-            ])
+            'tbl_vaccination_schedule.injection_name',
+            'tbl_vaccination_result.vaccination_schedule_id',
+            'tbl_vaccination_schedule.months_to_first',
+            'tbl_vaccination_schedule.months_to_repeat',
+            VaccinationResult::raw("CONVERT(nvarchar, injection_date, 103) as injection_date"),
+            'tbl_vaccination_result.note',
+            'tbl_vaccination_result.id'
+        ])
             ->join('tbl_vaccination_schedule', 'tbl_vaccination_result.vaccination_schedule_id', '=', 'tbl_vaccination_schedule.id')
             ->join('tbl_vaccination', 'tbl_vaccination_schedule.vaccination_id', '=', 'tbl_vaccination.id')
             ->join('tbl_customer', 'tbl_vaccination_result.customer_id', '=', 'tbl_customer.id')

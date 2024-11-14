@@ -66,7 +66,26 @@ class InsuranceExpensesController extends Controller
         $customer = $this->customerService->getCustomerByCustomerId($params['id'], $params['periodId']);
         $customerPay = $this->customerService->getListCustomersPayForInsuranceByCustomerId($params['id']);
         $amountSpent = $this->customerService->getMoneyAmountSpent($params['id'], $params['periodId']);
-        return view('admin.insurance-expenses.detail', compact(['customer', 'customerPay', 'amountSpent']));
+        $paymentTypeList = $this->paymentTypeService->getPaymentTypeList();
+        $vaccinationClassificationList = $this->vaccinationClassificationService->getActiveClassifications();
+        $vaccinationList = $this->vaccinationService->getVaccinationByClassification($vaccinationClassificationList->first() ? $vaccinationClassificationList->first()->id : 0);
+
+        $vaccinationScheduleList = $this->vaccinationScheduleService->getVaccinationScheduleByVaccinationIdAndCustomerId($vaccinationList->first() ? $vaccinationList->first()->id : 0, $params['id']);
+
+        $hospitalList = $this->hospitalService->getHospital();
+
+        if ($request->isMethod('post')) {
+            $params = $request->post();
+            $check = $this->insuranceExpensesService->InsuranceExpensesInsert($params);
+            if ($check) {
+                $this->saveLog(Auth::user()->id, 'Thêm chi trả thành công.');
+                return redirect()->back()->with('success', 'Thêm chi trả thành công.');
+            } else {
+                $this->saveLog(Auth::user()->id, 'Thêm chi trả thất bại.');
+                return redirect()->back()->with('error', 'Thêm chi trả thất bại.');
+            }
+        }
+        return view('admin.insurance-expenses.detail', compact(['customer', 'customerPay', 'amountSpent', 'hospitalList', 'paymentTypeList', 'vaccinationClassificationList', 'vaccinationList', 'vaccinationScheduleList']));
     }
 
     public function create(Request $request)
@@ -78,7 +97,7 @@ class InsuranceExpensesController extends Controller
         $paymentTypeList = $this->paymentTypeService->getPaymentTypeList();
         $vaccinationClassificationList = $this->vaccinationClassificationService->getActiveClassifications();
         $vaccinationList = $this->vaccinationService->getVaccinationByClassification($vaccinationClassificationList->first() ? $vaccinationClassificationList->first()->id : 0);
-        $vaccinationScheduleList = $this->vaccinationScheduleService->getVaccinationScheduleByVaccinationIdAndCustomerId($vaccinationClassificationList->first() ? $vaccinationClassificationList->first()->id : 0, $params['id']);
+        $vaccinationScheduleList = $this->vaccinationScheduleService->getVaccinationScheduleByVaccinationIdAndCustomerId($vaccinationList->first() ? $vaccinationList->first()->id : 0, $params['id']);
         $hospitalList = $this->hospitalService->getHospital();
         if ($request->isMethod('post')) {
             $params = $request->post();
