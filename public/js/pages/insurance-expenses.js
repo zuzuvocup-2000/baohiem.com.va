@@ -5,6 +5,32 @@ $(document).ready(function () {
         card_body.find('.info-contract').slideToggle();
     });
 
+    // TODOL: App cũ đang không có và cần clear nghiệp vụ
+    $(document).on('click', '.btn-action-calculator', function (e) {
+        e.preventDefault();
+        alert("Chức năng đang phát triển")
+        // $.ajax({
+        //     url: '/ajax/insurance-expenses/calculate',
+        //     method: 'POST',
+        //     data: {
+        //         _token: '{{ csrf_token() }}',
+        //         sotienchi: $('#txt_sotienchi').val(),
+        //         uocchi: $('#txt_uocchi').val(),
+        //         gioihankyBH: $('#lbl_gioihankyBH').text(),
+        //         chiTKkhac: $('#lbl_chiTKkhac').text(),
+        //         goi: '{{ session("goi") }}'
+        //     },
+        //     success: function (response) {
+        //         if (response.error) {
+        //             alert(response.message);
+        //         } else {
+        //             $('#txt_sotienbituchoi').text(response.sotienbituchoi);
+        //             $('#lbl_gioihanconlai').text(response.gioihanconlai);
+        //         }
+        //     }
+        // });
+    });
+
     $(document).on('click', '.btn-get-detail', function () {
         var id = $(this).data('id');
         var periodId = $('#periodSelectGeneral').val()
@@ -12,7 +38,7 @@ $(document).ready(function () {
         $('#formCreatePaymentInsurance').attr('action', '/insurance-expenses/create');
 
         $.ajax({
-            url: '/insurance-expenses/detail',
+            url: '/ajax/insurance-expenses/detail',
             type: 'GET',
             data: {
                 id: id,

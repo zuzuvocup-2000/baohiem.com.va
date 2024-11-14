@@ -123,19 +123,6 @@ class InsuranceExpensesController extends Controller
         return view('admin.insurance-expenses.insurance-diary', $data);
     }
 
-    public function getDetailAccount(Request $request)
-    {
-        $params = $request->query();
-        $customer = $this->customerService->getCustomerByCustomerId($params['id'], $params['periodId']);
-        $customerPay = $this->customerService->getListCustomersPayForInsuranceByCustomerId($params['id']);
-        $amountSpent = $this->customerService->getMoneyAmountSpent($params['id'], $params['periodId']);
-        return [
-            'customer' => $customer,
-            'customerPay' => $customerPay,
-            'amountSpent' => $amountSpent,
-        ];
-    }
-
     public function checkPeriod(Request $request)
     {
         $params = $request->query();

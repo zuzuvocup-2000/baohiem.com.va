@@ -41,6 +41,8 @@ Route::group(['middleware' => ['check.any.guard:isUserAdmin']], function () {
 
     // Chi bảo hiểm
     Route::get('/insurance-expenses/detail/{id}', [AjaxInsuranceExpensesController::class, 'detail'])->name('ajax.insurance-expenses.detail');
+    Route::get('/insurance-expenses/detail', [AjaxInsuranceExpensesController::class, 'getDetailInsuranceExpenses'])->name('ajax.insurance-expenses.get-detail');
+    Route::get('/insurance-expenses/calculator', [AjaxInsuranceExpensesController::class, 'calculator'])->name('ajax.insurance-expenses.calculator');
 
     // Niên hạn
     Route::get('/period/list', [PeriodController::class, 'index'])->name('ajax.period.index');

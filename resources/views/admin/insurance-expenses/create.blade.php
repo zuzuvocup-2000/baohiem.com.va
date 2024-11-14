@@ -17,8 +17,10 @@
         <div class="row">
             @include('admin.insurance-expenses.common.info', compact(['customer']))
 
-            @include('admin.insurance-expenses.common.table-vaccine', ['vaccinationClassificationList'
-            => $vaccinationClassificationList, 'vaccinationList' => $vaccinationList])
+            @include('admin.insurance-expenses.common.table-vaccine', [
+            'vaccinationClassificationList' => $vaccinationClassificationList,
+            'vaccinationList' => $vaccinationList,
+            ])
 
             <div class="col-12">
                 <div class="card w-100 position-relative overflow-hidden mb-0">
@@ -26,9 +28,7 @@
                         <div class="row">
                             <div class="col-4 mb-3">
                                 @include('common/select-hospital', [
-                                'hospitalId' => isset($_GET['hospital'])
-                                ? $_GET['hospital']
-                                : 0,
+                                'hospitalId' => isset($_GET['hospital']) ? $_GET['hospital'] : 0,
                                 'hospitalList' => $hospitalList,
                                 ])
                             </div>
@@ -122,8 +122,10 @@
                             </table>
                         </div>
                         <div class="row align-items-center mb-3">
-                            @include('admin.insurance-expenses.common.amount-info', ['customer' => $customer,
-                            'amountSpent' => $amountSpent])
+                            @include('admin.insurance-expenses.common.amount-info', [
+                            'customer' => $customer,
+                            'amountSpent' => $amountSpent,
+                            ])
 
                             <div class="col-sm-12 col-md-6">
                                 <div class="text-right ">
@@ -134,8 +136,7 @@
                                             data-action="create">Thêm mới</button>
                                         <button onclick="return false"
                                             class="btn btn-primary btn-action-content-payment" data-bs-toggle="modal"
-                                            data-bs-target="#contentPaymentModal">Thêm nội dung
-                                            chi</button>
+                                            data-bs-target="#contentPaymentModal">Thêm nội dung chi</button>
                                     </div>
                                 </div>
                             </div>
@@ -146,9 +147,10 @@
         </div>
     </div>
 </form>
-@include('common.modal-content-payment', ['paymentTypeList'=> $paymentTypeList])
+@include('common.modal-content-payment', ['paymentTypeList' => $paymentTypeList])
 <script>
-    var paymentTypeList = JSON.parse('<?php echo json_encode($paymentTypeList) ?>')
+    var paymentTypeList = JSON.parse('<?php echo json_encode($paymentTypeList); ?>')
+
 </script>
 @endsection
 @section('script')
