@@ -63,7 +63,7 @@ class LoginController extends Controller
                             }
                             $this->saveLogHospital($userHospital->id, __('login.login_success'));
                         }
-                        return redirect('/insurance-expenses/hospital')->with('success', __('login.login_success'));
+                        return redirect('/dashboard')->with('success', __('login.login_success'));
                     case 'isUserCustomer':
                         if (Auth::guard('isUserCustomer')->check()) {
                             $userCustomer = Auth::guard('isUserCustomer')->user();
@@ -73,7 +73,7 @@ class LoginController extends Controller
                             }
                             $this->saveLogCustomer($userCustomer->id, __('login.login_success'));
                         }
-                        return redirect('/insurance-expenses/index')->with('success', __('login.login_success'));
+                        return redirect('/dashboard')->with('success', __('login.login_success'));
                 }
             }
         }
