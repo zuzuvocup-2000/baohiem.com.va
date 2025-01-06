@@ -14,6 +14,7 @@ use App\Http\Controllers\Ajax\PositionController as PositionAjax;
 use App\Http\Controllers\Ajax\HospitalContractController;
 use App\Http\Controllers\Ajax\HospitalController as HospitalAjax;
 use App\Http\Controllers\Ajax\InsuranceExpensesController as AjaxInsuranceExpensesController;
+use App\Http\Controllers\Ajax\PaymentTypeController;
 use App\Http\Controllers\Ajax\PeriodController;
 use App\Http\Controllers\Ajax\SupervisorController as SupervisorAjax;
 use App\Http\Controllers\Ajax\UserHospitalController;
@@ -40,6 +41,8 @@ Route::group(['middleware' => ['check.any.guard:isUserAdmin']], function () {
 
     // Chi bảo hiểm
     Route::get('/insurance-expenses/detail/{id}', [AjaxInsuranceExpensesController::class, 'detail'])->name('ajax.insurance-expenses.detail');
+    Route::get('/insurance-expenses/detail', [AjaxInsuranceExpensesController::class, 'getDetailInsuranceExpenses'])->name('ajax.insurance-expenses.get-detail');
+    Route::get('/insurance-expenses/calculator', [AjaxInsuranceExpensesController::class, 'calculator'])->name('ajax.insurance-expenses.calculator');
 
     // Niên hạn
     Route::get('/period/list', [PeriodController::class, 'index'])->name('ajax.period.index');
@@ -95,6 +98,14 @@ Route::group(['middleware' => ['check.any.guard:isUserAdmin']], function () {
     // Vaccination
     Route::get('/vaccination/list', [VaccinationController::class, 'list'])->name('ajax.vaccination.list');
     Route::post('/vaccination/create', [VaccinationController::class, 'create'])->name('ajax.vaccination.create');
+    Route::put('/vaccination/update', [VaccinationController::class, 'update'])->name('ajax.vaccination.update');
+    Route::post('/vaccination/delete', [VaccinationController::class, 'delete'])->name('ajax.vaccination.delete');
+    Route::get('/vaccination/schedule', [VaccinationController::class, 'getSchedule']);
+
+    // Payment Type
+    Route::post('/payment-type/add', [PaymentTypeController::class, 'add'])->name('paymentType.add');
+    Route::post('/payment-type/edit', [PaymentTypeController::class, 'edit'])->name('paymentType.edit');
+    Route::post('/payment-type/delete', [PaymentTypeController::class, 'delete'])->name('paymentType.delete');
 });
 
 // Chỉ tài khoản nhân sự

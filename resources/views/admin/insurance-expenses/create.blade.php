@@ -16,15 +16,19 @@
     <div class="wrap-insurance-detail">
         <div class="row">
             @include('admin.insurance-expenses.common.info', compact(['customer']))
+
+            @include('admin.insurance-expenses.common.table-vaccine', [
+            'vaccinationClassificationList' => $vaccinationClassificationList,
+            'vaccinationList' => $vaccinationList,
+            ])
+
             <div class="col-12">
                 <div class="card w-100 position-relative overflow-hidden mb-0">
                     <div class="card-body p-4">
                         <div class="row">
                             <div class="col-4 mb-3">
                                 @include('common/select-hospital', [
-                                'hospitalId' => isset($_GET['hospital'])
-                                ? $_GET['hospital']
-                                : 0,
+                                'hospitalId' => isset($_GET['hospital']) ? $_GET['hospital'] : 0,
                                 'hospitalList' => $hospitalList,
                                 ])
                             </div>
@@ -117,113 +121,22 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="vaccination-container" style="display: none;">
-                            <div class="row">
-                                <div class="col-sm-12 col-md-6 mb-3">
-                                    <div class="form-group">
-                                        <label class="d-inline-block">
-                                            <h5>Loại chủng ngừa:</h5>
-                                        </label>
-                                        <div class="col-sm">
-                                            <select class="form-select" id="vaccinationClassificationSelectGeneral" name="vaccination_classification">
-                                                @foreach ($vaccinationClassificationList as $vaccinationClassification)
-                                                <option value="{{ $vaccinationClassification->id }}">
-                                                    {{ $vaccinationClassification->classification_name }}
-                                                </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-6 mb-3">
-                                    <div class="form-group">
-                                        <label class="d-inline-block">
-                                            <h5>Tên chủng ngừa:</h5>
-                                        </label>
-                                        <div class="col-sm">
-                                            <select class="form-select" id="vaccinationSelectGeneral" name="vaccination">
-                                                @foreach ($vaccinationList as $vaccination)
-                                                <option value="{{ $vaccination->id }}" data-vaccine-name="{{ $vaccination->vaccine_name }}">
-                                                    {{ $vaccination->vaccination_name }}
-                                                </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12">
-                                    <h5>Tên Vacxin: <span class="font-normal vaccine_name"></span></h5>
-                                </div>
-                            </div>
-                            <div class="table-responsive">
-                                <table
-                                    class="table system-table border text-nowrap customize-table mb-0 align-middle mb-3 table-content-pay">
-                                    <thead class="text-dark fs-4">
-                                        <tr role="row">
-                                            <th>
-                                                <h6 class="fs-4 fw-semibold mb-0 text-center" style="width: 100px">
-                                                    Thao
-                                                    tác
-                                                </h6>
-                                            </th>
-                                            <th>
-                                                <h6 class="fs-4 fw-semibold text-center mb-0">STT</h6>
-                                            </th>
-                                            <th>
-                                                <h6 class="fs-4 fw-semibold text-center mb-0">Tên lần tiêm
-                                                </h6>
-                                            </th>
-                                            <th>
-                                                <h6 class="fs-4 fw-semibold text-center mb-0">Số tháng cách
-                                                    lần đầu tiên
-                                                </h6>
-                                            </th>
-                                            <th>
-                                                <h6 class="fs-4 fw-semibold text-center mb-0">Số tháng nhắc
-                                                    lại
-                                                </h6>
-                                            </th>
-                                            <th>
-                                                <h6 class="fs-4 fw-semibold text-center mb-0">Ngày tiêm</h6>
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr role="row">
-                                            <td colspan="2">
-                                                @include('common/button-loading', ['class' =>
-                                                'btn-create-vaccination'])
-                                            </td>
-                                            <td>
-                                                <input class="inputField form-control create-vaccination-injection_name"
-                                                    type="text" name="injection_name" value="" />
-                                            </td>
-                                            <td>
-                                                <input class="inputField form-control create-vaccination-months_to_first"
-                                                    type="text" name="months_to_first" value="" />
-                                            </td>
-                                            <td>
-                                                <input class="inputField form-control create-vaccination-months_to_repeat" type="text" name="months_to_repeat" value="" />
-                                            </td>
-                                            <td>
-                                                <input class="inputField form-control create-vaccination-injection_date singledate" type="text" name="injection_date" value="" />
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
                         <div class="row align-items-center mb-3">
-                            @include('admin.insurance-expenses.common.amount-info', ['customer' => $customer,
-                            'amountSpent' => $amountSpent])
+                            @include('admin.insurance-expenses.common.amount-info', [
+                            'customer' => $customer,
+                            'amountSpent' => $amountSpent,
+                            ])
 
                             <div class="col-sm-12 col-md-6">
                                 <div class="text-right ">
                                     <div class="d-flex align-items-center justify-content-end">
+                                        <button type="submit" class="btn btn-success btn-save-payment-insurance me-2"
+                                            data-action="create">Lưu</button>
                                         <button type="submit" class="btn btn-primary btn-add-content-pay me-2"
                                             data-action="create">Thêm mới</button>
-                                        <button type="submit" class="btn btn-success btn-save-payment-insurance"
-                                            data-action="create">Lưu</button>
+                                        <button onclick="return false"
+                                            class="btn btn-primary btn-action-content-payment" data-bs-toggle="modal"
+                                            data-bs-target="#contentPaymentModal">Thêm nội dung chi</button>
                                     </div>
                                 </div>
                             </div>
@@ -234,8 +147,10 @@
         </div>
     </div>
 </form>
+@include('common.modal-content-payment', ['paymentTypeList' => $paymentTypeList])
 <script>
-    var paymentTypeList = JSON.parse('<?php echo json_encode($paymentTypeList) ?>')
+    var paymentTypeList = JSON.parse('<?php echo json_encode($paymentTypeList); ?>')
+
 </script>
 @endsection
 @section('script')

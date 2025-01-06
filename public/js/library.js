@@ -1,24 +1,4 @@
 $(document).ready(function () {
-    $('#vaccinationClassificationSelectGeneral').on('change', function () {
-        var vaccinationClassificationId = $(this).val();
-
-        $.ajax({
-            type: 'GET',
-            url: '/ajax/vaccination/list',
-            data: {
-                'vaccination_classification': vaccinationClassificationId
-            },
-            success: function (response) {
-                $('#vaccinationSelectGeneral').empty();
-
-                $.each(response.data, function (key, value) {
-                    $('#vaccinationSelectGeneral').append('<option value="' + value.id + '">' + value.vaccination_name + '</option > ');
-                });
-
-                $('#vaccinationSelectGeneral').trigger('change');
-            }
-        });
-    });
 
     $('#companySelectGeneral').on('change', function () {
         var companyId = $(this).val();
@@ -141,6 +121,7 @@ $(document).ready(function () {
             return false;
         }
     });
+    
 });
 
 function addCommas(nStr) {
@@ -175,3 +156,4 @@ function formatDate(inputDate) {
     var formattedDate = (day < 10 ? '0' : '') + day + '/' + (month < 10 ? '0' : '') + month + '/' + year;
     return formattedDate;
 }
+
