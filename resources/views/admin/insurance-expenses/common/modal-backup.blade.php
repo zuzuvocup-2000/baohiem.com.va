@@ -50,12 +50,14 @@
                                 <div class="col-sm form-radio">
                                     <div class="d-flex">
                                         <div class="form-check me-3">
-                                            <input class="form-check-input account_holder_customer" type="radio" disabled name="account_holder" id="info1" value="1" checked="" />
-                                            <label class="form-check-label" for="info1">Chủ tài khoản</label>
+                                            <input class="form-check-input account_holder_customer" type="radio" name="account_holder" id="info1" value="1" checked="" />
+                                            <label class="form-check-label" for="info1">Chủ tài
+                                                khoản</label>
                                         </div>
                                         <div class="form-check me-3">
-                                            <input class="form-check-input account_holder_customer" type="radio" disabled name="account_holder" id="info2" value="0" />
-                                            <label class="form-check-label" for="info2">Thân nhân</label>
+                                            <input class="form-check-input account_holder_customer" type="radio" name="account_holder" id="info2" value="0" />
+                                            <label class="form-check-label" for="info2">Thân
+                                                nhân</label>
                                         </div>
                                     </div>
                                 </div>
@@ -77,7 +79,7 @@
                                     <h5>Ngày nhập:</h5>
                                 </label>
                                 <div class="col-sm">
-                                    <input class="inputField form-control create-contract-payment_date singledate" autocomplete="off" type="text" name="payment_date" value="">
+                                    <input class="inputField form-control create-contract-payment_date singledate" type="text" name="payment_date" value="">
                                 </div>
                             </div>
                         </div>
@@ -87,7 +89,7 @@
                                     <h5>Ngày khám:</h5>
                                 </label>
                                 <div class="col-sm">
-                                    <input class="inputField form-control create-contract-checkup_date singledate" autocomplete="off" type="text" name="checkup_date" value="">
+                                    <input class="inputField form-control create-contract-checkup_date singledate" type="text" name="checkup_date" value="">
                                 </div>
                             </div>
                         </div>
@@ -150,6 +152,95 @@
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+                    <div class="vaccination-container" style="display: none;">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label class="d-inline-block">
+                                        <h5>Loại chủng ngừa:</h5>
+                                    </label>
+                                    <div class="col-sm">
+                                        <select class="form-select">
+                                            <option value="1">
+                                                Bại liệt
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label class="d-inline-block">
+                                        <h5>Tên chủng ngừa:</h5>
+                                    </label>
+                                    <div class="col-sm">
+                                        <select class="form-select">
+                                            <option value="1">
+                                                Ngừa Bại liệt
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <h5>Tên Vacxin: <span class="font-normal">IMOVAX POLIO</span></h5>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table system-table border text-nowrap customize-table mb-0 align-middle mb-3 table-content-pay">
+                                <thead class="text-dark fs-4">
+                                    <tr role="row">
+                                        <th>
+                                            <h6 class="fs-4 fw-semibold mb-0 text-center" style="width: 100px">Thao
+                                                tác
+                                            </h6>
+                                        </th>
+                                        <th>
+                                            <h6 class="fs-4 fw-semibold text-center mb-0">STT</h6>
+                                        </th>
+                                        <th>
+                                            <h6 class="fs-4 fw-semibold text-center mb-0">Tên lần tiêm
+                                            </h6>
+                                        </th>
+                                        <th>
+                                            <h6 class="fs-4 fw-semibold text-center mb-0">Số tháng cách
+                                                lần đầu tiên
+                                            </h6>
+                                        </th>
+                                        <th>
+                                            <h6 class="fs-4 fw-semibold text-center mb-0">Số tháng nhắc
+                                                lại
+                                            </h6>
+                                        </th>
+                                        <th>
+                                            <h6 class="fs-4 fw-semibold text-center mb-0">Ngày tiêm</h6>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr role="row">
+                                        <td colspan="2">
+                                            @include('common/button-loading', [
+                                            'class' => 'btn-create-company',
+                                            ])
+                                        </td>
+                                        <td>
+                                            <input class="inputField form-control create-company-address" type="text" name="address" value="" />
+                                        </td>
+                                        <td>
+                                            <input class="inputField form-control create-company-phone_number" type="text" name="phone_number" value="" />
+                                        </td>
+                                        <td>
+                                            <input class="inputField form-control create-company-email" type="text" name="email" value="" />
+                                        </td>
+                                        <td>
+                                            <input class="inputField form-control create-company-ceo_name" type="text" name="ceo_name" value="" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <div class="row mb-3 align-items-center">
                         <div class="col-sm-12 col-md-3">

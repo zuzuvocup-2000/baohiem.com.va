@@ -177,21 +177,21 @@ $(document).ready(function () {
         return false;
     })
 
-    $(document).on('change', '.create-insurance-payment_type', function () {
-        var showVaccinationContainer = false;
-        $('.create-insurance-payment_type').each(function () {
-            if ($(this).val() == 3) {
-                showVaccinationContainer = true;
-            }
-        });
+    // $(document).on('change', '.create-insurance-payment_type', function () {
+    //     var showVaccinationContainer = false;
+    //     $('.create-insurance-payment_type').each(function () {
+    //         if ($(this).val() == 3) {
+    //             showVaccinationContainer = true;
+    //         }
+    //     });
 
-        if (showVaccinationContainer) {
-            toastr.info('Vui lòng nhập tên chủng ngừa vào bảng trên !')
-            $('.vaccination-container').show();
-        } else {
-            $('.vaccination-container').hide();
-        }
-    });
+    //     if (showVaccinationContainer) {
+    //         toastr.info('Vui lòng nhập tên chủng ngừa vào bảng trên !')
+    //         $('.vaccination-container').show();
+    //     } else {
+    //         $('.vaccination-container').hide();
+    //     }
+    // });
 
     $('#vaccinationClassificationSelectGeneral').on('change', function () {
         var vaccinationClassificationId = $(this).val();
@@ -241,7 +241,7 @@ $(document).ready(function () {
     $(document).on('click', '.btn-update-vaccination', function () {
         let _this = $(this);
         let row = _this.parents('tr');
-    
+
         var formData = {
             injection_name: row.find('input[name="update_injection_name"]').val(),
             months_to_first: row.find('input[name="update_months_to_first"]').val(),
@@ -249,7 +249,7 @@ $(document).ready(function () {
             injection_date: row.find('input[name="update_injection_date"]').val(),
             vaccinationId: row.attr('data-id'),
         };
-        
+
         $.ajax({
             type: 'PUT',
             url: '/ajax/vaccination/update',
@@ -270,12 +270,12 @@ $(document).ready(function () {
         });
         return false;
     })
-    
+
     $(document).on('click', '.delete-button-vaccination', function () {
         let _this = $(this);
         let row = _this.closest('tr');
         let vaccinationId = row.data('id');
-    
+
         Swal.fire({
             title: 'Bạn có chắc chắn?',
             text: "Bạn có muốn xóa thông tin chủng ngừa này không?",
@@ -293,7 +293,7 @@ $(document).ready(function () {
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
-                    data: { 
+                    data: {
                         vaccinationId: vaccinationId,
                     },
                     success: function (response) {
@@ -323,7 +323,7 @@ $(document).ready(function () {
             }
         });
     });
-    
+
 
     $(document).on('click', '.btn-create-vaccination', function () {
         let _this = $(this);
