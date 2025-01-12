@@ -114,7 +114,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="btn-export text-center"><button class="btn btn-primary" type="button">Xuất báo cáo</button></div>
+                        <div class="btn-export text-center"><a class="btn btn-primary" href="{{ route('export.accountListResult') }}">Xuất báo cáo</a></div>
                     </div>
                 </div>
             </div>

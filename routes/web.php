@@ -176,7 +176,7 @@ Route::group(['middleware' => ['check.any.guard:isUserAdmin']], function () {
     Route::get('/diary/customer', [DiaryController::class, 'customerDiary'])->name('diary.customer');
     // Routes Export
     Route::get('/export/account', [ExportController::class, 'exportAccountList'])->name('export.accountList');
-
+    Route::get('/export/account-result', [ExportController::class, 'exportAccountListResult'])->name('export.accountListResult');
     // Routes for Insurance
     Route::get('/insurance-expenses/check-period', [InsuranceExpensesController::class, 'checkPeriod'])->name('insuranceExpenses.checkPeriod');
 });
