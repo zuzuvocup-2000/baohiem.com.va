@@ -80,9 +80,9 @@ class AccountService
             ->first();
     }
 
-    public function getAccountReport($params = [])
+    public function getAccountReport($params = [], $paginate = true)
     {
-        $accountList = DB::table('tbl_customer')
+        $query = DB::table('tbl_customer')
             ->join('tbl_information_insurance', 'tbl_customer.id', '=', 'tbl_information_insurance.customer_id')
             ->join('tbl_account_detail', 'tbl_customer.id', '=', 'tbl_account_detail.customer_id')
             ->join('tbl_account', 'tbl_account_detail.account_id', '=', 'tbl_account.id')
@@ -105,8 +105,9 @@ class AccountService
             ->orderBy('tbl_account_detail.account_id')
             ->orderBy('tbl_account_detail.account_holder', 'DESC')
             ->orderBy('tbl_customer.full_name')
-            ->distinct()
-            ->paginate(PER_PAGE_SMALL);
+            ->distinct();
+
+        $accountList = $paginate ? $query->paginate(PER_PAGE_SMALL) : $query->get();
         foreach ($accountList as $value) {
             $value->data = $this->calculationMoneyPayment($value);
         }
@@ -207,6 +208,9 @@ class AccountService
                 $accountDays = $numberOfContractDays;
             }
             $moneyStartPeriod .= '/' . $numberOfContractDays;
+            $moneyStartPeriod = is_numeric($moneyStartPeriod) ? $moneyStartPeriod : 0;
+            $numberOfContractDays = (is_numeric($numberOfContractDays) && $numberOfContractDays > 0) ? $numberOfContractDays : 1;
+
             $moneyStartPeriod = round($moneyStartPeriod / $numberOfContractDays, 0);
             $moneyStartPeriod *= $accountDays;
             $moneyStartPeriod += $prepayment;
