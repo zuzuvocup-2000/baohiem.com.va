@@ -25,20 +25,13 @@
                         <div class="col-sm-12 col-md-6 col-xl-3">
                             <div class="form-group ">
                                 <label class="col-form-label">Tên bệnh viện:</label>
-                                <select class="form-select period-search mr-sm-2" name="periodSelect"
-                                    style="width: calc(100% - 100px);">
-                                    <option value="10079" selected="">
-                                        Bệnh viện VN Cu Ba
-                                    </option>
-                                    <option value="10077">
-                                        Bệnh viện Việt Đức
-                                    </option>
-                                    <option value="10077">
-                                        Bệnh viện Xanh Pôn
-                                    </option>
-                                    <option value="10077">
-                                        Bệnh viện Đức Giang
-                                    </option>
+                                <select class="form-select mr-sm-2 {{ isset($class) ? $class : '' }}"
+                                    id="{{ isset($id) ? $id : 'hospitalSelectGeneral' }}" name="{{ isset($name) ? $name : 'hospital' }}">
+                                    @foreach ($hospitalList as $hospital)
+                                        <option value="{{ $hospital->id }}" >
+                                            {{ $hospital->hospital_name }}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
