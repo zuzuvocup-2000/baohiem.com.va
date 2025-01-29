@@ -5,47 +5,12 @@
 @section('content')
     @include('partial.breadcrumb', ['breadcrumbTitle' => 'Chi bảo hiểm'])
     <div class="widget-content searchable-container list insurance-account">
-        @include('admin.insurance-expenses.common.filter')
+        @include('admin.insurance-expenses.common.filter-hospital')
         <div class="card card-body">
             @include('admin.insurance-expenses.common.menu')
             <div class="tab-content" id="pills-tabContent">
                 <div >
-                    <div class="row mb-3">
-                        <div class="col-sm-12 col-md-6 col-xl-3">
-                            <div class="form-group ">
-                                <label class="col-form-label">Thời gian:</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control daterange">
-                                    <span class="input-group-text">
-                                        <i class="ti ti-calendar fs-5"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6 col-xl-3">
-                            <div class="form-group ">
-                                <label class="col-form-label">Tên bệnh viện:</label>
-                                <select class="form-select mr-sm-2 {{ isset($class) ? $class : '' }}"
-                                    id="{{ isset($id) ? $id : 'hospitalSelectGeneral' }}" name="{{ isset($name) ? $name : 'hospital' }}">
-                                    @foreach ($hospitalList as $hospital)
-                                        <option value="{{ $hospital->id }}" >
-                                            {{ $hospital->hospital_name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6 col-xl-3 btn-flexend">
-                            <div>
-                                <button class="btn btn-primary" type="button">Duyệt chi</button>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6 col-xl-3 btn-flexend">
-                            <div>
-                                <button class="btn btn-primary" type="button">Xuất ra Excel</button>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div class="table-responsive">
                         <table id="simpletable"
                             class="table system-table border text-nowrap customize-table mb-0 align-middle mb-3">
