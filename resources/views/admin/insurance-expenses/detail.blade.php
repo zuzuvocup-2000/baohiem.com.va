@@ -193,8 +193,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div id="detailclient1" class="modal fade" tabindex="-1" aria-labelledby="primary-header-modalLabel"
-                        style="display: none;" aria-hidden="true">
+                        <div id="detailclient1" class="modal fade" tabindex="-1" data-bs-backdrop="static" aria-labelledby="primary-header-modalLabel" style="display: none;" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-scrollable modal-xl">
                                 <div class="modal-content">
                                     <div class="modal-header modal-colored-header bg-primary text-white">

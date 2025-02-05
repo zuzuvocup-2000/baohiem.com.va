@@ -1,4 +1,4 @@
-<div id="detailclient1" class="modal fade" tabindex="-1" aria-labelledby="primary-header-modalLabel" style="display: none;" aria-hidden="true">
+<div id="detailclient1" class="modal fade" data-bs-backdrop="static" tabindex="-1" aria-labelledby="primary-header-modalLabel" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-xl">
         <div class="modal-content">
             <div class="modal-header modal-colored-header bg-primary text-white">
@@ -64,14 +64,14 @@
                         <div class="col-sm-12 col-md-4 mb-3">
                             <h5>Loại TK: <span class="account_package_customer"></span></h5>
                         </div>
-
-                        <div class="col-12 mb-3">
+                        <div class="col-sm-12 col-md-6"></div>
+                        <div class="col-4 mb-3">
                             @include('common/select-hospital', [
                             'hospitalId' => isset($_GET['hospital']) ? $_GET['hospital'] : 0,
                             'hospitalList' => $hospitalList,
                             ])
                         </div>
-                        <div class="col-sm-12 col-md-6 mb-3">
+                        <div class="col-4 mb-3">
                             <div class="form-group">
                                 <label class="d-inline-block">
                                     <h5>Ngày nhập:</h5>
@@ -81,7 +81,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-12 col-md-6 mb-3">
+                        <div class="col-4 mb-3">
                             <div class="form-group">
                                 <label class="d-inline-block">
                                     <h5>Ngày khám:</h5>
@@ -158,13 +158,14 @@
                             </h5>
                         </div>
                         <div class="col-sm-12 col-md-3">
-                            <h5 class="mb-0">Tài khoản chi khác: <span class="main-color amountSpent"></span> đồng
+                            <h5 class="mb-0">Tài khoản chi khác: <span class="main-color amountSpent"></span>
+                                đồng
                             </h5>
                         </div>
                         <div class="col-sm-12 col-md-6">
                             <div class="text-right ">
                                 <div class="d-flex align-items-center justify-content-end">
-                                    <button onclick="return false" class="btn btn-info btn-action-calculator me-2">Tính</button>
+                                    <button onclick="return false" class="btn btn-info btn-action-calculator me-2 d-none">Tính</button>
                                     <button onclick="return false" class="btn btn-primary btn-action-content-payment me-2" data-bs-toggle="modal" data-bs-target="#contentPaymentModal">Thêm nội dung chi</button>
                                     <button type="submit" class="btn btn-primary btn-add-content-pay me-2" data-action="create">Thêm mới</button>
                                     <button type="submit" class="btn btn-success btn-save-payment-insurance" data-action="create">Lưu</button>

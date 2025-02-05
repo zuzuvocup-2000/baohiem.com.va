@@ -134,16 +134,13 @@ $(document).ready(function () {
             type: 'GET',
             dataType: 'json',
             success: function (response) {
-                $('#hospitalSelectGeneral').val(response.hospital_id)
-                $('.create-contract-payment_date').val(response.payment_date)
-                $('.create-contract-checkup_date').val(response.examination_date)
-                $('.create-insurance-payment_type').val(response.payment_type_id)
-                $('.create-insurance-note').val(response.note)
-                $('.create-insurance-amount_paid').val(response.amount_paid).trigger('change')
-                $('.create-insurance-expected_payment').val(response.expected_payment).trigger('change')
-                $('.create-insurance-rejected_amount').val(response.rejected_amount).trigger('change')
-                $('.create-insurance-paymennote_type').val(response.note)
-                $('#formCreatePaymentInsurance').attr('action', '/insurance-expenses/update/' + response.payment_detail_id);
+               
+                render_insurance_expense_detail(response, 'update')
+                // $('.create-insurance-payment_type').val(response.payment_type_id)
+                // $('.create-insurance-note').val(response.note)
+                // $('.create-insurance-amount_paid').val(response.amount_paid).trigger('change')
+                // $('.create-insurance-expected_payment').val(response.expected_payment).trigger('change')
+                // $('.create-insurance-rejected_amount').val(response.rejected_amount).trigger('change')
             },
             error: function (xhr, status, error) {
                 console.error(error);
@@ -361,6 +358,73 @@ $(document).ready(function () {
     })
 });
 
+function render_insurance_expense_detail(response, action = 'update') {
+    const {
+        payment_type_id: paymentTypeId = 0,
+        amount_paid = 0,
+        expected_payment = 0,
+        rejected_amount = 0,
+        note = '',
+        hospital_id,
+        payment_date,
+        examination_date,
+        payment_detail_id
+    } = response;
+
+    let newRow = `
+        <tr class="clone-content-pay">
+            <td>
+                ${action === 'create' ? `
+                <div class="btn-group d-flex justify-content-center">
+                    <button class="btn btn-danger delete-content-pay">
+                        <span class="icon-item-icon">
+                            <img src="/img-system/system/trash_white.svg" alt="">
+                        </span>
+                    </button>
+                </div>` : ''}
+            </td>
+            <td>
+                <select class="form-select create-insurance-payment_type" name="payment_type_id[]">
+                    ${paymentTypeList.map(element => `
+                        <option value="${element.id}" ${paymentTypeId == element.id ? 'selected' : ''}>
+                            ${element.payment_type_name}
+                        </option>`).join('')}
+                </select>
+            </td>
+            <td class="text-center">
+                <input type="text" class="form-control int" name="amount_paid[]" value="${amount_paid}">
+            </td>
+            <td class="text-center">
+                <input type="text" class="form-control int" name="expected_payment[]" value="${expected_payment}">
+            </td>
+            <td class="text-center">
+                <input type="text" class="form-control int" name="rejected_amount[]" value="${rejected_amount}">
+            </td>
+            <td>
+                <input type="text" class="form-control" name="note[]" value="${note}">
+            </td>
+        </tr>`;
+
+    if (action === 'create') {
+        $('.table-content-pay tbody').prepend(newRow);
+        $('.create-insurance-payment_type, .create-insurance-amount_paid, .create-insurance-expected_payment, .create-insurance-rejected_amount, .create-insurance-note').val('');
+        $('.create-insurance-payment_type').val(2);
+        $('.btn-add-content-pay').removeClass('d-none');
+        $('#formCreatePaymentInsurance').attr('action', '/insurance-expenses/create');
+    } else {
+        toastr.success('Thu thập dữ liệu thành công');
+        $('#hospitalSelectGeneral').val(hospital_id);
+        $('.create-contract-payment_date').val(payment_date);
+        $('.create-contract-checkup_date').val(examination_date);
+        $('#formCreatePaymentInsurance').attr('action', `/insurance-expenses/update/${payment_detail_id}`);
+        $('.table-content-pay tbody').html(newRow);
+        $('.btn-add-content-pay').addClass('d-none');
+    }
+
+    $('.int').trigger('change');
+    return false;
+}
+
 function render_customer_payment(customerList) {
     let html = "";
     $('.table-customer-pay tbody').html("")
@@ -405,10 +469,12 @@ function render_customer_payment(customerList) {
         html += "</td>";
         html += "</tr>";
     });
-    $('.table-customer-pay tbody').html(html)
+    $('.table-customer-pay tbody').html(html);
     if ($(".table-customer-pay.dataTable").length == 0) {
         $(".table-customer-pay").DataTable({
-            "bLengthChange": false
+            "bLengthChange": false,
+            "searching": false,
+            "ordering": false
         });
     }
 }

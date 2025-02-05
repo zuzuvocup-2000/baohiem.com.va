@@ -1,4 +1,4 @@
-<div class="modal fade" id="contentPaymentModal" tabindex="-1" aria-labelledby="contentPaymentModalLabel"
+<div class="modal fade" id="contentPaymentModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="contentPaymentModalLabel"
     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
