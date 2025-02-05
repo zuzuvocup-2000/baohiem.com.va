@@ -134,7 +134,7 @@ $(document).ready(function () {
             type: 'GET',
             dataType: 'json',
             success: function (response) {
-               
+
                 render_insurance_expense_detail(response, 'update')
                 // $('.create-insurance-payment_type').val(response.payment_type_id)
                 // $('.create-insurance-note').val(response.note)
