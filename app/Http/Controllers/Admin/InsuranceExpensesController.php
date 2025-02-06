@@ -9,12 +9,10 @@ use App\Services\ContractService;
 use App\Services\CustomerService;
 use App\Services\PeriodService;
 use App\Services\AccountService;
-use App\Services\VaccinationClassificationService;
-use App\Services\VaccinationService;
-use App\Services\VaccinationScheduleService;
 use App\Services\HospitalService;
 use App\Services\InsuranceExpensesService;
 use App\Services\PaymentTypeService;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -30,11 +28,8 @@ class InsuranceExpensesController extends Controller
     protected $hospitalService;
     protected $paymentTypeService;
     protected $insuranceExpensesService;
-    protected $vaccinationClassificationService;
-    protected $vaccinationService;
-    protected $vaccinationScheduleService;
 
-    public function __construct(CompanyService $companyService, PeriodService $periodService, ContractService $contractService, CustomerGroupService $customerGroupService, CustomerService $customerService, AccountService $accountService, HospitalService $hospitalService, PaymentTypeService $paymentTypeService, InsuranceExpensesService $insuranceExpensesService, VaccinationClassificationService $vaccinationClassificationService, VaccinationService $vaccinationService, VaccinationScheduleService $vaccinationScheduleService)
+    public function __construct(CompanyService $companyService, PeriodService $periodService, ContractService $contractService, CustomerGroupService $customerGroupService, CustomerService $customerService, AccountService $accountService, HospitalService $hospitalService, PaymentTypeService $paymentTypeService, InsuranceExpensesService $insuranceExpensesService)
     {
         $this->customerGroupService = $customerGroupService;
         $this->companyService = $companyService;
@@ -45,9 +40,6 @@ class InsuranceExpensesController extends Controller
         $this->hospitalService = $hospitalService;
         $this->paymentTypeService = $paymentTypeService;
         $this->insuranceExpensesService = $insuranceExpensesService;
-        $this->vaccinationClassificationService = $vaccinationClassificationService;
-        $this->vaccinationService = $vaccinationService;
-        $this->vaccinationScheduleService = $vaccinationScheduleService;
     }
 
     public function index(Request $request)
@@ -67,40 +59,20 @@ class InsuranceExpensesController extends Controller
         $customerPay = $this->customerService->getListCustomersPayForInsuranceByCustomerId($params['id']);
         $amountSpent = $this->customerService->getMoneyAmountSpent($params['id'], $params['periodId']);
         $paymentTypeList = $this->paymentTypeService->getPaymentTypeList();
-        $vaccinationClassificationList = $this->vaccinationClassificationService->getActiveClassifications();
-        $vaccinationList = $this->vaccinationService->getVaccinationByClassification($vaccinationClassificationList->first() ? $vaccinationClassificationList->first()->id : 0);
-
-        $vaccinationScheduleList = $this->vaccinationScheduleService->getVaccinationScheduleByVaccinationIdAndCustomerId($vaccinationList->first() ? $vaccinationList->first()->id : 0, $params['id']);
-
         $hospitalList = $this->hospitalService->getHospital();
 
-        if ($request->isMethod('post')) {
-            $params = $request->post();
-            $check = $this->insuranceExpensesService->InsuranceExpensesInsert($params);
-            if ($check) {
-                $this->saveLog(Auth::user()->id, 'Thêm chi trả thành công.');
-                return redirect()->back()->with('success', 'Thêm chi trả thành công.');
-            } else {
-                $this->saveLog(Auth::user()->id, 'Thêm chi trả thất bại.');
-                return redirect()->back()->with('error', 'Thêm chi trả thất bại.');
-            }
-        }
-        return view('admin.insurance-expenses.detail', compact(['customer', 'customerPay', 'amountSpent', 'hospitalList', 'paymentTypeList', 'vaccinationClassificationList', 'vaccinationList', 'vaccinationScheduleList']));
+        return view('admin.insurance-expenses.detail', compact(['customer', 'customerPay', 'amountSpent', 'hospitalList', 'paymentTypeList']));
     }
 
     public function create(Request $request)
     {
-        $params = $request->query();
-        $customer = $this->customerService->getCustomerByCustomerId($params['id'], $params['periodId']);
-        $customerPay = $this->customerService->getListCustomersPayForInsuranceByCustomerId($params['id']);
-        $amountSpent = $this->customerService->getMoneyAmountSpent($params['id'], $params['periodId']);
+        $params = $request->post();
+        $customer = $this->customerService->getCustomerByCustomerId($params['customer_id'], $params['period_id']);
+        $customerPay = $this->customerService->getListCustomersPayForInsuranceByCustomerId($params['customer_id']);
+        $amountSpent = $this->customerService->getMoneyAmountSpent($params['customer_id'], $params['period_id']);
         $paymentTypeList = $this->paymentTypeService->getPaymentTypeList();
-        $vaccinationClassificationList = $this->vaccinationClassificationService->getActiveClassifications();
-        $vaccinationList = $this->vaccinationService->getVaccinationByClassification($vaccinationClassificationList->first() ? $vaccinationClassificationList->first()->id : 0);
-        $vaccinationScheduleList = $this->vaccinationScheduleService->getVaccinationScheduleByVaccinationIdAndCustomerId($vaccinationList->first() ? $vaccinationList->first()->id : 0, $params['id']);
         $hospitalList = $this->hospitalService->getHospital();
         if ($request->isMethod('post')) {
-            $params = $request->post();
             $check = $this->insuranceExpensesService->InsuranceExpensesInsert($params);
             if ($check) {
                 $this->saveLog(Auth::user()->id, 'Thêm chi trả thành công.');
@@ -110,7 +82,7 @@ class InsuranceExpensesController extends Controller
                 return redirect()->back()->with('error', 'Thêm chi trả thất bại.');
             }
         }
-        return view('admin.insurance-expenses.create', compact(['customer', 'customerPay', 'amountSpent', 'hospitalList', 'paymentTypeList', 'vaccinationClassificationList', 'vaccinationList', 'vaccinationScheduleList']));
+        return view('admin.insurance-expenses.create', compact(['customer', 'customerPay', 'amountSpent', 'hospitalList', 'paymentTypeList']));
     }
 
     public function update(Request $request)
@@ -150,11 +122,13 @@ class InsuranceExpensesController extends Controller
             ->where('customer_id', $params['customer_id'])
             ->max('id');
         $time_end = $this->insuranceExpensesService->getTimeEnd($params, $account_detail_id);
-        if (strtotime($params['payment_date']) > strtotime($time_end)) {
-            return ['message' => 'Ngày chi không đúng. Vui lòng kiểm tra lại thông tin!', 'status' => 0];
-        } else {
-            return ['status' => 1];
+        $payment_date = DateTime::createFromFormat('d/m/Y', $params['payment_date'])->format('Y-m-d');
+
+        if (strtotime($payment_date) > strtotime($time_end)) {
+            return ['message' => 'Ngày nhập không đúng. Vui lòng kiểm tra lại thông tin!', 'status' => 0];
         }
+
+        return ['status' => 1];
     }
 
     private function prepareData(Request $request)

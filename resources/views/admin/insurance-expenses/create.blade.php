@@ -17,11 +17,6 @@
         <div class="row">
             @include('admin.insurance-expenses.common.info', compact(['customer']))
 
-            @include('admin.insurance-expenses.common.table-vaccine', [
-            'vaccinationClassificationList' => $vaccinationClassificationList,
-            'vaccinationList' => $vaccinationList,
-            ])
-
             <div class="col-12">
                 <div class="card w-100 position-relative overflow-hidden mb-0">
                     <div class="card-body p-4">
@@ -38,8 +33,7 @@
                                         <h5>Ngày nhập:</h5>
                                     </label>
                                     <div class="col-sm">
-                                        <input class="inputField form-control create-contract-payment_date singledate"
-                                            type="text" name="payment_date" value="">
+                                        <input class="inputField form-control create-contract-payment_date singledate" type="text" name="payment_date" value="">
                                     </div>
                                 </div>
                             </div>
@@ -49,15 +43,13 @@
                                         <h5>Ngày khám:</h5>
                                     </label>
                                     <div class="col-sm">
-                                        <input class="inputField form-control create-contract-checkup_date singledate"
-                                            type="text" name="checkup_date" value="">
+                                        <input class="inputField form-control create-contract-checkup_date singledate" type="text" name="checkup_date" value="">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table
-                                class="table system-table border text-nowrap customize-table mb-0 align-middle mb-3 table-content-pay">
+                            <table class="table system-table border text-nowrap customize-table mb-0 align-middle mb-3 table-content-pay">
                                 <thead class="text-dark fs-4">
                                     <tr role="row">
                                         <th>
@@ -87,10 +79,7 @@
                                     <tr role="row">
                                         <td>
                                             <div class="btn-group d-flex justify-content-center">
-                                                <button class="btn btn-danger delete-content-pay"><span
-                                                        class="icon-item-icon"><img
-                                                            src="/img-system/system/trash_white.svg"
-                                                            alt=""></span></button>
+                                                <button class="btn btn-danger delete-content-pay"><span class="icon-item-icon"><img src="/img-system/system/trash_white.svg" alt=""></span></button>
                                             </div>
                                         </td>
                                         <td>
@@ -103,16 +92,13 @@
                                             </select>
                                         </td>
                                         <td>
-                                            <input class="form-control int create-insurance-amount_paid" type="text"
-                                                value="">
+                                            <input class="form-control int create-insurance-amount_paid" type="text" value="">
                                         </td>
                                         <td>
-                                            <input class="form-control int create-insurance-expected_payment"
-                                                type="text" value="">
+                                            <input class="form-control int create-insurance-expected_payment" type="text" value="">
                                         </td>
                                         <td>
-                                            <input class="form-control int create-insurance-rejected_amount" type="text"
-                                                value="">
+                                            <input class="form-control int create-insurance-rejected_amount" type="text" value="">
                                         </td>
                                         <td>
                                             <input class="form-control create-insurance-note" type="text" value="">
@@ -130,13 +116,9 @@
                             <div class="col-sm-12 col-md-6">
                                 <div class="text-right ">
                                     <div class="d-flex align-items-center justify-content-end">
-                                        <button type="submit" class="btn btn-success btn-save-payment-insurance me-2"
-                                            data-action="create">Lưu</button>
-                                        <button type="submit" class="btn btn-primary btn-add-content-pay me-2"
-                                            data-action="create">Thêm mới</button>
-                                        <button onclick="return false"
-                                            class="btn btn-primary btn-action-content-payment" data-bs-toggle="modal"
-                                            data-bs-target="#contentPaymentModal">Thêm nội dung chi</button>
+                                        <button type="submit" class="btn btn-success btn-save-payment-insurance me-2" data-action="create">Lưu</button>
+                                        <button type="submit" class="btn btn-primary btn-add-content-pay me-2" data-action="create">Thêm mới</button>
+                                        <button onclick="return false" class="btn btn-primary btn-action-content-payment" data-bs-toggle="modal" data-bs-target="#contentPaymentModal">Thêm nội dung chi</button>
                                     </div>
                                 </div>
                             </div>

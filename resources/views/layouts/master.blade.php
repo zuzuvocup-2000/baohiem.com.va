@@ -29,7 +29,7 @@
     </div>
 
     <div id="main-wrapper">
-        @include('partial.aside-vertical')
+        {{-- @include('partial.aside-vertical') --}}
         <div class="page-wrapper">
             @include('partial.header')
             <div class="body-wrapper">

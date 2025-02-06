@@ -97,7 +97,9 @@
                             <thead class="text-dark fs-4">
                                 <tr role="row">
                                     <th>
-                                        <h6 class="fs-4 fw-semibold mb-0 text-center" style="width: 100px"></h6>
+                                        <h6 class="fs-4 fw-semibold mb-0 text-center" style="width: 100px">
+                                            <button type="submit" class="btn btn-primary btn-add-content-pay" data-action="create">Thêm mới</button>
+                                        </h6>
                                     </th>
                                     <th>
                                         <h6 class="fs-4 fw-semibold text-center mb-0">Nội dung chi</h6>
@@ -127,7 +129,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <select class="form-select create-insurance-payment_type">
+                                        <select class="form-select create-insurance-payment_type" name="payment_type_id[]">
                                             @foreach ($paymentTypeList as $paymentType)
                                             <option value="{{ $paymentType['id'] }}">
                                                 {{ $paymentType['payment_type_name'] }}
@@ -136,16 +138,16 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <input class="form-control int create-insurance-amount_paid" type="text" value="">
+                                        <input class="form-control int create-insurance-amount_paid" name="amount_paid[]" type="text" value="">
                                     </td>
                                     <td>
-                                        <input class="form-control int create-insurance-expected_payment" type="text" value="">
+                                        <input class="form-control int create-insurance-expected_payment" name="expected_payment[]" type="text" value="">
                                     </td>
                                     <td>
-                                        <input class="form-control int create-insurance-rejected_amount" type="text" value="">
+                                        <input class="form-control int create-insurance-rejected_amount" name="rejected_amount[]" type="text" value="">
                                     </td>
                                     <td>
-                                        <input class="form-control create-insurance-note" type="text" value="">
+                                        <input class="form-control create-insurance-note" name="note[]" type="text" value="">
                                     </td>
                                 </tr>
                             </tbody>
@@ -167,7 +169,7 @@
                                 <div class="d-flex align-items-center justify-content-end">
                                     <button onclick="return false" class="btn btn-info btn-action-calculator me-2 d-none">Tính</button>
                                     <button onclick="return false" class="btn btn-primary btn-action-content-payment me-2" data-bs-toggle="modal" data-bs-target="#contentPaymentModal">Thêm nội dung chi</button>
-                                    <button type="submit" class="btn btn-primary btn-add-content-pay me-2" data-action="create">Thêm mới</button>
+                                    <button type="submit" class="btn btn-info btn-reset-content-pay me-2" data-action="reset">Reset</button>
                                     <button type="submit" class="btn btn-success btn-save-payment-insurance" data-action="create">Lưu</button>
                                 </div>
                             </div>
@@ -177,7 +179,7 @@
                 <div class="table-responsive" style="overflow: hidden">
                     <table class="table sticky-column border text-nowrap customize-table mb-0 align-middle mb-3 table-customer-pay">
                         <thead class="text-dark fs-4">
-                            <tr role="row">
+                            <tr role="row" class="clone-content-pay">
                                 <th>
                                     <h6 class="fs-4 fw-semibold mb-0 text-center">Thao tác</h6>
                                 </th>

@@ -31,6 +31,11 @@ $(document).ready(function () {
         // });
     });
 
+    $(document).on('click', '.btn-reset-content-pay', function () {
+        render_insurance_expense_detail({}, 'reset')
+        return false;
+    })
+
     $(document).on('click', '.btn-get-detail', function () {
         var id = $(this).data('id');
         var periodId = $('#periodSelectGeneral').val()
@@ -67,58 +72,13 @@ $(document).ready(function () {
                 render_customer_payment(response.customerPay);
             },
             error: function (xhr, status, error) {
-                // Xử lý lỗi nếu có
                 console.error(error);
             }
         });
     });
 
     $('.btn-add-content-pay').click(function () {
-        var currentRow = $(this).closest('tr');
-        // var paymentTypeId = currentRow.find('.create-insurance-payment_type').val();
-        // var amount_paid = currentRow.find('.create-insurance-amount_paid').val();
-        // var expected_payment = currentRow.find('.create-insurance-expected_payment').val();
-        // var rejected_amount = currentRow.find('.create-insurance-rejected_amount').val();
-        // var note = currentRow.find('.create-insurance-note').val();
-        var paymentTypeId = 0;
-        var amount_paid = 0;
-        var expected_payment = 0;
-        var rejected_amount = 0;
-        var note = '';
-        var newRow = `
-            <tr class="clone-content-pay">
-                <td>
-                    <div class="btn-group d-flex justify-content-center">
-                        <button class="btn btn-danger delete-content-pay"><span class="icon-item-icon"><img src="/img-system/system/trash_white.svg" alt=""></span></button>
-                    </div>
-                </td>
-                <td>
-                    <select class="form-select create-insurance-payment_type" name="payment_type_id[]">`;
-        paymentTypeList.forEach(element => {
-            newRow += `<option value="${element.id}" ${paymentTypeId == element.id ? "selected" : ""}>${element.payment_type_name}</option>`;
-        });
-        newRow += `</select>
-                </td>
-                <td class="text-center">
-                    <input type="text" class="form-control int" name="amount_paid[]" value="${amount_paid}">
-                </td>
-                <td class="text-center">
-                    <input type="text" class="form-control int" name="expected_payment[]" value="${expected_payment}">
-                </td>
-                <td class="text-center">
-                    <input type="text" class="form-control int" name="rejected_amount[]" value="${rejected_amount}">
-                </td>
-                <td>
-                    <input type="text" class="form-control" name="note[]" value="${note}">
-                </td>
-            </tr>`;
-
-        $('.table-content-pay tbody').prepend(newRow);
-        // $('.create-insurance-payment_type').val(2);
-        // $('.create-insurance-amount_paid').val(0);
-        // $('.create-insurance-expected_payment').val(0);
-        // $('.create-insurance-rejected_amount').val(0);
-        // $('.create-insurance-note').val('');
+        render_insurance_expense_detail({}, 'create')
         return false;
     });
 
@@ -134,13 +94,7 @@ $(document).ready(function () {
             type: 'GET',
             dataType: 'json',
             success: function (response) {
-
                 render_insurance_expense_detail(response, 'update')
-                // $('.create-insurance-payment_type').val(response.payment_type_id)
-                // $('.create-insurance-note').val(response.note)
-                // $('.create-insurance-amount_paid').val(response.amount_paid).trigger('change')
-                // $('.create-insurance-expected_payment').val(response.expected_payment).trigger('change')
-                // $('.create-insurance-rejected_amount').val(response.rejected_amount).trigger('change')
             },
             error: function (xhr, status, error) {
                 console.error(error);
@@ -149,8 +103,9 @@ $(document).ready(function () {
     });
 
     $(document).on('click', '.btn-save-payment-insurance', function (e) {
-        if ($('.clone-content-pay').length == 0) {
-            toastr.error("Chưa thêm thông tin chi bảo hiểm được. Vui lòng kiểm tra lại thông tin!");
+        e.preventDefault();
+
+        if (!validateInsurancePaymentForm()) {
             return false;
         }
 
@@ -171,192 +126,50 @@ $(document).ready(function () {
                 }
             }
         });
-        return false;
-    })
-
-    // $(document).on('change', '.create-insurance-payment_type', function () {
-    //     var showVaccinationContainer = false;
-    //     $('.create-insurance-payment_type').each(function () {
-    //         if ($(this).val() == 3) {
-    //             showVaccinationContainer = true;
-    //         }
-    //     });
-
-    //     if (showVaccinationContainer) {
-    //         toastr.info('Vui lòng nhập tên chủng ngừa vào bảng trên !')
-    //         $('.vaccination-container').show();
-    //     } else {
-    //         $('.vaccination-container').hide();
-    //     }
-    // });
-
-    $('#vaccinationClassificationSelectGeneral').on('change', function () {
-        var vaccinationClassificationId = $(this).val();
-        $.ajax({
-            type: 'GET',
-            url: '/ajax/vaccination/list',
-            data: {
-                'classification_id': vaccinationClassificationId
-            },
-            success: function (data) {
-                $('#vaccinationSelectGeneral').empty();
-
-                $.each(data.data, function (key, value) {
-                    $('#vaccinationSelectGeneral').append('<option value="' + value.id + '" data-vaccine-name="' + value.vaccine_name.trim() + '">' + value.vaccination_name.trim() + '</option>');
-                });
-
-                $('#vaccinationSelectGeneral').trigger('change');
-            }
-        });
     });
-
-    $('#vaccinationSelectGeneral').on('change', function () {
-        var vaccinationId = $(this).val();
-        var customerId = $('#customerId').val();
-        var selectedVaccineName = $('#vaccinationSelectGeneral').find('option:selected').data('vaccine-name');
-        $('h5 span.font-normal').text(selectedVaccineName);
-        $.ajax({
-            type: 'GET',
-            url: '/ajax/vaccination/schedule',
-            data: {
-                'vaccination_id': vaccinationId,
-                'customer_id': customerId
-            },
-            success: function (response) {
-                if (response.status === 'success') {
-                    updateVaccinationScheduleTable(response.data);
-                } else {
-                    alert(response.message);
-                }
-            },
-            error: function (xhr, status, error) {
-                console.error("Có lỗi xảy ra:", error);
-            }
-        });
-    });
-
-    $(document).on('click', '.btn-update-vaccination', function () {
-        let _this = $(this);
-        let row = _this.parents('tr');
-
-        var formData = {
-            injection_name: row.find('input[name="update_injection_name"]').val(),
-            months_to_first: row.find('input[name="update_months_to_first"]').val(),
-            months_to_repeat: row.find('input[name="update_months_to_repeat"]').val(),
-            injection_date: row.find('input[name="update_injection_date"]').val(),
-            vaccinationId: row.attr('data-id'),
-        };
-
-        $.ajax({
-            type: 'PUT',
-            url: '/ajax/vaccination/update',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            data: formData,
-            success: function (response) {
-                if (response.status === 'success') {
-                    toastr.success(response.message);
-                } else {
-                    toastr.error(response.message);
-                }
-            },
-            error: function (error) {
-                toastr.error(error.responseJSON.message);
-            }
-        });
-        return false;
-    })
-
-    $(document).on('click', '.delete-button-vaccination', function () {
-        let _this = $(this);
-        let row = _this.closest('tr');
-        let vaccinationId = row.data('id');
-
-        Swal.fire({
-            title: 'Bạn có chắc chắn?',
-            text: "Bạn có muốn xóa thông tin chủng ngừa này không?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Có, xóa ngay!',
-            cancelButtonText: 'Hủy'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    type: 'POST',
-                    url: '/ajax/vaccination/delete',
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    data: {
-                        vaccinationId: vaccinationId,
-                    },
-                    success: function (response) {
-                        if (response.status === 'success') {
-                            Swal.fire(
-                                'Đã xóa!',
-                                response.message,
-                                'success'
-                            );
-                            row.remove();
-                        } else {
-                            Swal.fire(
-                                'Lỗi!',
-                                response.message,
-                                'error'
-                            );
-                        }
-                    },
-                    error: function (error) {
-                        Swal.fire(
-                            'Lỗi!',
-                            error.responseJSON.message,
-                            'error'
-                        );
-                    }
-                });
-            }
-        });
-    });
-
-
-    $(document).on('click', '.btn-create-vaccination', function () {
-        let _this = $(this);
-        var formData = {
-            injection_name: $('input[name="create-injection_name"]').val(),
-            vaccination_id: $('select[name="vaccination"]').val(),
-            months_to_first: $('input[name="create-months_to_first"]').val(),
-            months_to_repeat: $('input[name="create-months_to_repeat"]').val(),
-            injection_date: $('input[name="create-injection_date"]').val(),
-            customerId: $('#customerId').val(),
-        };
-        disabledButtonLoading(_this)
-        $.ajax({
-            type: 'POST',
-            url: '/ajax/vaccination/create',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            data: formData,
-            success: function (response) {
-                if (response.status === 'success') {
-                    toastr.success(response.message);
-                    window.location.reload()
-                } else {
-                    toastr.error(response.message);
-                }
-                enabledButtonLoading(_this)
-            },
-            error: function (error) {
-                toastr.error(error.responseJSON.message);
-                enabledButtonLoading(_this)
-            }
-        });
-        return false;
-    })
 });
+
+/**
+ * Kiểm tra tất cả các trường required, thêm class 'is-invalid' nếu thiếu dữ liệu
+ * Hiển thị toàn bộ các lỗi cùng lúc
+ * @returns {boolean} true nếu hợp lệ, false nếu có lỗi
+ */
+function validateInsurancePaymentForm() {
+    let isValid = true;
+    let errorMessages = [];
+
+    // Danh sách các trường cần kiểm tra
+    const requiredFields = [
+        { selector: '#hospitalSelectGeneral', message: 'Vui lòng chọn bệnh viện!' },
+        { selector: '.create-contract-payment_date', message: 'Ngày nhập không được để trống!' },
+        { selector: '.create-contract-checkup_date', message: 'Ngày khám không được để trống!' },
+        { selector: 'input[name="amount_paid[]"]', message: 'Số tiền chi trả phải lớn hơn 0!' },
+        { selector: 'select[name="payment_type_id[]"]', message: 'Vui lòng chọn nội dung chi!' }
+    ];
+
+    // Duyệt qua tất cả các trường để kiểm tra
+    requiredFields.forEach(field => {
+        $(field.selector).each(function () {
+            let value = $(this).val().trim();
+            let isEmpty = value === '' || value === '0';
+
+            if (isEmpty) {
+                $(this).addClass('is-invalid'); // Đánh dấu ô bị lỗi
+                errorMessages.push(field.message); // Thêm lỗi vào danh sách
+                isValid = false;
+            } else {
+                $(this).removeClass('is-invalid'); // Xóa lỗi nếu hợp lệ
+            }
+        });
+    });
+
+    // Nếu có lỗi, hiển thị tất cả thông báo lỗi cùng lúc
+    if (!isValid) {
+        toastr.error(errorMessages.join('<br>'));
+    }
+
+    return isValid;
+}
 
 function render_insurance_expense_detail(response, action = 'update') {
     const {
@@ -374,7 +187,7 @@ function render_insurance_expense_detail(response, action = 'update') {
     let newRow = `
         <tr class="clone-content-pay">
             <td>
-                ${action === 'create' ? `
+                ${action === 'create' || action === 'reset' ? `
                 <div class="btn-group d-flex justify-content-center">
                     <button class="btn btn-danger delete-content-pay">
                         <span class="icon-item-icon">
@@ -405,13 +218,19 @@ function render_insurance_expense_detail(response, action = 'update') {
             </td>
         </tr>`;
 
-    if (action === 'create') {
-        $('.table-content-pay tbody').prepend(newRow);
+    if (action === 'create' || action === 'reset') {
         $('.create-insurance-payment_type, .create-insurance-amount_paid, .create-insurance-expected_payment, .create-insurance-rejected_amount, .create-insurance-note').val('');
         $('.create-insurance-payment_type').val(2);
         $('.btn-add-content-pay').removeClass('d-none');
         $('#formCreatePaymentInsurance').attr('action', '/insurance-expenses/create');
-    } else {
+
+        if (action === 'reset') {
+            toastr.success('Reset về thêm mới chi bảo hiểm!');
+            $('.table-content-pay tbody').html(newRow);
+        } else {
+            $('.table-content-pay tbody').append(newRow);
+        }
+    } else if (action === 'update') {
         toastr.success('Thu thập dữ liệu thành công');
         $('#hospitalSelectGeneral').val(hospital_id);
         $('.create-contract-payment_date').val(payment_date);
@@ -477,66 +296,4 @@ function render_customer_payment(customerList) {
             "ordering": false
         });
     }
-}
-
-
-
-function updateVaccinationScheduleTable(data) {
-    var tbody = $('.table-content-pay tbody');
-    tbody.find('tr.vaccination-data').empty();
-
-    $.each(data, function (key, value) {
-        var row = `
-            <tr class="vaccination-data" role="row" data-id="${value.id}">
-                <td>
-                    <h6 class='fs-4 fw-semibold mb-0'>
-                        <div class='btn-group d-flex justify-content-center '>
-                            <button class='btn btn-success me-1 editButton' type="button">
-                                <span class='icon-item-icon'>
-                                    <img src='/img-system/system/edit_white.svg' />
-                                </span>
-                            </button>
-                            <button class='btn btn-danger tabledit-delete-button delete-button-vaccination' type="button">
-                                <span class='icon-item-icon'>
-                                    <img src='/img-system/system/trash_white.svg' alt='' />
-                                </span>
-                            </button>
-                            <button class="btn btn-info me-1 saveButton btn-update-vaccination" type="button" style="display: none;">
-                                <span class="icon-item-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                        class="icon icon-tabler icon-tabler-discount-check-filled" width="24"
-                                        height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                        <path
-                                            d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944zm3.697 7.282a1 1 0 0 0 -1.414 0l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.32 1.497l2 2l.094 .083a1 1 0 0 0 1.32 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
-                                            stroke-width="0" fill="currentColor"></path>
-                                    </svg>
-                                </span>
-                            </button>
-                            <button class="btn btn-warning cancelButton" type="button" style="display: none;">
-                                <span class="icon-item-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                        class="icon icon-tabler icon-tabler-circle-x-filled" width="24"
-                                        height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                        <path
-                                            d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-6.489 5.8a1 1 0 0 0 -1.218 1.567l1.292 1.293l-1.292 1.293l-.083 .094a1 1 0 0 0 1.497 1.32l1.293 -1.292l1.293 1.292l.094 .083a1 1 0 0 0 1.32 -1.497l-1.292 -1.293l1.292 -1.293l.083 -.094a1 1 0 0 0 -1.497 -1.32l-1.293 1.292l-1.293 -1.292l-.094 -.083z"
-                                            stroke-width="0" fill="currentColor"></path>
-                                    </svg>
-                                </span>
-                            </button>
-                        </div>
-                    </h6>
-                </td>
-                <td class="text-center">${key + 1}</td>
-                <td><input class="inputField form-control vaccination-injection_name" type="text" name="update_injection_name" value="${value.injection_name}" disabled/></td>
-                <td><input class="inputField form-control vaccination-months_to_first" type="text" name="update_months_to_first" value="${value.months_to_first}" disabled/></td>
-                <td><input class="inputField form-control vaccination-months_to_repeat" type="text" name="update_months_to_repeat" value="${value.months_to_repeat}" disabled/></td>
-                <td><input class="inputField form-control vaccination-injection_date singledate" type="text" name="update_injection_date" value="${value.injection_date}" disabled/></td>
-            </tr>
-        `;
-        tbody.append(row);
-    });
 }

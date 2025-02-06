@@ -111,7 +111,7 @@ class InsuranceExpensesService
                         'payment_date' => Carbon::parse($params['payment_date'])->format('Y-m-d H:i:s'),
                         'note' => $value['note'],
                         'examination_date' => Carbon::parse($params['checkup_date'])->format('Y-m-d H:i:s'),
-                        'approved' => (isset($params['approved']) ? $params['approved'] : 0),
+                        'approved' => (isset($params['approved']) ? $params['approved'] : 1),
                         'payment_type_id' => $value['payment_type_id'],
                         'expected_payment' => $value['expected_payment'],
                         'rejected_amount' => $value['rejected_amount'],
