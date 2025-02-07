@@ -67,11 +67,6 @@ class InsuranceExpensesController extends Controller
     public function create(Request $request)
     {
         $params = $request->post();
-        $customer = $this->customerService->getCustomerByCustomerId($params['customer_id'], $params['period_id']);
-        $customerPay = $this->customerService->getListCustomersPayForInsuranceByCustomerId($params['customer_id']);
-        $amountSpent = $this->customerService->getMoneyAmountSpent($params['customer_id'], $params['period_id']);
-        $paymentTypeList = $this->paymentTypeService->getPaymentTypeList();
-        $hospitalList = $this->hospitalService->getHospital();
         if ($request->isMethod('post')) {
             $check = $this->insuranceExpensesService->InsuranceExpensesInsert($params);
             if ($check) {
@@ -82,18 +77,21 @@ class InsuranceExpensesController extends Controller
                 return redirect()->back()->with('error', 'Thêm chi trả thất bại.');
             }
         }
-        return view('admin.insurance-expenses.create', compact(['customer', 'customerPay', 'amountSpent', 'hospitalList', 'paymentTypeList']));
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $payment_detail_id = 0)
     {
-        $params = $request->query();
-        $customer = $this->customerService->getCustomerByCustomerId($params['id'], $params['periodId']);
-        $customerPay = $this->customerService->getListCustomersPayForInsuranceByCustomerId($params['id']);
-        $amountSpent = $this->customerService->getMoneyAmountSpent($params['id'], $params['periodId']);
-        $paymentTypeList = $this->paymentTypeService->getPaymentTypeList();
-        $hospitalList = $this->hospitalService->getHospital();
-        return view('admin.insurance-expenses.detail', compact(['customer', 'customerPay', 'amountSpent', 'hospitalList', 'paymentTypeList']));
+        $params = $request->post();
+        if ($request->isMethod('post')) {
+            $check = $this->insuranceExpensesService->updateInsuranceExpense($params, $payment_detail_id);
+            if ($check) {
+                $this->saveLog(Auth::user()->id, 'Hiệu chỉnh chi trả thành công.');
+                return redirect()->back()->with('success', 'Hiệu chỉnh chi trả thành công.');
+            } else {
+                $this->saveLog(Auth::user()->id, 'Hiệu chỉnh chi trả thất bại.');
+                return redirect()->back()->with('error', 'Hiệu chỉnh chi trả thất bại.');
+            }
+        }
     }
 
     public function insuranceDay(Request $request)

@@ -123,12 +123,11 @@ Route::group(['middleware' => ['check.any.guard:isUserAdmin']], function () {
         Route::get('/insurance-expenses/index', 'index')->name('insuranceExpenses.index');
         Route::get('/insurance-expenses/detail', 'detail')->name('insuranceExpenses.detail');
         Route::get('/insurance-expenses/create', 'create')->name('insuranceExpenses.create');
-        Route::get('/insurance-expenses/update', 'update')->name('insuranceExpenses.update');
         Route::get('/insurance-expenses/day', 'insuranceDay')->name('insuranceExpenses.day');
         Route::get('/insurance-expenses/hospital', 'insuranceHospital')->name('insuranceExpenses.hospital');
         Route::get('/insurance-expenses/diary', 'insuranceDiary')->name('insuranceExpenses.diary');
         Route::post('/insurance-expenses/create', 'create')->name('insuranceExpenses.create');
-        Route::put('/insurance-expenses/update', 'update')->name('insuranceExpenses.update');
+        Route::post('/insurance-expenses/update/{id}', 'update')->name('insuranceExpenses.update');
     });
 
     // Routes for Supervisor

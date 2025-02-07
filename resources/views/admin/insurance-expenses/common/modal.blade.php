@@ -74,20 +74,20 @@
                         <div class="col-4 mb-3">
                             <div class="form-group">
                                 <label class="d-inline-block">
-                                    <h5>Ngày nhập:</h5>
+                                    <h5>Ngày khám:</h5>
                                 </label>
                                 <div class="col-sm">
-                                    <input class="inputField form-control create-contract-payment_date singledate" autocomplete="off" type="text" name="payment_date" value="">
+                                    <input class="inputField form-control create-contract-checkup_date singledate" autocomplete="off" type="text" name="checkup_date" value="">
                                 </div>
                             </div>
                         </div>
                         <div class="col-4 mb-3">
                             <div class="form-group">
                                 <label class="d-inline-block">
-                                    <h5>Ngày khám:</h5>
+                                    <h5>Ngày nhập:</h5>
                                 </label>
                                 <div class="col-sm">
-                                    <input class="inputField form-control create-contract-checkup_date singledate" autocomplete="off" type="text" name="checkup_date" value="">
+                                    <input class="inputField form-control create-contract-payment_date singledate" autocomplete="off" type="text" name="payment_date" value="">
                                 </div>
                             </div>
                         </div>

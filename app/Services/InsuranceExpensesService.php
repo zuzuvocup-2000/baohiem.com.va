@@ -108,14 +108,15 @@ class InsuranceExpensesService
                         'account_detail_id' => $account_detail_id,
                         'hospital_id' => $params['hospital'],
                         'amount_paid' => $value['amount_paid'],
-                        'payment_date' => Carbon::parse($params['payment_date'])->format('Y-m-d H:i:s'),
                         'note' => $value['note'],
-                        'examination_date' => Carbon::parse($params['checkup_date'])->format('Y-m-d H:i:s'),
-                        'approved' => (isset($params['approved']) ? $params['approved'] : 1),
+                        'approved' => 1,
                         'payment_type_id' => $value['payment_type_id'],
                         'expected_payment' => $value['expected_payment'],
                         'rejected_amount' => $value['rejected_amount'],
                         'vaccine_result_code' => 0,
+                        'payment_date' => Carbon::createFromFormat('d/m/Y', $params['payment_date'])->format('Y-m-d H:i:s'),
+                        'examination_date' => Carbon::createFromFormat('d/m/Y', $params['checkup_date'])->format('Y-m-d H:i:s'),
+
                     ]);
                 }
 
@@ -127,7 +128,6 @@ class InsuranceExpensesService
             }
         } catch (\Exception $e) {
             DB::rollBack();
-
             return false;
         }
     }
@@ -144,5 +144,34 @@ class InsuranceExpensesService
             ->where('tbl_period_detail.period_id', $params['period_id'])
             ->where('tbl_contract.id', $params['contract_id'])
             ->value('tbl_contract.end_time');
+    }
+
+    // KhachhangChiBH_UPDATE
+    public function updateInsuranceExpense(array $params, $payment_detail_id = 0)
+    {
+        $userId = Auth::user()->id;
+        try {
+            DB::beginTransaction();
+            DB::table('tbl_payment_detail')
+                ->where('id', $payment_detail_id)
+                ->update([
+                    'user_id'           => $userId,
+                    'hospital_id'       => $params['hospital'],
+                    'amount_paid'       => (int)str_replace('.', '', $params['amount_paid'][0]),
+                    'note'              => isset($params['note'][0]) ? $params['note'][0] : '',
+                    'payment_date'      => Carbon::createFromFormat('d/m/Y', $params['payment_date'])->format('Y-m-d H:i:s'),
+                    'examination_date'  => Carbon::createFromFormat('d/m/Y', $params['checkup_date'])->format('Y-m-d H:i:s'),
+                    'approved'          => 1,
+                    'payment_type_id'   => isset($params['payment_type_id'][0]) ? $params['payment_type_id'][0] : 0,
+                    'expected_payment'  => (int)str_replace('.', '', $params['expected_payment'][0]),
+                    'rejected_amount'   => (int)str_replace('.', '', $params['rejected_amount'][0]),
+                ]);
+
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return false;
+        }
     }
 }
