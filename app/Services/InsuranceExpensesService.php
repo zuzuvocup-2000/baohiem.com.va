@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\PaymentDetail;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -147,13 +148,13 @@ class InsuranceExpensesService
     }
 
     // KhachhangChiBH_UPDATE
-    public function updateInsuranceExpense(array $params, $payment_detail_id = 0)
+    public function updateInsuranceExpense(array $params, $paymentDetailId = 0)
     {
         $userId = Auth::user()->id;
         try {
             DB::beginTransaction();
             DB::table('tbl_payment_detail')
-                ->where('id', $payment_detail_id)
+                ->where('id', $paymentDetailId)
                 ->update([
                     'user_id'           => $userId,
                     'hospital_id'       => $params['hospital'],
@@ -173,5 +174,46 @@ class InsuranceExpensesService
             DB::rollBack();
             return false;
         }
+    }
+
+    public function deleteInsuranceExpense($paymentDetailId = 0)
+    {
+        try {
+            DB::beginTransaction();
+            PaymentDetail::where('id', $paymentDetailId)->update(['active' => 0]);
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return false;
+        }
+    }
+
+    public function test(Request $request)
+    {
+        $remainAmount = (int) str_replace('.', '', $request->input('remain_amount', 0));
+        $amountPaid = (int) str_replace('.', '', (is_array($request->input('amount_paid')) ? ($request->input('amount_paid')[0] ?? 0) : $request->input('amount_paid')));
+        $expectedPayment = (int) str_replace('.', '', (is_array($request->input('expected_payment')) ? ($request->input('expected_payment')[0] ?? 0) : $request->input('expected_payment')));
+
+        // Kiểm tra nếu số tiền chi vượt quá ước chi
+        if ($amountPaid > $expectedPayment && $expectedPayment > 0) {
+            return [
+                'status' => true,
+                'message' => 'Chú ý: Số tiền chi vượt quá ước chi. Thông tin vẫn ghi nhận!',
+            ];
+        }
+
+        // Kiểm tra nếu tổng số duyệt chi vượt quá giới hạn còn lại
+        if ($amountPaid > $remainAmount) {
+            return [
+                'status' => true,
+                'message' => 'Số tiền chi vượt quá giới hạn. Vui lòng kiểm tra lại thông tin, thông tin vẫn được lưu!',
+            ];
+        }
+
+        return [
+            'status' => true,
+            'message' => 'Hiệu chỉnh chi trả thành công.',
+        ];
     }
 }

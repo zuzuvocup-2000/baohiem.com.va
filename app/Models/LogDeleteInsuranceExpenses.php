@@ -10,7 +10,7 @@ class LogDeleteInsuranceExpenses extends Model
     public $timestamps = false;
 
     protected $fillable = [
-       'payment_detail_id',
+        'payment_detail_id',
         'hospital_user',
         'user_id',
         'hospital_user_id',
@@ -21,5 +21,4 @@ class LogDeleteInsuranceExpenses extends Model
     protected $dates = [
         'log_date',
     ];
-
 }

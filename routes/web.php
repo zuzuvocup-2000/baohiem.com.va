@@ -128,6 +128,7 @@ Route::group(['middleware' => ['check.any.guard:isUserAdmin']], function () {
         Route::get('/insurance-expenses/diary', 'insuranceDiary')->name('insuranceExpenses.diary');
         Route::post('/insurance-expenses/create', 'create')->name('insuranceExpenses.create');
         Route::post('/insurance-expenses/update/{id}', 'update')->name('insuranceExpenses.update');
+        Route::delete('/insurance-expenses/delete/{id}', 'delete')->name('insuranceExpenses.delete');
     });
 
     // Routes for Supervisor

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\LogUser;
 use App\Models\LogCustomer;
+use App\Models\LogDeleteInsuranceExpenses;
 use App\Models\LogUserHospital;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
@@ -16,9 +17,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     public function saveLog($userId, $action = '', $old_value = 0, $payment_detail_id = 0)
     {
@@ -39,6 +38,7 @@ class Controller extends BaseController
             return LogUser::create($insert);
         }
     }
+
     public function saveLogHospital($hospital_user_id, $action = '')
     {
         if (Auth::guard('isUserHospital')->check()) {
@@ -53,6 +53,7 @@ class Controller extends BaseController
             return LogUserHospital::create($insert);
         }
     }
+
     public function saveLogCustomer($customer_id, $action = '')
     {
         if (Auth::guard('isUserCustomer')->check()) {
@@ -65,6 +66,21 @@ class Controller extends BaseController
                 'computer_name' => gethostname(),
             ];
             return LogCustomer::create($insert);
+        }
+    }
+
+    public function saveLogInsuranceExpense($paymentDetailId, $hospitalUser = false, $userId = null, $hospitalUserId = null)
+    {
+        if (Auth::guard('isUserAdmin')->check() || Auth::guard('isUserHospital')->check()) {
+            $insert = [
+                'payment_detail_id' => $paymentDetailId,
+                'hospital_user' => $hospitalUser,
+                'user_id' => $userId,
+                'hospital_user_id' => $hospitalUserId,
+                'created_at' => now(),
+                'updated_at' => now()
+            ];
+            return LogDeleteInsuranceExpenses::create($insert);
         }
     }
 }

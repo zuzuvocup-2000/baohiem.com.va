@@ -374,6 +374,14 @@
         @if (session('success'))
             toastr.success('{{ session('success') }}');
         @endif
+
+        @if (session('warning'))
+            toastr.warning('{{ session('warning') }}');
+        @endif
+
+        @if (session('info'))
+            toastr.info('{{ session('info') }}');
+        @endif
     })(
         "function" == typeof define && define.amd ?
         define :

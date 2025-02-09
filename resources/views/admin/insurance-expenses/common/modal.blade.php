@@ -155,6 +155,7 @@
                     </div>
                     <div class="row mb-3 align-items-center">
                         <div class="col-sm-12 col-md-3">
+                            <input type="hidden" name="remain_amount" class="input-remain-amount">
                             <h5 class="mb-0">Giới hạn còn lại: <span class="main-color theRemainingAmount"></span>
                                 đồng
                             </h5>

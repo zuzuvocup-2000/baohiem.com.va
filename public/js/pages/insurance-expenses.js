@@ -58,6 +58,7 @@ $(document).ready(function () {
                 $('.contract_name_customer').text(response.customer.contract_name)
                 $('.limit_money_customer').text(addCommas(response.customer.moneyStartPeriod))
                 $('.theRemainingAmount').text(addCommas(response.customer.theRemainingAmount))
+                $('.input-remain-amount').val(response.customer.theRemainingAmount)
                 $('.amountSpent').text(addCommas(response.amountSpent))
                 $('.fullname_customer').text(response.customer.full_name)
                 $('.card_number_customer').text(response.customer.card_number)
@@ -124,6 +125,45 @@ $(document).ready(function () {
                 } else {
                     $('#formCreatePaymentInsurance').submit()
                 }
+            }
+        });
+    });
+
+    $(document).on('click', '.delete-button-payment', function () {
+        let recordId = $(this).closest("tr").data("id");
+        let csrfToken = $('meta[name="csrf-token"]').attr('content');
+        Swal.fire({
+            title: "Xác nhận xóa?",
+            text: "Bạn có chắc chắn muốn xóa khoản chi này?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Có, xóa!",
+            cancelButtonText: "Hủy"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "/insurance-expenses/delete/" + recordId,
+                    type: "DELETE",
+                    data: { _token: csrfToken },
+                    success: function (response) {
+                        if (response.status) {
+                            Swal.fire({
+                                title: "Đã xóa!",
+                                text: response.message,
+                                icon: "success"
+                            }).then(() => {
+                                location.reload();
+                            });
+                        } else {
+                            Swal.fire("Lỗi!", "Xóa không thành công.", "error");
+                        }
+                    },
+                    error: function () {
+                        Swal.fire("Lỗi!", "Không thể kết nối với máy chủ.", "error");
+                    }
+                });
             }
         });
     });

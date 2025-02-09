@@ -79,17 +79,34 @@ class InsuranceExpensesController extends Controller
         }
     }
 
-    public function update(Request $request, $payment_detail_id = 0)
+    public function update(Request $request, $paymentDetailId = 0)
     {
         $params = $request->post();
         if ($request->isMethod('post')) {
-            $check = $this->insuranceExpensesService->updateInsuranceExpense($params, $payment_detail_id);
+            $check = $this->insuranceExpensesService->updateInsuranceExpense($params, $paymentDetailId);
             if ($check) {
-                $this->saveLog(Auth::user()->id, 'Hiệu chỉnh chi trả thành công.');
-                return redirect()->back()->with('success', 'Hiệu chỉnh chi trả thành công.');
+                $message = 'Hiệu chỉnh chi trả thành công.';
+                $this->saveLog(Auth::user()->id, $message);
+                $checkTest = $this->insuranceExpensesService->test($request);
+                return redirect()->back()->with($checkTest['status'] ? 'warning' : 'success', $checkTest['status'] ? $checkTest['message'] : $message);
             } else {
                 $this->saveLog(Auth::user()->id, 'Hiệu chỉnh chi trả thất bại.');
                 return redirect()->back()->with('error', 'Hiệu chỉnh chi trả thất bại.');
+            }
+        }
+    }
+
+    public function delete(Request $request, $paymentDetailId = 0)
+    {
+        if ($request->isMethod('delete')) {
+            $check = $this->insuranceExpensesService->deleteInsuranceExpense($paymentDetailId);
+            if ($check) {
+                $this->saveLog(Auth::user()->id, 'Xoá chi trả thành công.');
+                $this->saveLogInsuranceExpense($paymentDetailId, false, Auth::user()->id);
+                return response()->json(['status' => true, 'message' => 'Xóa chi trả thành công']);
+            } else {
+                $this->saveLog(Auth::user()->id, 'Hiệu chỉnh chi trả thất bại.');
+                return response()->json(['status' => false, 'message' => 'Có lỗi xảy ra']);
             }
         }
     }
